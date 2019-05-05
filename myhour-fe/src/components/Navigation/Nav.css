@@ -2,24 +2,20 @@
   display: flex;
   background: white;
   height: 6rem; }
-
-.navigation .navContent {
-  width: 90%;
-  margin: 0 auto;
-  height: 100%;
-  display: flex;
-  align-items: center; }
-
-.navigation .navContent a {
-  text-decoration: none;
-  color: black;
-  margin: 0 2rem;
-  font-size: 1.3rem;
-  font-weight: bold; }
-
-.navigation .navContent img {
-  height: 80%;
-  margin-right: 2rem; }
-
-.navigation .navContent img:hover {
-  cursor: pointer; }
+  .navigation .navContent {
+    width: 90%;
+    margin: 0 auto;
+    height: 100%;
+    display: flex;
+    align-items: center; }
+    .navigation .navContent a {
+      text-decoration: none;
+      color: black;
+      margin: 0 2rem;
+      font-size: 1.3rem;
+      font-weight: bold; }
+    .navigation .navContent img {
+      height: 80%;
+      margin-right: 2rem; }
+    .navigation .navContent img:hover {
+      cursor: pointer; }

@@ -107,6 +107,7 @@ const Calendar = observer(() => {
 
     return (
         <div className="calendar">
+            <div className='key'>KEY</div>
             {renderHead()}
             {renderDays()}
             {renderCells()}
