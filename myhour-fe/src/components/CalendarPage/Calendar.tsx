@@ -84,7 +84,7 @@ const Calendar = observer(() => {
             }
             rows.push(
                 <div className="row" key={`${day}`}>
-                {days}
+                    {days}
                 </div>
             );
             days = [];
