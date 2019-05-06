@@ -16,7 +16,6 @@ const App = observer(() => {
       <Route exact path="/Authentication" component={Authentication} />
       <Route exact path="/Homepage" component={HomePage} />
       <Route exact path="/Schedule" component={Calendar} />
-      <p>Hello</p>
     </div>
   );
 });

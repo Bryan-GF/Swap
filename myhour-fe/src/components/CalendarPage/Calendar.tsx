@@ -8,6 +8,19 @@ const Calendar = observer(() => {
     
     const state = useContext(GlobalStateContext);
 
+    //Would need to make an api call to get data for this month, and everytime the arrow key is clicked
+    const tempData = {
+        1: {
+            count: 2
+        },
+        2: {
+            count: 6
+        },
+        3: {
+            count: 10
+        }
+    }
+
     const [currentMonth, setCurrentMonth] = useState(new Date());
     const [selectedDate, setSelectedDate] = useState(new Date());
 
@@ -71,6 +84,10 @@ const Calendar = observer(() => {
                     !dateFns.isSameMonth(day, monthStart)
                         ? "disabled"
                         : dateFns.isSameDay(day, selectedDate) ? "selected" : ""
+                    } ${
+                        (dateFns.getDate(day) in tempData) ? 
+                            (tempData[dateFns.getDate(day)].count <= 3 ? 'greenCell' : 
+                                tempData[dateFns.getDate(day)].count <= 6 ? 'orangeCell' : 'redCell') : ''
                     }`}
                     key={`${day}`}
                     onClick={() => onDateClick(dateFns.parse(cloneDay))}
@@ -80,7 +97,9 @@ const Calendar = observer(() => {
                 </div>
                 );
                 day = dateFns.addDays(day, 1);
-                
+                if((dateFns.getDate(day) in tempData)) {
+                    console.log('CHANGE', tempData[dateFns.getDate(day)].count);
+                }
             }
             rows.push(
                 <div className="row" key={`${day}`}>
@@ -107,7 +126,6 @@ const Calendar = observer(() => {
 
     return (
         <div className="calendar">
-            <div className='key'>KEY</div>
             {renderHead()}
             {renderDays()}
             {renderCells()}

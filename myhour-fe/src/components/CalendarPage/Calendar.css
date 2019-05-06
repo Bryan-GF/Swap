@@ -1,8 +1,6 @@
 /* FONT IMPORTS */
-
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,700');
-@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
-
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,700");
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 .icon {
   font-family: 'Material Icons', serif;
   font-style: normal;
@@ -96,7 +94,9 @@ main {
 .calendar {
   display: block;
   position: relative;
-  width: 100%;
+  width: 85%;
+  margin: 0 auto;
+  margin-top: 2rem;
   background: var(--neutral-color);
   border: 1px solid var(--border-color); }
 
@@ -132,12 +132,33 @@ main {
 
 .calendar .body .cell {
   position: relative;
-  height: 7em;
+  height: 8em;
   border-right: 1px solid var(--border-color);
   overflow: hidden;
   cursor: pointer;
   background: var(--neutral-color);
   transition: 0.25s ease-out; }
+
+.calendar .body .greenCell {
+  color: white;
+  background: #77EE62; }
+
+.calendar .body .orangeCell {
+  color: white;
+  background: #F0AD4B; }
+
+.calendar .body .redCell {
+  color: white;
+  background: #F04B4B; }
+
+.calendar .body .greenCell:hover {
+  background: #71E05D !important; }
+
+.calendar .body .orangeCell:hover {
+  background: #F1A535 !important; }
+
+.calendar .body .redCell:hover {
+  background: #E73D3D !important; }
 
 .calendar .body .cell:hover {
   background: var(--bg-color);
@@ -166,7 +187,8 @@ main {
   font-weight: 700; }
 
 .calendar .body .disabled {
-  color: var(--text-color-light);
+  background: white;
+  color: var(--text-color-light) !important;
   pointer-events: none; }
 
 .calendar .body .cell .bg {
@@ -176,14 +198,32 @@ main {
   opacity: 0;
   font-size: 8em;
   position: absolute;
-  top: -.2em;
+  top: .18em;
   right: -.05em;
   transition: .25s ease-out;
   letter-spacing: -.07em; }
 
+.calendar .body .greenCell .bg {
+  color: white !important; }
+
+.calendar .body .orangeCell .bg {
+  color: white !important; }
+
+.calendar .body .redCell .bg {
+  color: white !important; }
+
 .calendar .body .cell:hover .bg, .calendar .body .selected .bg {
   opacity: 0.05;
   transition: .5s ease-in; }
+
+.calendar .body .greenCell:hover .bg, .calendar .body .selected .bg {
+  opacity: 1; }
+
+.calendar .body .orangeCell:hover .bg, .calendar .body .selected .bg {
+  opacity: 1; }
+
+.calendar .body .redCell:hover .bg, .calendar .body .selected .bg {
+  opacity: 1; }
 
 .calendar .body .col {
   flex-grow: 0;
