@@ -3,6 +3,7 @@ import {observer} from 'mobx-react-lite';
 import { GlobalStateContext } from '../../Stores/GlobalStore';
 import dateFns from "date-fns";
 import './Calendar.css'
+import { Link } from 'react-router-dom';
 
 const Calendar = observer(() => {
     
@@ -18,6 +19,27 @@ const Calendar = observer(() => {
         },
         3: {
             count: 10
+        },
+        15: {
+            count:4
+        },
+        12: {
+            count:8
+        },
+        17: {
+            count:8
+        },
+        18: {
+            count:3
+        },
+        20: {
+            count:1
+        },
+        28: {
+            count:8
+        },
+        27: {
+            count: 1
         }
     }
 
@@ -79,27 +101,26 @@ const Calendar = observer(() => {
                 formattedDate = dateFns.format(day, dateFormat);
                 const cloneDay = day;
                 days.push(
-                <div
-                    className={`col cell ${
-                    !dateFns.isSameMonth(day, monthStart)
-                        ? "disabled"
-                        : dateFns.isSameDay(day, selectedDate) ? "selected" : ""
-                    } ${
-                        (dateFns.getDate(day) in tempData) ? 
-                            (tempData[dateFns.getDate(day)].count <= 3 ? 'greenCell' : 
-                                tempData[dateFns.getDate(day)].count <= 6 ? 'orangeCell' : 'redCell') : ''
-                    }`}
-                    key={`${day}`}
-                    onClick={() => onDateClick(dateFns.parse(cloneDay))}
-                >
-                    <span className="number">{formattedDate}</span>
-                    <span className="bg">{formattedDate}</span>
-                </div>
+                    <Link className='col cell' to={{ pathname: "/schedule/requests", search: `?date=${day}`}}>
+                        <div
+                            className={`cell ${
+                            !dateFns.isSameMonth(day, monthStart)
+                                ? "disabled"
+                                : dateFns.isSameDay(day, selectedDate) ? "selected" : ""
+                            } ${
+                                (dateFns.getDate(day) in tempData) ? 
+                                    (tempData[dateFns.getDate(day)].count <= 3 ? 'greenCell' : 
+                                        tempData[dateFns.getDate(day)].count <= 6 ? 'orangeCell' : 'redCell') : ''
+                            }`}
+                            key={`${day}`}
+                            onClick={() => onDateClick(dateFns.parse(cloneDay))}
+                        >
+                            <span className="number">{formattedDate}</span>
+                            <span className="bg">{formattedDate}</span>
+                        </div>
+                    </Link>
                 );
                 day = dateFns.addDays(day, 1);
-                if((dateFns.getDate(day) in tempData)) {
-                    console.log('CHANGE', tempData[dateFns.getDate(day)].count);
-                }
             }
             rows.push(
                 <div className="row" key={`${day}`}>
