@@ -6,6 +6,7 @@ import Authentication from './components/Authentication/Authentication';
 import HomePage from './components/HomePage/Homepage';
 import Calendar from './components/CalendarPage/Calendar';
 import Nav from './components/Navigation/Nav';
+import RequestListPage from './components/Requests/RequestsListPage';
 
 const App = observer(() => {
 
@@ -16,6 +17,7 @@ const App = observer(() => {
       <Route exact path="/Authentication" component={Authentication} />
       <Route exact path="/Homepage" component={HomePage} />
       <Route exact path="/Schedule" component={Calendar} />
+      <Route path="/Schedule/Requests" component={RequestListPage} />
     </div>
   );
 });

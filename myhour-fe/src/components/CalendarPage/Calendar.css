@@ -94,7 +94,7 @@ main {
 .calendar {
   display: block;
   position: relative;
-  width: 85%;
+  width: 80%;
   margin: 0 auto;
   margin-top: 2rem;
   background: var(--neutral-color);
