@@ -10,7 +10,7 @@ Important:
     - Possibly need a way to limit how many hours someone can work a day.
     - Need a clickaway for the create request.
     - Need a popup for the accept button, to double confirm they want to take the shift. Also needs clickaway.
-    - Need to make it so urgen requests always show up first.
+    - Need to make it so urgent requests always show up first.
 For Later: 
     - Messages should open up the conversation tab with the ability to message the person of interest.
 */
@@ -66,9 +66,16 @@ const RequestListPage = observer(() => {
 
     const [creatingRequest, setCreatingRequest] = useState(false);
     const [requestContent, setRequestContent] = useState<RequestContent>({message: '', shiftID: 0})
+    const [acceptingRequest, setAcceptingRequest] = useState(false);
 
     const handlePost = () => {
         setCreatingRequest(false);
+        console.log('Post')
+    }
+
+    const handleConfirmation = () => {
+        setAcceptingRequest(false);
+        console.log('Confirmation')
     }
 
     useEffect(() => {
@@ -104,7 +111,7 @@ const RequestListPage = observer(() => {
                         <button onClick={() => {setCreatingRequest(false)}} className="red">Cancel</button>
                     </div>
                 </div>
-                : ''}
+            : ''}
             <div className='header'>
                 <h1>Requests</h1>
                 <div onClick={() => {setCreatingRequest(true)}} className='addButton'>
@@ -118,7 +125,7 @@ const RequestListPage = observer(() => {
             <div className='list-content'>
                 {tempData.map(request => {
                     return (
-                        <Request props={request}/>
+                        <Request info={request} handleConfirmation={handleConfirmation} acceptingRequest={acceptingRequest} setAcceptingRequest={setAcceptingRequest}/>
                     )
                 })}
             </div>
