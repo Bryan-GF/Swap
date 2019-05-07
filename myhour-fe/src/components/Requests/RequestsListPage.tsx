@@ -3,6 +3,7 @@ import {observer} from 'mobx-react-lite';
 import './Requests.css';
 import Request from './Request';
 import { number } from 'prop-types';
+import Nav from '../Navigation/Nav';
 
 /*NOTES:
 Important:
@@ -86,48 +87,51 @@ const RequestListPage = observer(() => {
 
     console.log(requestContent)
     return (
-        <div className='request-list-wrapper'>
-            {creatingRequest ? 
-                <div className='request-creator-wrapper'>
-                    <h2>Request Creator</h2>
-                    <div className='creator-content'>
-                        <textarea 
-                            maxLength={200}
-                            placeholder='Could someone please take over this shift for me?'
-                            onChange={(ev) => {setRequestContent({...requestContent, message: ev.target.value})}}
-                        />
-                        <div className="myselect">
-                            <select className="form-control" id="test" onChange={(ev) => {
-                                console.log(ev.target.value);
-                                setRequestContent({...requestContent, shiftID: +ev.target.value})}}>
-                                {tempShifts.map(shift =>
-                                    <option value={shift.id}>{shift.information}</option>
-                                )}
-                        </select>
+        <div>
+            <Nav/>
+            <div className='request-list-wrapper'>
+                {creatingRequest ? 
+                    <div className='request-creator-wrapper'>
+                        <h2>Request Creator</h2>
+                        <div className='creator-content'>
+                            <textarea 
+                                maxLength={200}
+                                placeholder='Could someone please take over this shift for me?'
+                                onChange={(ev) => {setRequestContent({...requestContent, message: ev.target.value})}}
+                            />
+                            <div className="myselect">
+                                <select className="form-control" id="test" onChange={(ev) => {
+                                    console.log(ev.target.value);
+                                    setRequestContent({...requestContent, shiftID: +ev.target.value})}}>
+                                    {tempShifts.map(shift =>
+                                        <option value={shift.id}>{shift.information}</option>
+                                    )}
+                            </select>
+                            </div>
+                        </div>
+                        <div className='creator-buttons'>
+                            <button onClick={() => {handlePost()}} className="green">Post</button>
+                            <button onClick={() => {setCreatingRequest(false)}} className="red">Cancel</button>
                         </div>
                     </div>
-                    <div className='creator-buttons'>
-                        <button onClick={() => {handlePost()}} className="green">Post</button>
-                        <button onClick={() => {setCreatingRequest(false)}} className="red">Cancel</button>
+                : ''}
+                <div className='header'>
+                    <h1>Requests</h1>
+                    <div onClick={() => {setCreatingRequest(true)}} className='addButton'>
+                        <span className='createPlus'>+ </span>
+                        <span className='createContent'>Create Request</span>
                     </div>
                 </div>
-            : ''}
-            <div className='header'>
-                <h1>Requests</h1>
-                <div onClick={() => {setCreatingRequest(true)}} className='addButton'>
-                    <span className='createPlus'>+ </span>
-                    <span className='createContent'>Create Request</span>
-                </div>
-            </div>
-            <div className='create-request-wrapper'>
+                <div className='create-request-wrapper'>
 
-            </div>
-            <div className='list-content'>
-                {tempData.map(request => {
-                    return (
-                        <Request info={request} handleConfirmation={handleConfirmation} acceptingRequest={acceptingRequest} setAcceptingRequest={setAcceptingRequest}/>
-                    )
-                })}
+                </div>
+                <div className='list-content'>
+                    {tempData.map(request => {
+                        return (
+                            <Request info={request} handleConfirmation={handleConfirmation} acceptingRequest={acceptingRequest} setAcceptingRequest={setAcceptingRequest}/>
+                        )
+                    })}
+                </div>
             </div>
         </div>
     )

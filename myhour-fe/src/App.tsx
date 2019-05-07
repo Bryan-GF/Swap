@@ -12,7 +12,6 @@ const App = observer(() => {
 
   return (
     <div>
-      <Nav/>
       <Route exact path="/" component={LandingPage} />
       <Route exact path="/Authentication" component={Authentication} />
       <Route exact path="/Homepage" component={HomePage} />

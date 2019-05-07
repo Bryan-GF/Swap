@@ -24,7 +24,8 @@
   --text-color-light: #ccc;
   --border-color: #eee;
   --bg-color: #f9f9f9;
-  --neutral-color: #fff; }
+  --neutral-color: #fff; 
+  --main-hover-color: rgb(43, 126, 199);}
 
 /* GENERAL */
 * {

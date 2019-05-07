@@ -8,7 +8,10 @@ const Nav = observer(() => {
     return (
         <div className='navigation'>    
             <div className='navContent'>
-                <img src={logo} alt='logo'/>
+                <div className='logo'>
+                    <img src={logo} alt='logo'/>
+                    <span>Swap</span>
+                </div>
                 <Link to='/Homepage'>Home</Link>
                 <Link to='/Schedule'>Schedule</Link>
                 <Link to='/Conversations'>Conversations</Link>

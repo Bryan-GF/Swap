@@ -1,6 +1,7 @@
 import React, {useContext} from 'react';
 import {observer} from 'mobx-react-lite';
 import { GlobalStateContext } from '../../Stores/GlobalStore';
+import Nav from '../Navigation/Nav';
 
 const HomePage = observer(() => {
     
@@ -8,8 +9,11 @@ const HomePage = observer(() => {
 
     return (
         <div>
-            <h1>Homepage</h1>
-            <p>{state.userData.name}</p>
+            <Nav/>
+            <div>
+                <h1>Homepage</h1>
+                <p>{state.userData.name}</p>
+            </div>
         </div>
     )
 });

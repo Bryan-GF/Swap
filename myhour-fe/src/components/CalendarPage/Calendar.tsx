@@ -4,6 +4,7 @@ import { GlobalStateContext } from '../../Stores/GlobalStore';
 import dateFns from "date-fns";
 import './Calendar.css'
 import { Link } from 'react-router-dom';
+import Nav from '../Navigation/Nav';
 
 const Calendar = observer(() => {
     
@@ -165,10 +166,13 @@ const Calendar = observer(() => {
 
 
     return (
-        <div className="calendar">
-            {renderHead()}
-            {renderDays()}
-            {renderCells()}
+        <div>
+            <Nav/>
+            <div className="calendar">
+                {renderHead()}
+                {renderDays()}
+                {renderCells()}
+            </div>
         </div>
     )
 });

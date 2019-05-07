@@ -1,21 +1,64 @@
+@import url("https://fonts.googleapis.com/css?family=Pacifico");
 .navigation {
   display: flex;
   background: white;
   height: 6rem; }
-  .navigation .navContent {
-    width: 90%;
-    margin: 0 auto;
-    height: 100%;
-    display: flex;
-    align-items: center; }
-    .navigation .navContent a {
-      text-decoration: none;
-      color: black;
-      margin: 0 2rem;
-      font-size: 1.3rem;
-      font-weight: bold; }
-    .navigation .navContent img {
-      height: 80%;
-      margin-right: 2rem; }
-    .navigation .navContent img:hover {
-      cursor: pointer; }
+
+.navigation .navContent {
+  width: 80%;
+  margin: 0 auto;
+  height: 100%;
+  display: flex;
+  align-items: center; }
+
+.navigation .navContent a {
+  text-decoration: none;
+  color: var(--text-color);
+  margin: 0 2rem;
+  font-size: 1.3rem;
+  font-weight: bold; }
+
+.navigation .navContent a:hover {
+  color: var(--main-color); }
+
+.navigation .navContent .logo {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  margin-right: 3rem; }
+
+.navigation .navContent .logo span {
+  font-family: 'Pacifico', cursive;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: var(--main-color); }
+
+.navigation .navContent .logo img {
+  height: 80%;
+  margin-right: .5rem; }
+
+.navigation .navContent .logo:hover {
+  cursor: pointer; }
+
+.navigation .landing {
+  justify-content: space-between; }
+
+.navigation .landing .landingButtons {
+  display: flex;
+  flex-direction: row;
+  align-items: center; }
+
+.navigation .landing .landingButtons .signUpButton {
+  background: var(--main-color);
+  color: white;
+  padding: .8rem 1.8rem; }
+
+.navigation .landing .landingButtons .signUpButton:hover {
+  background: var(--main-hover-color); }
+
+.navigation .landing .landingButtons .loginButton {
+  color: var(--text-color);
+  padding: .2rem .4rem; }
+
+.navigation .landing .landingButtons .loginButton:hover {
+  color: var(--main-color); }
