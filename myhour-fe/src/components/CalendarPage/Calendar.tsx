@@ -101,6 +101,7 @@ const Calendar = observer(() => {
                 formattedDate = dateFns.format(day, dateFormat);
                 const cloneDay = day;
                 days.push(
+                    (dateFns.isSameMonth(day, monthStart) ?
                     <Link className='col cell' to={{ pathname: "/Schedule/Requests", search: `?date=${day}`}}>
                         <div
                             className={`cell ${
@@ -119,6 +120,24 @@ const Calendar = observer(() => {
                             <span className="bg">{formattedDate}</span>
                         </div>
                     </Link>
+                    :
+                    <div
+                        className={`col cell ${
+                        !dateFns.isSameMonth(day, monthStart)
+                            ? "disabled"
+                            : dateFns.isSameDay(day, selectedDate) ? "selected" : ""
+                        } ${
+                            (dateFns.getDate(day) in tempData) ? 
+                                (tempData[dateFns.getDate(day)].count <= 3 ? 'greenCell' : 
+                                    tempData[dateFns.getDate(day)].count <= 6 ? 'orangeCell' : 'redCell') : ''
+                        }`}
+                        key={`${day}`}
+                        onClick={() => onDateClick(dateFns.parse(cloneDay))}
+                    >
+                        <span className="number">{formattedDate}</span>
+                        <span className="bg">{formattedDate}</span>
+                    </div>
+                    )
                 );
                 day = dateFns.addDays(day, 1);
             }
