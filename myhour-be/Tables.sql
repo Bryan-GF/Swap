@@ -19,6 +19,13 @@ branchID int NOT NULL FOREIGN KEY REFERENCES BranchTable(branchID)
     ON DELETE CASCADE    
     ON UPDATE CASCADE 	  
 );
+CREATE TABLE Shifts (
+ShiftID int IDENTITY(1,1) NOT NULL PRIMARY KEY,
+shiftDate date NOT NULL,
+startTime time NOT NULL,
+endTime time NOT NULL,
+UserID int NOT NULL FOREIGN KEY REFERENCES Users(UserID),
+);
 GO  
 
 CREATE PROCEDURE dbo.uspAddUser
@@ -69,7 +76,6 @@ BEGIN
 
 END
 
-
 GO
 CREATE PROCEDURE dbo.uspAddCompany
     @pCompanyName varchar(255),
@@ -82,6 +88,31 @@ BEGIN
 
         INSERT INTO dbo.CompanyTable(companyName)
         VALUES(@pCompanyName)
+
+        SET @responseMessage='Success'
+
+    END TRY
+    BEGIN CATCH
+        SET @responseMessage=ERROR_MESSAGE() 
+    END CATCH
+
+END
+
+GO
+CREATE PROCEDURE dbo.uspAddShift
+    @pDate date,
+	@pStart time,
+	@pEnd time,
+	@pUserID int,
+	@responseMessage NVARCHAR(250) OUTPUT
+AS
+BEGIN
+    SET NOCOUNT ON
+
+    BEGIN TRY
+
+        INSERT INTO dbo.Shifts(shiftDate, startTime, endTime, UserID)
+        VALUES(@pDate, @pStart, @pEnd, @pUserID)
 
         SET @responseMessage='Success'
 
