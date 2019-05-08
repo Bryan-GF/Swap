@@ -12,10 +12,10 @@ const LandingNav = () => {
                     <span>Swap</span>
                 </div>
                 <div className='landingButtons'>
-                    <Link to='/Authentication'>
+                    <Link to='/Login'>
                         <div className='loginButton'>Login</div>
                     </Link>
-                    <Link to='/Authentication'>
+                    <Link to='/SignUp'>
                         <div className='signUpButton'>Sign Up</div>
                     </Link>
                 </div>

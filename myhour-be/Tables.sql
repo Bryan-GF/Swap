@@ -26,9 +26,11 @@ startTime time NOT NULL,
 endTime time NOT NULL,
 UserID int NOT NULL FOREIGN KEY REFERENCES Users(UserID),
 );
-GO  
 
-CREATE PROCEDURE dbo.uspAddUser
+ALTER TABLE Users ADD Salt UNIQUEIDENTIFIER 
+
+GO  
+ALTER PROCEDURE dbo.uspAddUser
     @pEmployeeID varchar(255), 
     @pPassword NVARCHAR(50), 
     @pFirstName varchar(255),
@@ -40,10 +42,12 @@ AS
 BEGIN
     SET NOCOUNT ON
 
+	DECLARE @salt UNIQUEIDENTIFIER=NEWID()
+
     BEGIN TRY
 
-        INSERT INTO dbo.Users(employeeID, PasswordHash, Firstname, Lastname, Position, branchID)
-        VALUES(@pEmployeeID, HASHBYTES('SHA2_512', @pPassword), @pFirstName, @pLastName, @pPosition, @pBranchID)
+        INSERT INTO dbo.Users(employeeID, PasswordHash, Salt, Firstname, Lastname, Position, branchID)
+        VALUES(@pEmployeeID, HASHBYTES('SHA2_512',  @pPassword+CAST(@salt AS NVARCHAR(36))), @salt, @pFirstName, @pLastName, @pPosition, @pBranchID)
 
         SET @responseMessage='Success'
 
@@ -51,6 +55,32 @@ BEGIN
     BEGIN CATCH
         SET @responseMessage=ERROR_MESSAGE() 
     END CATCH
+
+END
+
+GO
+CREATE PROCEDURE dbo.uspLogin
+    @pEmployeeID varchar(255),
+    @pPassword NVARCHAR(50),
+    @responseMessage NVARCHAR(250)='' OUTPUT
+AS
+BEGIN
+
+    SET NOCOUNT ON
+
+    DECLARE @userID INT
+
+    IF EXISTS (SELECT TOP 1 UserID FROM dbo.Users WHERE employeeID=@pEmployeeID)
+    BEGIN
+        SET @userID=(SELECT UserID FROM dbo.Users WHERE employeeID=@pEmployeeID AND PasswordHash=HASHBYTES('SHA2_512', @pPassword+CAST(Salt AS NVARCHAR(36))))
+
+       IF(@userID IS NULL)
+           SET @responseMessage='Incorrect password'
+       ELSE 
+           SET @responseMessage='User successfully logged in'
+    END
+    ELSE
+       SET @responseMessage='Invalid login'
 
 END
 
