@@ -5,6 +5,7 @@ import logo from '../../assets/logo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye } from '@fortawesome/free-solid-svg-icons'
 import './Auth.css';
+import axios from 'axios';
 
 const Login= observer(() => {
     
@@ -12,6 +13,15 @@ const Login= observer(() => {
     const [loginInfo, setLoginInfo] = useState({employeeID: '', password: ''});
     const [viewPass, setViewPass] = useState(false);
     console.log(state);
+
+    const attemptLogin = () => {
+        axios
+        .post('https://swapapi.azurewebsites.net/api/AddCompany', { companyName: 'Google'})
+        .then(response => 
+            console.log(response)
+        ).catch(error => console.log(error))
+    }
+
     return (
         <div className='loginWrapper'>
             <div className='loginContainer'>
@@ -29,7 +39,7 @@ const Login= observer(() => {
                         </div>
                     </div>
                 </div>
-                <button className='loginButton'>Login</button>
+                <button onClick={() => {attemptLogin()}}className='loginButton'>Login</button>
             </div>
         </div>
     )
