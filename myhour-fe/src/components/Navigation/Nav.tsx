@@ -15,7 +15,6 @@ const Nav = observer((props:any) => {
                 <div className='logo'>
                     <img src={logo} alt='logo'/>
                     <span>Swap</span>
-                    <p>{state.userData.Position}</p>
                 </div>
                 {state.userData.Position === 'Branch Manager' ?
                     <Link to='/Manager/Home'>Home</Link> :

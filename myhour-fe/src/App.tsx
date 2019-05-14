@@ -3,11 +3,12 @@ import {observer} from 'mobx-react-lite';
 import { Route, Redirect } from 'react-router-dom';
 import LandingPage from './components/LandingPage/LandingPage';
 import HomePage from './components/HomePage/Homepage';
+import ManagerHomePage from './components/HomePage/ManagerHomePage';
 import Calendar from './components/CalendarPage/Calendar';
 import RequestListPage from './components/Requests/RequestsListPage';
 import Login from './components/Authentication/Login';
 import { GlobalStateContext } from './Stores/GlobalStore';
-import {BasicAuthRoute, ManagerAuthRoute} from './components/Authentication/requireAuth';
+import {BasicAuthRoute} from './components/Authentication/requireAuth';
 import { VerifyToken } from './components/Authentication/VerifyToken';
 
 const App = observer((props:any) => {
@@ -24,11 +25,9 @@ const App = observer((props:any) => {
       <Route exact path="/Login" component={Login} />
       {!loading ?
         <div>
-          <BasicAuthRoute exact path="/User/Home" component={HomePage} />       
+          <BasicAuthRoute exact path="/Home" component={HomePage} />       
           <BasicAuthRoute exact path="/Schedule" component={Calendar} />
           <BasicAuthRoute path="/Schedule/Requests" component={RequestListPage} />
-          <ManagerAuthRoute exact path="/Manager/Home" component={HomePage} />
-          <BasicAuthRoute exact path="/Homer" component={Calendar}/>  
         </div>
       : null}
     </div>

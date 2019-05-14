@@ -29,15 +29,9 @@ const Login= observer((props:any) => {
         .then(res => {
             localStorage.setItem('Token', res.data.Token);
             let User = {"employeeID": res.data.employeeID, "Firstname": res.data.Firstname, "Lastname": res.data.Lastname, "Position": res.data.Position}
-            localStorage.setItem('User', JSON.stringify(User));
             state.setUserData(User);
             state.setLoginStatus(true);
-            if(res.data.Position === "Branch Manager") {
-                props.history.push('/Manager/Home');
-            } else {
-                props.history.push('/User/Home');
-            }
-            
+            props.history.push('/Home');           
         }).catch(err => console.log(err))
     }
 
