@@ -7,12 +7,7 @@ const HomePage = observer((props:any) => {
     
     const state = useContext(GlobalStateContext);
 
-    useEffect(() => {
-        if(!state.loginStatus) {
-          props.history.push('/Login');
-        }
-      }, []);
-
+    
     return (
         <div>
             <Nav/>
