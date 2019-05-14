@@ -5,16 +5,17 @@ import './Nav.css';
 import { GlobalStateContext } from '../../Stores/GlobalStore';
 import logo from '../../assets/logo.png'
 
-const Nav = observer(() => {
+const Nav = observer((props:any) => {
 
     const state = useContext(GlobalStateContext);
-
+    console.log(state);
     return (
         <div className='navigation'>    
             <div className='navContent'>
                 <div className='logo'>
                     <img src={logo} alt='logo'/>
                     <span>Swap</span>
+                    <p>{state.userData.Position}</p>
                 </div>
                 {state.userData.Position === 'Branch Manager' ?
                     <Link to='/Manager/Home'>Home</Link> :
