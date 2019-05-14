@@ -1,8 +1,9 @@
 import {observable, action, computed} from 'mobx';
 import {createContext} from 'react';
 
+
 class GlobalState {
-    @observable userData = {name : "", id : ""};
+    @observable userData = {employeeID : "",  Firstname: "", Lastname: "", Position: ""};
 
     @observable loginStatus = false;
 
@@ -16,13 +17,13 @@ class GlobalState {
         this.loginStatus = status;
     }
     ///////////////
-    
+
     @action setUserData = (userInfo: any) => {
-        this.userData =  {name: userInfo.name, id: userInfo.id}
+        this.userData =  {employeeID: userInfo.employeeID, Firstname: userInfo.Firstname, Lastname: userInfo.Lastname, Position: userInfo.Position}
     }
 
     @computed get UserName() {
-        return this.userData.name;
+        return this.userData.Firstname;
     }
 }
 

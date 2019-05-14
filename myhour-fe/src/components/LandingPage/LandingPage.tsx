@@ -13,7 +13,6 @@ const LandingPage = observer(() => {
             <LandingNav/>
             <div>
                 <h1>LandingPage</h1>
-                <p>{state.userData.name}</p>
                 <Link to='/Authentication'>Authentication</Link>
             </div>
         </div>

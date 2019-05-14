@@ -33,31 +33,64 @@
             align-items: center;
             margin-top: 2rem;
             input {
-                border: 1px solid var(--main-color);
                 margin-bottom: 1rem;
                 padding: 1rem;
                 outline: none;
+                border: none;
+                
+            }
+
+            .employeeInput {
+                border: 1px solid var(--main-color);
+                border-radius: 4px;
             }
 
             .passwordInput {
+                border: 1px solid var(--main-color);
                 display: flex;
+                border-radius: 4px;
                 input {
+                    border-radius: 4px;
                     width: 87%;
                     margin-bottom: 0;
                     border-right: 0;
                     padding-right: 0;
                     outline:none;
+                    
                 }
                 .toggleEye {
                     width: 13%;
                     display: flex;
                     align-items: center;
-                    border: 1px solid var(--main-color);
                     background: white;
                     border-left: 0;
+                    border-radius: 4px;
 
                     svg:hover {
                         cursor: pointer;
+                    }
+                }
+            }
+
+            .companyInfo {
+                width: 100%;
+                margin-top: 1rem;
+                .companySelect {
+                    .company__control {
+                        border-color: var(--main-color);
+                    }
+
+                    .company__menu {
+                        border-color: var(--main-color);
+                    }
+
+                    .company__input {
+                        input {
+                            margin-bottom: 0;
+                            margin-top: .5rem;
+                            margin-bottom: .5rem;
+                        }
+                        
                     }
                 }
             }

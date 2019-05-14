@@ -26,8 +26,7 @@ startTime time NOT NULL,
 endTime time NOT NULL,
 UserID int NOT NULL FOREIGN KEY REFERENCES Users(UserID),
 );
-
-ALTER TABLE Users ADD Salt UNIQUEIDENTIFIER 
+GO
 
 GO  
 ALTER PROCEDURE dbo.uspAddUser
@@ -59,7 +58,7 @@ BEGIN
 END
 
 GO
-CREATE PROCEDURE dbo.uspLogin
+ALTER PROCEDURE dbo.uspLogin
     @pEmployeeID varchar(255),
     @pPassword NVARCHAR(50),
     @responseMessage NVARCHAR(250)='' OUTPUT
@@ -75,9 +74,14 @@ BEGIN
         SET @userID=(SELECT UserID FROM dbo.Users WHERE employeeID=@pEmployeeID AND PasswordHash=HASHBYTES('SHA2_512', @pPassword+CAST(Salt AS NVARCHAR(36))))
 
        IF(@userID IS NULL)
-           SET @responseMessage='Incorrect password'
+		   BEGIN
+			   SET @responseMessage='Incorrect password'
+
+			END
        ELSE 
+		BEGIN
            SET @responseMessage='User successfully logged in'
+		END
     END
     ELSE
        SET @responseMessage='Invalid login'
@@ -153,6 +157,13 @@ BEGIN
 
 END
 
+GO
+DELETE FROM CompanyTable;
+DELETE FROM BranchTable;
+DELETE FROM Users;
+
+
+ALTER TABLE Users ADD PasswordHash varbinary(64) NOT NULL
 
 
 
