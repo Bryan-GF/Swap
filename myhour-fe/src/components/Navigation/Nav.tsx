@@ -16,7 +16,7 @@ const Nav = observer((props:any) => {
                     <img src={logo} alt='logo'/>
                     <span>Swap</span>
                 </div>
-                <Link to='//Home'>Home</Link>   
+                <Link to='/Home'>Home</Link>   
                 <Link to='/Schedule'>Schedule</Link>
                 <Link to='/Conversations'>Conversations</Link>
                 <Link to='/Settings'>Settings</Link>

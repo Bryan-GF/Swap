@@ -8,7 +8,6 @@ const Request = observer((props:any) => {
     console.log(props);
     return (
         <div>
-            <Nav/>
             <div>
                 {props.acceptingRequest ?
                     <div className='request-confirmation-wrapper'>

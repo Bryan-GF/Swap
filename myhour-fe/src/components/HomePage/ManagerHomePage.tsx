@@ -16,7 +16,7 @@ const ManagerHomePage = observer((props:any) => {
                     <p>120 Employees</p>
                     <div className="addEmployee">
                         <span>+</span>
-                        <p>Add Employee</p>
+                        <p>ADD EMPLOYEE</p>
                     </div>
                 </div>
                 <div className="ManageListColumn Title">
