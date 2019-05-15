@@ -1,0 +1,61 @@
+.ManageWrapper {
+  width: 1000px;
+  margin: 0 auto; }
+
+.ManageWrapper h2 {
+  background: var(--main-color);
+  color: white;
+  padding: 1rem;
+  margin: 2rem 0 0 0; }
+
+.ManageWrapper p {
+  margin: 0; }
+
+.ManageWrapper .ManageListInteractive {
+  display: flex;
+  background: white;
+  padding: 1rem;
+  justify-content: space-between;
+  font-weight: bold; }
+
+.ManageWrapper .ManageListInteractive .addEmployee {
+  display: flex;
+  font-weight: bold; }
+
+.ManageWrapper .ManageListColumn {
+  display: flex;
+  background: white; }
+
+.ManageWrapper .ManageListColumn div {
+  padding: 1rem 0 1rem 1rem; }
+
+.ManageWrapper .ManageListColumn .columnID {
+  width: 20%; }
+
+.ManageWrapper .ManageListColumn .columnName {
+  width: 30%; }
+
+.ManageWrapper .ManageListColumn .columnPosition {
+  width: 30%; }
+
+.ManageWrapper .Title {
+  background: ghostwhite;
+  border-right: 4px solid #b8babc;
+  border-left: none; }
+
+.ManageWrapper .Title div {
+  font-weight: bold;
+  border-right: 3px solid #b8babc; }
+
+.ManageWrapper .Title .columnID {
+  border-left: 4px solid #b8babc; }
+
+.ManageWrapper .Employee {
+  border-right: 4px solid #dbdbdb;
+  border-top: none; }
+
+.ManageWrapper .Employee div {
+  border-right: 3px solid #efefef; }
+
+.ManageWrapper .Employee .columnID {
+  border-left: 4px solid #dbdbdb; }

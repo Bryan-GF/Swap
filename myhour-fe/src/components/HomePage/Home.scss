@@ -1,0 +1,71 @@
+.ManageWrapper {
+    width: 1000px;
+    margin: 0 auto;
+    h2 {
+        background: var(--main-color);
+        color: white;
+        padding: 1rem;
+        margin: 2rem 0 0 0;
+    }
+    p {
+        margin: 0;
+    }
+    
+    .ManageListInteractive {
+        display: flex;
+        background: white;
+        padding: 1rem;
+        justify-content: space-between;
+        font-weight: bold;
+        .addEmployee {
+            display: flex;
+            font-weight: bold;
+        }
+    }
+    
+    .ManageListColumn {
+        display: flex;
+        background: white;
+
+        div {
+            padding: 1rem 0 1rem 1rem;
+        }
+
+        .columnID {
+            width: 20%;
+        }
+        .columnName {
+            width: 30%;
+        }
+        .columnPosition {
+            width: 30%;
+        }
+    }
+
+    .Title {
+        
+        background: ghostwhite;
+        border-right:  4px solid #b8babc;
+        border-left: none;
+
+        div {
+            font-weight: bold;
+            border-right:  3px solid #b8babc;   
+        }
+        .columnID {
+            border-left:  4px solid #b8babc;
+        }
+
+    }
+
+    .Employee {
+        border-right: 4px solid #dbdbdb;
+        border-top: none;
+        div {
+            border-right: 3px solid #efefef;
+        }
+        .columnID {
+            border-left:  4px solid #dbdbdb;
+        }
+    }
+}
