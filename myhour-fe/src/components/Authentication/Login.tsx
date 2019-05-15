@@ -29,7 +29,7 @@ const Login= observer((props:any) => {
         .then(res => {
             console.log(res.data);
             localStorage.setItem('Token', res.data.Token);
-            let User = {"employeeID": res.data.employeeID, "Firstname": res.data.Firstname, "Lastname": res.data.Lastname, "Position": res.data.Position, "branchID": res.data.BranchID}
+            let User = {"employeeID": res.data.employeeID, "Firstname": res.data.Firstname, "Lastname": res.data.Lastname, "Position": res.data.Position, "branchID": res.data.branchID}
             state.setUserData(User);
             state.setLoginStatus(true);
             props.history.push('/Home');           

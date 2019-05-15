@@ -1,3 +1,80 @@
+.employee-adder-wrapper {
+    position: fixed;
+    width: 500px;
+    top: 50%;
+    left: 50%;
+    margin-top: -320px; /* Negative half of height. */
+    margin-left: -250px; /* Negative half of width. */
+    background: white;
+    border-radius: 9px;
+    padding: 3rem;
+    border: 3px solid #60B0F4;
+    z-index: 3;
+
+    h2 {
+        margin-top: 0;
+        color: var(--main-color);
+    }
+
+    .adder-content {
+        display: flex;
+        flex-direction: column;
+
+        span {
+            font-weight: bold;
+            margin-top: 1rem;
+        }
+
+        input{
+            width: 100%;
+            resize: none;
+            padding: .5rem;     
+            outline: none;
+            border-color: var(--main-color);
+        }
+        p {
+            font-size: .8rem;
+            color: red;
+            margin-top: .2rem;
+        }
+    }
+
+    .employee-adder-buttons {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 10px;
+        .green {
+            background: #77EE62;
+            border: 1px solid #71E05D;
+        }
+
+        .green:hover {
+            background: #71E05D;
+            cursor: pointer;
+        }
+
+        .red {
+            background: #F04B4B;
+            border: 3px solid #E73D3D;
+        }
+
+        .red:hover {
+            background: #E73D3D;
+            cursor: pointer;
+        }
+
+        button {
+            border: none;
+            color: white;
+            padding: .5rem 1rem;
+            margin-left: 1rem;
+            font-weight: bold;
+            font-size: 1rem;
+            outline: none;
+        }
+    }
+}
+
 .ManageWrapper {
     width: 1000px;
     margin: 0 auto;
@@ -22,12 +99,9 @@
             font-weight: bold;
             color: var(--main-color);
             align-items: center;
-            span {
-                border-radius: 24px;
-                border: 2px solid var(--main-color);
-                font-size: 1.2rem;
-                padding: 0 .5rem;
-                height: 1.8rem;
+            svg {
+                height: 1.6rem;
+                width: 1.6rem;
             }
 
             p {
@@ -38,6 +112,14 @@
 
         .addEmployee:hover {
             cursor: pointer;
+
+            svg {
+                color: var(--main-hover-color);
+            }
+
+            p {
+                color: var(--main-hover-color);
+            }
         }
     }
     
@@ -57,6 +139,38 @@
         }
         .columnPosition {
             width: 30%;
+        }
+        .columnIcons {
+            width: 20%;
+            display: flex;
+            justify-content: flex-end;
+
+            .plus {
+                color: var(--main-color);
+            }
+
+            .plus:hover {
+                color: var(--main-hover-color);
+                transform: scale(1.1); 
+            }
+
+            .trash {
+                margin-left: 1.5rem;
+                margin-right: 1rem;
+            }
+
+            .trash:hover {
+                color: #4e4e4f;
+                transform: scale(1.1); 
+            }
+            svg {
+                height: 1.5rem;
+                width: 1.5rem;
+            }
+
+            svg:hover {
+                cursor: pointer;
+            }
         }
     }
 
@@ -85,5 +199,10 @@
         .columnID {
             border-left:  4px solid #dbdbdb;
         }
+    }
+
+    .Employee:hover {
+        background: ghostwhite;
+        cursor: pointer;
     }
 }

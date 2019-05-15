@@ -10,6 +10,16 @@ class GlobalState {
 
     @observable branchData = [];
 
+    @action addEmployee = async(employee) => {
+        return await axios
+        .post('https://swapapi.azurewebsites.net/api/AddUser', {...employee, "branchID": this.userData.branchID})
+        .then(res => {
+            console.log(res); 
+        }).catch(err => {
+            console.log(err)
+        })
+    }
+
     @action getBranchData = async() => {
         return await axios
         .post('https://swapapi.azurewebsites.net/api/GetBranchEmployees', {"branchID": this.userData.branchID})
