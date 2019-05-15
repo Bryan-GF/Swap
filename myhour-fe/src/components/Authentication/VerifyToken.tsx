@@ -8,7 +8,7 @@ export const VerifyToken = async(state, setLoading) => {
         .then(async(res) => {
             console.log("Success")
             let json = JSON.parse(res.data);
-            let User = {"employeeID": json.employeeID, "Firstname": json.Firstname, "Lastname": json.Lastname, "Position": json.Position}
+            let User = {"employeeID": json.employeeID, "Firstname": json.Firstname, "Lastname": json.Lastname, "Position": json.Position, "branchID": json.branchID}
             state.setUserData(User);
             state.setLoginStatus(true);
             setLoading(false);

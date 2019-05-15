@@ -158,12 +158,8 @@ BEGIN
 END
 
 GO
-DELETE FROM CompanyTable;
-DELETE FROM BranchTable;
-DELETE FROM Users;
 
-
-ALTER TABLE Users ADD PasswordHash varbinary(64) NOT NULL
+ALTER TABLE Users ALTER COLUMN PasswordHash varchar(255) NOT NULL;
 
 
 

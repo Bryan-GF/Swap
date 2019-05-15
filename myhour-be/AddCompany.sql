@@ -1,3 +1,4 @@
 
+
 SELECT *
 FROM dbo.CompanyTable

@@ -1,14 +1,4 @@
-
-DECLARE @responseMessage NVARCHAR(250)
-
-EXEC dbo.uspAddUser
-          @pEmployeeID = '18NKJ2E',
-          @pPassword = N'zoomingintheforeign',
-          @pFirstName = 'AdminTest',
-          @pLastName = 'Login',
-		  @pPosition = 'Cashier',
-		  @pBranchID = 1,
-          @responseMessage=@responseMessage OUTPUT
-
-SELECT *
-FROM dbo.Users
+SELECT employeeID, Firstname, Lastname, Position, PasswordHash FROM Users U 
+                        JOIN BranchTable B on B.branchID = U.branchID 
+                        JOIN CompanyTable C on C.companyID = B.companyID 
+                        WHERE employeeID = '101PEL' AND C.companyName = 'Target'

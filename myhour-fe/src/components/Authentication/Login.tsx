@@ -27,8 +27,9 @@ const Login= observer((props:any) => {
         axios
         .post('https://swapapi.azurewebsites.net/api/Authenticate', loginInfo)
         .then(res => {
+            console.log(res.data);
             localStorage.setItem('Token', res.data.Token);
-            let User = {"employeeID": res.data.employeeID, "Firstname": res.data.Firstname, "Lastname": res.data.Lastname, "Position": res.data.Position}
+            let User = {"employeeID": res.data.employeeID, "Firstname": res.data.Firstname, "Lastname": res.data.Lastname, "Position": res.data.Position, "branchID": res.data.BranchID}
             state.setUserData(User);
             state.setLoginStatus(true);
             props.history.push('/Home');           

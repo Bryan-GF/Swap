@@ -1,12 +1,25 @@
 import {observable, action, computed} from 'mobx';
 import {createContext} from 'react';
+import axios from 'axios';
 
 
 class GlobalState {
-    @observable userData = {employeeID : "",  Firstname: "", Lastname: "", Position: ""};
+    @observable userData = {employeeID : "",  Firstname: "", Lastname: "", Position: "", branchID: ""};
 
     @observable loginStatus = false;
 
+    @observable branchData = [];
+
+    @action getBranchData = async() => {
+        return await axios
+        .post('https://swapapi.azurewebsites.net/api/GetBranchEmployees', {"branchID": this.userData.branchID})
+        .then(res => {
+            console.log(res.data);
+            this.branchData = res.data;       
+        }).catch(err => {
+            console.log(err)
+        })
+    }
 
     //LOGIN ACTIONS
     @action attemptLogin = () => {
@@ -19,7 +32,7 @@ class GlobalState {
     ///////////////
 
     @action setUserData = (userInfo: any) => {
-        this.userData =  {employeeID: userInfo.employeeID, Firstname: userInfo.Firstname, Lastname: userInfo.Lastname, Position: userInfo.Position}
+        this.userData =  {employeeID: userInfo.employeeID, Firstname: userInfo.Firstname, Lastname: userInfo.Lastname, Position: userInfo.Position, branchID: userInfo.branchID}
     }
 
     @computed get UserName() {
