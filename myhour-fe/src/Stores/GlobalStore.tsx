@@ -8,6 +8,8 @@ class GlobalState {
 
     @observable loginStatus = false;
 
+    @observable targetEmployee = {employeeID: '', Name: '', Position: '', branchID: ''};
+
     @observable branchData = [];
 
     @action deleteUser = (ID) => {
@@ -53,6 +55,10 @@ class GlobalState {
 
     @action setUserData = (userInfo: any) => {
         this.userData =  {employeeID: userInfo.employeeID, Firstname: userInfo.Firstname, Lastname: userInfo.Lastname, Position: userInfo.Position, branchID: userInfo.branchID}
+    }
+
+    @action setTargetEmployee = (employeeInfo) => {
+        this.targetEmployee = employeeInfo;
     }
 
     @computed get UserName() {

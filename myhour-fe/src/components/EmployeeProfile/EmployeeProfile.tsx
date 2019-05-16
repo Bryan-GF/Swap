@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {observer} from 'mobx-react-lite';
 import { GlobalStateContext } from '../../Stores/GlobalStore';
 import Nav from '../Navigation/Nav';
@@ -6,14 +6,19 @@ import avatar from '../../assets/avatar.png';
 import './Profile.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
+import DeleteEmployee from '../Delete/DeleteEmployee';
 
 const EmployeeProfile = observer((props:any) => {
     
     const state = useContext(GlobalStateContext);
 
-    
+    const [deletingUser, setDeletingUser] = useState(false);
     return (
         <div>
+            {deletingUser ?
+                <DeleteEmployee setDeletingUser={setDeletingUser}/>
+                : ''
+            }
             <Nav/>
             <div className="employeeContentWrapper">
                 <div className="employeeProfileContent">
@@ -24,13 +29,13 @@ const EmployeeProfile = observer((props:any) => {
                         <img src={avatar}/>
                         <div className="profileTextContent">
                             <span>Employee ID: </span>
-                            <p>1O1PEL</p>
+                            <p>{state.targetEmployee.employeeID}</p>
                             <span>Name: </span>
-                            <p>Bob Bilbow</p>
+                            <p>{state.targetEmployee.Name}</p>
                             <span>Position: </span>
-                            <p>Cashier</p>
+                            <p>{state.targetEmployee.Position}</p>
                             <div className="profileButtons">
-                                <div className="trash">
+                                <div onClick={() => { setDeletingUser(true)}} className="trash">
                                     <FontAwesomeIcon className="trash" icon={faTrash}/>
                                 </div>
                                 <button>Message</button>
@@ -41,6 +46,11 @@ const EmployeeProfile = observer((props:any) => {
                 <div className="employeeShiftContent">
                     <div className="shiftListHeader">
                         <h2>Shifts</h2>
+                        <div className='createShift'>
+                            <span className='createPlus'>+ </span>
+                            <span className='createContent'>Add Shift</span>
+                        </div>
+                        
                     </div>
                     <div className="shiftListContent">
 

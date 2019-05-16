@@ -34,13 +34,13 @@
                 span {
                     margin-left: 2rem;
                     font-weight: bold;
-                    font-size: 1.2rem;
+                    font-size: 1rem;
                 }
 
                 p {
                     margin: 0;
                     margin-left: .5rem;
-                    font-size: 1.2rem;
+                    font-size: 1rem;
                 }
 
                 .profileButtons {
@@ -53,7 +53,7 @@
                         border: none;
                         color: white;
                         padding: 1rem 2rem;
-                        font-size: 1.2rem;
+                        font-size: 1rem;
                     }
     
                     button:hover {
@@ -79,5 +79,46 @@
 
         }
 
+    }
+
+    .employeeShiftContent {
+        background: var(--main-color);
+        color: white;
+        padding: 1rem 2rem;
+        margin-top: 2rem;
+        h2 {
+            margin: 0;
+            font-size: 2rem;
+        }
+
+        .shiftListHeader {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            .createShift {
+                font-size: 1.5rem;
+                font-weight: bold;
+                border-radius: 24px;
+                border: 2px solid white;
+                padding: 1rem;
+                color: white;
+                background: #77EE62;
+                display: flex;
+                align-items: center;
+    
+                .createPlus {
+                    font-size: 2rem;
+                    margin-right: .4rem;
+                    height: 24px;
+                    margin-top: -24px;
+                }     
+            }
+    
+            .createShift:hover {
+                cursor: pointer;
+                background: #71E05D;
+            }
+            
+        }
     }
 }
