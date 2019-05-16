@@ -1,3 +1,56 @@
+.delete-confirmation-wrapper {
+    position: fixed;
+    width: 500px;
+    top: 50%;
+    left: 50%;
+    margin-top: -200px; /* Negative half of height. */
+    margin-left: -250px; /* Negative half of width. */
+    background: white;
+    border-radius: 9px;
+    padding: 2rem;
+    border: 3px solid #60B0F4;
+    z-index: 3;
+    .confirmation-info {
+        text-align: center;
+        h2 {
+            font-size: 1.3rem;
+            margin-top: 0;
+        }
+    }  
+    
+    .confirmation-buttons {
+        display: flex;
+        justify-content: center;
+        margin-top: 1rem;
+        .green {
+            background: #77EE62;
+            border: 1px solid #71E05D;
+        }
+
+        .green:hover {
+            background: #71E05D;
+        }
+
+        .red {
+            background: #F04B4B;
+            border: 3px solid #E73D3D;
+        }
+
+        .red:hover {
+            background: #E73D3D;
+        }
+        button {
+            border: none;
+            color: white;
+            padding: .5rem 1rem;
+            margin-left: 1rem;
+            font-weight: bold;
+            font-size: 1rem;
+            outline: none;
+        }
+    }
+}
+
 .employee-adder-wrapper {
     position: fixed;
     width: 500px;
@@ -144,6 +197,11 @@
             width: 20%;
             display: flex;
             justify-content: flex-end;
+
+            div {
+                padding: 0;
+                border: none;
+            }
 
             .plus {
                 color: var(--main-color);

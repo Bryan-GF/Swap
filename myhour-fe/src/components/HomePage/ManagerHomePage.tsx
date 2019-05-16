@@ -10,7 +10,9 @@ const ManagerHomePage = observer((props:any) => {
 
     const state = useContext(GlobalStateContext);
 
+    const [targetEmployee, setTargetEmployee] = useState(null)
     const [addingUser, setAddingUser] = useState(false);
+    const [deletingUser, setDeletingUser] = useState(false);
     const [newEmployeeInfo, setNewEmployeeInfo] = useState({
         "employeeID": '',
         "Firstname": '',
@@ -20,11 +22,6 @@ const ManagerHomePage = observer((props:any) => {
     })
     const [activeErrors, setActiveErrors] = useState({"employeeID": false, "Firstname": false, "Lastname": false, "Position": false, "Password": false})
 
-    const validate = () => {
-        return {
-
-        }
-    }
     const handleAddEmployee = () => {
         const {employeeID, Firstname, Lastname, Password, Position} = newEmployeeInfo;
         let safeActive = {"employeeID": false, "Firstname": false, "Lastname": false, "Position": false, "Password": false}
@@ -40,8 +37,6 @@ const ManagerHomePage = observer((props:any) => {
     useEffect(() => {
         state.getBranchData();
     }, [])
-
-    console.log(activeErrors);
 
     return (
         <div>
@@ -77,6 +72,21 @@ const ManagerHomePage = observer((props:any) => {
                         </div>
                     </div>
                 : ''}
+            {deletingUser ?
+                <div className='delete-confirmation-wrapper'>
+                    <div className='confirmation-info'>
+                        <h2>Are you sure you want to delete {targetEmployee.Name}?</h2>
+                    </div>
+                    <div className='confirmation-buttons'>
+                        <button onClick={() => { 
+                            state.deleteUser(targetEmployee.employeeID);
+                            setDeletingUser(false);
+                            }} className='green'>Confirm</button>
+                        <button onClick={() => { setDeletingUser(false)}} className='red'>Cancel</button>
+                    </div>
+                </div>
+                : ''
+            }
             <div className="ManageWrapper">
                 <h2>Manage Employees</h2> 
                 <div className="ManageListContainer">
@@ -99,8 +109,15 @@ const ManagerHomePage = observer((props:any) => {
                             <div className="columnName">{employee.Firstname + " " + employee.Lastname}</div>
                             <div className="columnPosition">{employee.Position}</div>
                             <div className="columnIcons">
-                                <FontAwesomeIcon className="plus" icon={faPlusSquare}/>
-                                <FontAwesomeIcon className="trash" icon={faTrash}/>
+                                <div className="plus-wrapper">
+                                    <FontAwesomeIcon className="plus" icon={faPlusSquare}/>
+                                </div>
+                                <div onClick={() => { 
+                                    setTargetEmployee({employeeID: employee.EmployeeID, branchID: employee.branchID, Name: employee.Firstname + ' ' + employee.Lastname});
+                                    setDeletingUser(true);     
+                                }} className="trash-wrapper">
+                                    <FontAwesomeIcon className="trash" icon={faTrash}/>
+                                </div>
                             </div>
                     </div>
                         )

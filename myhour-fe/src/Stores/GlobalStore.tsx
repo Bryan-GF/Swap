@@ -10,6 +10,16 @@ class GlobalState {
 
     @observable branchData = [];
 
+    @action deleteUser = (ID) => {
+        return axios
+        .post('https://swapapi.azurewebsites.net/api/DeleteUser', {employeeID: ID, branchID: this.userData.branchID})
+        .then(res => {
+            console.log(res); 
+        }).catch(err => {
+            console.log(err)
+        })
+    }
+
     @action addEmployee = async(employee) => {
         return await axios
         .post('https://swapapi.azurewebsites.net/api/AddUser', {...employee, "branchID": this.userData.branchID})
