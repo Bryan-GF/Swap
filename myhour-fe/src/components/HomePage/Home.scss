@@ -175,6 +175,11 @@
             }
         }
     }
+
+    .linkedRow {
+        text-decoration: none;
+        
+    }
     
     .ManageListColumn {
         display: flex;
@@ -182,6 +187,7 @@
 
         div {
             padding: 1rem 0 1rem 1rem;
+            color: var(--text-color);
         }
 
         .columnID {
@@ -205,6 +211,7 @@
 
             .plus {
                 color: var(--main-color);
+                z-index: 10;
             }
 
             .plus:hover {
@@ -215,6 +222,8 @@
             .trash {
                 margin-left: 1.5rem;
                 margin-right: 1rem;
+                z-index: 10;
+                color: var(--text-color);
             }
 
             .trash:hover {

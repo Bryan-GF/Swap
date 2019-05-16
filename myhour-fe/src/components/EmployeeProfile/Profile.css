@@ -1,0 +1,68 @@
+.employeeContentWrapper {
+  width: 1000px;
+  margin: 0 auto;
+  margin-top: 2rem; }
+
+.employeeContentWrapper .employeeProfileContent {
+  width: 100%; }
+
+.employeeContentWrapper .employeeProfileContent .profileHeader {
+  background: var(--main-color);
+  color: white;
+  padding: 1rem 2rem; }
+
+.employeeContentWrapper .employeeProfileContent .profileHeader h2 {
+  margin: 0; }
+
+.employeeContentWrapper .employeeProfileContent .profileContent {
+  display: flex;
+  flex-direction: row;
+  background: white;
+  padding: 1rem 2rem; }
+
+.employeeContentWrapper .employeeProfileContent .profileContent img {
+  height: 100%;
+  width: 4rem; }
+
+.employeeContentWrapper .employeeProfileContent .profileContent .profileTextContent {
+  display: flex;
+  align-items: center;
+  width: 100%; }
+
+.employeeContentWrapper .employeeProfileContent .profileContent .profileTextContent span {
+  margin-left: 2rem;
+  font-weight: bold;
+  font-size: 1.2rem; }
+
+.employeeContentWrapper .employeeProfileContent .profileContent .profileTextContent p {
+  margin: 0;
+  margin-left: .5rem;
+  font-size: 1.2rem; }
+
+.employeeContentWrapper .employeeProfileContent .profileContent .profileTextContent .profileButtons {
+  margin-left: auto;
+  display: flex;
+  align-items: center; }
+
+.employeeContentWrapper .employeeProfileContent .profileContent .profileTextContent .profileButtons button {
+  margin-left: 1.5rem;
+  background: #60B0F4;
+  border: none;
+  color: white;
+  padding: 1rem 2rem;
+  font-size: 1.2rem; }
+
+.employeeContentWrapper .employeeProfileContent .profileContent .profileTextContent .profileButtons button:hover {
+  cursor: pointer;
+  background: #2b7ec7; }
+
+.employeeContentWrapper .employeeProfileContent .profileContent .profileTextContent .profileButtons .trash:hover {
+  color: #4e4e4f;
+  transform: scale(1.1); }
+
+.employeeContentWrapper .employeeProfileContent .profileContent .profileTextContent .profileButtons svg {
+  height: 2rem;
+  width: 2rem; }
+
+.employeeContentWrapper .employeeProfileContent .profileContent .profileTextContent .profileButtons svg:hover {
+  cursor: pointer; }

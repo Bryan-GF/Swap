@@ -7,95 +7,78 @@
   /* Negative half of height. */
   margin-left: -205px;
   /* Negative half of width. */ }
-
-.loginWrapper .loginContainer {
-  width: 25rem;
-  background: white;
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center; }
-
-.loginWrapper .loginContainer .logoWrapper {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  width: 6rem; }
-
-.loginWrapper .loginContainer .logoWrapper img {
-  width: 100%; }
-
-.loginWrapper .loginContainer .logoWrapper span {
-  color: var(--main-color);
-  font-size: 3.5rem;
-  font-family: 'Pacifico', cursive; }
-
-.loginWrapper .loginContainer .inputWrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 2rem; }
-
-.loginWrapper .loginContainer .inputWrapper input {
-  margin-bottom: 1rem;
-  padding: 1rem;
-  outline: none;
-  border: none; }
-
-.loginWrapper .loginContainer .inputWrapper .employeeInput {
-  border: 1px solid var(--main-color);
-  border-radius: 4px; }
-
-.loginWrapper .loginContainer .inputWrapper .passwordInput {
-  border: 1px solid var(--main-color);
-  display: flex;
-  border-radius: 4px; }
-
-.loginWrapper .loginContainer .inputWrapper .passwordInput input {
-  border-radius: 4px;
-  width: 87%;
-  margin-bottom: 0;
-  border-right: 0;
-  padding-right: 0;
-  outline: none; }
-
-.loginWrapper .loginContainer .inputWrapper .passwordInput .toggleEye {
-  width: 13%;
-  display: flex;
-  align-items: center;
-  background: white;
-  border-left: 0;
-  border-radius: 4px; }
-
-.loginWrapper .loginContainer .inputWrapper .passwordInput .toggleEye svg:hover {
-  cursor: pointer; }
-
-.loginWrapper .loginContainer .inputWrapper .companyInfo {
-  width: 100%;
-  margin-top: 1rem; }
-
-.loginWrapper .loginContainer .inputWrapper .companyInfo .companySelect .company__control {
-  border-color: var(--main-color); }
-
-.loginWrapper .loginContainer .inputWrapper .companyInfo .companySelect .company__menu {
-  border-color: var(--main-color); }
-
-.loginWrapper .loginContainer .inputWrapper .companyInfo .companySelect .company__input input {
-  margin-bottom: 0;
-  margin-top: .5rem;
-  margin-bottom: .5rem; }
-
-.loginWrapper .loginContainer .loginButton {
-  margin-top: 2rem;
-  padding: .8rem 1.3rem;
-  background: var(--main-color);
-  color: white;
-  font-size: 1.5rem;
-  font-weight: bold;
-  border: none; }
-
-.loginWrapper .loginContainer .loginButton:hover {
-  cursor: pointer; }
+  .loginWrapper .loginContainer {
+    width: 25rem;
+    background: white;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center; }
+    .loginWrapper .loginContainer .logoWrapper {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      width: 6rem; }
+      .loginWrapper .loginContainer .logoWrapper img {
+        width: 100%; }
+      .loginWrapper .loginContainer .logoWrapper span {
+        color: var(--main-color);
+        font-size: 3.5rem;
+        font-family: 'Pacifico', cursive; }
+    .loginWrapper .loginContainer .inputWrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 2rem; }
+      .loginWrapper .loginContainer .inputWrapper input {
+        margin-bottom: 1rem;
+        padding: 1rem;
+        outline: none;
+        border: none; }
+      .loginWrapper .loginContainer .inputWrapper .employeeInput {
+        border: 1px solid var(--main-color);
+        border-radius: 4px; }
+      .loginWrapper .loginContainer .inputWrapper .passwordInput {
+        border: 1px solid var(--main-color);
+        display: flex;
+        border-radius: 4px; }
+        .loginWrapper .loginContainer .inputWrapper .passwordInput input {
+          border-radius: 4px;
+          width: 87%;
+          margin-bottom: 0;
+          border-right: 0;
+          padding-right: 0;
+          outline: none; }
+        .loginWrapper .loginContainer .inputWrapper .passwordInput .toggleEye {
+          width: 13%;
+          display: flex;
+          align-items: center;
+          background: white;
+          border-left: 0;
+          border-radius: 4px; }
+          .loginWrapper .loginContainer .inputWrapper .passwordInput .toggleEye svg:hover {
+            cursor: pointer; }
+      .loginWrapper .loginContainer .inputWrapper .companyInfo {
+        width: 100%;
+        margin-top: 1rem; }
+        .loginWrapper .loginContainer .inputWrapper .companyInfo .companySelect .company__control {
+          border-color: var(--main-color); }
+        .loginWrapper .loginContainer .inputWrapper .companyInfo .companySelect .company__menu {
+          border-color: var(--main-color); }
+        .loginWrapper .loginContainer .inputWrapper .companyInfo .companySelect .company__input input {
+          margin-bottom: 0;
+          margin-top: .5rem;
+          margin-bottom: .5rem; }
+    .loginWrapper .loginContainer .loginButton {
+      margin-top: 2rem;
+      padding: .8rem 1.3rem;
+      background: var(--main-color);
+      color: white;
+      font-size: 1.5rem;
+      font-weight: bold;
+      border: none; }
+    .loginWrapper .loginContainer .loginButton:hover {
+      cursor: pointer; }
 
 .Unauthorized-Container {
   width: 400px;
@@ -104,13 +87,10 @@
   border-radius: 10px;
   padding: 2rem;
   margin-top: 300px; }
-
-.Unauthorized-Container h1 {
-  margin: 0; }
-
-.Unauthorized-Container p {
-  margin: .7rem 0 2rem 0; }
-
-.Unauthorized-Container a {
-  font-size: 1.5rem;
-  color: var(--text-color); }
+  .Unauthorized-Container h1 {
+    margin: 0; }
+  .Unauthorized-Container p {
+    margin: .7rem 0 2rem 0; }
+  .Unauthorized-Container a {
+    font-size: 1.5rem;
+    color: var(--text-color); }

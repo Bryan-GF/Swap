@@ -131,11 +131,14 @@
         color: var(--main-hover-color); }
       .ManageWrapper .ManageListInteractive .addEmployee:hover p {
         color: var(--main-hover-color); }
+  .ManageWrapper .linkedRow {
+    text-decoration: none; }
   .ManageWrapper .ManageListColumn {
     display: flex;
     background: white; }
     .ManageWrapper .ManageListColumn div {
-      padding: 1rem 0 1rem 1rem; }
+      padding: 1rem 0 1rem 1rem;
+      color: var(--text-color); }
     .ManageWrapper .ManageListColumn .columnID {
       width: 20%; }
     .ManageWrapper .ManageListColumn .columnName {
@@ -150,13 +153,16 @@
         padding: 0;
         border: none; }
       .ManageWrapper .ManageListColumn .columnIcons .plus {
-        color: var(--main-color); }
+        color: var(--main-color);
+        z-index: 10; }
       .ManageWrapper .ManageListColumn .columnIcons .plus:hover {
         color: var(--main-hover-color);
         transform: scale(1.1); }
       .ManageWrapper .ManageListColumn .columnIcons .trash {
         margin-left: 1.5rem;
-        margin-right: 1rem; }
+        margin-right: 1rem;
+        z-index: 10;
+        color: var(--text-color); }
       .ManageWrapper .ManageListColumn .columnIcons .trash:hover {
         color: #4e4e4f;
         transform: scale(1.1); }

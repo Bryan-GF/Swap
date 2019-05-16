@@ -5,6 +5,7 @@ import { GlobalStateContext } from '../../Stores/GlobalStore';
 import './Home.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash, faPlusSquare, faPlusCircle } from '@fortawesome/free-solid-svg-icons'
+import { Link } from 'react-router-dom';
 
 const ManagerHomePage = observer((props:any) => {
 
@@ -104,22 +105,25 @@ const ManagerHomePage = observer((props:any) => {
                     </div>
                     {state.branchData.map(employee => {
                         return (
-                            <div className="ManageListColumn Employee">
-                            <div className="columnID">{employee.EmployeeID}</div>
-                            <div className="columnName">{employee.Firstname + " " + employee.Lastname}</div>
-                            <div className="columnPosition">{employee.Position}</div>
-                            <div className="columnIcons">
-                                <div className="plus-wrapper">
-                                    <FontAwesomeIcon className="plus" icon={faPlusSquare}/>
+                            <Link className="linkedRow" to='/Employee'>
+                                <div className="ManageListColumn Employee">
+                                    <div className="columnID">{employee.EmployeeID}</div>
+                                    <div className="columnName">{employee.Firstname + " " + employee.Lastname}</div>
+                                    <div className="columnPosition">{employee.Position}</div>
+                                    <div className="columnIcons">
+                                        <div onClick={(ev) => { ev.preventDefault(); }}className="plus-wrapper">
+                                            <FontAwesomeIcon className="plus" icon={faPlusSquare}/>
+                                        </div>
+                                        <div onClick={(ev) => { 
+                                            ev.preventDefault();
+                                            setTargetEmployee({employeeID: employee.EmployeeID, branchID: employee.branchID, Name: employee.Firstname + ' ' + employee.Lastname});
+                                            setDeletingUser(true);     
+                                        }} className="trash-wrapper">
+                                            <FontAwesomeIcon className="trash" icon={faTrash}/>
+                                        </div>
+                                    </div>                     
                                 </div>
-                                <div onClick={() => { 
-                                    setTargetEmployee({employeeID: employee.EmployeeID, branchID: employee.branchID, Name: employee.Firstname + ' ' + employee.Lastname});
-                                    setDeletingUser(true);     
-                                }} className="trash-wrapper">
-                                    <FontAwesomeIcon className="trash" icon={faTrash}/>
-                                </div>
-                            </div>
-                    </div>
+                            </Link>
                         )
                     })}
                     <div className="ManageListColumn Employee">

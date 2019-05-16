@@ -1,0 +1,83 @@
+.employeeContentWrapper {
+    width: 1000px;
+    margin: 0 auto;
+    margin-top: 2rem;
+
+
+    .employeeProfileContent {
+        width: 100%;
+
+
+        .profileHeader {
+            background: var(--main-color);
+            color: white;
+            padding: 1rem 2rem;
+            h2 {
+                margin: 0;
+            }
+        }
+
+        .profileContent {
+            display: flex;
+            flex-direction: row;
+            background: white;
+            padding: 1rem 2rem;
+            img {
+                height: 100%;
+                width: 4rem;
+            }
+
+            .profileTextContent {
+                display: flex;
+                align-items: center;
+                width: 100%;
+                span {
+                    margin-left: 2rem;
+                    font-weight: bold;
+                    font-size: 1.2rem;
+                }
+
+                p {
+                    margin: 0;
+                    margin-left: .5rem;
+                    font-size: 1.2rem;
+                }
+
+                .profileButtons {
+                    margin-left:auto;
+                    display: flex;
+                    align-items: center;
+                    button {
+                        margin-left: 1.5rem;
+                        background: #60B0F4;
+                        border: none;
+                        color: white;
+                        padding: 1rem 2rem;
+                        font-size: 1.2rem;
+                    }
+    
+                    button:hover {
+                        cursor: pointer;
+                        background: rgb(43, 126, 199);
+                    }
+
+                    .trash:hover {
+                        color: #4e4e4f;
+                        transform: scale(1.1); 
+                    }
+
+                    svg {
+                        height: 2rem;
+                        width: 2rem;
+                    }
+        
+                    svg:hover {
+                        cursor: pointer;
+                    }
+                }
+            }
+
+        }
+
+    }
+}
