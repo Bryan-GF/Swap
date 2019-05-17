@@ -205,5 +205,65 @@
                 }
             }
         }
+
+        .shiftListContent {
+            background: white;
+
+            p {
+                margin: 0;
+            }
+
+            .shiftRow {
+                display: flex;
+                padding: 1rem 2rem 1rem 0rem;
+                align-items: center;
+
+                span {
+                    font-weight: bold;
+                    font-size: 1.3rem;
+                    margin-left: 1rem;
+                }
+
+                p {
+                    font-size: 1.1rem;
+                    margin: 0 1rem 0 .7rem
+                }
+
+                .num {
+                    margin: 0;
+                    padding: 0 2rem;
+                    border-right: 3px solid var(--main-color);
+                    font-weight: bold;
+                }
+
+                .shiftRowIcons {
+                    display: flex;
+                    margin-left: auto;
+                    .edit {
+                        background: var(--main-color);
+                        padding: .3rem .4rem;
+
+                        .editIcon {
+                            height: 1.3rem;
+                            width: 1.3rem;
+                            color: white;
+                            padding-top: .2rem;
+                        }
+                    }
+
+                    .trash {
+                        background: #F04B4B;
+                        padding: .3rem .4rem;
+                        margin-left: .5rem;
+                        .trashIcon {
+                            height: 1.3rem;
+                            width: 1.3rem;
+                            padding-top: .2rem;
+                            color: white;
+                        }
+                    }
+                }
+            }
+        }
     }
 }

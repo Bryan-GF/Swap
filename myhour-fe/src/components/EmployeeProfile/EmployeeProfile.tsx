@@ -5,7 +5,7 @@ import Nav from '../Navigation/Nav';
 import avatar from '../../assets/avatar.png';
 import './Profile.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faTrashAlt, faPen } from '@fortawesome/free-solid-svg-icons'
 import DeleteEmployee from '../Delete/DeleteEmployee';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
@@ -54,7 +54,7 @@ const EmployeeProfile = observer((props:any) => {
                             <p>{state.currEmployee.Position}</p>
                             <div className="profileButtons">
                                 <div onClick={() => { setDeletingUser(true)}} className="trash">
-                                    <FontAwesomeIcon className="trash" icon={faTrash}/>
+                                    <FontAwesomeIcon className="trash" icon={faTrashAlt}/>
                                 </div>
                                 <button>Message</button>
                             </div>
@@ -118,13 +118,25 @@ const EmployeeProfile = observer((props:any) => {
                         : null
                         }
                     <div className="shiftListContent">
-                        {state.currShifts.map(shift => {
+                        {state.currShifts.map((shift, i) => {
                             console.log(shift.endTime);
                             return (
-                                <div>
-                                    <p>Date: {shift.shiftDate.split(" ")[0]}</p>
-                                    <p>Start Time: {moment(shift.startTime, 'HH:mm:ss').format('hh:mm a')}</p>
-                                    <p>End Time: {moment(shift.endTime, 'HH:mm:ss').format('hh:mm a')}</p>
+                                <div className="shiftRow">
+                                    <p className="num">{i + 1}</p>
+                                    <span>Date: </span>
+                                    <p>{shift.shiftDate.split(" ")[0]}</p>
+                                    <span>Start Time: </span>
+                                    <p>{moment(shift.startTime, 'HH:mm:ss').format('hh:mm a')}</p>
+                                    <span>End Time: </span>
+                                    <p>{moment(shift.endTime, 'HH:mm:ss').format('hh:mm a')}</p>
+                                    <div className="shiftRowIcons">
+                                        <div className="edit">
+                                            <FontAwesomeIcon className="editIcon" icon={faPen}/>
+                                        </div>
+                                        <div className="trash">
+                                            <FontAwesomeIcon className="trashIcon" icon={faTrashAlt}/>
+                                        </div>
+                                    </div>
                                 </div>
                             )
                         })}

@@ -4,7 +4,7 @@ import { toJS } from 'mobx';
 import { GlobalStateContext } from '../../Stores/GlobalStore';
 import './Home.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrash, faPlusSquare, faPlusCircle } from '@fortawesome/free-solid-svg-icons'
+import { faTrashAlt, faPlusSquare, faPlusCircle } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom';
 import DeleteEmployee from '../Delete/DeleteEmployee';
 
@@ -111,7 +111,7 @@ const ManagerHomePage = observer((props:any) => {
                                             setTargetEmployee({UserID: employee.UserID, Name: employee.Firstname + ' ' + employee.Lastname});
                                             setDeletingUser(true);     
                                         }} className="trash-wrapper">
-                                            <FontAwesomeIcon className="trash" icon={faTrash}/>
+                                            <FontAwesomeIcon className="trash" icon={faTrashAlt}/>
                                         </div>
                                     </div>                     
                                 </div>
