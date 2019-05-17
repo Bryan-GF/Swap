@@ -14,7 +14,7 @@ const DeleteEmployee = observer((props:any) => {
             </div>
             <div className='confirmation-buttons'>
                 <button onClick={() => { 
-                    state.deleteUser(state.targetEmployee.employeeID);
+                    state.deleteUser();
                     props.setDeletingUser(false);
                     }} className='green'>Confirm</button>
                 <button onClick={() => { props.setDeletingUser(false)}} className='red'>Cancel</button>

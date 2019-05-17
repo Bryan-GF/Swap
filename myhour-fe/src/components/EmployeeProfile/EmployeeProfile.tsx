@@ -7,12 +7,22 @@ import './Profile.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import DeleteEmployee from '../Delete/DeleteEmployee';
+import DatePicker from 'react-datepicker';
+
 
 const EmployeeProfile = observer((props:any) => {
     
     const state = useContext(GlobalStateContext);
 
     const [deletingUser, setDeletingUser] = useState(false);
+    const [addingShift, setAddingShift] = useState(false);
+    const [startDate, setStartDate] = useState(new Date());
+    const [startTime, setStartTime] = useState(new Date());
+    const [endTime, setEndTime] = useState(new Date());
+
+    console.log(startDate.toISOString());
+    console.log(startTime.toISOString());
+    console.log();
     return (
         <div>
             {deletingUser ?
@@ -46,12 +56,59 @@ const EmployeeProfile = observer((props:any) => {
                 <div className="employeeShiftContent">
                     <div className="shiftListHeader">
                         <h2>Shifts</h2>
-                        <div className='createShift'>
+                        <div onClick={() => { setAddingShift(true)}} className='createShift'>
                             <span className='createPlus'>+ </span>
                             <span className='createContent'>Add Shift</span>
-                        </div>
-                        
+                        </div>  
                     </div>
+                    {addingShift ? 
+                        <div className="addShiftWrapper">
+                            <div className="shiftDataSelect Date">
+                                <p>Date: </p>
+                                <DatePicker
+                                    selected={startDate}
+                                    onChange={(val) => {
+                                        setStartDate(val);
+                                    }}
+                                />
+                            </div>
+                            <div className="shiftDataSelect Time">
+                                <p>Start Time:</p>
+                                <DatePicker
+                                    selected={startTime}
+                                    onChange={(val) => {
+                                        setStartTime(val);
+                                    }}
+                                    showTimeSelect
+                                    showTimeSelectOnly
+                                    timeIntervals={15}
+                                    dateFormat="h:mm aa"
+                                    timeCaption="Time"
+                                />
+                            </div>
+                            <div className="shiftDataSelect Time">
+                                <p>End Time:</p>
+                                <DatePicker
+                                    selected={endTime}
+                                    onChange={(val) => {
+                                        setEndTime(val);
+                                    }}
+                                    showTimeSelect
+                                    showTimeSelectOnly
+                                    timeIntervals={15}
+                                    dateFormat="h:mm aa"
+                                    timeCaption="Time"
+                                />
+                            </div>
+                            <div className="addShiftButtons">
+                                    <button onClick={() => {
+                                        state.addShift(startDate.toISOString(), startTime.toISOString(), endTime.toISOString())
+                                    }}className="green">Confirm</button>
+                                    <button onClick={() => { setAddingShift(false)}} className="red">Cancel</button>
+                            </div>
+                        </div>
+                        : null
+                        }
                     <div className="shiftListContent">
 
                     </div>
@@ -62,3 +119,4 @@ const EmployeeProfile = observer((props:any) => {
 });
 
 export default EmployeeProfile;
+import "react-datepicker/dist/react-datepicker.css";

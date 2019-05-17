@@ -8,13 +8,13 @@ class GlobalState {
 
     @observable loginStatus = false;
 
-    @observable targetEmployee = {employeeID: '', Name: '', Position: '', branchID: ''};
+    @observable targetEmployee = {employeeID: '', Name: '', Position: '', branchID: '', UserID: ''};
 
     @observable branchData = [];
 
-    @action deleteUser = (ID) => {
+    @action deleteUser = () => {
         return axios
-        .post('https://swapapi.azurewebsites.net/api/DeleteUser', {employeeID: ID, branchID: this.userData.branchID})
+        .post('https://swapapi.azurewebsites.net/api/DeleteUser', {UserID: this.targetEmployee.UserID})
         .then(res => {
             console.log(res); 
         }).catch(err => {
@@ -43,6 +43,19 @@ class GlobalState {
         })
     }
 
+    @action addShift = async(shiftDate, startTime, endTime) => {
+        shiftDate = shiftDate.slice(0, 10);
+        startTime =startTime.slice(11, 19);
+        endTime = endTime.slice(11, 19);
+        return await axios
+        .post('https://swapapi.azurewebsites.net/api/AddShift', {"UserID": this.targetEmployee.UserID, "shiftDate": shiftDate, "startTime": startTime, "endTime": endTime})
+        .then(res => {
+            console.log(res.data);     
+        }).catch(err => {
+            console.log(err)
+        })
+    }
+
     //LOGIN ACTIONS
     @action attemptLogin = () => {
         console.log('attempted')
@@ -54,7 +67,7 @@ class GlobalState {
     ///////////////
 
     @action setUserData = (userInfo: any) => {
-        this.userData =  {employeeID: userInfo.employeeID, Firstname: userInfo.Firstname, Lastname: userInfo.Lastname, Position: userInfo.Position, branchID: userInfo.branchID}
+        this.userData = userInfo;
     }
 
     @action setTargetEmployee = (employeeInfo) => {

@@ -95,7 +95,7 @@ const ManagerHomePage = observer((props:any) => {
                     {state.branchData.map(employee => {
                         return (
                             <Link className="linkedRow" to='/Employee'>
-                                <div onClick={() => {state.setTargetEmployee({employeeID: employee.EmployeeID, Name: employee.Firstname + " " + employee.Lastname, Position: employee.Position, branchID: employee.branchID})}} className="ManageListColumn Employee">
+                                <div onClick={() => {state.setTargetEmployee({UserID: employee.UserID, employeeID: employee.EmployeeID, Name: employee.Firstname + " " + employee.Lastname, Position: employee.Position, branchID: employee.branchID})}} className="ManageListColumn Employee">
                                     <div className="columnID">{employee.EmployeeID}</div>
                                     <div className="columnName">{employee.Firstname + " " + employee.Lastname}</div>
                                     <div className="columnPosition">{employee.Position}</div>
@@ -105,7 +105,7 @@ const ManagerHomePage = observer((props:any) => {
                                         </div>
                                         <div onClick={(ev) => { 
                                             ev.preventDefault();
-                                            state.setTargetEmployee({employeeID: employee.EmployeeID, branchID: employee.branchID, Name: employee.Firstname + ' ' + employee.Lastname, Position: employee.Position});
+                                            state.setTargetEmployee({UserID: employee.UserID, employeeID: employee.EmployeeID, branchID: employee.branchID, Name: employee.Firstname + ' ' + employee.Lastname, Position: employee.Position});
                                             setDeletingUser(true);     
                                         }} className="trash-wrapper">
                                             <FontAwesomeIcon className="trash" icon={faTrash}/>

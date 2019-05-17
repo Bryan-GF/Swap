@@ -68,9 +68,6 @@
   cursor: pointer; }
 
 .employeeContentWrapper .employeeShiftContent {
-  background: var(--main-color);
-  color: white;
-  padding: 1rem 2rem;
   margin-top: 2rem; }
 
 .employeeContentWrapper .employeeShiftContent h2 {
@@ -80,7 +77,10 @@
 .employeeContentWrapper .employeeShiftContent .shiftListHeader {
   display: flex;
   justify-content: space-between;
-  align-items: center; }
+  align-items: center;
+  background: var(--main-color);
+  color: white;
+  padding: 1rem 2rem; }
 
 .employeeContentWrapper .employeeShiftContent .shiftListHeader .createShift {
   font-size: 1.5rem;
@@ -102,3 +102,67 @@
 .employeeContentWrapper .employeeShiftContent .shiftListHeader .createShift:hover {
   cursor: pointer;
   background: #71E05D; }
+
+.employeeContentWrapper .employeeShiftContent .addShiftWrapper {
+  display: flex;
+  background: white;
+  padding: 1.5rem 5rem; }
+
+.employeeContentWrapper .employeeShiftContent .addShiftWrapper p {
+  margin: 0; }
+
+.employeeContentWrapper .employeeShiftContent .addShiftWrapper .shiftDataSelect {
+  display: flex;
+  margin-right: 1.4rem;
+  align-items: center; }
+
+.employeeContentWrapper .employeeShiftContent .addShiftWrapper .shiftDataSelect p {
+  margin-right: .5rem;
+  font-weight: bold; }
+
+.employeeContentWrapper .employeeShiftContent .addShiftWrapper .shiftDataSelect input {
+  padding: .5rem; }
+
+.employeeContentWrapper .employeeShiftContent .addShiftWrapper .Time input {
+  width: 90px;
+  text-align: center; }
+
+.employeeContentWrapper .employeeShiftContent .addShiftWrapper .Date input {
+  width: 90px;
+  text-align: center; }
+
+.employeeContentWrapper .employeeShiftContent .addShiftWrapper .react-datepicker-wrapper .react-datepicker-popper .react-datepicker--time-only .react-datepicker__time-container {
+  width: 110px !important; }
+
+.employeeContentWrapper .employeeShiftContent .addShiftWrapper .react-datepicker-wrapper .react-datepicker-popper .react-datepicker--time-only .react-datepicker__time-box {
+  width: 100px !important; }
+
+.employeeContentWrapper .employeeShiftContent .addShiftWrapper .addShiftButtons {
+  margin-left: auto;
+  display: flex;
+  justify-content: flex-end; }
+
+.employeeContentWrapper .employeeShiftContent .addShiftWrapper .addShiftButtons .green {
+  background: #77EE62;
+  border: 1px solid #71E05D; }
+
+.employeeContentWrapper .employeeShiftContent .addShiftWrapper .addShiftButtons .green:hover {
+  background: #71E05D;
+  cursor: pointer; }
+
+.employeeContentWrapper .employeeShiftContent .addShiftWrapper .addShiftButtons .red {
+  background: #F04B4B;
+  border: 3px solid #E73D3D; }
+
+.employeeContentWrapper .employeeShiftContent .addShiftWrapper .addShiftButtons .red:hover {
+  background: #E73D3D;
+  cursor: pointer; }
+
+.employeeContentWrapper .employeeShiftContent .addShiftWrapper .addShiftButtons button {
+  border: none;
+  color: white;
+  padding: .5rem 1rem;
+  margin-left: 1rem;
+  font-weight: bold;
+  font-size: 1rem;
+  outline: none; }
