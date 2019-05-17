@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import DeleteEmployee from '../Delete/DeleteEmployee';
 import DatePicker from 'react-datepicker';
+import moment from 'moment';
 
 
 const EmployeeProfile = observer((props:any) => {
@@ -19,17 +20,24 @@ const EmployeeProfile = observer((props:any) => {
     const [startDate, setStartDate] = useState(new Date());
     const [startTime, setStartTime] = useState(new Date());
     const [endTime, setEndTime] = useState(new Date());
+    const [loading, setLoading] = useState(true);
 
-    console.log(startDate.toISOString());
-    console.log(startTime.toISOString());
-    console.log();
+    useEffect(() => {
+        const ID = props.match.params.UserID;
+        state.getEmployee(ID);
+        state.getShifts(ID);  
+        setLoading(false);
+        
+    }, [])
+
     return (
         <div>
             {deletingUser ?
-                <DeleteEmployee setDeletingUser={setDeletingUser}/>
+                <DeleteEmployee Employee={{'Name': state.currEmployee.Name, 'UserID': state.currEmployee.UserID}} setDeletingUser={setDeletingUser}/>
                 : ''
             }
             <Nav/>
+            {!loading ?
             <div className="employeeContentWrapper">
                 <div className="employeeProfileContent">
                     <div className="profileHeader">
@@ -39,11 +47,11 @@ const EmployeeProfile = observer((props:any) => {
                         <img src={avatar}/>
                         <div className="profileTextContent">
                             <span>Employee ID: </span>
-                            <p>{state.targetEmployee.employeeID}</p>
+                            <p>{state.currEmployee.EmployeeID}</p>
                             <span>Name: </span>
-                            <p>{state.targetEmployee.Name}</p>
+                            <p>{state.currEmployee.Name}</p>
                             <span>Position: </span>
-                            <p>{state.targetEmployee.Position}</p>
+                            <p>{state.currEmployee.Position}</p>
                             <div className="profileButtons">
                                 <div onClick={() => { setDeletingUser(true)}} className="trash">
                                     <FontAwesomeIcon className="trash" icon={faTrash}/>
@@ -102,7 +110,7 @@ const EmployeeProfile = observer((props:any) => {
                             </div>
                             <div className="addShiftButtons">
                                     <button onClick={() => {
-                                        state.addShift(startDate.toISOString(), startTime.toISOString(), endTime.toISOString())
+                                        state.addShift(state.currEmployee.UserID, startDate.toISOString(), startTime.toISOString(), endTime.toISOString())
                                     }}className="green">Confirm</button>
                                     <button onClick={() => { setAddingShift(false)}} className="red">Cancel</button>
                             </div>
@@ -110,13 +118,24 @@ const EmployeeProfile = observer((props:any) => {
                         : null
                         }
                     <div className="shiftListContent">
-
+                        {state.currShifts.map(shift => {
+                            console.log(shift.endTime);
+                            return (
+                                <div>
+                                    <p>Date: {shift.shiftDate.split(" ")[0]}</p>
+                                    <p>Start Time: {moment(shift.startTime, 'HH:mm:ss').format('hh:mm a')}</p>
+                                    <p>End Time: {moment(shift.endTime, 'HH:mm:ss').format('hh:mm a')}</p>
+                                </div>
+                            )
+                        })}
                     </div>
                 </div>
             </div>
+            : null}
         </div>
     )
 });
 
 export default EmployeeProfile;
 import "react-datepicker/dist/react-datepicker.css";
+import { stat } from 'fs';

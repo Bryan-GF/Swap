@@ -22,6 +22,7 @@ const ManagerHomePage = observer((props:any) => {
         "Password": ''
     })
     const [activeErrors, setActiveErrors] = useState({"employeeID": false, "Firstname": false, "Lastname": false, "Position": false, "Password": false})
+    const [targetEmployee, setTargetEmployee] = useState({Name: '', UserID: ''});
 
     const handleAddEmployee = () => {
         const {employeeID, Firstname, Lastname, Password, Position} = newEmployeeInfo;
@@ -74,7 +75,7 @@ const ManagerHomePage = observer((props:any) => {
                     </div>
                 : ''}
             {deletingUser ?
-                <DeleteEmployee setDeletingUser={setDeletingUser}/>
+                <DeleteEmployee Employee={targetEmployee} setDeletingUser={setDeletingUser}/>
                 : ''
             }
             <div className="ManageWrapper">
@@ -94,8 +95,10 @@ const ManagerHomePage = observer((props:any) => {
                     </div>
                     {state.branchData.map(employee => {
                         return (
-                            <Link className="linkedRow" to='/Employee'>
-                                <div onClick={() => {state.setTargetEmployee({UserID: employee.UserID, employeeID: employee.EmployeeID, Name: employee.Firstname + " " + employee.Lastname, Position: employee.Position, branchID: employee.branchID})}} className="ManageListColumn Employee">
+                            <Link className="linkedRow"
+                                to={`/Employee/${employee.UserID}`}
+                            >
+                                <div className="ManageListColumn Employee">
                                     <div className="columnID">{employee.EmployeeID}</div>
                                     <div className="columnName">{employee.Firstname + " " + employee.Lastname}</div>
                                     <div className="columnPosition">{employee.Position}</div>
@@ -105,7 +108,7 @@ const ManagerHomePage = observer((props:any) => {
                                         </div>
                                         <div onClick={(ev) => { 
                                             ev.preventDefault();
-                                            state.setTargetEmployee({UserID: employee.UserID, employeeID: employee.EmployeeID, branchID: employee.branchID, Name: employee.Firstname + ' ' + employee.Lastname, Position: employee.Position});
+                                            setTargetEmployee({UserID: employee.UserID, Name: employee.Firstname + ' ' + employee.Lastname});
                                             setDeletingUser(true);     
                                         }} className="trash-wrapper">
                                             <FontAwesomeIcon className="trash" icon={faTrash}/>

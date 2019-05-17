@@ -17,6 +17,7 @@ const App = observer((props:any) => {
 
   useEffect(() => {
     const token = localStorage.getItem('Token');
+    console.log(props.location)
     if(token) {
       VerifyToken(state, setLoading, token);
     } else {
@@ -33,7 +34,7 @@ const App = observer((props:any) => {
           <BasicAuthRoute exact path="/Home" component={HomePage} />       
           <BasicAuthRoute exact path="/Schedule" component={Calendar} />
           <BasicAuthRoute path="/Schedule/Requests" component={RequestListPage} />
-          <ManagerAuthRoute path="/Employee" component={EmployeeProfile}/>
+          <ManagerAuthRoute path="/Employee/:UserID" component={EmployeeProfile}/>
         </div>
       : null}
     </div>

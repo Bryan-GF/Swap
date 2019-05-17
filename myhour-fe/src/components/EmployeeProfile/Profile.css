@@ -2,167 +2,132 @@
   width: 1000px;
   margin: 0 auto;
   margin-top: 2rem; }
-
-.employeeContentWrapper .employeeProfileContent {
-  width: 100%; }
-
-.employeeContentWrapper .employeeProfileContent .profileHeader {
-  background: var(--main-color);
-  color: white;
-  padding: 1rem 2rem; }
-
-.employeeContentWrapper .employeeProfileContent .profileHeader h2 {
-  margin: 0; }
-
-.employeeContentWrapper .employeeProfileContent .profileContent {
-  display: flex;
-  flex-direction: row;
-  background: white;
-  padding: 1rem 2rem; }
-
-.employeeContentWrapper .employeeProfileContent .profileContent img {
-  height: 100%;
-  width: 4rem; }
-
-.employeeContentWrapper .employeeProfileContent .profileContent .profileTextContent {
-  display: flex;
-  align-items: center;
-  width: 100%; }
-
-.employeeContentWrapper .employeeProfileContent .profileContent .profileTextContent span {
-  margin-left: 2rem;
-  font-weight: bold;
-  font-size: 1rem; }
-
-.employeeContentWrapper .employeeProfileContent .profileContent .profileTextContent p {
-  margin: 0;
-  margin-left: .5rem;
-  font-size: 1rem; }
-
-.employeeContentWrapper .employeeProfileContent .profileContent .profileTextContent .profileButtons {
-  margin-left: auto;
-  display: flex;
-  align-items: center; }
-
-.employeeContentWrapper .employeeProfileContent .profileContent .profileTextContent .profileButtons button {
-  margin-left: 1.5rem;
-  background: #60B0F4;
-  border: none;
-  color: white;
-  padding: 1rem 2rem;
-  font-size: 1rem; }
-
-.employeeContentWrapper .employeeProfileContent .profileContent .profileTextContent .profileButtons button:hover {
-  cursor: pointer;
-  background: #2b7ec7; }
-
-.employeeContentWrapper .employeeProfileContent .profileContent .profileTextContent .profileButtons .trash:hover {
-  color: #4e4e4f;
-  transform: scale(1.1); }
-
-.employeeContentWrapper .employeeProfileContent .profileContent .profileTextContent .profileButtons svg {
-  height: 2rem;
-  width: 2rem; }
-
-.employeeContentWrapper .employeeProfileContent .profileContent .profileTextContent .profileButtons svg:hover {
-  cursor: pointer; }
-
-.employeeContentWrapper .employeeShiftContent {
-  margin-top: 2rem; }
-
-.employeeContentWrapper .employeeShiftContent h2 {
-  margin: 0;
-  font-size: 2rem; }
-
-.employeeContentWrapper .employeeShiftContent .shiftListHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: var(--main-color);
-  color: white;
-  padding: 1rem 2rem; }
-
-.employeeContentWrapper .employeeShiftContent .shiftListHeader .createShift {
-  font-size: 1.5rem;
-  font-weight: bold;
-  border-radius: 24px;
-  border: 2px solid white;
-  padding: 1rem;
-  color: white;
-  background: #77EE62;
-  display: flex;
-  align-items: center; }
-
-.employeeContentWrapper .employeeShiftContent .shiftListHeader .createShift .createPlus {
-  font-size: 2rem;
-  margin-right: .4rem;
-  height: 24px;
-  margin-top: -24px; }
-
-.employeeContentWrapper .employeeShiftContent .shiftListHeader .createShift:hover {
-  cursor: pointer;
-  background: #71E05D; }
-
-.employeeContentWrapper .employeeShiftContent .addShiftWrapper {
-  display: flex;
-  background: white;
-  padding: 1.5rem 5rem; }
-
-.employeeContentWrapper .employeeShiftContent .addShiftWrapper p {
-  margin: 0; }
-
-.employeeContentWrapper .employeeShiftContent .addShiftWrapper .shiftDataSelect {
-  display: flex;
-  margin-right: 1.4rem;
-  align-items: center; }
-
-.employeeContentWrapper .employeeShiftContent .addShiftWrapper .shiftDataSelect p {
-  margin-right: .5rem;
-  font-weight: bold; }
-
-.employeeContentWrapper .employeeShiftContent .addShiftWrapper .shiftDataSelect input {
-  padding: .5rem; }
-
-.employeeContentWrapper .employeeShiftContent .addShiftWrapper .Time input {
-  width: 90px;
-  text-align: center; }
-
-.employeeContentWrapper .employeeShiftContent .addShiftWrapper .Date input {
-  width: 90px;
-  text-align: center; }
-
-.employeeContentWrapper .employeeShiftContent .addShiftWrapper .react-datepicker-wrapper .react-datepicker-popper .react-datepicker--time-only .react-datepicker__time-container {
-  width: 110px !important; }
-
-.employeeContentWrapper .employeeShiftContent .addShiftWrapper .react-datepicker-wrapper .react-datepicker-popper .react-datepicker--time-only .react-datepicker__time-box {
-  width: 100px !important; }
-
-.employeeContentWrapper .employeeShiftContent .addShiftWrapper .addShiftButtons {
-  margin-left: auto;
-  display: flex;
-  justify-content: flex-end; }
-
-.employeeContentWrapper .employeeShiftContent .addShiftWrapper .addShiftButtons .green {
-  background: #77EE62;
-  border: 1px solid #71E05D; }
-
-.employeeContentWrapper .employeeShiftContent .addShiftWrapper .addShiftButtons .green:hover {
-  background: #71E05D;
-  cursor: pointer; }
-
-.employeeContentWrapper .employeeShiftContent .addShiftWrapper .addShiftButtons .red {
-  background: #F04B4B;
-  border: 3px solid #E73D3D; }
-
-.employeeContentWrapper .employeeShiftContent .addShiftWrapper .addShiftButtons .red:hover {
-  background: #E73D3D;
-  cursor: pointer; }
-
-.employeeContentWrapper .employeeShiftContent .addShiftWrapper .addShiftButtons button {
-  border: none;
-  color: white;
-  padding: .5rem 1rem;
-  margin-left: 1rem;
-  font-weight: bold;
-  font-size: 1rem;
-  outline: none; }
+  .employeeContentWrapper .employeeProfileContent {
+    width: 100%; }
+    .employeeContentWrapper .employeeProfileContent .profileHeader {
+      background: var(--main-color);
+      color: white;
+      padding: 1rem 2rem; }
+      .employeeContentWrapper .employeeProfileContent .profileHeader h2 {
+        margin: 0; }
+    .employeeContentWrapper .employeeProfileContent .profileContent {
+      display: flex;
+      flex-direction: row;
+      background: white;
+      padding: 1rem 2rem; }
+      .employeeContentWrapper .employeeProfileContent .profileContent img {
+        height: 100%;
+        width: 4rem; }
+      .employeeContentWrapper .employeeProfileContent .profileContent .profileTextContent {
+        display: flex;
+        align-items: center;
+        width: 100%; }
+        .employeeContentWrapper .employeeProfileContent .profileContent .profileTextContent span {
+          margin-left: 2rem;
+          font-weight: bold;
+          font-size: 1rem; }
+        .employeeContentWrapper .employeeProfileContent .profileContent .profileTextContent p {
+          margin: 0;
+          margin-left: .5rem;
+          font-size: 1rem; }
+        .employeeContentWrapper .employeeProfileContent .profileContent .profileTextContent .profileButtons {
+          margin-left: auto;
+          display: flex;
+          align-items: center; }
+          .employeeContentWrapper .employeeProfileContent .profileContent .profileTextContent .profileButtons button {
+            margin-left: 1.5rem;
+            background: #60B0F4;
+            border: none;
+            color: white;
+            padding: 1rem 2rem;
+            font-size: 1rem; }
+          .employeeContentWrapper .employeeProfileContent .profileContent .profileTextContent .profileButtons button:hover {
+            cursor: pointer;
+            background: #2b7ec7; }
+          .employeeContentWrapper .employeeProfileContent .profileContent .profileTextContent .profileButtons .trash:hover {
+            color: #4e4e4f;
+            transform: scale(1.1); }
+          .employeeContentWrapper .employeeProfileContent .profileContent .profileTextContent .profileButtons svg {
+            height: 2rem;
+            width: 2rem; }
+          .employeeContentWrapper .employeeProfileContent .profileContent .profileTextContent .profileButtons svg:hover {
+            cursor: pointer; }
+  .employeeContentWrapper .employeeShiftContent {
+    margin-top: 2rem; }
+    .employeeContentWrapper .employeeShiftContent h2 {
+      margin: 0;
+      font-size: 2rem; }
+    .employeeContentWrapper .employeeShiftContent .shiftListHeader {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--main-color);
+      color: white;
+      padding: 1rem 2rem; }
+      .employeeContentWrapper .employeeShiftContent .shiftListHeader .createShift {
+        font-size: 1.5rem;
+        font-weight: bold;
+        border-radius: 24px;
+        border: 2px solid white;
+        padding: 1rem;
+        color: white;
+        background: #77EE62;
+        display: flex;
+        align-items: center; }
+        .employeeContentWrapper .employeeShiftContent .shiftListHeader .createShift .createPlus {
+          font-size: 2rem;
+          margin-right: .4rem;
+          height: 24px;
+          margin-top: -24px; }
+      .employeeContentWrapper .employeeShiftContent .shiftListHeader .createShift:hover {
+        cursor: pointer;
+        background: #71E05D; }
+    .employeeContentWrapper .employeeShiftContent .addShiftWrapper {
+      display: flex;
+      background: white;
+      padding: 1.5rem 5rem; }
+      .employeeContentWrapper .employeeShiftContent .addShiftWrapper p {
+        margin: 0; }
+      .employeeContentWrapper .employeeShiftContent .addShiftWrapper .shiftDataSelect {
+        display: flex;
+        margin-right: 1.4rem;
+        align-items: center; }
+        .employeeContentWrapper .employeeShiftContent .addShiftWrapper .shiftDataSelect p {
+          margin-right: .5rem;
+          font-weight: bold; }
+        .employeeContentWrapper .employeeShiftContent .addShiftWrapper .shiftDataSelect input {
+          padding: .5rem; }
+      .employeeContentWrapper .employeeShiftContent .addShiftWrapper .Time input {
+        width: 90px;
+        text-align: center; }
+      .employeeContentWrapper .employeeShiftContent .addShiftWrapper .Date input {
+        width: 90px;
+        text-align: center; }
+      .employeeContentWrapper .employeeShiftContent .addShiftWrapper .react-datepicker-wrapper .react-datepicker-popper .react-datepicker--time-only .react-datepicker__time-container {
+        width: 110px !important; }
+      .employeeContentWrapper .employeeShiftContent .addShiftWrapper .react-datepicker-wrapper .react-datepicker-popper .react-datepicker--time-only .react-datepicker__time-box {
+        width: 100px !important; }
+      .employeeContentWrapper .employeeShiftContent .addShiftWrapper .addShiftButtons {
+        margin-left: auto;
+        display: flex;
+        justify-content: flex-end; }
+        .employeeContentWrapper .employeeShiftContent .addShiftWrapper .addShiftButtons .green {
+          background: #77EE62;
+          border: 1px solid #71E05D; }
+        .employeeContentWrapper .employeeShiftContent .addShiftWrapper .addShiftButtons .green:hover {
+          background: #71E05D;
+          cursor: pointer; }
+        .employeeContentWrapper .employeeShiftContent .addShiftWrapper .addShiftButtons .red {
+          background: #F04B4B;
+          border: 3px solid #E73D3D; }
+        .employeeContentWrapper .employeeShiftContent .addShiftWrapper .addShiftButtons .red:hover {
+          background: #E73D3D;
+          cursor: pointer; }
+        .employeeContentWrapper .employeeShiftContent .addShiftWrapper .addShiftButtons button {
+          border: none;
+          color: white;
+          padding: .5rem 1rem;
+          margin-left: 1rem;
+          font-weight: bold;
+          font-size: 1rem;
+          outline: none; }
