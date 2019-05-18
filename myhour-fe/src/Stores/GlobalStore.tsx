@@ -70,6 +70,23 @@ class GlobalState {
         })
     }
 
+    @action editShift = async(ShiftID, shiftDate, startTime, endTime) => {
+        shiftDate = shiftDate.slice(0, 10);
+        startTime =startTime.slice(11, 19);
+        endTime = endTime.slice(11, 19);
+        console.log(ShiftID)
+        console.log(shiftDate)
+        console.log(startTime)
+        console.log(endTime)
+        return await axios
+        .put('https://swapapi.azurewebsites.net/api/EditShift', {"ShiftID": ShiftID, "shiftDate": shiftDate, "startTime": startTime, "endTime": endTime})
+        .then(res => {
+            console.log(res.data);     
+        }).catch(err => {
+            console.log(err);
+        })
+    }
+
     @action getShifts = async(ID) => {
         return await axios
         .post('https://swapapi.azurewebsites.net/api/GetEmployeeShifts', {"UserID": ID})

@@ -5,11 +5,14 @@ import Nav from '../Navigation/Nav';
 import avatar from '../../assets/avatar.png';
 import './Profile.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrashAlt, faPen } from '@fortawesome/free-solid-svg-icons'
+import { faTrashAlt, faPen, faCheck, faTimes } from '@fortawesome/free-solid-svg-icons'
 import DeleteEmployee from '../Delete/DeleteEmployee';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 
+
+//GOAL FOR TOMORROW: Get Editing and Deleting Shifts, that should take 2 hours. Next I will move onto getting shifts shwoing up
+// on request creation.
 
 const EmployeeProfile = observer((props:any) => {
     
@@ -17,10 +20,17 @@ const EmployeeProfile = observer((props:any) => {
 
     const [deletingUser, setDeletingUser] = useState(false);
     const [addingShift, setAddingShift] = useState(false);
+
     const [startDate, setStartDate] = useState(new Date());
     const [startTime, setStartTime] = useState(new Date());
     const [endTime, setEndTime] = useState(new Date());
+    const [startEditDate, setEditStartDate] = useState(new Date());
+    const [startEditTime, setEditStartTime] = useState(new Date());
+    const [endEditTime, setEditEndTime] = useState(new Date());
+
+
     const [loading, setLoading] = useState(true);
+    const [editActive, setEditActive] = useState({active: false, target: null});
 
     useEffect(() => {
         const ID = props.match.params.UserID;
@@ -29,7 +39,7 @@ const EmployeeProfile = observer((props:any) => {
         setLoading(false);
         
     }, [])
-
+    
     return (
         <div>
             {deletingUser ?
@@ -119,24 +129,89 @@ const EmployeeProfile = observer((props:any) => {
                         }
                     <div className="shiftListContent">
                         {state.currShifts.map((shift, i) => {
-                            console.log(shift.endTime);
+                            let date;
+                            let start;
+                            let end;
+                            let shiftIcons;
+                            if(editActive.active === true && i === editActive.target) {
+                               date = <DatePicker
+                                            selected={startEditDate}
+                                            onChange={(val) => {
+                                                setEditStartDate(val);
+                                            }}
+                                        />
+                                start = <DatePicker
+                                            selected={startEditTime}
+                                            onChange={(val) => {
+                                                setEditStartTime(val);
+                                            }}
+                                            showTimeSelect
+                                            showTimeSelectOnly
+                                            timeIntervals={15}
+                                            dateFormat="h:mm aa"
+                                            timeCaption="Time"
+                                        />
+                                end = <DatePicker
+                                            selected={endEditTime}
+                                            onChange={(val) => {
+                                                setEditEndTime(val);
+                                            }}
+                                            showTimeSelect
+                                            showTimeSelectOnly
+                                            timeIntervals={15}
+                                            dateFormat="h:mm aa"
+                                            timeCaption="Time"
+                                        />
+                                shiftIcons = <div className="shiftRowIcons">
+                                                <div onClick={( ) => { 
+                                                    state.editShift(shift.ShiftID, startEditDate.toISOString(), startEditTime.toISOString(), endEditTime.toISOString());
+                                                    setEditActive({active: false, target: null})}} className="check">
+                                                    <FontAwesomeIcon className="checkIcon" icon={faCheck}/>
+                                                </div>
+                                                <div onClick={() => { setEditActive({active: false, target: null})}} className="cancel">
+                                                    <FontAwesomeIcon className="cancelIcon" icon={faTimes}/>
+                                                </div>
+                                            </div>
+                            } else {
+                                date = <p>{shift.shiftDate.split(" ")[0]}</p>
+                                start = <p>{moment(shift.startTime, 'HH:mm:ss').format('hh:mm a')}</p>
+                                end = <p>{moment(shift.endTime, 'HH:mm:ss').format('hh:mm a')}</p>
+                                shiftIcons = <div className="shiftRowIcons">
+                                                <div onClick={() => { 
+                                                    setEditActive({active: true, target: i})
+                                                    let startHours = shift.startTime.split(":");
+                                                    let endHours = shift.endTime.split(":");
+                                                    let dateInfo = shift.shiftDate.split(/\/| /) 
+                                                    let newDate = new Date(dateInfo[2], dateInfo[0] - 1, dateInfo[1]);
+                                                    console.log(dateInfo);
+                                                    setEditStartDate(newDate);
+                                                    let newStartTime = startEditTime;
+                                                    let newEndTime = endEditTime;
+                                                    newEndTime.setHours(parseInt(endHours[0]), parseInt(endHours[1]));
+                                                    newStartTime.setHours(parseInt(startHours[0]), parseInt(startHours[1]));
+                                                    setEditStartTime(newStartTime);
+                                                    
+                                                    }} className="edit" id={`${i}`}>
+                                                    <FontAwesomeIcon className="editIcon" icon={faPen}/>
+                                                </div>
+                                                <div className="trash">
+                                                    <FontAwesomeIcon className="trashIcon" icon={faTrashAlt}/>
+                                                </div>
+                                            </div>
+                            }
+                           
                             return (
-                                <div className="shiftRow">
-                                    <p className="num">{i + 1}</p>
-                                    <span>Date: </span>
-                                    <p>{shift.shiftDate.split(" ")[0]}</p>
-                                    <span>Start Time: </span>
-                                    <p>{moment(shift.startTime, 'HH:mm:ss').format('hh:mm a')}</p>
-                                    <span>End Time: </span>
-                                    <p>{moment(shift.endTime, 'HH:mm:ss').format('hh:mm a')}</p>
-                                    <div className="shiftRowIcons">
-                                        <div className="edit">
-                                            <FontAwesomeIcon className="editIcon" icon={faPen}/>
-                                        </div>
-                                        <div className="trash">
-                                            <FontAwesomeIcon className="trashIcon" icon={faTrashAlt}/>
-                                        </div>
-                                    </div>
+                                <div>
+                                    <div className="shiftRow">
+                                        <p className="num">{i + 1}</p>
+                                        <span>Date: </span>
+                                        {date}
+                                        <span>Start Time: </span>
+                                        {start}
+                                        <span>End Time: </span>
+                                        {end}
+                                        {shiftIcons}
+                                    </div>        
                                 </div>
                             )
                         })}
@@ -150,4 +225,3 @@ const EmployeeProfile = observer((props:any) => {
 
 export default EmployeeProfile;
 import "react-datepicker/dist/react-datepicker.css";
-import { stat } from 'fs';
