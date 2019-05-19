@@ -27,7 +27,8 @@ const EmployeeProfile = observer((props:any) => {
     const [startEditDate, setEditStartDate] = useState(new Date());
     const [startEditTime, setEditStartTime] = useState(new Date());
     const [endEditTime, setEditEndTime] = useState(new Date());
-
+    const [deletingShift, setDeletingShift] = useState(false);
+    const [currDelete, setCurrDelete] = useState(null);
 
     const [loading, setLoading] = useState(true);
     const [editActive, setEditActive] = useState({active: false, target: null});
@@ -45,6 +46,22 @@ const EmployeeProfile = observer((props:any) => {
             {deletingUser ?
                 <DeleteEmployee Employee={{'Name': state.currEmployee.Name, 'UserID': state.currEmployee.UserID}} setDeletingUser={setDeletingUser}/>
                 : ''
+            }
+            {
+                deletingShift ?
+                        <div className='delete-confirmation-wrapper'>
+                            <div className='confirmation-info'>
+                                <h2>Are you sure you want to delete this shift?</h2>
+                            </div>
+                            <div className='confirmation-buttons'>
+                                <button onClick={() => { 
+                                    state.deleteShift(currDelete);
+                                    setDeletingShift(false);
+                                    }} className='green'>Confirm</button>
+                                <button onClick={() => { setDeletingShift(false)}} className='red'>Cancel</button>
+                            </div>
+                        </div>
+                : null
             }
             <Nav/>
             {!loading ?
@@ -127,6 +144,7 @@ const EmployeeProfile = observer((props:any) => {
                         </div>
                         : null
                         }
+                        
                     <div className="shiftListContent">
                         {state.currShifts.map((shift, i) => {
                             let date;
@@ -194,7 +212,10 @@ const EmployeeProfile = observer((props:any) => {
                                                     }} className="edit" id={`${i}`}>
                                                     <FontAwesomeIcon className="editIcon" icon={faPen}/>
                                                 </div>
-                                                <div className="trash">
+                                                <div onClick={() => { 
+                                                    setCurrDelete(shift.ShiftID); 
+                                                    setDeletingShift(true);
+                                                    }} className="trash">
                                                     <FontAwesomeIcon className="trashIcon" icon={faTrashAlt}/>
                                                 </div>
                                             </div>

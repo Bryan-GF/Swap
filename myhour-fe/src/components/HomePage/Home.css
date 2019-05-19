@@ -25,12 +25,14 @@
       background: #77EE62;
       border: 1px solid #71E05D; }
     .delete-confirmation-wrapper .confirmation-buttons .green:hover {
-      background: #71E05D; }
+      background: #71E05D;
+      cursor: pointer; }
     .delete-confirmation-wrapper .confirmation-buttons .red {
       background: #F04B4B;
       border: 3px solid #E73D3D; }
     .delete-confirmation-wrapper .confirmation-buttons .red:hover {
-      background: #E73D3D; }
+      background: #E73D3D;
+      cursor: pointer; }
     .delete-confirmation-wrapper .confirmation-buttons button {
       border: none;
       color: white;

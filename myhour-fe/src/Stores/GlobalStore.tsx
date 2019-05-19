@@ -87,6 +87,16 @@ class GlobalState {
         })
     }
 
+    @action deleteShift = async(ShiftID) => {
+        return await axios
+        .post('https://swapapi.azurewebsites.net/api/DeleteShift', {"ShiftID": ShiftID})
+        .then(res => {
+            console.log(res.data);
+        }).catch(err => {
+            console.log(err) ;
+        })
+    }
+
     @action getShifts = async(ID) => {
         return await axios
         .post('https://swapapi.azurewebsites.net/api/GetEmployeeShifts', {"UserID": ID})
