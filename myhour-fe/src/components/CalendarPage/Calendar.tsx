@@ -103,7 +103,7 @@ const Calendar = observer(() => {
                 const cloneDay = day;
                 days.push(
                     (dateFns.isSameMonth(day, monthStart) ?
-                    <Link className='col cell' to={{ pathname: "/Schedule/Requests", search: `?date=${day}`}}>
+                    <Link className='col cell' to={{ pathname: "/Requests/Date", search: `date=${day}`}}>
                         <div
                             className={`cell ${
                             !dateFns.isSameMonth(day, monthStart)

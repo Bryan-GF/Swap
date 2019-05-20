@@ -5,7 +5,6 @@ import avatar from '../../assets/avatar.png'
 import Nav from '../Navigation/Nav';
 
 const Request = observer((props:any) => {
-    console.log(props);
     return (
         <div>
             <div>

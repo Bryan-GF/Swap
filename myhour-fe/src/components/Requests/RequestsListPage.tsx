@@ -4,6 +4,7 @@ import './Requests.css';
 import Request from './Request';
 import { number } from 'prop-types';
 import Nav from '../Navigation/Nav';
+import queryString from 'query-string'
 
 /*NOTES:
 Important:
@@ -16,7 +17,7 @@ For Later:
     - Messages should open up the conversation tab with the ability to message the person of interest.
 */
 
-const RequestListPage = observer(() => {
+const RequestListPage = observer((props:any) => {
 
     const tempData = [
         {
@@ -66,7 +67,7 @@ const RequestListPage = observer(() => {
     }
 
     const [creatingRequest, setCreatingRequest] = useState(false);
-    const [requestContent, setRequestContent] = useState<RequestContent>({message: '', shiftID: 0})
+    const [requestContent, setRequestContent] = useState<RequestContent>({message: '', shiftID: 0});
     const [acceptingRequest, setAcceptingRequest] = useState(false);
 
     const handlePost = () => {
@@ -80,9 +81,9 @@ const RequestListPage = observer(() => {
     }
 
     useEffect(() => {
-      return (
-        setRequestContent({...requestContent, shiftID: tempShifts[0].id})
-      );
+        setRequestContent({...requestContent, shiftID: tempShifts[0].id});
+        const values = queryString.parse(props.location.search)
+        console.log(values.date);
     }, [])
 
     console.log(requestContent)

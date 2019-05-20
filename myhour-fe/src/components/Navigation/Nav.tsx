@@ -17,7 +17,7 @@ const Nav = observer((props:any) => {
                     <span>Swap</span>
                 </div>
                 <Link to='/Home'>Home</Link>   
-                <Link to='/Schedule'>Schedule</Link>
+                <Link to='/Requests'>Requests</Link>
                 <Link to='/Conversations'>Conversations</Link>
                 <Link to='/Settings'>Settings</Link>
             </div>
