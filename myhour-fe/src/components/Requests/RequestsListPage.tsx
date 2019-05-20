@@ -1,10 +1,13 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {observer} from 'mobx-react-lite';
 import './Requests.css';
 import Request from './Request';
-import { number } from 'prop-types';
 import Nav from '../Navigation/Nav';
 import queryString from 'query-string'
+import { GlobalStateContext } from '../../Stores/GlobalStore';
+import format from 'date-fns/format'
+import moment from 'moment';
+
 
 /*NOTES:
 Important:
@@ -18,6 +21,8 @@ For Later:
 */
 
 const RequestListPage = observer((props:any) => {
+
+    const state = useContext(GlobalStateContext);
 
     const tempData = [
         {
@@ -62,15 +67,17 @@ const RequestListPage = observer((props:any) => {
     ]
 
     interface RequestContent {
-        message: string;
-        shiftID: number;
+        Comment: string;
+        ShiftID: string;
     }
 
     const [creatingRequest, setCreatingRequest] = useState(false);
-    const [requestContent, setRequestContent] = useState<RequestContent>({message: '', shiftID: 0});
+    const [requestContent, setRequestContent] = useState<RequestContent>({Comment: '', ShiftID: ''});
     const [acceptingRequest, setAcceptingRequest] = useState(false);
+    const [shiftsList, setShiftsList] = useState([]);
 
     const handlePost = () => {
+        state.addRequest(requestContent);
         setCreatingRequest(false);
         console.log('Post')
     }
@@ -81,12 +88,22 @@ const RequestListPage = observer((props:any) => {
     }
 
     useEffect(() => {
-        setRequestContent({...requestContent, shiftID: tempShifts[0].id});
+        
         const values = queryString.parse(props.location.search)
-        console.log(values.date);
+        const val = format(
+            values.date.toString(), 
+            'YYYY-MM-DD'
+        );
+        
+        async function getShifts () {
+            const shifts = await state.getShiftsByDay(val);
+            setRequestContent({...requestContent, ShiftID: shifts[0].ShiftID});
+            setShiftsList(shifts);
+        }
+        getShifts();
     }, [])
 
-    console.log(requestContent)
+    console.log(requestContent);
     return (
         <div>
             <Nav/>
@@ -98,14 +115,25 @@ const RequestListPage = observer((props:any) => {
                             <textarea 
                                 maxLength={200}
                                 placeholder='Could someone please take over this shift for me?'
-                                onChange={(ev) => {setRequestContent({...requestContent, message: ev.target.value})}}
+                                onChange={(ev) => {setRequestContent({...requestContent, Comment: ev.target.value})}}
                             />
                             <div className="myselect">
                                 <select className="form-control" id="test" onChange={(ev) => {
                                     console.log(ev.target.value);
-                                    setRequestContent({...requestContent, shiftID: +ev.target.value})}}>
-                                    {tempShifts.map(shift =>
-                                        <option value={shift.id}>{shift.information}</option>
+                                    setRequestContent({...requestContent, ShiftID: ev.target.value})}}>
+                                    {shiftsList.map(shift => {
+                                        let startTime = moment(shift.startTime, 'HH:mm:ss').format('hh:mm A');
+                                        let endTime = moment(shift.endTime, 'HH:mm:ss').format('hh:mm A');
+                                        if(startTime.charAt(0) === '0') {
+                                            startTime = startTime.slice(1);
+                                        }
+                                        if (endTime.charAt(0) === '0') {
+                                            endTime = endTime.slice(1);
+                                        }
+                                        return (
+                                            <option value={shift.ShiftID}>{startTime} - {endTime}</option>
+                                        )
+                                    }   
                                     )}
                             </select>
                             </div>

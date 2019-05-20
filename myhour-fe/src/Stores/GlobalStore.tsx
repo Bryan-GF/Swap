@@ -4,7 +4,7 @@ import axios from 'axios';
 
 
 class GlobalState {
-    @observable userData = {employeeID : "",  Firstname: "", Lastname: "", Position: "", branchID: ""};
+    @observable userData = {UserID: "" ,employeeID : "",  Firstname: "", Lastname: "", Position: "", branchID: ""};
 
     @observable loginStatus = false;
 
@@ -13,6 +13,16 @@ class GlobalState {
     @observable currShifts = [];
 
     @observable currEmployee = {UserID: '', EmployeeID: '', Name: '', Position: ''};
+
+    @action addRequest = (RequestData) => {
+        return axios
+        .post('https://swapapi.azurewebsites.net/api/AddRequest', {UserID: this.userData.UserID, ShiftID: RequestData.ShiftID, Comment: RequestData.Comment})
+        .then(res => {
+            console.log(res); 
+        }).catch(err => {
+            console.log(err);
+        })
+    }
 
     @action deleteUser = (ID) => {
         return axios
@@ -103,6 +113,16 @@ class GlobalState {
         .then(res => {
             console.log(res);
             this.currShifts = res.data;
+        }).catch(err => {
+            console.log(err) ;
+        })
+    }
+
+    @action getShiftsByDay = async(date) => {
+        return await axios
+        .post('https://swapapi.azurewebsites.net/api/GetShiftsByDay', {"UserID": this.userData.UserID, "Date": date})
+        .then(res => {
+            return res.data;
         }).catch(err => {
             console.log(err) ;
         })

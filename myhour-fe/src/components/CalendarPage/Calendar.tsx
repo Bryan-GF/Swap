@@ -100,6 +100,7 @@ const Calendar = observer(() => {
         while (day <= endDate) {
             for (let i = 0; i < 7; i++) {
                 formattedDate = dateFns.format(day, dateFormat);
+                
                 const cloneDay = day;
                 days.push(
                     (dateFns.isSameMonth(day, monthStart) ?

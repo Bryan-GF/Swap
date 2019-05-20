@@ -137,7 +137,8 @@ const EmployeeProfile = observer((props:any) => {
                             </div>
                             <div className="addShiftButtons">
                                     <button onClick={() => {
-                                        state.addShift(state.currEmployee.UserID, startDate.toISOString(), startTime.toISOString(), endTime.toISOString())
+                                        state.addShift(state.currEmployee.UserID, startDate.toISOString(), startTime.toISOString(), endTime.toISOString());
+                                        setAddingShift(false);
                                     }}className="green">Confirm</button>
                                     <button onClick={() => { setAddingShift(false)}} className="red">Cancel</button>
                             </div>
