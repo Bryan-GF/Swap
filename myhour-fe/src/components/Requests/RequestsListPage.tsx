@@ -69,10 +69,11 @@ const RequestListPage = observer((props:any) => {
     interface RequestContent {
         Comment: string;
         ShiftID: string;
+        Urgent: boolean;
     }
 
     const [creatingRequest, setCreatingRequest] = useState(false);
-    const [requestContent, setRequestContent] = useState<RequestContent>({Comment: '', ShiftID: ''});
+    const [requestContent, setRequestContent] = useState<RequestContent>({Comment: '', ShiftID: '', Urgent: false});
     const [acceptingRequest, setAcceptingRequest] = useState(false);
     const [shiftsList, setShiftsList] = useState([]);
 
@@ -117,30 +118,40 @@ const RequestListPage = observer((props:any) => {
                                 placeholder='Could someone please take over this shift for me?'
                                 onChange={(ev) => {setRequestContent({...requestContent, Comment: ev.target.value})}}
                             />
-                            <div className="myselect">
-                                <select className="form-control" id="test" onChange={(ev) => {
-                                    console.log(ev.target.value);
-                                    setRequestContent({...requestContent, ShiftID: ev.target.value})}}>
-                                    {shiftsList.map(shift => {
-                                        let startTime = moment(shift.startTime, 'HH:mm:ss').format('hh:mm A');
-                                        let endTime = moment(shift.endTime, 'HH:mm:ss').format('hh:mm A');
-                                        if(startTime.charAt(0) === '0') {
-                                            startTime = startTime.slice(1);
-                                        }
-                                        if (endTime.charAt(0) === '0') {
-                                            endTime = endTime.slice(1);
-                                        }
-                                        return (
-                                            <option value={shift.ShiftID}>{startTime} - {endTime}</option>
-                                        )
-                                    }   
-                                    )}
-                            </select>
+                            <div className='radioSelect'>
+                                <div className="myselect">
+                                    <select className="form-control" id="test" onChange={(ev) => {
+                                        console.log(ev.target.value);
+                                        setRequestContent({...requestContent, ShiftID: ev.target.value})}}>
+                                        {shiftsList.map(shift => {
+                                            let startTime = moment(shift.startTime, 'HH:mm:ss').format('hh:mm A');
+                                            let endTime = moment(shift.endTime, 'HH:mm:ss').format('hh:mm A');
+                                            if(startTime.charAt(0) === '0') {
+                                                startTime = startTime.slice(1);
+                                            }
+                                            if (endTime.charAt(0) === '0') {
+                                                endTime = endTime.slice(1);
+                                            }
+                                            return (
+                                                <option value={shift.ShiftID}>{startTime} - {endTime}</option>
+                                            )
+                                        }   
+                                        )}
+                                </select>
+                                
+                                </div>
+                                <label className="container">Urgent?
+                                    <input type="checkbox" checked={requestContent.Urgent}/> 
+                                    <span onClick={() => { setRequestContent({...requestContent, Urgent: !requestContent.Urgent})}} className="checkmark"></span> 
+                                </label> 
                             </div>
+                            
                         </div>
                         <div className='creator-buttons'>
                             <button onClick={() => {handlePost()}} className="green">Post</button>
-                            <button onClick={() => {setCreatingRequest(false)}} className="red">Cancel</button>
+                            <button onClick={() => {
+                                setRequestContent({Comment: '', ShiftID: shiftsList[0].ShiftID, Urgent: false});
+                                setCreatingRequest(false)}} className="red">Cancel</button>
                         </div>
                     </div>
                 : ''}

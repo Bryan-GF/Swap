@@ -16,7 +16,7 @@ class GlobalState {
 
     @action addRequest = (RequestData) => {
         return axios
-        .post('https://swapapi.azurewebsites.net/api/AddRequest', {UserID: this.userData.UserID, ShiftID: RequestData.ShiftID, Comment: RequestData.Comment})
+        .post('https://swapapi.azurewebsites.net/api/AddRequest', {UserID: this.userData.UserID, ShiftID: RequestData.ShiftID, Comment: RequestData.Comment, Urgent: RequestData.Urgent})
         .then(res => {
             console.log(res); 
         }).catch(err => {

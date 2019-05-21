@@ -164,8 +164,10 @@ ALTER TABLE Users ALTER COLUMN PasswordHash varchar(255) NOT NULL;
 CREATE TABLE Requests (
 	UserID int NOT NULL FOREIGN KEY REFERENCES Users(UserID),
 	ShiftID int NOT NULL FOREIGN KEY REFERENCES Shifts(ShiftID),
-	Comment varchar(255)
+	Comment varchar(255) NOT NULL,
 );
+
+ALTER TABLE Requests ADD Urgent BIT default 'FALSE';
 
 
 

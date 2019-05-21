@@ -21,7 +21,14 @@
       margin-top: 0;
       color: var(--main-color); }
     .request-list-wrapper .request-creator-wrapper .creator-content {
-      width: 100%; }
+      width: 100%;
+      /* Hide the browser's default checkbox */
+      /* Create a custom checkbox */
+      /* On mouse-over, add a grey background color */
+      /* When the checkbox is checked, add a blue background */
+      /* Create the checkmark/indicator (hidden when not checked) */
+      /* Show the checkmark when checked */
+      /* Style the checkmark/indicator */ }
       .request-list-wrapper .request-creator-wrapper .creator-content textarea {
         width: 100%;
         resize: none;
@@ -29,6 +36,55 @@
         margin-bottom: 1rem;
         outline: none;
         border-color: var(--main-color); }
+      .request-list-wrapper .request-creator-wrapper .creator-content .radioSelect {
+        display: flex;
+        justify-content: space-between; }
+      .request-list-wrapper .request-creator-wrapper .creator-content .container {
+        display: block;
+        position: relative;
+        padding-left: 35px;
+        margin-bottom: 12px;
+        font-size: 1.2rem;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none; }
+        .request-list-wrapper .request-creator-wrapper .creator-content .container span:hover {
+          cursor: pointer; }
+      .request-list-wrapper .request-creator-wrapper .creator-content .container input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0; }
+      .request-list-wrapper .request-creator-wrapper .creator-content .checkmark {
+        position: absolute;
+        top: 4px;
+        left: 0;
+        height: 20px;
+        width: 20px;
+        background-color: #eee;
+        border: 1px solid var(--main-color); }
+      .request-list-wrapper .request-creator-wrapper .creator-content .container:hover input ~ .checkmark {
+        background-color: #ccc; }
+      .request-list-wrapper .request-creator-wrapper .creator-content .container input:checked ~ .checkmark {
+        background-color: #2196F3; }
+      .request-list-wrapper .request-creator-wrapper .creator-content .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none; }
+      .request-list-wrapper .request-creator-wrapper .creator-content .container input:checked ~ .checkmark:after {
+        display: block; }
+      .request-list-wrapper .request-creator-wrapper .creator-content .container .checkmark:after {
+        left: 6.3px;
+        top: 2px;
+        width: 5px;
+        height: 10px;
+        border: solid white;
+        border-width: 0 3px 3px 0;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg); }
       .request-list-wrapper .request-creator-wrapper .creator-content .myselect {
         position: relative;
         display: inline-block; }
@@ -49,6 +105,8 @@
           border-color: var(--main-color);
           font-weight: bold;
           outline: none; }
+      .request-list-wrapper .request-creator-wrapper .creator-content .myselect select:hover {
+        cursor: pointer; }
       .request-list-wrapper .request-creator-wrapper .creator-content .myselect::after {
         content: '';
         position: absolute;
@@ -63,7 +121,9 @@
     .request-list-wrapper .request-creator-wrapper .creator-buttons {
       display: flex;
       justify-content: flex-end;
-      margin-top: 10px; }
+      margin-top: 2rem; }
+      .request-list-wrapper .request-creator-wrapper .creator-buttons button:hover {
+        cursor: pointer; }
       .request-list-wrapper .request-creator-wrapper .creator-buttons .green {
         background: #77EE62;
         border: 1px solid #71E05D; }
