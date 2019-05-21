@@ -14,6 +14,19 @@ class GlobalState {
 
     @observable currEmployee = {UserID: '', EmployeeID: '', Name: '', Position: ''};
 
+    @action acceptRequest = (DelUserID, ShiftID) => {
+        console.log(this.userData.UserID);
+        console.log(DelUserID);
+        console.log(ShiftID);
+        return axios
+        .post('https://swapapi.azurewebsites.net/api/AcceptRequest', {AddUserID: this.userData.UserID, DelUserID: DelUserID, ShiftID: ShiftID})
+        .then(res => {
+            console.log(res); 
+        }).catch(err => {
+            console.log(err);
+        })
+    }
+
     @action addRequest = (RequestData) => {
         return axios
         .post('https://swapapi.azurewebsites.net/api/AddRequest', {UserID: this.userData.UserID, ShiftID: RequestData.ShiftID, Comment: RequestData.Comment, Urgent: RequestData.Urgent})
@@ -21,6 +34,16 @@ class GlobalState {
             console.log(res); 
         }).catch(err => {
             console.log(err);
+        })
+    }
+
+    @action getRequestsByDay = async(date) => {
+        return await axios
+        .post('https://swapapi.azurewebsites.net/api/GetRequestsByDay', {"shiftDate": date})
+        .then(res => {
+            return res.data;
+        }).catch(err => {
+            console.log(err) ;
         })
     }
 
@@ -48,9 +71,7 @@ class GlobalState {
         return await axios
         .post('https://swapapi.azurewebsites.net/api/GetUser', {"UserID": ID})
         .then(res => {
-            console.log(res);
             this.currEmployee = {...res.data, Name: res.data.Firstname + ' ' + res.data.Lastname};
-            console.log(this.currEmployee);
         }).catch(err => {
             console.log(err);
         })
@@ -111,8 +132,9 @@ class GlobalState {
         return await axios
         .post('https://swapapi.azurewebsites.net/api/GetEmployeeShifts', {"UserID": ID})
         .then(res => {
-            console.log(res);
-            this.currShifts = res.data;
+            if (res.data != null) {
+                this.currShifts = res.data;
+            }      
         }).catch(err => {
             console.log(err) ;
         })

@@ -6,7 +6,7 @@ import Nav from '../Navigation/Nav';
 import queryString from 'query-string'
 import { GlobalStateContext } from '../../Stores/GlobalStore';
 import format from 'date-fns/format'
-import moment from 'moment';
+import {fixTime} from './RequestHelper';
 
 
 /*NOTES:
@@ -24,48 +24,6 @@ const RequestListPage = observer((props:any) => {
 
     const state = useContext(GlobalStateContext);
 
-    const tempData = [
-        {
-            userID: 10,
-            userName: 'Brandon',
-            position: 'Cashier',
-            description: 'Really need someone to pick up this shift for me!',
-            startTime: '12:30 PM',
-            endTime: '3:30 PM',
-            urgent: true,
-        },
-        {
-            userID: 2,
-            userName: 'Josh',
-            position: 'Cashier',
-            description: 'Family emergency',
-            startTime: '12:45 PM',
-            endTime: '5:20 PM',
-            urgent: true,
-        },
-        {
-            userID: 8,
-            userName: 'Liz',
-            position: 'Cashier',
-            description: "I can't come in today, need to study for a test.",
-            startTime: '6:00 PM',
-            endTime: '11:00 PM',
-            urgent: false,
-        },
-    ]
-
-    //Want to get the shifts for this person for the specified day
-    const tempShifts = [
-        {
-            id: 1,
-            information: '12:30PM - 4:30PM'
-        },
-        {
-            id: 2,
-            information: '7:30AM - 9:00AM'
-        }
-    ]
-
     interface RequestContent {
         Comment: string;
         ShiftID: string;
@@ -76,16 +34,13 @@ const RequestListPage = observer((props:any) => {
     const [requestContent, setRequestContent] = useState<RequestContent>({Comment: '', ShiftID: '', Urgent: false});
     const [acceptingRequest, setAcceptingRequest] = useState(false);
     const [shiftsList, setShiftsList] = useState([]);
+    const [requestsList, setRequestsList] = useState([]);
+    const [date, setDate] = useState('');
 
     const handlePost = () => {
         state.addRequest(requestContent);
         setCreatingRequest(false);
         console.log('Post')
-    }
-
-    const handleConfirmation = () => {
-        setAcceptingRequest(false);
-        console.log('Confirmation')
     }
 
     useEffect(() => {
@@ -95,13 +50,19 @@ const RequestListPage = observer((props:any) => {
             values.date.toString(), 
             'YYYY-MM-DD'
         );
-        
-        async function getShifts () {
+        setDate(val);
+        async function getData () {
+            const request = await state.getRequestsByDay(val);
+            if(request != null) {
+                setRequestsList(request);
+            }         
             const shifts = await state.getShiftsByDay(val);
-            setRequestContent({...requestContent, ShiftID: shifts[0].ShiftID});
-            setShiftsList(shifts);
+            if(shifts != null) {
+                setRequestContent({...requestContent, ShiftID: shifts[0].ShiftID});
+                setShiftsList(shifts);
+            }  
         }
-        getShifts();
+        getData();
     }, [])
 
     console.log(requestContent);
@@ -124,16 +85,9 @@ const RequestListPage = observer((props:any) => {
                                         console.log(ev.target.value);
                                         setRequestContent({...requestContent, ShiftID: ev.target.value})}}>
                                         {shiftsList.map(shift => {
-                                            let startTime = moment(shift.startTime, 'HH:mm:ss').format('hh:mm A');
-                                            let endTime = moment(shift.endTime, 'HH:mm:ss').format('hh:mm A');
-                                            if(startTime.charAt(0) === '0') {
-                                                startTime = startTime.slice(1);
-                                            }
-                                            if (endTime.charAt(0) === '0') {
-                                                endTime = endTime.slice(1);
-                                            }
+                                            let newTimes = fixTime(shift.startTime, shift.endTime);
                                             return (
-                                                <option value={shift.ShiftID}>{startTime} - {endTime}</option>
+                                                <option value={shift.ShiftID}>{newTimes.startTime} - {newTimes.endTime}</option>
                                             )
                                         }   
                                         )}
@@ -166,9 +120,9 @@ const RequestListPage = observer((props:any) => {
 
                 </div>
                 <div className='list-content'>
-                    {tempData.map(request => {
+                    {requestsList.map(request => {
                         return (
-                            <Request info={request} handleConfirmation={handleConfirmation} acceptingRequest={acceptingRequest} setAcceptingRequest={setAcceptingRequest}/>
+                            <Request info={request} date={date} acceptingRequest={acceptingRequest} setAcceptingRequest={setAcceptingRequest}/>
                         )
                     })}
                 </div>

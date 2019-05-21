@@ -162,6 +162,7 @@
             display: flex;
             justify-content: flex-end;
             margin-top: 2rem;
+            
 
             button:hover {
                 cursor: pointer;
@@ -313,8 +314,8 @@
                 margin: 0;
             }
             .user-image {
-                width: 5rem;
-                height: 5rem;
+                width: 5.5rem;
+                height: 5.5rem;
                 margin-right: 1rem;
                 img {
                     height: 100%;
@@ -329,7 +330,8 @@
             }
 
             .request-buttons {
-                float: right;
+                
+                margin-left: auto;
                 button {
                     margin-left: .8rem;
                     background: #60B0F4;

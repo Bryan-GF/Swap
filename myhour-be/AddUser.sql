@@ -1,1 +1,2 @@
-SELECT * FROM Shifts
+Select * FROM Shifts
+Select * FROM Users
