@@ -67,10 +67,11 @@ const Calendar = observer(() => {
         let days = [];
         let day = startDate;
         let formattedDate = "";
+        let compareDate =""
         while (day <= endDate) {
             for (let i = 0; i < 7; i++) {
                 formattedDate = dateFns.format(day, dateFormat);
-                console.log(requestCounts);
+                compareDate = dateFns.format(day, 'M/D/YYYY');
                 const cloneDay = day;
                 days.push(
                     (dateFns.isSameMonth(day, monthStart) ?
@@ -81,9 +82,9 @@ const Calendar = observer(() => {
                                 ? "disabled"
                                 : dateFns.isSameDay(day, selectedDate) ? "selected" : ""
                             } ${
-                                (formattedDate in requestCounts) ? 
-                                    (requestCounts[formattedDate].Count <= 3 ? 'greenCell' : 
-                                    requestCounts[formattedDate].Count <= 6 ? 'orangeCell' : 'redCell') : ''
+                                (compareDate in requestCounts) ? 
+                                    (requestCounts[compareDate].Count <= 3 ? 'greenCell' : 
+                                    requestCounts[compareDate].Count <= 6 ? 'orangeCell' : 'redCell') : ''
                             }`}
                             key={`${day}`}
                             onClick={() => onDateClick(dateFns.parse(cloneDay))}
@@ -99,9 +100,9 @@ const Calendar = observer(() => {
                             ? "disabled"
                             : dateFns.isSameDay(day, selectedDate) ? "selected" : ""
                         } ${
-                            (formattedDate in requestCounts) ? 
-                                (requestCounts[formattedDate].Count <= 3 ? 'greenCell' : 
-                                requestCounts[formattedDate].Count <= 6 ? 'orangeCell' : 'redCell') : ''
+                            (compareDate in requestCounts) ? 
+                                (requestCounts[compareDate].Count <= 3 ? 'greenCell' : 
+                                requestCounts[compareDate].Count <= 6 ? 'orangeCell' : 'redCell') : ''
                         }`}
                         key={`${day}`}
                         onClick={() => onDateClick(dateFns.parse(cloneDay))}
