@@ -1,6 +1,7 @@
 import {observable, action, computed} from 'mobx';
 import {createContext} from 'react';
 import axios from 'axios';
+import { isThisISOWeek } from 'date-fns';
 
 
 class GlobalState {
@@ -12,15 +13,21 @@ class GlobalState {
 
     @observable currShifts = [];
 
+    //IMPORTANT FOR REQUESTS
+    
+    @observable todaysShifts = [];
+
+    @observable todaysRequests = [];
+
     @observable currEmployee = {UserID: '', EmployeeID: '', Name: '', Position: ''};
 
-    @action deleteRequest = (UserID, ShiftID) => {  
-        return axios
+    @action deleteRequest = async(UserID, ShiftID) => {  
+        return await axios
         .post('https://swapapi.azurewebsites.net/api/DeleteRequest', {UserID: UserID, ShiftID: ShiftID})
         .then(res => {
-            console.log(res); 
+            return true;
         }).catch(err => {
-            console.log(err);
+            return false;
         })
     }
 
@@ -51,9 +58,9 @@ class GlobalState {
         return axios
         .post('https://swapapi.azurewebsites.net/api/AddRequest', {UserID: this.userData.UserID, ShiftID: RequestData.ShiftID, Comment: RequestData.Comment, Urgent: RequestData.Urgent})
         .then(res => {
-            console.log(res); 
+            return true;
         }).catch(err => {
-            console.log(err);
+            return false;
         })
     }
 
@@ -61,9 +68,16 @@ class GlobalState {
         return await axios
         .post('https://swapapi.azurewebsites.net/api/GetRequestsByDay', {"shiftDate": date})
         .then(res => {
-            return res.data;
+            if(res.data != null) {
+                this.todaysRequests = res.data;  
+                console.log(this.todaysRequests);
+                return ({ShiftID: res.data[0].ShiftID, startTime: res.data[0].startTime, endTime: res.data[0].endTime});
+            } else {
+                this.todaysRequests = [];
+                return null;
+            }
         }).catch(err => {
-            console.log(err) ;
+            return null;
         })
     }
 
@@ -164,7 +178,11 @@ class GlobalState {
         return await axios
         .post('https://swapapi.azurewebsites.net/api/GetShiftsByDay', {"UserID": this.userData.UserID, "Date": date})
         .then(res => {
-            return res.data;
+            if(res.data != null) {
+                this.todaysShifts = res.data;
+            } else {
+                this.todaysShifts = [];
+            }
         }).catch(err => {
             console.log(err) ;
         })
@@ -182,6 +200,11 @@ class GlobalState {
 
     @action setUserData = (userInfo: any) => {
         this.userData = userInfo;
+    }
+
+    @action setTodaysRequests = (data) => {
+        this.todaysRequests = data;
+        console.log(this.todaysRequests);
     }
 
     @computed get UserName() {

@@ -202,7 +202,6 @@ const EmployeeProfile = observer((props:any) => {
                                                     let endHours = shift.endTime.split(":");
                                                     let dateInfo = shift.shiftDate.split(/\/| /) 
                                                     let newDate = new Date(dateInfo[2], dateInfo[0] - 1, dateInfo[1]);
-                                                    console.log(dateInfo);
                                                     setEditStartDate(newDate);
                                                     let newStartTime = startEditTime;
                                                     let newEndTime = endEditTime;

@@ -207,6 +207,9 @@
   cursor: pointer;
   background: #71E05D; }
 
+.request-list-wrapper .header .none {
+  display: none; }
+
 .request-list-wrapper .list-content {
   min-height: 435px;
   background: white; }

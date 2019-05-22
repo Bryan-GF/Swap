@@ -8,7 +8,6 @@ import { GlobalStateContext } from '../../Stores/GlobalStore';
 import format from 'date-fns/format'
 import {fixTime} from './RequestHelper';
 
-
 /*NOTES:
 Important:
     - Need to make it so someone can't add a shift to their schedule if they already have a shift at that time.
@@ -32,16 +31,28 @@ const RequestListPage = observer((props:any) => {
 
     const [creatingRequest, setCreatingRequest] = useState(false);
     const [requestContent, setRequestContent] = useState<RequestContent>({Comment: '', ShiftID: '', Urgent: false});
+    const [requestTime, setRequestTime] = useState('');
     const [acceptingRequest, setAcceptingRequest] = useState(false);
     const [deletingRequest, setDeletingRequest] = useState(false);
-    const [shiftsList, setShiftsList] = useState([]);
-    const [requestsList, setRequestsList] = useState([]);
+    
     const [date, setDate] = useState('');
 
-    const handlePost = () => {
-        state.addRequest(requestContent);
+    const handlePost = async() => {
+        if(requestContent.ShiftID.length > 1) {           
+            let status = await state.addRequest(requestContent);
+            if(status) {
+                state.setTodaysRequests([...state.todaysRequests, {
+                    Comment: requestContent.Comment,
+                    Firstname: state.userData.Firstname,
+                    Position: state.userData.Position,
+                    ShiftID: requestContent.ShiftID,
+                    Urgent: requestContent.Urgent,
+                    UserID: state.userData.UserID,
+                    Time: requestTime
+                }]);
+            }
+        }
         setCreatingRequest(false);
-        console.log('Post')
     }
 
     useEffect(() => {
@@ -53,20 +64,20 @@ const RequestListPage = observer((props:any) => {
         );
         setDate(val);
         async function getData () {
-            const request = await state.getRequestsByDay(val);
-            if(request != null) {
-                setRequestsList(request);
-            }         
-            const shifts = await state.getShiftsByDay(val);
-            if(shifts != null) {
-                setRequestContent({...requestContent, ShiftID: shifts[0].ShiftID});
-                setShiftsList(shifts);
-            }  
+            const requestInfo = await state.getRequestsByDay(val);
+            state.getShiftsByDay(val);
+            if(requestInfo != null) {
+                setRequestContent({...requestContent, ShiftID: requestInfo.ShiftID});
+                let newTimes = fixTime(requestInfo.startTime, requestInfo.endTime);
+                setRequestTime(`${newTimes.startTime} - ${newTimes.endTime}`);
+            }   
         }
         getData();
+        
     }, [])
 
-    console.log(requestContent);
+
+    console.log(requestTime);
     return (
         <div>
             <Nav/>
@@ -83,8 +94,9 @@ const RequestListPage = observer((props:any) => {
                             <div className='radioSelect'>
                                 <div className="myselect">
                                     <select className="form-control" id="test" onChange={(ev) => {
+                                        setRequestTime(ev.target[ev.target.selectedIndex].textContent);
                                         setRequestContent({...requestContent, ShiftID: ev.target.value})}}>
-                                        {shiftsList.map(shift => {
+                                        {state.todaysShifts.map(shift => {
                                             let newTimes = fixTime(shift.startTime, shift.endTime);
                                             return (
                                                 <option value={shift.ShiftID}>{newTimes.startTime} - {newTimes.endTime}</option>
@@ -104,14 +116,14 @@ const RequestListPage = observer((props:any) => {
                         <div className='creator-buttons'>
                             <button onClick={() => {handlePost()}} className="green">Post</button>
                             <button onClick={() => {
-                                setRequestContent({Comment: '', ShiftID: shiftsList[0].ShiftID, Urgent: false});
+                                setRequestContent({Comment: '', ShiftID: state.todaysShifts[0].ShiftID, Urgent: false});
                                 setCreatingRequest(false)}} className="red">Cancel</button>
                         </div>
                     </div>
                 : ''}
                 <div className='header'>
                     <h1>Requests</h1>
-                    <div onClick={() => {setCreatingRequest(true)}} className='addButton'>
+                    <div onClick={() => { state.todaysShifts.length > 0 ? setCreatingRequest(true) : ''}} className={`addButton ${state.todaysShifts.length > 0  ? '' : 'none'}`}>
                         <span className='createPlus'>+ </span>
                         <span className='createContent'>Create Request</span>
                     </div>
@@ -120,9 +132,12 @@ const RequestListPage = observer((props:any) => {
 
                 </div>
                 <div className='list-content'>
-                    {requestsList.map(request => {
+                    {state.todaysRequests.map(request => {
                         return (
-                            <Request info={request} date={date} acceptingRequest={acceptingRequest} setAcceptingRequest={setAcceptingRequest} deletingRequest={deletingRequest} setDeletingRequest={setDeletingRequest}/>
+                            <Request info={request} date={date} 
+                            acceptingRequest={acceptingRequest} setAcceptingRequest={setAcceptingRequest} 
+                            deletingRequest={deletingRequest} setDeletingRequest={setDeletingRequest}
+                            />
                         )
                     })}
                 </div>

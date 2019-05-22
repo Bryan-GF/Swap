@@ -9,8 +9,11 @@ import DeleteRequest from '../Delete/DeleteRequest';
 const Request = observer((props:any) => {
 
     const state = useContext(GlobalStateContext);
-    console.log(props.info);
-    const newTimes = fixTime(props.info.startTime, props.info.endTime)
+    let newTimes;
+    if(!props.info.Time) {
+        newTimes = fixTime(props.info.startTime, props.info.endTime);
+    }
+    console.log(newTimes);
     return (
         <div>
             <div>
@@ -18,7 +21,11 @@ const Request = observer((props:any) => {
                     <div className='request-confirmation-wrapper'>
                         <div className='confirmation-info'>
                             <h2>Are you sure you want to take this shift?</h2>
-                            <span>Hours: {newTimes.startTime} - {newTimes.endTime}</span>
+                            {!props.info.Time ?
+                                <span>{`${newTimes.startTime} - ${newTimes.endTime}`}</span>                           
+                            :
+                                <span>{props.info.Time}</span>
+                            }
                         </div>
                         <div className='confirmation-buttons'>
                             <button onClick={() => { 
@@ -48,7 +55,11 @@ const Request = observer((props:any) => {
                         <span>{props.info.Firstname}</span>
                         <span>{props.info.Position}</span>
                         <span>{props.info.Comment}</span>
-                        <span>{newTimes.startTime} - {newTimes.endTime}</span>
+                        {!props.info.Time ?
+                            <span>{`${newTimes.startTime} - ${newTimes.endTime}`}</span>                           
+                        :
+                            <span>{props.info.Time}</span>
+                        }
                     </div>
                     {props.info.UserID === state.userData.UserID ? 
                         <div className='request-buttons'>
