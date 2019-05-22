@@ -210,6 +210,10 @@ class GlobalState {
         console.log(this.todaysRequests);
     }
 
+    @action setTodaysShifts = (data) => {
+        this.todaysShifts = data;
+    }
+
     @computed get UserName() {
         return this.userData.Firstname;
     }

@@ -50,6 +50,8 @@ const RequestListPage = observer((props:any) => {
                     UserID: state.userData.UserID,
                     Time: requestTime
                 }]);
+                state.setTodaysShifts(state.todaysShifts.filter((shift) =>
+                requestContent.ShiftID != shift.ShiftID));
             }
         }
         setCreatingRequest(false);
