@@ -1,51 +1,21 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 import {observer} from 'mobx-react-lite';
 import { GlobalStateContext } from '../../Stores/GlobalStore';
 import dateFns from "date-fns";
 import './Calendar.css'
 import { Link } from 'react-router-dom';
 import Nav from '../Navigation/Nav';
+import { format } from 'util';
 
 const Calendar = observer(() => {
     
     const state = useContext(GlobalStateContext);
 
     //Would need to make an api call to get data for this month, and everytime the arrow key is clicked
-    const tempData = {
-        1: {
-            count: 2
-        },
-        2: {
-            count: 6
-        },
-        3: {
-            count: 10
-        },
-        15: {
-            count:4
-        },
-        12: {
-            count:8
-        },
-        17: {
-            count:8
-        },
-        18: {
-            count:3
-        },
-        20: {
-            count:1
-        },
-        28: {
-            count:8
-        },
-        27: {
-            count: 1
-        }
-    }
 
     const [currentMonth, setCurrentMonth] = useState(new Date());
     const [selectedDate, setSelectedDate] = useState(new Date());
+    const [requestCounts, setRequestCounts] = useState({});
 
     const renderHead = ()  =>{
         const dateFormat = "MMMM YYYY";
@@ -100,7 +70,7 @@ const Calendar = observer(() => {
         while (day <= endDate) {
             for (let i = 0; i < 7; i++) {
                 formattedDate = dateFns.format(day, dateFormat);
-                
+                console.log(requestCounts);
                 const cloneDay = day;
                 days.push(
                     (dateFns.isSameMonth(day, monthStart) ?
@@ -111,9 +81,9 @@ const Calendar = observer(() => {
                                 ? "disabled"
                                 : dateFns.isSameDay(day, selectedDate) ? "selected" : ""
                             } ${
-                                (dateFns.getDate(day) in tempData) ? 
-                                    (tempData[dateFns.getDate(day)].count <= 3 ? 'greenCell' : 
-                                        tempData[dateFns.getDate(day)].count <= 6 ? 'orangeCell' : 'redCell') : ''
+                                (formattedDate in requestCounts) ? 
+                                    (requestCounts[formattedDate].Count <= 3 ? 'greenCell' : 
+                                    requestCounts[formattedDate].Count <= 6 ? 'orangeCell' : 'redCell') : ''
                             }`}
                             key={`${day}`}
                             onClick={() => onDateClick(dateFns.parse(cloneDay))}
@@ -129,9 +99,9 @@ const Calendar = observer(() => {
                             ? "disabled"
                             : dateFns.isSameDay(day, selectedDate) ? "selected" : ""
                         } ${
-                            (dateFns.getDate(day) in tempData) ? 
-                                (tempData[dateFns.getDate(day)].count <= 3 ? 'greenCell' : 
-                                    tempData[dateFns.getDate(day)].count <= 6 ? 'orangeCell' : 'redCell') : ''
+                            (formattedDate in requestCounts) ? 
+                                (requestCounts[formattedDate].Count <= 3 ? 'greenCell' : 
+                                requestCounts[formattedDate].Count <= 6 ? 'orangeCell' : 'redCell') : ''
                         }`}
                         key={`${day}`}
                         onClick={() => onDateClick(dateFns.parse(cloneDay))}
@@ -164,6 +134,17 @@ const Calendar = observer(() => {
             setCurrentMonth(dateFns.subMonths(currentMonth, 1));
         }
     }
+
+    useEffect(() => {
+        async function getData () {
+            const counts = await state.getRequestCounts();
+            if(counts != null) {
+                setRequestCounts(counts);
+            }
+        }
+        getData();
+        
+    }, [])
 
 
     return (

@@ -65,6 +65,7 @@ const ManagerHomePage = observer((props:any) => {
                         <div className='employee-adder-buttons'>
                             <button onClick={() => {
                                 handleAddEmployee();
+                                
                             }} className="green">Create</button>
                             <button onClick={() => {
                                 setAddingUser(false);

@@ -27,6 +27,16 @@ class GlobalState {
         })
     }
 
+    @action getRequestCounts = () => {
+        return axios
+        .get('https://swapapi.azurewebsites.net/api/GetRequestCounts')
+        .then(res => {
+            return res.data; 
+        }).catch(err => {
+            console.log(err);
+        })
+    }
+
     @action addRequest = (RequestData) => {
         return axios
         .post('https://swapapi.azurewebsites.net/api/AddRequest', {UserID: this.userData.UserID, ShiftID: RequestData.ShiftID, Comment: RequestData.Comment, Urgent: RequestData.Urgent})
