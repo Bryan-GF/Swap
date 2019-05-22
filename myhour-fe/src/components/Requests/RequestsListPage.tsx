@@ -65,12 +65,16 @@ const RequestListPage = observer((props:any) => {
         setDate(val);
         async function getData () {
             const requestInfo = await state.getRequestsByDay(val);
-            state.getShiftsByDay(val);
+            const shiftInfo = await state.getShiftsByDay(val);
             if(requestInfo != null) {
                 setRequestContent({...requestContent, ShiftID: requestInfo.ShiftID});
-                let newTimes = fixTime(requestInfo.startTime, requestInfo.endTime);
-                setRequestTime(`${newTimes.startTime} - ${newTimes.endTime}`);
+                
             }   
+
+            if(shiftInfo != null) {
+                let newTimes = fixTime(shiftInfo.startTime, shiftInfo.endTime);
+                setRequestTime(`${newTimes.startTime} - ${newTimes.endTime}`);
+            }
         }
         getData();
         

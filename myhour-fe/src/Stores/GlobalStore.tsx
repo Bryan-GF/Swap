@@ -71,7 +71,7 @@ class GlobalState {
             if(res.data != null) {
                 this.todaysRequests = res.data;  
                 console.log(this.todaysRequests);
-                return ({ShiftID: res.data[0].ShiftID, startTime: res.data[0].startTime, endTime: res.data[0].endTime});
+                return ({ShiftID: res.data[0].ShiftID});
             } else {
                 this.todaysRequests = [];
                 return null;
@@ -180,11 +180,14 @@ class GlobalState {
         .then(res => {
             if(res.data != null) {
                 this.todaysShifts = res.data;
+                return ({startTime: res.data[0].startTime, endTime: res.data[0].endTime});
             } else {
                 this.todaysShifts = [];
+                return null;
             }
         }).catch(err => {
-            console.log(err) ;
+            console.log(err);
+            return null;
         })
     }
 
