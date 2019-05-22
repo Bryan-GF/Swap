@@ -166,7 +166,7 @@ CREATE TABLE Requests (
 	ShiftID int NOT NULL FOREIGN KEY REFERENCES Shifts(ShiftID),
 	Comment varchar(255) NOT NULL,
 );
-
+GO
 ALTER TABLE Requests ADD Urgent BIT default 'FALSE';
 
 

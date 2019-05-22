@@ -332,6 +332,7 @@
             .request-buttons {
                 
                 margin-left: auto;
+
                 button {
                     margin-left: .8rem;
                     background: #60B0F4;
@@ -339,11 +340,20 @@
                     color: white;
                     padding: 1rem 2rem;
                     font-size: 1.2rem;
+                    outline:none;
                 }
 
                 button:hover {
                     cursor: pointer;
                     background: rgb(43, 126, 199);
+                }
+
+                .cancelbutton {
+                    background: #F04B4B;
+                }
+
+                .cancelbutton:hover {
+                    background: #E73D3D;
                 }
             }
         }

@@ -4,12 +4,12 @@ import './Requests.css';
 import avatar from '../../assets/avatar.png'
 import {fixTime} from './RequestHelper';
 import { GlobalStateContext } from '../../Stores/GlobalStore';
+import DeleteRequest from '../Delete/DeleteRequest';
 
 const Request = observer((props:any) => {
 
     const state = useContext(GlobalStateContext);
-    
-
+    console.log(props.info);
     const newTimes = fixTime(props.info.startTime, props.info.endTime)
     return (
         <div>
@@ -30,6 +30,11 @@ const Request = observer((props:any) => {
                     </div>
                     : ''
                 }
+                {props.deletingRequest ? 
+                <DeleteRequest setDeletingRequest={props.setDeletingRequest} UserID={props.info.UserID} ShiftID={props.info.ShiftID}/>
+                :
+                null
+                }
                 {props.info.Urgent ? 
                 <div className="urgent-item">
                     <div className='urgent-color'>URGENT</div>
@@ -45,10 +50,16 @@ const Request = observer((props:any) => {
                         <span>{props.info.Comment}</span>
                         <span>{newTimes.startTime} - {newTimes.endTime}</span>
                     </div>
-                    <div className='request-buttons'>
-                        <button onClick={() => { props.setAcceptingRequest(true)}}>Accept</button>
-                        <button>Message</button>
-                    </div>
+                    {props.info.UserID === state.userData.UserID ? 
+                        <div className='request-buttons'>
+                            <button onClick={() => { props.setDeletingRequest(true)}}className="cancelbutton">Cancel</button>
+                        </div>
+                    :
+                        <div className='request-buttons'>
+                            <button onClick={() => { props.setAcceptingRequest(true)}}>Accept</button>
+                            <button>Message</button>
+                        </div>
+                    }
                 </div>
             </div>
         </div>

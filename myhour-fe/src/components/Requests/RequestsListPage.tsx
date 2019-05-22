@@ -33,6 +33,7 @@ const RequestListPage = observer((props:any) => {
     const [creatingRequest, setCreatingRequest] = useState(false);
     const [requestContent, setRequestContent] = useState<RequestContent>({Comment: '', ShiftID: '', Urgent: false});
     const [acceptingRequest, setAcceptingRequest] = useState(false);
+    const [deletingRequest, setDeletingRequest] = useState(false);
     const [shiftsList, setShiftsList] = useState([]);
     const [requestsList, setRequestsList] = useState([]);
     const [date, setDate] = useState('');
@@ -82,7 +83,6 @@ const RequestListPage = observer((props:any) => {
                             <div className='radioSelect'>
                                 <div className="myselect">
                                     <select className="form-control" id="test" onChange={(ev) => {
-                                        console.log(ev.target.value);
                                         setRequestContent({...requestContent, ShiftID: ev.target.value})}}>
                                         {shiftsList.map(shift => {
                                             let newTimes = fixTime(shift.startTime, shift.endTime);
@@ -122,7 +122,7 @@ const RequestListPage = observer((props:any) => {
                 <div className='list-content'>
                     {requestsList.map(request => {
                         return (
-                            <Request info={request} date={date} acceptingRequest={acceptingRequest} setAcceptingRequest={setAcceptingRequest}/>
+                            <Request info={request} date={date} acceptingRequest={acceptingRequest} setAcceptingRequest={setAcceptingRequest} deletingRequest={deletingRequest} setDeletingRequest={setDeletingRequest}/>
                         )
                     })}
                 </div>

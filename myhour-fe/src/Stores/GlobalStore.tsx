@@ -14,6 +14,16 @@ class GlobalState {
 
     @observable currEmployee = {UserID: '', EmployeeID: '', Name: '', Position: ''};
 
+    @action deleteRequest = (UserID, ShiftID) => {  
+        return axios
+        .post('https://swapapi.azurewebsites.net/api/DeleteRequest', {UserID: UserID, ShiftID: ShiftID})
+        .then(res => {
+            console.log(res); 
+        }).catch(err => {
+            console.log(err);
+        })
+    }
+
     @action acceptRequest = (DelUserID, ShiftID) => {
         console.log(this.userData.UserID);
         console.log(DelUserID);
