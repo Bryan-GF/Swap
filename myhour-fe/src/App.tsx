@@ -32,7 +32,7 @@ const App = observer((props:any) => {
         <div>
           <BasicAuthRoute exact path="/Home" component={HomePage} />       
           <BasicAuthRoute exact path="/Requests" component={Calendar} />
-          <BasicAuthRoute path="/Requests/Date" component={RequestListPage} />
+          <BasicAuthRoute path="/Requests/List" component={RequestListPage} />
           <ManagerAuthRoute path="/Employee/:UserID" component={EmployeeProfile}/>
         </div>
       : null}

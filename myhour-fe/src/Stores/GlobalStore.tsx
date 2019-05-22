@@ -13,6 +13,8 @@ class GlobalState {
 
     @observable currShifts = [];
 
+    @observable userRequests = [];
+
     //IMPORTANT FOR REQUESTS
     
     @observable todaysShifts = [];
@@ -32,9 +34,6 @@ class GlobalState {
     }
 
     @action acceptRequest = (DelUserID, ShiftID) => {
-        console.log(this.userData.UserID);
-        console.log(DelUserID);
-        console.log(ShiftID);
         return axios
         .post('https://swapapi.azurewebsites.net/api/AcceptRequest', {AddUserID: this.userData.UserID, DelUserID: DelUserID, ShiftID: ShiftID})
         .then(res => {
@@ -52,6 +51,18 @@ class GlobalState {
         }).catch(err => {
             console.log(err);
         })
+    }
+
+    @action getUserRequests = async() => {
+        return await axios
+        .post('https://swapapi.azurewebsites.net/api/GetUserRequests', {UserID: this.userData.UserID})
+        .then(res => {
+            if(res.data != null) {
+               this.userRequests =res.data;
+            }
+        }).catch(err => {
+            console.log(err);
+        })   
     }
 
     @action addRequest = (RequestData) => {
@@ -152,8 +163,8 @@ class GlobalState {
         })
     }
 
-    @action deleteShift = async(ShiftID) => {
-        return await axios
+    @action deleteShift = (ShiftID) => {
+        return axios
         .post('https://swapapi.azurewebsites.net/api/DeleteShift', {"ShiftID": ShiftID})
         .then(res => {
             console.log(res.data);
@@ -162,10 +173,11 @@ class GlobalState {
         })
     }
 
-    @action getShifts = async(ID) => {
-        return await axios
+    @action getShifts = (ID) => {
+        return axios
         .post('https://swapapi.azurewebsites.net/api/GetEmployeeShifts', {"UserID": ID})
         .then(res => {
+            console.log("RESSSSSSSSSSSSSSSSSSSSSSS",res);
             if (res.data != null) {
                 this.currShifts = res.data;
             }      

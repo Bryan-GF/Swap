@@ -345,6 +345,38 @@
                 color: white;
                 padding-top: .2rem;
             }
+            .Row-Buttons {
+                margin-left: auto;
+                button {
+                    border: 0;        
+                    color: white;
+                    font-weight: bold;
+                    margin-left: auto;
+                }
+    
+                button:hover {
+                    cursor: pointer;
+                }
+    
+                .Active-Button {
+                    background: #F0AD4B; 
+                    padding: 1rem 1rem; 
+                }
+    
+                .Active-Button:hover {
+                    background: #F1A535;
+                }
+    
+                .Add-Button {
+                    background: #77EE62;
+                    padding: 1rem 1.2rem; 
+                }
+    
+                .Add-Button:hover {
+                    background: #71E05D;
+                }
+            }
+            
 
 
             .num {
