@@ -9,10 +9,17 @@ const DeleteEmployee = observer((props:any) => {
     
     const handleDelete = async() => {
         const status  = await state.deleteUser(props.Employee.UserID);
-        if(props.type === 'profile' && status) {
-            props.history.push('/Home');
+        if(status) {
+            
+            if(props.type === 'profile') {
+                props.history.push('/Home');
+            } else if(props.type === 'home') {
+                state.setBranchData(state.branchData.filter((User) =>
+                User.UserID != props.Employee.UserID));
+            } 
         }
         props.setDeletingUser(false);
+        
     }
     
     return (
