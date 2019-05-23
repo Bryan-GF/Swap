@@ -106,9 +106,9 @@ class GlobalState {
         return await axios
         .post('https://swapapi.azurewebsites.net/api/AddUser', {...employee, "branchID": this.userData.branchID})
         .then(res => {
-            console.log(res); 
+            return res.data;
         }).catch(err => {
-            console.log(err)
+            return null;
         })
     }
 
@@ -228,6 +228,10 @@ class GlobalState {
 
     @action setCurrShifts = (data) => {
         this.currShifts = data;
+    }
+    
+    @action setBranchData = (data) => {
+        this.branchData = data;
     }
 
     @computed get UserName() {

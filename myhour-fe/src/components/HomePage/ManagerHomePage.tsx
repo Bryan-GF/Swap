@@ -24,14 +24,17 @@ const ManagerHomePage = observer((props:any) => {
     const [activeErrors, setActiveErrors] = useState({"employeeID": false, "Firstname": false, "Lastname": false, "Position": false, "Password": false})
     const [targetEmployee, setTargetEmployee] = useState({Name: '', UserID: ''});
 
-    const handleAddEmployee = () => {
+    const handleAddEmployee = async() => {
         const {employeeID, Firstname, Lastname, Password, Position} = newEmployeeInfo;
         let safeActive = {"employeeID": false, "Firstname": false, "Lastname": false, "Position": false, "Password": false}
         let newActive = {"employeeID": employeeID.length === 0, "Firstname": Firstname.length === 0, "Lastname": Lastname.length === 0, "Position": Position.length === 0, "Password": Password.length < 7}
         setActiveErrors(newActive)
         if(JSON.stringify(safeActive) === JSON.stringify(newActive)) {
             setActiveErrors({"employeeID": false, "Firstname": false, "Lastname": false, "Position": false, "Password": false});
-            state.addEmployee(newEmployeeInfo);
+            const result = await state.addEmployee(newEmployeeInfo);
+            if(result) {
+                state.setBranchData([...state.branchData, {UserID: result, EmployeeID: employeeID, Firstname: Firstname, Lastname: Lastname, Positon: Position}])
+            }
             setAddingUser(false);
         }  
     }
