@@ -96,9 +96,9 @@ class GlobalState {
         return axios
         .post('https://swapapi.azurewebsites.net/api/DeleteUser', {UserID: ID})
         .then(res => {
-            console.log(res); 
+            return true;
         }).catch(err => {
-            console.log(err);
+            return false;
         })
     }
 
@@ -140,9 +140,9 @@ class GlobalState {
         return await axios
         .post('https://swapapi.azurewebsites.net/api/AddShift', {"UserID": ID, "shiftDate": shiftDate, "startTime": startTime, "endTime": endTime})
         .then(res => {
-            console.log(res.data);     
+            return res.data;   
         }).catch(err => {
-            console.log(err);
+            return null;
         })
     }
 
@@ -167,9 +167,9 @@ class GlobalState {
         return axios
         .post('https://swapapi.azurewebsites.net/api/DeleteShift', {"ShiftID": ShiftID})
         .then(res => {
-            console.log(res.data);
+            return true;
         }).catch(err => {
-            console.log(err) ;
+            return false;
         })
     }
 
@@ -182,7 +182,7 @@ class GlobalState {
                 this.currShifts = res.data;
             }      
         }).catch(err => {
-            console.log(err) ;
+            this.currShifts = [];
         })
     }
 
@@ -224,6 +224,10 @@ class GlobalState {
 
     @action setTodaysShifts = (data) => {
         this.todaysShifts = data;
+    }
+
+    @action setCurrShifts = (data) => {
+        this.currShifts = data;
     }
 
     @computed get UserName() {

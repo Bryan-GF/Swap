@@ -208,6 +208,9 @@
 
         .shiftListContent {
             background: white;
+            margin-bottom: 5rem;
+            min-height: 5rem;
+            border-bottom: 1rem solid var(--main-color);
 
             p {
                 margin: 0;

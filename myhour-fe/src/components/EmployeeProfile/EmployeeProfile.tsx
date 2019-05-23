@@ -33,6 +33,28 @@ const EmployeeProfile = observer((props:any) => {
     const [loading, setLoading] = useState(true);
     const [editActive, setEditActive] = useState({active: false, target: null});
 
+    const handleShiftDelete = async() => {
+        const status = await state.deleteShift(currDelete);
+        if(status) {
+            state.setCurrShifts(state.currShifts.filter((shift) =>
+            shift.ShiftID != currDelete));
+        }
+        setDeletingShift(false);
+    }
+
+    const handleAddShift = async () => {
+        const result = await state.addShift(state.currEmployee.UserID, startDate.toISOString(), startTime.toISOString(), endTime.toISOString());
+        if(result) {
+            state.setCurrShifts([...state.currShifts, {
+                ShiftID: `${result}`,
+                shiftDate: moment(startDate).format('MM/DD/YYYY').substring(1),
+                startTime: moment(startTime, 'HH:mm:ss').format('h:mm A'),
+                endTime: moment(endTime, 'HH:mm:ss').format('h:mm A')
+            }]);
+        }
+        setAddingShift(false);
+    }
+
     useEffect(() => {
         const ID = props.match.params.UserID;
         state.getEmployee(ID);
@@ -44,7 +66,7 @@ const EmployeeProfile = observer((props:any) => {
     return (
         <div>
             {deletingUser ?
-                <DeleteEmployee Employee={{'Name': state.currEmployee.Name, 'UserID': state.currEmployee.UserID}} setDeletingUser={setDeletingUser}/>
+                <DeleteEmployee Employee={{'Name': state.currEmployee.Name, 'UserID': state.currEmployee.UserID}} setDeletingUser={setDeletingUser} type='profile'/>
                 : ''
             }
             {
@@ -55,8 +77,7 @@ const EmployeeProfile = observer((props:any) => {
                             </div>
                             <div className='confirmation-buttons'>
                                 <button onClick={() => { 
-                                    state.deleteShift(currDelete);
-                                    setDeletingShift(false);
+                                    handleShiftDelete()
                                     }} className='green'>Confirm</button>
                                 <button onClick={() => { setDeletingShift(false)}} className='red'>Cancel</button>
                             </div>
@@ -137,8 +158,7 @@ const EmployeeProfile = observer((props:any) => {
                             </div>
                             <div className="addShiftButtons">
                                     <button onClick={() => {
-                                        state.addShift(state.currEmployee.UserID, startDate.toISOString(), startTime.toISOString(), endTime.toISOString());
-                                        setAddingShift(false);
+                                        handleAddShift();
                                     }}className="green">Confirm</button>
                                     <button onClick={() => { setAddingShift(false)}} className="red">Cancel</button>
                             </div>
@@ -193,8 +213,8 @@ const EmployeeProfile = observer((props:any) => {
                                             </div>
                             } else {
                                 date = <p>{shift.shiftDate.split(" ")[0]}</p>
-                                start = <p>{moment(shift.startTime, 'HH:mm:ss').format('hh:mm a')}</p>
-                                end = <p>{moment(shift.endTime, 'HH:mm:ss').format('hh:mm a')}</p>
+                                start = <p>{moment(shift.startTime, 'HH:mm:ss').format('h:mm A')}</p>
+                                end = <p>{moment(shift.endTime, 'HH:mm:ss').format('h:mm A')}</p>
                                 shiftIcons = <div className="shiftRowIcons">
                                                 <div onClick={() => { 
                                                     setEditActive({active: true, target: i})
@@ -245,4 +265,5 @@ const EmployeeProfile = observer((props:any) => {
 });
 
 export default EmployeeProfile;
-import "react-datepicker/dist/react-datepicker.css";
+import "react-datepicker/dist/react-datepicker.css";import { start } from 'repl';
+

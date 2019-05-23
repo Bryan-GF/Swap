@@ -76,7 +76,7 @@ const ManagerHomePage = observer((props:any) => {
                     </div>
                 : ''}
             {deletingUser ?
-                <DeleteEmployee Employee={targetEmployee} setDeletingUser={setDeletingUser}/>
+                <DeleteEmployee Employee={targetEmployee} setDeletingUser={setDeletingUser} type='home'/>
                 : ''
             }
             <div className="ManageWrapper">
