@@ -1,9 +1,13 @@
 @import url('https://fonts.googleapis.com/css?family=Pacifico');
 
 .navigation {
-    display: flex;
     background: white;
     height: 6rem;
+    padding: .5rem 0;
+    border-bottom: .5rem solid var(--main-color);
+    position: fixed;
+    width: 100%;
+    z-index: 100;
     
     .navContent {
         width: 80%;
@@ -49,6 +53,14 @@
             display: flex;
             flex-direction: row;
             align-items: center;
+
+            button {
+                border-radius: 4px;
+            }
+            
+            button:hover {
+                cursor: pointer;
+            }
 
             .signUpButton {
                 background: var(--main-color);

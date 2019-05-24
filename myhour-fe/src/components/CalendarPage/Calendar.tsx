@@ -151,10 +151,12 @@ const Calendar = observer(() => {
     return (
         <div>
             <Nav/>
-            <div className="calendar">
-                {renderHead()}
-                {renderDays()}
-                {renderCells()}
+            <div className="buffer">
+                <div className="calendar">
+                    {renderHead()}
+                    {renderDays()}
+                    {renderCells()}
+                </div>
             </div>
         </div>
     )

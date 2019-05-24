@@ -1,10 +1,7 @@
 .request-list-wrapper {
     width: 1000px;
     margin: 0 auto;
-    margin-top: 2rem;
-    border-bottom: .5rem solid #C5C5C5;  
-
-    
+    padding-top: 8rem;
     
     .request-creator-wrapper {
         position: fixed;
@@ -241,8 +238,10 @@
         }
     }
     .list-content {
-        min-height: 435px;
+        min-height: 40rem;
         background: white;
+        margin-bottom: 5rem;
+        border-bottom: 1rem solid var(--main-color);
 
         .request-confirmation-wrapper {
             position: fixed;

@@ -134,7 +134,7 @@
     .employeeContentWrapper .employeeShiftContent .shiftListContent {
       background: white;
       margin-bottom: 5rem;
-      min-height: 5rem;
+      min-height: 40rem;
       border-bottom: 1rem solid var(--main-color); }
       .employeeContentWrapper .employeeShiftContent .shiftListContent p {
         margin: 0; }

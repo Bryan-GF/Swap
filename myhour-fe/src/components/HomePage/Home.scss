@@ -133,6 +133,8 @@
 .ManageWrapper {
     width: 1000px;
     margin: 0 auto;
+    padding-top: 8rem;
+
     h2 {
         background: var(--main-color);
         color: white;
@@ -141,6 +143,11 @@
     }
     p {
         margin: 0;
+    }
+    .ManageListContainer {
+        background: white;
+        margin-bottom: 5rem;
+        border-bottom: 1rem solid var(--main-color);
     }
     
     .ManageListInteractive {
@@ -279,7 +286,8 @@
 .User-Homepage-Container {
     width: 1000px;
     margin: 0 auto;
-    margin-top: 2rem;
+    padding-top: 8rem;
+    
     h2 {
         margin: 0;
         font-size: 2rem;

@@ -24,8 +24,8 @@
   --text-color-light: #ccc;
   --border-color: #eee;
   --bg-color: #f9f9f9;
-  --neutral-color: #fff; 
-  --main-hover-color: rgb(43, 126, 199);}
+  --neutral-color: #fff;
+  --main-hover-color: rgb(43, 126, 199); }
 
 /* GENERAL */
 * {
@@ -91,13 +91,15 @@ main {
   justify-content: flex-end;
   text-align: right; }
 
+.buffer {
+  padding-top: 8rem; }
+
 /* Calendar */
 .calendar {
   display: block;
   position: relative;
   width: 80%;
   margin: 0 auto;
-  margin-top: 2rem;
   background: var(--neutral-color);
   border: 1px solid var(--border-color); }
 
