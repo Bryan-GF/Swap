@@ -6,7 +6,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye } from '@fortawesome/free-solid-svg-icons'
 import './Auth.css';
 import axios from 'axios';
-import Select from 'react-select';
 import { withRouter } from 'react-router';
 
 

@@ -7,7 +7,7 @@ import Calendar from './components/CalendarPage/Calendar';
 import RequestListPage from './components/Requests/RequestsListPage';
 import Login from './components/Authentication/Login';
 import { GlobalStateContext } from './Stores/GlobalStore';
-import {BasicAuthRoute, ManagerAuthRoute} from './components/Authentication/requireAuth';
+import {BasicAuthRoute, ManagerAuthRoute, NoAuthRoute} from './components/Authentication/requireAuth';
 import { VerifyToken } from './components/Authentication/VerifyToken';
 import EmployeeProfile from './components/EmployeeProfile/EmployeeProfile';
 import axios from 'axios';
@@ -43,9 +43,9 @@ const App = observer((props:any) => {
   return (
     <div>
       <Route exact path="/" component={LandingPage} />
-      <Route exact path="/Login" component={Login} />
       {!loading ?
         <div>
+          <NoAuthRoute exact path="/Login" component={Login} />
           <BasicAuthRoute exact path="/Home" component={HomePage} />       
           <BasicAuthRoute exact path="/Requests" component={Calendar} />
           <BasicAuthRoute path="/Requests/List" component={RequestListPage} />

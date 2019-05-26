@@ -3,6 +3,27 @@ import {Route, Redirect} from 'react-router-dom';
 import { GlobalStateContext } from '../../Stores/GlobalStore';
 import Unauthorized from './Unauthorized';
 
+export const NoAuthRoute = ({component: Component, ...rest}) => {
+  const state = useContext(GlobalStateContext);
+  return (
+    <Route
+      {...rest}
+      render={(props) => {
+          return state.loginStatus ?  
+          <Redirect to={
+              {
+              pathname: '/Home',
+              state: {
+                  from: props.location
+              }
+              }
+          }/> :
+          <Component {...props} /> 
+      }}
+    />
+  )
+}
+
 export const BasicAuthRoute = ({component: Component, ...rest}) => {
     const state = useContext(GlobalStateContext);
     console.log(state);

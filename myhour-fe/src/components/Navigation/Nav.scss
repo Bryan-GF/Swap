@@ -9,19 +9,46 @@
     width: 100%;
     z-index: 100;
     
+    
     .navContent {
         width: 80%;
         margin: 0 auto;
         height: 100%;
         display: flex;
         align-items: center;
+        justify-content: space-between;
         a {
             text-decoration: none;
             color: var(--text-color);
             margin: 0 2rem;
             font-size: 1.3rem;
             font-weight: bold;
+            
         }
+        .bufferLogo {
+            height: 100%;
+
+            a {
+                display: block;
+                height: 100%;
+                margin: 0;
+            }
+        }
+
+        .logoutIcon {
+            margin-top: 5px;
+            svg {
+                height: 2rem;
+                width:  2rem;
+                
+            }
+            svg:hover {
+                color: var(--main-color);
+                cursor: pointer;
+                transform: scale(1.1); 
+            }
+        }
+
         a:hover {
             color: var(--main-color);
         }
@@ -29,7 +56,6 @@
             height: 100%;
             display: flex;
             align-items: center;
-            margin-right: 3rem;
             span {
                 font-family: 'Pacifico', cursive;
                 font-size: 2.5rem;
