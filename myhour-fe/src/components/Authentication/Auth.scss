@@ -137,6 +137,15 @@
 .signUpWrapper {
     width: 50%;
     margin: 0 auto;
+    margin-top: 2rem;
+    h1 {
+        text-align: center;
+    }
+
+    h5 {
+        margin: 0;
+        color: black;
+    }
     .signUpContainer {
         background: white;
         padding: 2rem 2rem;
@@ -146,17 +155,18 @@
             flex-direction: column;
             
             label {
+                margin-top: 1.8rem;
                 font-size: .7rem;
                 margin-bottom: .7rem;
             }
 
             input {
                 border: none;
-                margin-bottom: 2rem;
                 outline: none;
                 color: rgb(51, 51, 51);
                 border-bottom: 2px solid rgb(210, 210, 210);
                 font-size: 1.1rem;
+                margin-bottom: .2rem;
             }
 
             input:focus {
@@ -167,11 +177,15 @@
                 display: flex;
                 flex-direction: column;
             }
-
+            P {
+                font-size: .7rem;
+                color: red;
+            }
             
         }
         
         .registerButtons {
+            margin-top: 1rem;
             button {
                 border: none;
                 padding: .5rem 2.5rem;

@@ -7,78 +7,95 @@
   /* Negative half of height. */
   margin-left: -205px;
   /* Negative half of width. */ }
-  .loginWrapper .loginContainer {
-    width: 25rem;
-    background: white;
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center; }
-    .loginWrapper .loginContainer .logoWrapper {
-      display: flex;
-      align-items: center;
-      flex-direction: column;
-      width: 6rem; }
-      .loginWrapper .loginContainer .logoWrapper img {
-        width: 100%; }
-      .loginWrapper .loginContainer .logoWrapper span {
-        color: var(--main-color);
-        font-size: 3.5rem;
-        font-family: 'Pacifico', cursive; }
-    .loginWrapper .loginContainer .inputWrapper {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-top: 2rem; }
-      .loginWrapper .loginContainer .inputWrapper input {
-        margin-bottom: 1rem;
-        padding: 1rem;
-        outline: none;
-        border: none; }
-      .loginWrapper .loginContainer .inputWrapper .employeeInput {
-        border: 1px solid var(--main-color);
-        border-radius: 4px; }
-      .loginWrapper .loginContainer .inputWrapper .passwordInput {
-        border: 1px solid var(--main-color);
-        display: flex;
-        border-radius: 4px; }
-        .loginWrapper .loginContainer .inputWrapper .passwordInput input {
-          border-radius: 4px;
-          width: 87%;
-          margin-bottom: 0;
-          border-right: 0;
-          padding-right: 0;
-          outline: none; }
-        .loginWrapper .loginContainer .inputWrapper .passwordInput .toggleEye {
-          width: 13%;
-          display: flex;
-          align-items: center;
-          background: white;
-          border-left: 0;
-          border-radius: 4px; }
-          .loginWrapper .loginContainer .inputWrapper .passwordInput .toggleEye svg:hover {
-            cursor: pointer; }
-      .loginWrapper .loginContainer .inputWrapper .companyInfo {
-        width: 100%;
-        margin-top: 1rem; }
-        .loginWrapper .loginContainer .inputWrapper .companyInfo .companySelect .company__control {
-          border-color: var(--main-color); }
-        .loginWrapper .loginContainer .inputWrapper .companyInfo .companySelect .company__menu {
-          border-color: var(--main-color); }
-        .loginWrapper .loginContainer .inputWrapper .companyInfo .companySelect .company__input input {
-          margin-bottom: 0;
-          margin-top: .5rem;
-          margin-bottom: .5rem; }
-    .loginWrapper .loginContainer .loginButton {
-      margin-top: 2rem;
-      padding: .8rem 1.3rem;
-      background: var(--main-color);
-      color: white;
-      font-size: 1.5rem;
-      font-weight: bold;
-      border: none; }
-    .loginWrapper .loginContainer .loginButton:hover {
-      cursor: pointer; }
+
+.loginWrapper .loginContainer {
+  width: 25rem;
+  background: white;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+
+.loginWrapper .loginContainer .logoWrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 6rem; }
+
+.loginWrapper .loginContainer .logoWrapper img {
+  width: 100%; }
+
+.loginWrapper .loginContainer .logoWrapper span {
+  color: var(--main-color);
+  font-size: 3.5rem;
+  font-family: 'Pacifico', cursive; }
+
+.loginWrapper .loginContainer .inputWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem; }
+
+.loginWrapper .loginContainer .inputWrapper input {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  outline: none;
+  border: none; }
+
+.loginWrapper .loginContainer .inputWrapper .employeeInput {
+  border: 1px solid var(--main-color);
+  border-radius: 4px; }
+
+.loginWrapper .loginContainer .inputWrapper .passwordInput {
+  border: 1px solid var(--main-color);
+  display: flex;
+  border-radius: 4px; }
+
+.loginWrapper .loginContainer .inputWrapper .passwordInput input {
+  border-radius: 4px;
+  width: 87%;
+  margin-bottom: 0;
+  border-right: 0;
+  padding-right: 0;
+  outline: none; }
+
+.loginWrapper .loginContainer .inputWrapper .passwordInput .toggleEye {
+  width: 13%;
+  display: flex;
+  align-items: center;
+  background: white;
+  border-left: 0;
+  border-radius: 4px; }
+
+.loginWrapper .loginContainer .inputWrapper .passwordInput .toggleEye svg:hover {
+  cursor: pointer; }
+
+.loginWrapper .loginContainer .inputWrapper .companyInfo {
+  width: 100%;
+  margin-top: 1rem; }
+
+.loginWrapper .loginContainer .inputWrapper .companyInfo .companySelect .company__control {
+  border-color: var(--main-color); }
+
+.loginWrapper .loginContainer .inputWrapper .companyInfo .companySelect .company__menu {
+  border-color: var(--main-color); }
+
+.loginWrapper .loginContainer .inputWrapper .companyInfo .companySelect .company__input input {
+  margin-bottom: 0;
+  margin-top: .5rem;
+  margin-bottom: .5rem; }
+
+.loginWrapper .loginContainer .loginButton {
+  margin-top: 2rem;
+  padding: .8rem 1.3rem;
+  background: var(--main-color);
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  border: none; }
+
+.loginWrapper .loginContainer .loginButton:hover {
+  cursor: pointer; }
 
 .Unauthorized-Container {
   width: 400px;
@@ -87,52 +104,81 @@
   border-radius: 10px;
   padding: 2rem;
   margin-top: 300px; }
-  .Unauthorized-Container h1 {
-    margin: 0; }
-  .Unauthorized-Container p {
-    margin: .7rem 0 2rem 0; }
-  .Unauthorized-Container a {
-    font-size: 1.5rem;
-    color: var(--text-color); }
+
+.Unauthorized-Container h1 {
+  margin: 0; }
+
+.Unauthorized-Container p {
+  margin: .7rem 0 2rem 0; }
+
+.Unauthorized-Container a {
+  font-size: 1.5rem;
+  color: var(--text-color); }
 
 .signUpWrapper {
   width: 50%;
-  margin: 0 auto; }
-  .signUpWrapper .signUpContainer {
-    background: white;
-    padding: 2rem 2rem; }
-    .signUpWrapper .signUpContainer .inputWrapper {
-      display: flex;
-      flex-direction: column; }
-      .signUpWrapper .signUpContainer .inputWrapper label {
-        font-size: .7rem;
-        margin-bottom: .7rem; }
-      .signUpWrapper .signUpContainer .inputWrapper input {
-        border: none;
-        margin-bottom: 2rem;
-        outline: none;
-        color: #333333;
-        border-bottom: 2px solid #d2d2d2;
-        font-size: 1.1rem; }
-      .signUpWrapper .signUpContainer .inputWrapper input:focus {
-        border-bottom: 2px solid var(--main-color); }
-      .signUpWrapper .signUpContainer .inputWrapper .passwordInput {
-        display: flex;
-        flex-direction: column; }
-    .signUpWrapper .signUpContainer .registerButtons button {
-      border: none;
-      padding: .5rem 2.5rem;
-      border-radius: 4px;
-      font-size: 1rem;
-      border: 2px solid var(--main-color); }
-    .signUpWrapper .signUpContainer .registerButtons button:hover {
-      cursor: pointer;
-      box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
-      transform: scale(1.05); }
-    .signUpWrapper .signUpContainer .registerButtons .register {
-      background: var(--main-color);
-      color: white; }
-    .signUpWrapper .signUpContainer .registerButtons .cancel {
-      margin-left: 1rem;
-      background: white;
-      color: var(--main-color); }
+  margin: 0 auto;
+  margin-top: 2rem; }
+
+.signUpWrapper h1 {
+  text-align: center; }
+
+.signUpWrapper h5 {
+  margin: 0;
+  color: black; }
+
+.signUpWrapper .signUpContainer {
+  background: white;
+  padding: 2rem 2rem; }
+
+.signUpWrapper .signUpContainer .inputWrapper {
+  display: flex;
+  flex-direction: column; }
+
+.signUpWrapper .signUpContainer .inputWrapper label {
+  margin-top: 1.8rem;
+  font-size: .7rem;
+  margin-bottom: .7rem; }
+
+.signUpWrapper .signUpContainer .inputWrapper input {
+  border: none;
+  outline: none;
+  color: #333333;
+  border-bottom: 2px solid #d2d2d2;
+  font-size: 1.1rem;
+  margin-bottom: .2rem; }
+
+.signUpWrapper .signUpContainer .inputWrapper input:focus {
+  border-bottom: 2px solid var(--main-color); }
+
+.signUpWrapper .signUpContainer .inputWrapper .passwordInput {
+  display: flex;
+  flex-direction: column; }
+
+.signUpWrapper .signUpContainer .inputWrapper P {
+  font-size: .7rem;
+  color: red; }
+
+.signUpWrapper .signUpContainer .registerButtons {
+  margin-top: 1rem; }
+
+.signUpWrapper .signUpContainer .registerButtons button {
+  border: none;
+  padding: .5rem 2.5rem;
+  border-radius: 4px;
+  font-size: 1rem;
+  border: 2px solid var(--main-color); }
+
+.signUpWrapper .signUpContainer .registerButtons button:hover {
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+  transform: scale(1.05); }
+
+.signUpWrapper .signUpContainer .registerButtons .register {
+  background: var(--main-color);
+  color: white; }
+
+.signUpWrapper .signUpContainer .registerButtons .cancel {
+  margin-left: 1rem;
+  background: white;
+  color: var(--main-color); }
