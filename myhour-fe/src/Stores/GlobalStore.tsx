@@ -1,11 +1,9 @@
 import {observable, action, computed} from 'mobx';
 import {createContext} from 'react';
 import axios from 'axios';
-import { isThisISOWeek } from 'date-fns';
-
 
 class GlobalState {
-    @observable userData = {UserID: "" ,employeeID : "",  Firstname: "", Lastname: "", Position: "", branchID: ""};
+    @observable userData = {UserID: "" , email : "",  Firstname: "", Lastname: "", Position: "", branchID: "", CompanyID: "", roles: ""};
 
     @observable loginStatus = false;
 
@@ -21,7 +19,7 @@ class GlobalState {
 
     @observable todaysRequests = [];
 
-    @observable currEmployee = {UserID: '', EmployeeID: '', Name: '', Position: ''};
+    @observable currEmployee = {UserID: '', email: '', Name: '', Position: ''};
 
     @action deleteRequest = async(UserID, ShiftID) => {  
         return await axios
@@ -103,8 +101,11 @@ class GlobalState {
     }
 
     @action addEmployee = async(employee) => {
+        console.log(employee);
+        console.log(this.userData.branchID);
+        console.log(this.userData.CompanyID);
         return await axios
-        .post('https://swapapi.azurewebsites.net/api/AddUser', {...employee, "branchID": this.userData.branchID})
+        .post('https://swapapi.azurewebsites.net/api/AddUser', {...employee, "branchID": this.userData.branchID, "CompanyID": this.userData.CompanyID})
         .then(res => {
             return res.data;
         }).catch(err => {
@@ -123,6 +124,7 @@ class GlobalState {
     }
 
     @action getBranchData = async() => {
+        console.log(this.userData.branchID);
         return await axios
         .post('https://swapapi.azurewebsites.net/api/GetBranchEmployees', {"branchID": this.userData.branchID})
         .then(res => {

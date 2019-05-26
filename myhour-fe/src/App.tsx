@@ -10,10 +10,26 @@ import { GlobalStateContext } from './Stores/GlobalStore';
 import {BasicAuthRoute, ManagerAuthRoute} from './components/Authentication/requireAuth';
 import { VerifyToken } from './components/Authentication/VerifyToken';
 import EmployeeProfile from './components/EmployeeProfile/EmployeeProfile';
+import axios from 'axios';
 
 const App = observer((props:any) => {
   const state = useContext(GlobalStateContext);
   const [loading, setLoading] = useState(true);
+
+  axios.interceptors.request.use(
+    config => {
+      if (!config.headers.Authorization) {
+        const token = localStorage.getItem("Token");
+  
+        if (token) {
+          config.headers.Authorization = token;
+        }
+      }
+  
+      return config;
+    },
+    error => Promise.reject(error)
+  );
 
   useEffect(() => {
     const token = localStorage.getItem('Token');

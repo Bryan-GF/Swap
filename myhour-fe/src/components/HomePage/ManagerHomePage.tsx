@@ -15,25 +15,25 @@ const ManagerHomePage = observer((props:any) => {
     const [addingUser, setAddingUser] = useState(false);
     const [deletingUser, setDeletingUser] = useState(false);
     const [newEmployeeInfo, setNewEmployeeInfo] = useState({
-        "employeeID": '',
+        "email": '',
         "Firstname": '',
         "Lastname": '',
         "Position": '',
         "Password": ''
     })
-    const [activeErrors, setActiveErrors] = useState({"employeeID": false, "Firstname": false, "Lastname": false, "Position": false, "Password": false})
+    const [activeErrors, setActiveErrors] = useState({"email": false, "Firstname": false, "Lastname": false, "Position": false, "Password": false})
     const [targetEmployee, setTargetEmployee] = useState({Name: '', UserID: ''});
 
     const handleAddEmployee = async() => {
-        const {employeeID, Firstname, Lastname, Password, Position} = newEmployeeInfo;
-        let safeActive = {"employeeID": false, "Firstname": false, "Lastname": false, "Position": false, "Password": false}
-        let newActive = {"employeeID": employeeID.length === 0, "Firstname": Firstname.length === 0, "Lastname": Lastname.length === 0, "Position": Position.length === 0, "Password": Password.length < 7}
+        const {email, Firstname, Lastname, Password, Position} = newEmployeeInfo;
+        let safeActive = {"email": false, "Firstname": false, "Lastname": false, "Position": false, "Password": false}
+        let newActive = {"email": email.length === 0, "Firstname": Firstname.length === 0, "Lastname": Lastname.length === 0, "Position": Position.length === 0, "Password": Password.length < 7}
         setActiveErrors(newActive)
         if(JSON.stringify(safeActive) === JSON.stringify(newActive)) {
-            setActiveErrors({"employeeID": false, "Firstname": false, "Lastname": false, "Position": false, "Password": false});
+            setActiveErrors({"email": false, "Firstname": false, "Lastname": false, "Position": false, "Password": false});
             const result = await state.addEmployee(newEmployeeInfo);
             if(result) {
-                state.setBranchData([...state.branchData, {UserID: result, EmployeeID: employeeID, Firstname: Firstname, Lastname: Lastname, Position: Position}])
+                state.setBranchData([...state.branchData, {UserID: result, email: email, Firstname: Firstname, Lastname: Lastname, Position: Position}])
             }
             setAddingUser(false);
         }  
@@ -49,9 +49,9 @@ const ManagerHomePage = observer((props:any) => {
                     <div className='employee-adder-wrapper'>
                         <h2>Add Employee</h2>
                         <div className='adder-content'>
-                            <span>Employee ID</span>
-                            <input type="text" onChange={(ev) => {setNewEmployeeInfo({...newEmployeeInfo, "employeeID": ev.target.value})}}/>
-                            {activeErrors.employeeID ? <p>Please include an employee id.</p> : null}
+                            <span>Email</span>
+                            <input type="text" onChange={(ev) => {setNewEmployeeInfo({...newEmployeeInfo, "email": ev.target.value})}}/>
+                            {activeErrors.email ? <p>Please include a valid email.</p> : null}
                             <span>First Name</span>
                             <input type="text" onChange={(ev) => {setNewEmployeeInfo({...newEmployeeInfo, "Firstname": ev.target.value})}}/>
                             {activeErrors.Firstname ? <p>Please include a first name.</p> : null}
@@ -72,8 +72,8 @@ const ManagerHomePage = observer((props:any) => {
                             }} className="green">Create</button>
                             <button onClick={() => {
                                 setAddingUser(false);
-                                setActiveErrors({"employeeID": false, "Firstname": false, "Lastname": false, "Position": false, "Password": false});
-                                setNewEmployeeInfo({"employeeID": '', "Firstname": '', "Lastname": '', "Position": '', "Password": ''});
+                                setActiveErrors({"email": false, "Firstname": false, "Lastname": false, "Position": false, "Password": false});
+                                setNewEmployeeInfo({"email": '', "Firstname": '', "Lastname": '', "Position": '', "Password": ''});
                             }} className="red">Cancel</button>
                         </div>
                     </div>
@@ -93,7 +93,7 @@ const ManagerHomePage = observer((props:any) => {
                         </div>
                     </div>
                     <div className="ManageListColumn Title">
-                        <div className="columnID">Employee ID</div>
+                        <div className="columnID">Email</div>
                         <div className="columnName">Full Name</div>
                         <div className="columnPosition">Position</div>
                     </div>
@@ -103,7 +103,7 @@ const ManagerHomePage = observer((props:any) => {
                                 to={`/Employee/${employee.UserID}`}
                             >
                                 <div className="ManageListColumn Employee">
-                                    <div className="columnID">{employee.EmployeeID}</div>
+                                    <div className="columnID">{employee.email}</div>
                                     <div className="columnName">{employee.Firstname + " " + employee.Lastname}</div>
                                     <div className="columnPosition">{employee.Position}</div>
                                     <div className="columnIcons">

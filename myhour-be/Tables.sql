@@ -169,6 +169,10 @@ CREATE TABLE Requests (
 GO
 ALTER TABLE Requests ADD Urgent BIT default 'FALSE';
 
+ALTER TABLE Users ADD Role varchar(255) NOT NULL
+ALTER TABLE Users ADD CompanyID int NOT NULL FOREIGN KEY REFERENCES CompanyTable(CompanyID)
+
+
 
 
 

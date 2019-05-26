@@ -266,7 +266,8 @@
   padding: .8rem 2rem; }
 
 .User-Homepage-Container .Shifts-List {
-  background: white; }
+  background: white;
+  min-height: 40rem; }
 
 .User-Homepage-Container .Shifts-List p {
   margin: 0; }

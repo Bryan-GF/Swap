@@ -13,7 +13,7 @@ import { withRouter } from 'react-router';
 const Login= observer((props:any) => {
     
     const state = useContext(GlobalStateContext);
-    const [loginInfo, setLoginInfo] = useState({employeeID: '', Password: '', Companyname: ''});
+    const [loginInfo, setLoginInfo] = useState({email: '', Password: ''});
     const [viewPass, setViewPass] = useState(false);
     console.log(state);
 
@@ -29,7 +29,7 @@ const Login= observer((props:any) => {
         .then(res => {
             console.log(res.data);
             localStorage.setItem('Token', res.data.Token);
-            let User = {"employeeID": res.data.employeeID, "Firstname": res.data.Firstname, "Lastname": res.data.Lastname, "Position": res.data.Position, "branchID": res.data.branchID, "UserID": res.data.UserID}
+            let User = {"email": res.data.employeeID, "Firstname": res.data.Firstname, "Lastname": res.data.Lastname, "Position": res.data.Position, "branchID": res.data.branchID, "UserID": res.data.UserID, CompanyID: res.data.CompanyID, roles: res.data.roles}
             state.setUserData(User);
             state.setLoginStatus(true);
             props.history.push('/Home');           
@@ -44,15 +44,12 @@ const Login= observer((props:any) => {
                     <span>Swap</span>
                 </div>
                 <div className='inputWrapper'>     
-                        <input className="employeeInput" placeholder='Employee ID' onChange={(ev) => { setLoginInfo({...loginInfo, employeeID: ev.target.value})}}/>
+                        <input className="employeeInput" placeholder='Email' onChange={(ev) => { setLoginInfo({...loginInfo, email: ev.target.value})}}/>
                     <div className="passwordInput">
                         <input type={ viewPass ? 'text' : 'password'} placeholder='Password' onChange={(ev) => { setLoginInfo({...loginInfo, Password: ev.target.value})}}/>
                         <div onClick={() => {setViewPass(!viewPass)}} className='toggleEye'>
                             <FontAwesomeIcon style={{color: (viewPass ? '#60B0F4' : '')}} icon={faEye} />
                         </div>
-                    </div>
-                    <div className="companyInfo"> 
-                        <Select onChange={(value:any) => { setLoginInfo({...loginInfo, Companyname: value.label})}} className="companySelect" classNamePrefix="company" options={options}/>
                     </div>
                 </div>
                 <button onClick={() => {attemptLogin()}}className='loginButton'>Login</button>

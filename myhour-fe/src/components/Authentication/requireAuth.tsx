@@ -31,8 +31,9 @@ export const ManagerAuthRoute = ({component: Component, ...rest}) => {
     <Route
       {...rest}
       render={(props) => {
+        console.log(state.userData.roles);
           return state.loginStatus ? 
-          (state.userData.Position === 'Branch Manager' ? 
+          (state.userData.roles === 'Manager' ? 
           <Component {...props} /> : 
           <Unauthorized/>) :
           <Redirect to={

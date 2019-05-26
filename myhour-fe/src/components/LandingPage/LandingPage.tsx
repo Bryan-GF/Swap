@@ -1,13 +1,18 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {observer} from 'mobx-react-lite';
 import { GlobalStateContext } from '../../Stores/GlobalStore';
 import { Link } from 'react-router-dom';
 import LandingNav from '../Navigation/LandingNav';
 import './Landing.css';
+import axios from 'axios';
 
 const LandingPage = observer(() => {
     
     const state = useContext(GlobalStateContext);
+
+    useEffect(() => {
+
+    }, [])
 
     return (
         <div>
