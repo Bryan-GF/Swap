@@ -4,6 +4,7 @@ import { GlobalStateContext } from '../../Stores/GlobalStore';
 import Nav from '../Navigation/Nav';
 import ManagerHomePage from './ManagerHomePage';
 import UserHomePage from './UserHomePage';
+import OwnerHomePage from './OwnerHomePage';
 
 const HomePage = observer((props:any) => {
     
@@ -12,9 +13,11 @@ const HomePage = observer((props:any) => {
     return (
         <div>
             <Nav/>
-            {state.userData.Position === "Branch Manager" ?
+            {state.userData.roles === "Manager" ?
                 <ManagerHomePage/> :
-                <UserHomePage/>
+                (state.userData.roles === 'Owner' ?
+                <OwnerHomePage/> :
+                <UserHomePage/>)
             }
         </div>
     )

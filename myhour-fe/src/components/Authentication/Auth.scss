@@ -133,3 +133,69 @@
         color: var(--text-color);
     }
 }
+
+.signUpWrapper {
+    width: 50%;
+    margin: 0 auto;
+    .signUpContainer {
+        background: white;
+        padding: 2rem 2rem;
+        .inputWrapper {
+           
+            display: flex;
+            flex-direction: column;
+            
+            label {
+                font-size: .7rem;
+                margin-bottom: .7rem;
+            }
+
+            input {
+                border: none;
+                margin-bottom: 2rem;
+                outline: none;
+                color: rgb(51, 51, 51);
+                border-bottom: 2px solid rgb(210, 210, 210);
+                font-size: 1.1rem;
+            }
+
+            input:focus {
+                border-bottom: 2px solid var(--main-color);
+            }
+
+            .passwordInput {
+                display: flex;
+                flex-direction: column;
+            }
+
+            
+        }
+        
+        .registerButtons {
+            button {
+                border: none;
+                padding: .5rem 2.5rem;
+                border-radius: 4px;
+                font-size: 1rem;
+                border: 2px solid var(--main-color);
+            }
+
+            button:hover {
+                cursor:pointer;
+                box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+                transform: scale(1.05);
+            }
+
+            .register {
+                background: var(--main-color);
+                color: white;
+            }
+
+            .cancel {
+                margin-left: 1rem;
+                background: white;
+                color: var(--main-color);
+            }
+        }
+    }
+}

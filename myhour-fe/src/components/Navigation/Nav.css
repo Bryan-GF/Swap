@@ -7,88 +7,68 @@
   position: fixed;
   width: 100%;
   z-index: 100; }
-
-.navigation .navContent {
-  width: 80%;
-  margin: 0 auto;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between; }
-
-.navigation .navContent a {
-  text-decoration: none;
-  color: var(--text-color);
-  margin: 0 2rem;
-  font-size: 1.3rem;
-  font-weight: bold; }
-
-.navigation .navContent .bufferLogo {
-  height: 100%; }
-
-.navigation .navContent .bufferLogo a {
-  display: block;
-  height: 100%;
-  margin: 0; }
-
-.navigation .navContent .logoutIcon {
-  margin-top: 5px; }
-
-.navigation .navContent .logoutIcon svg {
-  height: 2rem;
-  width: 2rem; }
-
-.navigation .navContent .logoutIcon svg:hover {
-  color: var(--main-color);
-  cursor: pointer;
-  transform: scale(1.1); }
-
-.navigation .navContent a:hover {
-  color: var(--main-color); }
-
-.navigation .navContent .logo {
-  height: 100%;
-  display: flex;
-  align-items: center; }
-
-.navigation .navContent .logo span {
-  font-family: 'Pacifico', cursive;
-  font-size: 2.5rem;
-  font-weight: bold;
-  color: var(--main-color); }
-
-.navigation .navContent .logo img {
-  height: 80%;
-  margin-right: .5rem; }
-
-.navigation .navContent .logo:hover {
-  cursor: pointer; }
-
-.navigation .landing {
-  justify-content: space-between; }
-
-.navigation .landing .landingButtons {
-  display: flex;
-  flex-direction: row;
-  align-items: center; }
-
-.navigation .landing .landingButtons button {
-  border-radius: 4px; }
-
-.navigation .landing .landingButtons button:hover {
-  cursor: pointer; }
-
-.navigation .landing .landingButtons .signUpButton {
-  background: var(--main-color);
-  color: white;
-  padding: .8rem 1.8rem; }
-
-.navigation .landing .landingButtons .signUpButton:hover {
-  background: var(--main-hover-color); }
-
-.navigation .landing .landingButtons .loginButton {
-  color: var(--text-color);
-  padding: .2rem .4rem; }
-
-.navigation .landing .landingButtons .loginButton:hover {
-  color: var(--main-color); }
+  .navigation .navContent {
+    width: 80%;
+    margin: 0 auto;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; }
+    .navigation .navContent a {
+      text-decoration: none;
+      color: var(--text-color);
+      margin: 0 2rem;
+      font-size: 1.3rem;
+      font-weight: bold; }
+    .navigation .navContent .bufferLogo {
+      height: 100%; }
+      .navigation .navContent .bufferLogo a {
+        display: block;
+        height: 100%;
+        margin: 0; }
+    .navigation .navContent .logoutIcon {
+      margin-top: 5px; }
+      .navigation .navContent .logoutIcon svg {
+        height: 2rem;
+        width: 2rem; }
+      .navigation .navContent .logoutIcon svg:hover {
+        color: var(--main-color);
+        cursor: pointer;
+        transform: scale(1.1); }
+    .navigation .navContent a:hover {
+      color: var(--main-color); }
+    .navigation .navContent .logo {
+      height: 100%;
+      display: flex;
+      align-items: center; }
+      .navigation .navContent .logo span {
+        font-family: 'Pacifico', cursive;
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: var(--main-color); }
+      .navigation .navContent .logo img {
+        height: 80%;
+        margin-right: .5rem; }
+    .navigation .navContent .logo:hover {
+      cursor: pointer; }
+  .navigation .landing {
+    justify-content: space-between; }
+    .navigation .landing .landingButtons {
+      display: flex;
+      flex-direction: row;
+      align-items: center; }
+      .navigation .landing .landingButtons button {
+        border-radius: 4px; }
+      .navigation .landing .landingButtons button:hover {
+        cursor: pointer; }
+      .navigation .landing .landingButtons .signUpButton {
+        background: var(--main-color);
+        color: white;
+        padding: .8rem 1.8rem; }
+      .navigation .landing .landingButtons .signUpButton:hover {
+        background: var(--main-hover-color); }
+      .navigation .landing .landingButtons .loginButton {
+        color: var(--text-color);
+        padding: .2rem .4rem; }
+      .navigation .landing .landingButtons .loginButton:hover {
+        color: var(--main-color); }

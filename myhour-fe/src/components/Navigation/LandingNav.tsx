@@ -15,7 +15,7 @@ const LandingNav = () => {
                     <Link to='/Login'>
                         <div className='loginButton'>Login</div>
                     </Link>
-                    <Link to='/SignUp'>
+                    <Link to='/Register'>
                         <div className='signUpButton'>Sign Up</div>
                     </Link>
                 </div>

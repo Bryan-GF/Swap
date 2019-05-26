@@ -7,9 +7,10 @@ import Calendar from './components/CalendarPage/Calendar';
 import RequestListPage from './components/Requests/RequestsListPage';
 import Login from './components/Authentication/Login';
 import { GlobalStateContext } from './Stores/GlobalStore';
-import {BasicAuthRoute, ManagerAuthRoute, NoAuthRoute} from './components/Authentication/requireAuth';
+import {BasicAuthRoute, ManagerAuthRoute, NoAuthRoute, OwnerAuthRoute} from './components/Authentication/requireAuth';
 import { VerifyToken } from './components/Authentication/VerifyToken';
 import EmployeeProfile from './components/EmployeeProfile/EmployeeProfile';
+import Signup from './components/Authentication/Signup';
 import axios from 'axios';
 
 const App = observer((props:any) => {
@@ -38,11 +39,11 @@ const App = observer((props:any) => {
     } else {
       setLoading(false);
     }
-    console.log(state);
   }, [])
   return (
     <div>
       <Route exact path="/" component={LandingPage} />
+      <Route exact path="/Register" component={Signup} />
       {!loading ?
         <div>
           <NoAuthRoute exact path="/Login" component={Login} />

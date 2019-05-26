@@ -94,3 +94,45 @@
   .Unauthorized-Container a {
     font-size: 1.5rem;
     color: var(--text-color); }
+
+.signUpWrapper {
+  width: 50%;
+  margin: 0 auto; }
+  .signUpWrapper .signUpContainer {
+    background: white;
+    padding: 2rem 2rem; }
+    .signUpWrapper .signUpContainer .inputWrapper {
+      display: flex;
+      flex-direction: column; }
+      .signUpWrapper .signUpContainer .inputWrapper label {
+        font-size: .7rem;
+        margin-bottom: .7rem; }
+      .signUpWrapper .signUpContainer .inputWrapper input {
+        border: none;
+        margin-bottom: 2rem;
+        outline: none;
+        color: #333333;
+        border-bottom: 2px solid #d2d2d2;
+        font-size: 1.1rem; }
+      .signUpWrapper .signUpContainer .inputWrapper input:focus {
+        border-bottom: 2px solid var(--main-color); }
+      .signUpWrapper .signUpContainer .inputWrapper .passwordInput {
+        display: flex;
+        flex-direction: column; }
+    .signUpWrapper .signUpContainer .registerButtons button {
+      border: none;
+      padding: .5rem 2.5rem;
+      border-radius: 4px;
+      font-size: 1rem;
+      border: 2px solid var(--main-color); }
+    .signUpWrapper .signUpContainer .registerButtons button:hover {
+      cursor: pointer;
+      box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+      transform: scale(1.05); }
+    .signUpWrapper .signUpContainer .registerButtons .register {
+      background: var(--main-color);
+      color: white; }
+    .signUpWrapper .signUpContainer .registerButtons .cancel {
+      margin-left: 1rem;
+      background: white;
+      color: var(--main-color); }

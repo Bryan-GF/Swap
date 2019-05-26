@@ -52,9 +52,31 @@ export const ManagerAuthRoute = ({component: Component, ...rest}) => {
     <Route
       {...rest}
       render={(props) => {
-        console.log(state.userData.roles);
           return state.loginStatus ? 
           (state.userData.roles === 'Manager' ? 
+          <Component {...props} /> : 
+          <Unauthorized/>) :
+          <Redirect to={
+            {
+            pathname: '/Login',
+            state: {
+                from: props.location
+            }
+            }
+        }/>
+      }}
+    />
+  )
+}
+
+export const OwnerAuthRoute = ({component: Component, ...rest}) => {
+  const state = useContext(GlobalStateContext);
+  return (
+    <Route
+      {...rest}
+      render={(props) => {
+          return state.loginStatus ? 
+          (state.userData.roles === 'Owner' ? 
           <Component {...props} /> : 
           <Unauthorized/>) :
           <Redirect to={
