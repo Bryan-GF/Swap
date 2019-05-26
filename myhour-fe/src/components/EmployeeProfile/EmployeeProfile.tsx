@@ -94,7 +94,7 @@ const EmployeeProfile = observer((props:any) => {
                     <div className="profileContent">
                         <img src={avatar}/>
                         <div className="profileTextContent">
-                            <span>Employee ID: </span>
+                            <span>Email: </span>
                             <p>{state.currEmployee.email}</p>
                             <span>Name: </span>
                             <p>{state.currEmployee.Name}</p>
