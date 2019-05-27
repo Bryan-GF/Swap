@@ -1,6 +1,7 @@
 import {observable, action, computed} from 'mobx';
 import {createContext} from 'react';
 import axios from 'axios';
+import { userInfo } from 'os';
 
 class GlobalState {
     @observable userData = {UserID: "" , email : "",  Firstname: "", Lastname: "", Position: "", branchID: "", CompanyID: "", roles: ""};
@@ -12,6 +13,8 @@ class GlobalState {
     @observable currShifts = [];
 
     @observable userRequests = [];
+
+    @observable BranchList = [];
 
     //IMPORTANT FOR REQUESTS
     
@@ -134,12 +137,35 @@ class GlobalState {
     }
 
     @action getBranchData = async() => {
-        console.log(this.userData.branchID);
         return await axios
         .post('https://swapapi.azurewebsites.net/api/GetBranchEmployees', {"branchID": this.userData.branchID})
         .then(res => {
-            console.log(res.data);
-            this.branchData = res.data;       
+            if(res.data) {
+                this.branchData = res.data;  
+            }
+                 
+        }).catch(err => {
+            console.log(err);
+        })
+    }
+
+    @action getAllBranches = async() => {
+        return await axios
+        .post('https://swapapi.azurewebsites.net/api/GetAllBranches', {CompanyID: this.userData.CompanyID})
+        .then(res => {
+            if(res.data) {
+                this.BranchList = res.data; 
+            }        
+        }).catch(err => {
+            console.log(err);
+        })
+    }
+
+    @action addBranch = async(branchName) => {
+        return await axios
+        .post('https://swapapi.azurewebsites.net/api/AddBranch', {Name: branchName, CompanyID: this.userData.CompanyID})
+        .then(res => {
+            this.BranchList = [...this.BranchList, {Name: branchName, branchID: res.data}]; 
         }).catch(err => {
             console.log(err);
         })
