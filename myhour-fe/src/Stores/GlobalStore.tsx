@@ -171,6 +171,17 @@ class GlobalState {
         })
     }
 
+    @action deleteBranch = async(branchID) => {
+        return await axios
+        .post('https://swapapi.azurewebsites.net/api/DeleteBranch', {branchID: branchID})
+        .then(res => {
+            this.BranchList = this.BranchList.filter((branch) =>
+            branch.branchID != branchID); 
+        }).catch(err => {
+            console.log(err);
+        })
+    }
+
     @action addShift = async(ID, shiftDate, startTime, endTime) => {
         shiftDate = shiftDate.slice(0, 10);
         startTime =startTime.slice(11, 19);

@@ -11,6 +11,7 @@ const OwnerHomePage = observer((props:any) => {
     const [addingBranch, setAddingBranch] = useState(false);
     const [deletingBranch, setDeletingBranch] = useState(false);
     const [branchName, setBranchName] = useState('');
+    const [targetBranch, setTargetBranch] = useState('');
     const [activeErrorsBranch, setActiveErrorsBranch] = useState(false)
 
     const hanldeBranchCreate = () => {
@@ -25,12 +26,18 @@ const OwnerHomePage = observer((props:any) => {
         }
     }
 
+    const handleDelete = (ID) => {
+        state.deleteBranch(ID);
+        setDeletingBranch(false);
+    }
+
     useEffect(() => {
         state.getAllBranches();
     }, [])
     
     return (
         <div>
+            
             {addingBranch ? 
                 <div className='employee-adder-wrapper'>
                     <h2>Add Branch</h2>
@@ -67,6 +74,21 @@ const OwnerHomePage = observer((props:any) => {
                         {state.BranchList.map(branch => {
                             return (
                                 <div className="ManageListColumn Employee">
+                                    {deletingBranch ? 
+                                        <div className='delete-confirmation-wrapper'>
+                                            <div className='confirmation-info'>
+                                                <h2>Are you sure you want to delete {branch.Name}?</h2>
+                                            </div>
+                                            <div className='confirmation-buttons'>
+                                                <button onClick={() => { 
+                                                        handleDelete(branch.branchID);
+                                                    }} className='green'>Confirm</button>
+                                                <button onClick={() => { setDeletingBranch(false)}} className='red'>Cancel</button>
+                                            </div>
+                                        </div>
+                                        :
+                                        ''                
+                                    }
                                     <div className="columnName">{branch.Name}</div>
                                     <div className="columnIcons">
                                         <div onClick={(ev) => { ev.preventDefault(); }}className="plus-wrapper">
@@ -74,8 +96,8 @@ const OwnerHomePage = observer((props:any) => {
                                         </div>
                                         <div onClick={(ev) => { 
                                             ev.preventDefault();
-                                            //setTargetEmployee({UserID: employee.UserID, Name: employee.Firstname + ' ' + employee.Lastname});
-                                            //setDeletingUser(true);     
+
+                                            setDeletingBranch(true);     
                                         }} className="trash-wrapper">
                                             <FontAwesomeIcon className="trash" icon={faTrashAlt}/>
                                         </div>
