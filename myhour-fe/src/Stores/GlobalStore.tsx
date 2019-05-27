@@ -21,6 +21,16 @@ class GlobalState {
 
     @observable currEmployee = {UserID: '', email: '', Name: '', Position: ''};
 
+    @action addCompany = (companyInfo) => {
+        return axios
+        .post('https://swapapi.azurewebsites.net/api/AddCompany', companyInfo)
+        .then(res => {
+            return res.data;
+        }).catch(err => {
+            return null;
+        })
+    }
+
     @action deleteRequest = async(UserID, ShiftID) => {  
         return await axios
         .post('https://swapapi.azurewebsites.net/api/DeleteRequest', {UserID: UserID, ShiftID: ShiftID})

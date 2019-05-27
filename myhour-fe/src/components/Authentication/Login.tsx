@@ -14,13 +14,6 @@ const Login= observer((props:any) => {
     const state = useContext(GlobalStateContext);
     const [loginInfo, setLoginInfo] = useState({email: '', Password: ''});
     const [viewPass, setViewPass] = useState(false);
-    console.log(state);
-
-    const options = [
-        { value: 'Target', label: 'Target' },
-        { value: 'Microsoft', label: 'Microsoft' },
-        { value: 'Google', label: 'Google' }
-    ]
 
     const attemptLogin = () => {
         axios

@@ -12,7 +12,7 @@ const OwnerHomePage = observer((props:any) => {
     
     return (
         <div className="Owner-HomePage-Container">
-            OWNER
+            <h1>OWNER</h1>
         </div>
     )
 });

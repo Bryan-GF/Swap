@@ -19,7 +19,7 @@ const Signup = observer((props:any) => {
     const [viewPass2, setViewPass2] = useState(false);
     const [activeErrors, setActiveErrors] = useState({email: true, Firstname: false, Lastname: false, Password: false, ConfirmPassword: false, CompanyNumber: true, CompanyName: false})
 
-    const attemptRegister = () => {
+    const attemptRegister = async() => {
         const {email, Firstname, Lastname, Password, ConfirmPassword, CompanyName, CompanyNumber} = registerInfo;
         let safeActive = {email: true, Firstname: false, Lastname: false, Password: false, ConfirmPassword: false, CompanyName: false, CompanyNumber: true}
         let newActive = {email: isEmail(email), 
@@ -31,10 +31,14 @@ const Signup = observer((props:any) => {
             CompanyNumber: isMobilePhone(CompanyNumber.replace(/-/g, ""), 'any')}
         setActiveErrors(newActive)
         if(JSON.stringify(safeActive) === JSON.stringify(newActive)) {
-            console.log('PASSED');
-        }
-        
-        console.log('FAILED')
+            let status = await state.addCompany(registerInfo);
+            if(status) {
+                state.setUserData({UserID: status.UserID , email : email,  Firstname: Firstname, Lastname: Lastname, Position: "Company Ownder", branchID: "", CompanyID: status.CompanyID, roles: "Owner"});
+                state.setLoginStatus(true);
+                props.history.push('/Home');
+
+            }
+        } 
     }
 
     return (
@@ -60,15 +64,21 @@ const Signup = observer((props:any) => {
                         {activeErrors.CompanyName ? <p>Please include an organization name.</p> : null}
                     <div className="passwordInput">
                         <label>PASSWORD *</label> 
-                        <input type={ viewPass ? 'text' : 'password'} placeholder='Enter your Password' onChange={(ev) => { setRegisterInfo({...registerInfo, Password: ev.target.value})}}/>
-                        <div onClick={() => {setViewPass(!viewPass)}} className='toggleEye'>
-                            <FontAwesomeIcon style={{color: (viewPass ? '#60B0F4' : '')}} icon={faEye} />
+                        <div className="passwordInputInner">
+                            <input type={ viewPass ? 'text' : 'password'} placeholder='Enter your Password' onChange={(ev) => { setRegisterInfo({...registerInfo, Password: ev.target.value})}}/>
+                            <div onClick={() => {setViewPass(!viewPass)}} className='toggleEye'>
+                                <FontAwesomeIcon style={{color: (viewPass ? '#60B0F4' : '')}} icon={faEye} />
+                            </div>
                         </div>
                         {activeErrors.Password ? <p>Password too short. Must be minimum 7 characters.</p> : null}
+                    </div>
+                    <div className="passwordInput">
                         <label>CONFIRM PASSWORD *</label> 
-                        <input type={ viewPass2 ? 'text' : 'password'} placeholder='Confirm your Password' onChange={(ev) => { setRegisterInfo({...registerInfo, ConfirmPassword: ev.target.value})}}/>
-                        <div onClick={() => {setViewPass2(!viewPass2)}} className='toggleEye'>
-                            <FontAwesomeIcon style={{color: (viewPass2 ? '#60B0F4' : '')}} icon={faEye} />
+                        <div className="passwordInputInner">
+                            <input type={ viewPass2 ? 'text' : 'password'} placeholder='Confirm your Password' onChange={(ev) => { setRegisterInfo({...registerInfo, ConfirmPassword: ev.target.value})}}/>
+                            <div onClick={() => {setViewPass2(!viewPass2)}} className='toggleEye'>
+                                <FontAwesomeIcon style={{color: (viewPass2 ? '#60B0F4' : '')}} icon={faEye} />
+                            </div>
                         </div>
                         {activeErrors.ConfirmPassword ? <p>Passwords do not match.</p> : null}
                     </div>
