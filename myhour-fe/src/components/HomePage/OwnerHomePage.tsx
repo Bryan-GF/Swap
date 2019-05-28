@@ -14,7 +14,7 @@ const OwnerHomePage = observer((props:any) => {
     const [targetBranch, setTargetBranch] = useState('');
     const [activeErrorsBranch, setActiveErrorsBranch] = useState(false)
 
-    const hanldeBranchCreate = () => {
+    const handleBranchCreate = () => {
         let status = (branchName.length === 0);
         setActiveErrorsBranch(status);
         console.log(status);
@@ -32,7 +32,9 @@ const OwnerHomePage = observer((props:any) => {
     }
 
     useEffect(() => {
+        state.getManagers();
         state.getAllBranches();
+        
     }, [])
     
     return (
@@ -48,7 +50,7 @@ const OwnerHomePage = observer((props:any) => {
                     </div>
                     <div className='employee-adder-buttons'>
                         <button onClick={() => {
-                            hanldeBranchCreate();
+                            handleBranchCreate();
                         }} className="green">Create</button>
                         <button onClick={() => {
                             setAddingBranch(false);
@@ -73,36 +75,54 @@ const OwnerHomePage = observer((props:any) => {
                         </div>
                         {state.BranchList.map(branch => {
                             return (
-                                <div className="ManageListColumn Employee">
-                                    {deletingBranch ? 
-                                        <div className='delete-confirmation-wrapper'>
-                                            <div className='confirmation-info'>
-                                                <h2>Are you sure you want to delete {branch.Name}?</h2>
+                                <div>
+                                    <div className="ManageListColumn Employee">
+                                        {deletingBranch ? 
+                                            <div className='delete-confirmation-wrapper'>
+                                                <div className='confirmation-info'>
+                                                    <h2>Are you sure you want to delete {branch.Name}?</h2>
+                                                </div>
+                                                <div className='confirmation-buttons'>
+                                                    <button onClick={() => { 
+                                                            handleDelete(branch.branchID);
+                                                        }} className='green'>Confirm</button>
+                                                    <button onClick={() => { setDeletingBranch(false)}} className='red'>Cancel</button>
+                                                </div>
                                             </div>
-                                            <div className='confirmation-buttons'>
-                                                <button onClick={() => { 
-                                                        handleDelete(branch.branchID);
-                                                    }} className='green'>Confirm</button>
-                                                <button onClick={() => { setDeletingBranch(false)}} className='red'>Cancel</button>
+                                            :
+                                            ''                
+                                        }
+                                        <div className="columnName">{branch.Name}</div>
+                                        <div className="columnIcons">
+                                            <div onClick={(ev) => { ev.preventDefault(); }}className="plus-wrapper">
+                                                <FontAwesomeIcon className="plus" icon={faPlusSquare}/>
                                             </div>
-                                        </div>
-                                        :
-                                        ''                
-                                    }
-                                    <div className="columnName">{branch.Name}</div>
-                                    <div className="columnIcons">
-                                        <div onClick={(ev) => { ev.preventDefault(); }}className="plus-wrapper">
-                                            <FontAwesomeIcon className="plus" icon={faPlusSquare}/>
-                                        </div>
-                                        <div onClick={(ev) => { 
-                                            ev.preventDefault();
+                                            <div onClick={(ev) => { 
+                                                ev.preventDefault();
 
-                                            setDeletingBranch(true);     
-                                        }} className="trash-wrapper">
-                                            <FontAwesomeIcon className="trash" icon={faTrashAlt}/>
-                                        </div>
-                                    </div>                     
+                                                setDeletingBranch(true);     
+                                            }} className="trash-wrapper">
+                                                <FontAwesomeIcon className="trash" icon={faTrashAlt}/>
+                                            </div>
+                                        </div>                     
+                                    </div>
+                                    <div>
+                                        {
+                                            branch.branchID in state.BranchManagers ?
+                                                state.BranchManagers[branch.branchID].map(manager => {
+                                                    return (
+                                                        <div>
+                                                            <p>{manager.email}</p>
+                                                        </div>
+                                                    )
+                                                })
+                                            :
+                                            null                                         
+
+                                        }
+                                    </div>
                                 </div>
+
                             )
                         })}
                         <div className="ManageListColumn Employee">

@@ -16,6 +16,8 @@ class GlobalState {
 
     @observable BranchList = [];
 
+    @observable BranchManagers = {};
+
     //IMPORTANT FOR REQUESTS
     
     @observable todaysShifts = [];
@@ -154,8 +156,20 @@ class GlobalState {
         .post('https://swapapi.azurewebsites.net/api/GetAllBranches', {CompanyID: this.userData.CompanyID})
         .then(res => {
             if(res.data) {
-                this.BranchList = res.data; 
+                this.BranchList = res.data;
             }        
+        }).catch(err => {
+            console.log(err);
+        })
+    }
+
+    @action getManagers = async() => {
+        return await axios
+        .post('https://swapapi.azurewebsites.net/api/GetManagers', {CompanyID: this.userData.CompanyID})
+        .then(res => {
+            if(res.data) {
+                this.BranchManagers = res.data;
+            }         
         }).catch(err => {
             console.log(err);
         })
