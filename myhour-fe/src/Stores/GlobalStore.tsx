@@ -175,6 +175,18 @@ class GlobalState {
         })
     }
 
+    @action deleteManager = async(UserID) => {
+
+        return await axios
+        .post('https://swapapi.azurewebsites.net/api/DeleteManager', {UserID: UserID})
+        .then(res => {
+            console.log(res.data);
+        }).catch(err => {
+            console.log(err);
+        })
+        
+    }
+
     @action addBranch = async(branchName) => {
         return await axios
         .post('https://swapapi.azurewebsites.net/api/AddBranch', {Name: branchName, CompanyID: this.userData.CompanyID})

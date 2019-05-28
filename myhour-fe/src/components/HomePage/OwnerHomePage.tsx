@@ -10,6 +10,7 @@ const OwnerHomePage = observer((props:any) => {
     const state = useContext(GlobalStateContext);
     const [addingBranch, setAddingBranch] = useState(false);
     const [deletingBranch, setDeletingBranch] = useState(false);
+    const [deletingManager, setDeletingManager] = useState(false);
     const [branchName, setBranchName] = useState('');
     const [targetBranch, setTargetBranch] = useState('');
     const [activeErrorsBranch, setActiveErrorsBranch] = useState(false)
@@ -113,6 +114,28 @@ const OwnerHomePage = observer((props:any) => {
                                                     return (
                                                         <div>
                                                             <p>{manager.email}</p>
+                                                            <div onClick={(ev) => { 
+                                                                ev.preventDefault();
+                                                                setDeletingManager(true);     
+                                                            }} className="trash-wrapper">
+                                                                <FontAwesomeIcon className="trash" icon={faTrashAlt}/>
+                                                            </div>
+                                                            {deletingManager ? 
+                                                                <div className='delete-confirmation-wrapper'>
+                                                                    <div className='confirmation-info'>
+                                                                        <h2>Are you sure you want to delete {manager.Firstname}?</h2>
+                                                                    </div>
+                                                                    <div className='confirmation-buttons'>
+                                                                        <button onClick={() => { 
+                                                                                state.deleteManager(manager.UserID);
+                                                                                setDeletingManager(false);
+                                                                            }} className='green'>Confirm</button>
+                                                                        <button onClick={() => { setDeletingManager(false)}} className='red'>Cancel</button>
+                                                                    </div>
+                                                                </div>
+                                                                :
+                                                                ''                
+                                                            }
                                                         </div>
                                                     )
                                                 })
