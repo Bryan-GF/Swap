@@ -138,6 +138,21 @@ class GlobalState {
         })
     }
 
+    @action addManager = async(managerInfo) => {
+        return await axios
+        .post('https://swapapi.azurewebsites.net/api/AddManager', {...managerInfo, CompanyID: this.userData.CompanyID})
+        .then(res => {
+            if(res.data) {
+                this.BranchManagers[managerInfo.branchID] = [...this.BranchManagers[managerInfo.branchID], {email: managerInfo.email, UserID: managerInfo.UserID, Firstname: managerInfo.Firstname, Lastname: managerInfo.Lastname}];
+                return res.data;
+            }
+                 
+        }).catch(err => {
+            console.log(err);
+            return null;
+        })
+    }
+
     @action getBranchData = async() => {
         return await axios
         .post('https://swapapi.azurewebsites.net/api/GetBranchEmployees', {"branchID": this.userData.branchID})
@@ -175,12 +190,12 @@ class GlobalState {
         })
     }
 
-    @action deleteManager = async(UserID) => {
+    @action deleteManager = async(UserID, branchID) => {
 
         return await axios
         .post('https://swapapi.azurewebsites.net/api/DeleteManager', {UserID: UserID})
         .then(res => {
-            console.log(res.data);
+            this.BranchManagers[branchID] = this.BranchManagers[branchID].filter(manager => manager.UserID != UserID);
         }).catch(err => {
             console.log(err);
         })
