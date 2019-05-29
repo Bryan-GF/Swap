@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState} from 'react';
 import {observer} from 'mobx-react-lite';
 import { GlobalStateContext } from '../../Stores/GlobalStore';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrashAlt, faPlusSquare, faPlusCircle, faEye } from '@fortawesome/free-solid-svg-icons';
+import { faTrashAlt, faPlusSquare, faPlusCircle, faEye, faTimes} from '@fortawesome/free-solid-svg-icons';
 import './Home.css';
 import isEmail from 'validator/lib/isEmail';
 
@@ -15,6 +15,7 @@ const OwnerHomePage = observer((props:any) => {
     const [deletingManager, setDeletingManager] = useState(false);
     const [branchName, setBranchName] = useState('');
     const [targetBranch, setTargetBranch] = useState('');
+    const [targetManager, setTargetManager] = useState('');
     const [activeErrorsBranch, setActiveErrorsBranch] = useState(false);
     const [managerInfo, setManagerInfo] = useState({Firstname: '', Lastname: '', email: '', Password: '', ConfirmPassword: '', branchID: ''});
     const [activeErrorsManager, setActiveErrorsManager] = useState({email: true, Firstname: false, Lastname: false, Password: false, ConfirmPassword: false});
@@ -71,6 +72,7 @@ const OwnerHomePage = observer((props:any) => {
     return (
         <div>
             
+            
             {addingBranch ? 
                 <div className='employee-adder-wrapper'>
                     <h2>Add Branch</h2>
@@ -99,7 +101,7 @@ const OwnerHomePage = observer((props:any) => {
                     <div className="OwnerListContainer">
                         <div className="ManageListInteractive">
                             <p>{state.BranchList.length} Branches</p>
-                            <div onClick={() => { setAddingBranch(true)}} className="addBranch">
+                            <div onClick={() => { setAddingBranch(true)}} className="addItem">
                                 <FontAwesomeIcon icon={faPlusCircle}/>
                                 <p>ADD BRANCH</p>
                             </div>
@@ -107,8 +109,8 @@ const OwnerHomePage = observer((props:any) => {
                         {state.BranchList.map(branch => {
                             return (
                                 <div>
-                                    <div className="ManageListColumn Employee">
-                                        {deletingBranch ? 
+                                    <div className="ManageListColumn">
+                                        {deletingBranch && targetBranch === branch.branchID ? 
                                             <div className='delete-confirmation-wrapper'>
                                                 <div className='confirmation-info'>
                                                     <h2>Are you sure you want to delete {branch.Name}?</h2>
@@ -123,7 +125,7 @@ const OwnerHomePage = observer((props:any) => {
                                             :
                                             ''                
                                         }
-                                        {addingManager ? 
+                                        {addingManager && branch.branchID === targetBranch ? 
                                             <div className='employee-adder-wrapper'>
                                                 <label>FIRST NAME *</label>    
                                                 <input className="nameInput" placeholder='ex. Jennifer' onChange={(ev) => { setManagerInfo({...managerInfo, Firstname: ev.target.value})}}/>
@@ -168,38 +170,47 @@ const OwnerHomePage = observer((props:any) => {
                                             :
                                             ''
                                         }
-                                        <div className="columnName">{branch.Name}</div>
-                                        <div className="columnIcons">
-                                            <div onClick={(ev) => { 
-                                                ev.preventDefault(); 
-                                                setManagerInfo({...managerInfo, branchID: branch.branchID});
-                                                setAddingManager(true);
-                                            }}className="plus-wrapper">
-                                                <FontAwesomeIcon className="plus" icon={faPlusSquare}/>
-                                            </div>
-                                            <div onClick={(ev) => { 
-                                                ev.preventDefault();
-                                                
-                                                setDeletingBranch(true);     
-                                            }} className="trash-wrapper">
-                                                <FontAwesomeIcon className="trash" icon={faTrashAlt}/>
-                                            </div>
-                                        </div>                     
+                                        <div className="row">
+                                            <h3>{branch.Name}</h3>
+                                            <div className="columnIcons">
+                                                <div onClick={(ev) => { 
+                                                    ev.preventDefault(); 
+                                                    setManagerInfo({...managerInfo, branchID: branch.branchID});
+                                                    setAddingManager(true);
+                                                }}className="plus-wrapper">
+                                                    <FontAwesomeIcon className="plus" icon={faPlusSquare}/>
+                                                </div>
+                                                <div onClick={(ev) => { 
+                                                    ev.preventDefault();
+                                                    setTargetBranch(branch.branchID);
+                                                    setDeletingBranch(true);     
+                                                }} className="trash-wrapper">
+                                                    <FontAwesomeIcon className="trash" icon={faTrashAlt}/>
+                                                </div>
+                                            </div>   
+                                        </div>                  
                                     </div>
                                     <div>
                                         {
                                             branch.branchID in state.BranchManagers ?
                                                 state.BranchManagers[branch.branchID].map(manager => {
                                                     return (
-                                                        <div>
-                                                            <p>{manager.email}</p>
+                                                        <div className="managerRow">
+                                                            <div className="managerInfo">
+                                                                <span>Name:</span>
+                                                                <p>{`${manager.Firstname} ${manager.Lastname}`}</p>
+                                                                <span>Email:</span>
+                                                                <p>{manager.email}</p>
+
+                                                            </div>
                                                             <div onClick={(ev) => { 
                                                                 ev.preventDefault();
+                                                                setTargetManager(manager.UserID);
                                                                 setDeletingManager(true);     
                                                             }} className="trash-wrapper">
-                                                                <FontAwesomeIcon className="trash" icon={faTrashAlt}/>
+                                                                <FontAwesomeIcon className="times" icon={faTimes}/>
                                                             </div>
-                                                            {deletingManager ? 
+                                                            {deletingManager && targetManager === manager.UserID ? 
                                                                 <div className='delete-confirmation-wrapper'>
                                                                     <div className='confirmation-info'>
                                                                         <h2>Are you sure you want to delete {manager.Firstname}?</h2>
@@ -215,24 +226,24 @@ const OwnerHomePage = observer((props:any) => {
                                                                 :
                                                                 ''                
                                                             }
+                                                            
                                                         </div>
+                                                        
+                                                        
                                                     )
                                                 })
                                             :
                                             null                                         
 
                                         }
+                                        <div className="manageRowFiller">
+                                        </div>
                                     </div>
                                 </div>
 
                             )
                         })}
-                        <div className="ManageListColumn Employee">
-                            <div className="columnID">...</div>
-                            <div className="columnName">...</div>
-                            <div className="columnPosition">...</div>
                         
-                        </div>
                     </div>
                 </div>
             </div>

@@ -87,7 +87,7 @@ const ManagerHomePage = observer((props:any) => {
                 <div className="ManageListContainer">
                     <div className="ManageListInteractive">
                         <p>{state.branchData.length} Employees</p>
-                        <div onClick={() => { setAddingUser(true);}} className="addEmployee">
+                        <div onClick={() => { setAddingUser(true);}} className="addItem">
                             <FontAwesomeIcon icon={faPlusCircle}/>
                             <p>ADD EMPLOYEE</p>
                         </div>

@@ -1,3 +1,39 @@
+.ManageListInteractive {
+    display: flex;
+    background: white;
+    padding: 1rem;
+    justify-content: space-between;
+    font-weight: bold;
+    .addItem {
+        display: flex;
+        font-weight: bold;
+        color: var(--main-color);
+        align-items: center;
+        svg {
+            height: 1.6rem;
+            width: 1.6rem;
+        }
+
+        p {
+            font-size: 1rem;
+            margin-left: .5rem;
+        }
+    }
+
+    .addItem:hover {
+        cursor: pointer;
+
+        svg {
+            color: var(--main-hover-color);
+        }
+
+        p {
+            color: var(--main-hover-color);
+        }
+    }
+}
+
+
 .delete-confirmation-wrapper {
     position: fixed;
     width: 500px;
@@ -150,45 +186,13 @@
         border-bottom: 1rem solid var(--main-color);
     }
     
-    .ManageListInteractive {
-        display: flex;
-        background: white;
-        padding: 1rem;
-        justify-content: space-between;
-        font-weight: bold;
-        .addEmployee {
-            display: flex;
-            font-weight: bold;
-            color: var(--main-color);
-            align-items: center;
-            svg {
-                height: 1.6rem;
-                width: 1.6rem;
-            }
-
-            p {
-                font-size: .9rem;
-                margin-left: .5rem;
-            }
-        }
-
-        .addEmployee:hover {
-            cursor: pointer;
-
-            svg {
-                color: var(--main-hover-color);
-            }
-
-            p {
-                color: var(--main-hover-color);
-            }
-        }
-    }
+    
 
     .linkedRow {
         text-decoration: none;
         
     }
+    
     
     .ManageListColumn {
         display: flex;
@@ -401,4 +405,83 @@
     width: 1000px;
     margin: 0 auto;
     padding-top: 8rem;
+
+    .OwnerWrapper {
+        border-bottom: 1rem solid var(--main-color);
+    }
+    
+
+    h2 {
+        background: var(--main-color);
+        color: white;
+        padding: 1rem;
+        margin: 2rem 0 0 0;
+    }
+    
+    .ManageListColumn {
+        .row {
+            background: var(--main-color);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            padding: .5rem 1rem;
+
+            .columnIcons {
+                display: flex;
+                svg {
+                    height: 1.5rem;
+                    width: 1.5rem;
+                    margin-bottom: -5px;
+                }
+
+                .trash {
+                    margin-left: 1rem;
+                }
+                svg:hover {
+                    cursor: pointer;
+                    transform: scale(1.05);
+                }
+            }
+        }   
+    }
+
+    .managerRow {
+        display: flex;
+        padding: .5rem 1rem;
+        justify-content: space-between;
+        border-bottom: 1px solid var(--text-color);
+        background: white;
+        .managerInfo {
+            display: flex;
+            span {
+                margin-right: .5rem;
+                font-weight: bold;
+            }
+
+            p {
+                margin-right: 2rem;
+            }
+        }
+
+        .times {
+            color: #F04B4B;
+            height: 1.5rem;
+            width: 1.5rem;
+        }
+
+        .times:hover {
+            color: #E73D3D;
+            cursor: pointer;
+            transform: scale(1.05);
+        }
+
+        
+        
+
+    }
+    .manageRowFiller {
+            height: 1rem;
+            background: white;
+    }
+
 }

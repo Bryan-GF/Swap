@@ -29,8 +29,12 @@ const Nav = observer((props:any) => {
                     </Link>
                 </div>
                 <div>
-                    <Link to='/Home'>Home</Link>   
+                    <Link to='/Home'>Home</Link> 
+                    {state.userData.roles === 'Owner' ?
+                    null
+                    :
                     <Link to='/Requests'>Requests</Link>
+                    }                   
                     <Link to='/Conversations'>Conversations</Link>
                     <Link to='/Settings'>Settings</Link>
                 </div>
