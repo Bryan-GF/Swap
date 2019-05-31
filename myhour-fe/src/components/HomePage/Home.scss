@@ -35,17 +35,17 @@
 
 
 .delete-confirmation-wrapper {
-    position: fixed;
-    width: 500px;
-    top: 50%;
-    left: 50%;
-    margin-top: -200px; /* Negative half of height. */
-    margin-left: -250px; /* Negative half of width. */
-    background: white;
-    border-radius: 9px;
-    padding: 2rem;
-    border: 3px solid #60B0F4;
-    z-index: 3;
+    background-color: rgba(0,0,0,0.5);
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: auto;
+  z-index: 99999;
     .confirmation-info {
         text-align: center;
         h2 {

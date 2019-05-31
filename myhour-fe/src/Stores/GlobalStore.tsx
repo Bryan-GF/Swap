@@ -236,7 +236,7 @@ class GlobalState {
         })
     }
 
-    @action editShift = async(ShiftID, shiftDate, startTime, endTime) => {
+    @action editShift = async(ShiftID, shiftDate, startTime, endTime, Version) => {
         shiftDate = shiftDate.slice(0, 10);
         startTime =startTime.slice(11, 19);
         endTime = endTime.slice(11, 19);
@@ -245,7 +245,7 @@ class GlobalState {
         console.log(startTime)
         console.log(endTime)
         return await axios
-        .put('https://swapapi.azurewebsites.net/api/EditShift', {"ShiftID": ShiftID, "shiftDate": shiftDate, "startTime": startTime, "endTime": endTime})
+        .put('https://swapapi.azurewebsites.net/api/EditShift', {"ShiftID": ShiftID, "shiftDate": shiftDate, "startTime": startTime, "endTime": endTime, Version: Version})
         .then(res => {
             console.log(res.data);     
         }).catch(err => {
@@ -267,8 +267,9 @@ class GlobalState {
         return axios
         .post('https://swapapi.azurewebsites.net/api/GetEmployeeShifts', {"UserID": ID})
         .then(res => {
-            console.log("RESSSSSSSSSSSSSSSSSSSSSSS",res);
+            
             if (res.data != null) {
+                console.log(res.data);
                 this.currShifts = res.data;
             }      
         }).catch(err => {

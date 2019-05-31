@@ -203,7 +203,7 @@ const EmployeeProfile = observer((props:any) => {
                                         />
                                 shiftIcons = <div className="shiftRowIcons">
                                                 <div onClick={( ) => { 
-                                                    state.editShift(shift.ShiftID, startEditDate.toISOString(), startEditTime.toISOString(), endEditTime.toISOString());
+                                                    state.editShift(shift.ShiftID, startEditDate.toISOString(), startEditTime.toISOString(), endEditTime.toISOString(), shift.Version);
                                                     setEditActive({active: false, target: null})}} className="check">
                                                     <FontAwesomeIcon className="checkIcon" icon={faCheck}/>
                                                 </div>
