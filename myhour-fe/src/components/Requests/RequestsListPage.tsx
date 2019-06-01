@@ -38,8 +38,10 @@ const RequestListPage = observer((props:any) => {
     const [date, setDate] = useState('');
 
     const handlePost = async() => {
+        console.log(requestContent.ShiftID);
         if(requestContent.ShiftID.length > 1) {           
             let status = await state.addRequest(requestContent);
+
             if(status) {
                 state.setTodaysRequests([...state.todaysRequests, {
                     Comment: requestContent.Comment,
@@ -66,16 +68,12 @@ const RequestListPage = observer((props:any) => {
         );
         setDate(val);
         async function getData () {
-            const requestInfo = await state.getRequestsByDay(val);
+            state.getRequestsByDay(val);
             const shiftInfo = await state.getShiftsByDay(val);
-            if(requestInfo != null) {
-                setRequestContent({...requestContent, ShiftID: requestInfo.ShiftID});
-                
-            }   
-
             if(shiftInfo != null) {
                 let newTimes = fixTime(shiftInfo.startTime, shiftInfo.endTime);
                 setRequestTime(`${newTimes.startTime} - ${newTimes.endTime}`);
+                setRequestContent({...requestContent, ShiftID: shiftInfo.ShiftID}); 
             }
         }
         getData();
@@ -139,8 +137,15 @@ const RequestListPage = observer((props:any) => {
                 </div>
                 <div className='list-content'>
                     {state.todaysRequests.map(request => {
+                        let newTimes = null;
+                            if(!request.Time) {
+                                newTimes = fixTime(request.startTime, request.endTime);
+                            }
+
+                        
+                        
                         return (
-                            <Request info={request} date={date} 
+                            <Request info={request} date={date} times={newTimes}
                             acceptingRequest={acceptingRequest} setAcceptingRequest={setAcceptingRequest} 
                             deletingRequest={deletingRequest} setDeletingRequest={setDeletingRequest}
                             />

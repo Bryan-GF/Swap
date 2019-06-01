@@ -9,11 +9,7 @@ import DeleteRequest from '../Delete/DeleteRequest';
 const Request = observer((props:any) => {
 
     const state = useContext(GlobalStateContext);
-    let newTimes;
-    if(!props.info.Time) {
-        newTimes = fixTime(props.info.startTime, props.info.endTime);
-    }
-    console.log(newTimes);
+    
     return (
         <div>
             <div>
@@ -21,15 +17,16 @@ const Request = observer((props:any) => {
                     <div className='request-confirmation-wrapper'>
                         <div className='confirmation-info'>
                             <h2>Are you sure you want to take this shift?</h2>
-                            {!props.info.Time ?
-                                <span>{`${newTimes.startTime} - ${newTimes.endTime}`}</span>                           
+                            {props.times != null ?
+                                <span>{`${props.times.startTime} - ${props.times.endTime}`}</span>                           
                             :
                                 <span>{props.info.Time}</span>
                             }
                         </div>
                         <div className='confirmation-buttons'>
                             <button onClick={() => { 
-                                state.acceptRequest(props.info.UserID, props.info.ShiftID);
+                                console.log(props.info.ShiftID);
+                                state.acceptRequest(props.info.UserID, props.info.ShiftID, props.info.Version);
                                 props.setAcceptingRequest(false);
                                 }} className='green'>Confirm</button>
                             <button onClick={() => { props.setAcceptingRequest(false)}} className='red'>Cancel</button>
@@ -55,8 +52,8 @@ const Request = observer((props:any) => {
                         <span>{props.info.Firstname}</span>
                         <span>{props.info.Position}</span>
                         <span>{props.info.Comment}</span>
-                        {!props.info.Time ?
-                            <span>{`${newTimes.startTime} - ${newTimes.endTime}`}</span>                           
+                        {props.times != null ?
+                            <span>{`${props.times.startTime} - ${props.times.endTime}`}</span>                           
                         :
                             <span>{props.info.Time}</span>
                         }
@@ -67,7 +64,7 @@ const Request = observer((props:any) => {
                         </div>
                     :
                         <div className='request-buttons'>
-                            <button onClick={() => { props.setAcceptingRequest(true)}}>Accept</button>
+                            <button onClick={() => { console.log(props.info.ShiftID); props.setAcceptingRequest(true)}}>Accept</button>
                             <button>Message</button>
                         </div>
                     }

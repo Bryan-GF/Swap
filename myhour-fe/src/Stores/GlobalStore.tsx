@@ -46,9 +46,9 @@ class GlobalState {
         })
     }
 
-    @action acceptRequest = (DelUserID, ShiftID) => {
+    @action acceptRequest = (DelUserID, ShiftID, Version) => {
         return axios
-        .post('https://swapapi.azurewebsites.net/api/AcceptRequest', {AddUserID: this.userData.UserID, DelUserID: DelUserID, ShiftID: ShiftID})
+        .post('https://swapapi.azurewebsites.net/api/AcceptRequest', {AddUserID: this.userData.UserID, DelUserID: DelUserID, ShiftID: ShiftID, Version: Version})
         .then(res => {
             console.log(res); 
         }).catch(err => {
@@ -94,11 +94,8 @@ class GlobalState {
         .then(res => {
             if(res.data != null) {
                 this.todaysRequests = res.data;  
-                console.log(this.todaysRequests);
-                return ({ShiftID: res.data[0].ShiftID});
             } else {
                 this.todaysRequests = [];
-                return null;
             }
         }).catch(err => {
             return null;
@@ -240,10 +237,6 @@ class GlobalState {
         shiftDate = shiftDate.slice(0, 10);
         startTime =startTime.slice(11, 19);
         endTime = endTime.slice(11, 19);
-        console.log(ShiftID)
-        console.log(shiftDate)
-        console.log(startTime)
-        console.log(endTime)
         return await axios
         .put('https://swapapi.azurewebsites.net/api/EditShift', {"ShiftID": ShiftID, "shiftDate": shiftDate, "startTime": startTime, "endTime": endTime, Version: Version})
         .then(res => {
@@ -283,7 +276,7 @@ class GlobalState {
         .then(res => {
             if(res.data != null) {
                 this.todaysShifts = res.data;
-                return ({startTime: res.data[0].startTime, endTime: res.data[0].endTime});
+                return ({startTime: res.data[0].startTime, endTime: res.data[0].endTime, ShiftID: res.data[0].ShiftID});
             } else {
                 this.todaysShifts = [];
                 return null;
