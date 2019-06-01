@@ -52,8 +52,15 @@ const RequestListPage = observer((props:any) => {
                     UserID: state.userData.UserID,
                     Time: requestTime
                 }]);
-                state.setTodaysShifts(state.todaysShifts.filter((shift) =>
-                requestContent.ShiftID != shift.ShiftID));
+                let newArr = await state.todaysShifts.filter((shift) =>
+                requestContent.ShiftID != shift.ShiftID);
+                state.setTodaysShifts(newArr);
+                if(newArr.length > 0) {
+                    let newTimes = fixTime(newArr[0].startTime, newArr[0].endTime);
+                    setRequestTime(`${newTimes.startTime} - ${newTimes.endTime}`);
+                    setRequestContent({...requestContent, ShiftID: newArr[0].ShiftID}); 
+                }
+                
             }
         }
         setCreatingRequest(false);
