@@ -57,6 +57,7 @@ const EmployeeProfile = observer((props:any) => {
     }
 
     const handleAddShift = async () => {
+        console.log(state.currShifts);
         const result = await state.addShift(state.currEmployee.UserID, startDate.toISOString(), timeEditHelper(startTime), timeEditHelper(endTime));
         if(result) {
             state.setCurrShifts([...state.currShifts, {
@@ -287,4 +288,5 @@ const EmployeeProfile = observer((props:any) => {
 
 export default EmployeeProfile;
 import "react-datepicker/dist/react-datepicker.css";import { start } from 'repl';
+import { stat } from 'fs';
 

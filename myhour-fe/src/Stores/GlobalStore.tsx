@@ -81,7 +81,7 @@ class GlobalState {
 
     @action addRequest = (RequestData) => {
         return axios
-        .post('https://swapapi.azurewebsites.net/api/AddRequest', {UserID: this.userData.UserID, ShiftID: RequestData.ShiftID, Comment: RequestData.Comment, Urgent: RequestData.Urgent})
+        .post('https://swapapi.azurewebsites.net/api/AddRequest', {UserID: this.userData.UserID, ShiftID: RequestData.ShiftID, Comment: RequestData.Comment, Urgent: RequestData.Urgent, Version: RequestData.Version})
         .then(res => {
             return true;
         }).catch(err => {
@@ -279,7 +279,7 @@ class GlobalState {
         .then(res => {
             if(res.data != null) {
                 this.todaysShifts = res.data;
-                return ({startTime: res.data[0].startTime, endTime: res.data[0].endTime, ShiftID: res.data[0].ShiftID});
+                return ({startTime: res.data[0].startTime, endTime: res.data[0].endTime, ShiftID: res.data[0].ShiftID, Version: res.data[0].Version});
             } else {
                 this.todaysShifts = [];
                 return null;

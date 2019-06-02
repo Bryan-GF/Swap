@@ -28,19 +28,20 @@ const RequestListPage = observer((props:any) => {
         Comment: string;
         ShiftID: string;
         Urgent: boolean;
+        Version: string;
     }
 
     const [creatingRequest, setCreatingRequest] = useState(false);
-    const [requestContent, setRequestContent] = useState<RequestContent>({Comment: '', ShiftID: '', Urgent: false});
+    const [requestContent, setRequestContent] = useState<RequestContent>({Comment: '', ShiftID: '', Urgent: false, Version: ''});
     const [requestTime, setRequestTime] = useState('');
     const [acceptingRequest, setAcceptingRequest] = useState(false);
     const [deletingRequest, setDeletingRequest] = useState(false);
     const [targetRequest, setTargetRequest] = useState('');
     
-    const [date, setDate] = useState('');
+    //const [date, setDate] = useState('');
 
     const handlePost = async() => {
-        console.log(requestContent.ShiftID);
+        console.log(requestContent);
         if(requestContent.ShiftID.length > 1) {           
             let status = await state.addRequest(requestContent);
 
@@ -60,7 +61,7 @@ const RequestListPage = observer((props:any) => {
                 if(newArr.length > 0) {
                     let newTimes = fixTime(newArr[0].startTime, newArr[0].endTime);
                     setRequestTime(`${newTimes.startTime} - ${newTimes.endTime}`);
-                    setRequestContent({...requestContent, ShiftID: newArr[0].ShiftID}); 
+                    setRequestContent({...requestContent, ShiftID: newArr[0].ShiftID, Version: newArr[0].Version}); 
                 }
                 
             }
@@ -83,20 +84,20 @@ const RequestListPage = observer((props:any) => {
             values.date.toString(), 
             'YYYY-MM-DD'
         );
-        setDate(val);
         async function getData () {
             state.getRequestsByDay(val);
             const shiftInfo = await state.getShiftsByDay(val);
             if(shiftInfo != null) {
                 let newTimes = fixTime(shiftInfo.startTime, shiftInfo.endTime);
                 setRequestTime(`${newTimes.startTime} - ${newTimes.endTime}`);
-                setRequestContent({...requestContent, ShiftID: shiftInfo.ShiftID}); 
+                setRequestContent({...requestContent, ShiftID: shiftInfo.ShiftID, Version: shiftInfo.Version}); 
             }
         }
         getData();
         
     }, [])
 
+    console.log(requestContent);
     return (
         <div>
             <Nav/>
@@ -114,11 +115,11 @@ const RequestListPage = observer((props:any) => {
                                 <div className="myselect">
                                     <select className="form-control" id="test" onChange={(ev) => {
                                         setRequestTime(ev.target[ev.target.selectedIndex].textContent);
-                                        setRequestContent({...requestContent, ShiftID: ev.target.value})}}>
+                                        setRequestContent({...requestContent, ShiftID: ev.target.value, Version: ev.target[ev.target.selectedIndex].id})}}>
                                         {state.todaysShifts.map(shift => {
                                             let newTimes = fixTime(shift.startTime, shift.endTime);
                                             return (
-                                                <option value={shift.ShiftID}>{newTimes.startTime} - {newTimes.endTime}</option>
+                                                <option id={shift.Version} value={shift.ShiftID}>{newTimes.startTime} - {newTimes.endTime}</option>
                                             )
                                         }   
                                         )}
@@ -135,7 +136,7 @@ const RequestListPage = observer((props:any) => {
                         <div className='creator-buttons'>
                             <button onClick={() => {handlePost()}} className="green">Post</button>
                             <button onClick={() => {
-                                setRequestContent({Comment: '', ShiftID: state.todaysShifts[0].ShiftID, Urgent: false});
+                                setRequestContent({Comment: '', ShiftID: state.todaysShifts[0].ShiftID, Urgent: false, Version: ''});
                                 setCreatingRequest(false)}} className="red">Cancel</button>
                         </div>
                     </div>
