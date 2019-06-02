@@ -43,7 +43,7 @@ const EmployeeProfile = observer((props:any) => {
     }
 
     const handleAddShift = async () => {
-        const result = await state.addShift(state.currEmployee.UserID, startDate.toISOString(), startTime.toISOString(), endTime.toISOString());
+        const result = await state.addShift(state.currEmployee.UserID, startDate.toISOString(), timeEditHelper(startTime), timeEditHelper(endTime));
         if(result) {
             state.setCurrShifts([...state.currShifts, {
                 ShiftID: `${result}`,
@@ -53,6 +53,11 @@ const EmployeeProfile = observer((props:any) => {
             }]);
         }
         setAddingShift(false);
+    }
+
+    const timeEditHelper = (time) => {
+        let tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
+        return (new Date(time - tzoffset)).toISOString().slice(0, -1);
     }
 
     useEffect(() => {
@@ -203,7 +208,7 @@ const EmployeeProfile = observer((props:any) => {
                                         />
                                 shiftIcons = <div className="shiftRowIcons">
                                                 <div onClick={( ) => { 
-                                                    state.editShift(shift.ShiftID, startEditDate.toISOString(), startEditTime.toISOString(), endEditTime.toISOString(), shift.Version);
+                                                    state.editShift(shift.ShiftID, startEditDate.toISOString(), timeEditHelper(startEditTime), timeEditHelper(endEditTime), shift.Version);
                                                     setEditActive({active: false, target: null})}} className="check">
                                                     <FontAwesomeIcon className="checkIcon" icon={faCheck}/>
                                                 </div>
@@ -228,6 +233,7 @@ const EmployeeProfile = observer((props:any) => {
                                                     newEndTime.setHours(parseInt(endHours[0]), parseInt(endHours[1]));
                                                     newStartTime.setHours(parseInt(startHours[0]), parseInt(startHours[1]));
                                                     setEditStartTime(newStartTime);
+                                                    setEditEndTime(newEndTime);
                                                     
                                                     }} className="edit" id={`${i}`}>
                                                     <FontAwesomeIcon className="editIcon" icon={faPen}/>

@@ -169,11 +169,45 @@ CREATE TABLE Requests (
 GO
 ALTER TABLE Requests ADD Urgent BIT default 'FALSE';
 
+GO
 ALTER TABLE Users ADD Role varchar(255) NOT NULL
-ALTER TABLE Users ADD CompanyID int NOT NULL FOREIGN KEY REFERENCES CompanyTable(CompanyID)
+GO
+ALTER TABLE Users ADD CompanyID smallint NOT NULL FOREIGN KEY REFERENCES CompanyTable(CompanyID)
+GO 
+GO
+ALTER TABLE Users ADD CONSTRAINT (email);
+Go
+ALTER TABLE CompanyTable ADD Contact_Number varchar(255)
 
+GO
+ALTER TABLE BranchTable ADD Name varchar(255)
 
+ALTER TABLE Users ALTER COLUMN branchID int NULL
 
+ALTER TABLE Users ALTER COLUMN branchID int default null
+
+GO
+alter table Shifts
+drop constraint FK__Shifts__UserID__32AB8735;
+
+ALTER TABLE Shifts
+  ADD CONSTRAINT UserID
+  FOREIGN KEY (UserID)
+  REFERENCES Users(UserID) 
+  ON DELETE CASCADE;
+
+GO
+alter table Requests
+drop constraint FK__Requests__ShiftI__1209AD79;
+
+ALTER TABLE Requests
+  ADD CONSTRAINT ShiftID
+  FOREIGN KEY (ShiftID)
+  REFERENCES Shifts(ShiftID) 
+  ON DELETE CASCADE;
+
+GO
+ALTER TABLE Shifts ADD Version rowversion NOT NULL;
 
 
 

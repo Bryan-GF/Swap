@@ -1,12 +1,13 @@
 import React, {useState, useEffect, useContext} from 'react';
 import {observer} from 'mobx-react-lite';
 import './Requests.css';
-import Request from './Request';
 import Nav from '../Navigation/Nav';
-import queryString from 'query-string'
+import queryString from 'query-string';
 import { GlobalStateContext } from '../../Stores/GlobalStore';
-import format from 'date-fns/format'
+import format from 'date-fns/format';
 import {fixTime} from './RequestHelper';
+import DeleteRequest from '../Delete/DeleteRequest';
+import avatar from '../../assets/avatar.png';
 
 /*NOTES:
 Important:
@@ -34,6 +35,7 @@ const RequestListPage = observer((props:any) => {
     const [requestTime, setRequestTime] = useState('');
     const [acceptingRequest, setAcceptingRequest] = useState(false);
     const [deletingRequest, setDeletingRequest] = useState(false);
+    const [targetRequest, setTargetRequest] = useState('');
     
     const [date, setDate] = useState('');
 
@@ -66,6 +68,14 @@ const RequestListPage = observer((props:any) => {
         setCreatingRequest(false);
     }
 
+    const handleAcceptRequest = async (UserID, ShiftID, Version) => {
+        let status = await state.acceptRequest(UserID, ShiftID, Version);
+        if(status) {
+            setAcceptingRequest(false);
+        }
+        
+    }
+
     useEffect(() => {
         
         const values = queryString.parse(props.location.search)
@@ -87,8 +97,6 @@ const RequestListPage = observer((props:any) => {
         
     }, [])
 
-
-    console.log(requestTime);
     return (
         <div>
             <Nav/>
@@ -148,14 +156,70 @@ const RequestListPage = observer((props:any) => {
                             if(!request.Time) {
                                 newTimes = fixTime(request.startTime, request.endTime);
                             }
-
-                        
-                        
-                        return (
-                            <Request info={request} date={date} times={newTimes}
-                            acceptingRequest={acceptingRequest} setAcceptingRequest={setAcceptingRequest} 
-                            deletingRequest={deletingRequest} setDeletingRequest={setDeletingRequest}
-                            />
+                        return (                         
+                            <div>
+                                {acceptingRequest && targetRequest === request.ShiftID ?
+                                    <div className='request-confirmation-wrapper'>
+                                        <div className='confirmation-info'>
+                                            <h2>Are you sure you want to take this shift?</h2>
+                                            {newTimes != null ?
+                                                <span>{`${newTimes.startTime} - ${newTimes.endTime}`}</span>                           
+                                            :
+                                                <span>{request.Time}</span>
+                                            }
+                                        </div>
+                                        <div className='confirmation-buttons'>
+                                            <button onClick={() => {
+                                                handleAcceptRequest(request.UserID, request.ShiftID, request.Version);                                               
+                                                }} className='green'>Confirm</button>
+                                            <button onClick={() => { setAcceptingRequest(false)}} className='red'>Cancel</button>
+                                        </div>
+                                    </div>
+                                    : ''
+                                }
+                                {deletingRequest && targetRequest === request.ShiftID ? 
+                                <DeleteRequest setDeletingRequest={setDeletingRequest} UserID={request.UserID} ShiftID={request.ShiftID}/>
+                                :
+                                null
+                                }
+                                {request.Urgent ? 
+                                <div className="urgent-item">
+                                    <div className='urgent-color'>URGENT</div>
+                                </div>
+                                : ''}
+                                <div className='request-wrapper'>    
+                                    <div className='user-image'>
+                                        <img src={request.image ? '' : avatar}></img>
+                                    </div>
+                                    <div className ='request-content'>
+                                        <span>{request.Firstname}</span>
+                                        <span>{request.Position}</span>
+                                        <span>{request.Comment}</span>
+                                        {newTimes != null ?
+                                            <span>{`${newTimes.startTime} - ${newTimes.endTime}`}</span>                           
+                                        :
+                                            <span>{request.Time}</span>
+                                        }
+                                    </div>
+                                    {request.UserID === state.userData.UserID ? 
+                                        <div className='request-buttons'>
+                                            <button onClick={() => { 
+                                                setDeletingRequest(true);
+                                                setTargetRequest(request.ShiftID);
+                                                }}className="cancelbutton">Cancel</button>
+                                        </div>
+                                    :
+                                        <div className='request-buttons'>
+                                            <button onClick={() => { 
+                                                
+                                                setAcceptingRequest(true);
+                                                setTargetRequest(request.ShiftID);
+                                                }}>Accept</button>
+                                            <button>Message</button>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
                         )
                     })}
                 </div>

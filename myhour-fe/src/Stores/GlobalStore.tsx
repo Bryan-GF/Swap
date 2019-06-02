@@ -50,9 +50,10 @@ class GlobalState {
         return axios
         .post('https://swapapi.azurewebsites.net/api/AcceptRequest', {AddUserID: this.userData.UserID, DelUserID: DelUserID, ShiftID: ShiftID, Version: Version})
         .then(res => {
-            console.log(res); 
+            this.todaysRequests = this.todaysRequests.filter(request => request.ShiftID != ShiftID);
+            return true;
         }).catch(err => {
-            console.log(err);
+            return false;
         })
     }
 
@@ -262,9 +263,11 @@ class GlobalState {
         .then(res => {
             
             if (res.data != null) {
-                console.log(res.data);
+                
                 this.currShifts = res.data;
-            }      
+            } else {
+                this.currShifts = [];
+            } 
         }).catch(err => {
             this.currShifts = [];
         })
