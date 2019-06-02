@@ -33,6 +33,20 @@ const EmployeeProfile = observer((props:any) => {
     const [loading, setLoading] = useState(true);
     const [editActive, setEditActive] = useState({active: false, target: null});
 
+    const handleEditShift = async(ShiftID, Version) => {
+        let status = await state.editShift(ShiftID, startEditDate.toISOString(), timeEditHelper(startEditTime), timeEditHelper(endEditTime), Version);
+        if(status) {
+            state.setCurrShifts(state.currShifts.map((shift, i) => {
+                if(shift.ShiftID === ShiftID) {
+                    return {...shift, startTime:  moment(startEditTime, 'HH:mm:ss').format('h:mm A'), endTime:  moment(endEditTime, 'HH:mm:ss').format('h:mm A')}
+                } else {
+                    return shift;
+                }
+            }));
+           
+        }
+    }
+
     const handleShiftDelete = async() => {
         const status = await state.deleteShift(currDelete);
         if(status) {
@@ -208,7 +222,8 @@ const EmployeeProfile = observer((props:any) => {
                                         />
                                 shiftIcons = <div className="shiftRowIcons">
                                                 <div onClick={( ) => { 
-                                                    state.editShift(shift.ShiftID, startEditDate.toISOString(), timeEditHelper(startEditTime), timeEditHelper(endEditTime), shift.Version);
+                                                    handleEditShift(shift.ShiftID, shift.Version);
+                                                    
                                                     setEditActive({active: false, target: null})}} className="check">
                                                     <FontAwesomeIcon className="checkIcon" icon={faCheck}/>
                                                 </div>

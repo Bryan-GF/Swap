@@ -241,9 +241,9 @@ class GlobalState {
         return await axios
         .put('https://swapapi.azurewebsites.net/api/EditShift', {"ShiftID": ShiftID, "shiftDate": shiftDate, "startTime": startTime, "endTime": endTime, Version: Version})
         .then(res => {
-            console.log(res.data);     
+            return true;  
         }).catch(err => {
-            console.log(err);
+            return false;
         })
     }
 
