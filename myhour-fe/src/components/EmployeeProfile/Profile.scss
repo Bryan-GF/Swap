@@ -83,10 +83,7 @@
 
     .employeeShiftContent { 
         margin-top: 2rem;
-        h2 {
-            margin: 0;
-            font-size: 2rem;
-        }
+
 
         .shiftListHeader {
             display: flex;
@@ -95,6 +92,10 @@
             background: var(--main-color);
             color: white;
             padding: 1rem 2rem;
+            h2 {
+                margin: 0;
+                font-size: 2rem;
+            }
             .createShift {
                 font-size: 1.5rem;
                 font-weight: bold;
@@ -301,4 +302,8 @@
             }
         }
     }
+}
+
+.confirmation-info {
+    margin-top: .5rem;
 }

@@ -33,136 +33,83 @@
     }
 }
 
-
-.delete-confirmation-wrapper {
-    background-color: rgba(0,0,0,0.5);
-  position: fixed;
-  height: 100%;
-  width: 100%;
-  top: 0;
-  left: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: auto;
-  z-index: 99999;
+.delete-container {
+    width: 35rem;
+    background: white;
+    padding: 2rem 2rem;
+    border: 4px solid var(--main-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     .confirmation-info {
         text-align: center;
         h2 {
             font-size: 1.3rem;
             margin-top: 0;
+            background: none;
+            color: var(--text-color);
         }
-    }  
+    }       
+
+}
     
-    .confirmation-buttons {
-        display: flex;
-        justify-content: center;
-        margin-top: 2rem;
-        .green {
-            background: #77EE62;
-            border: 1px solid #71E05D;
-        }
 
-        .green:hover {
-            background: #71E05D;
-            cursor: pointer;
-        }
+.confirmation-buttons {
+    display: flex;
+    justify-content: flex-end;
 
-        .red {
-            background: #F04B4B;
-            border: 3px solid #E73D3D;
-        }
+    margin-top: 3rem;
+    .green {
+        background: #77EE62;
+        border: 1px solid #71E05D;
+    }
 
-        .red:hover {
-            background: #E73D3D;
-            cursor: pointer;
-        }
-        button {
-            border: none;
-            color: white;
-            padding: .5rem 1rem;
-            margin-left: 1rem;
-            font-weight: bold;
-            font-size: 1rem;
-            outline: none;
-        }
+    .green:hover {
+        background: #71E05D;
+        cursor: pointer;
+    }
+
+    .red {
+        background: #F04B4B;
+        border: 3px solid #E73D3D;
+    }
+
+    .red:hover {
+        background: #E73D3D;
+        cursor: pointer;
+    }
+
+    button {
+        border: none;
+        color: white;
+        padding: .5rem 1rem;
+        margin-left: 1rem;
+        font-weight: bold;
+        font-size: 1rem;
+        outline: none;
     }
 }
 
-.employee-adder-wrapper {
-    position: fixed;
-    width: 500px;
-    top: 50%;
-    left: 50%;
-    margin-top: -320px; /* Negative half of height. */
-    margin-left: -250px; /* Negative half of width. */
-    background: white;
-    border-radius: 9px;
-    padding: 3rem;
-    border: 3px solid #60B0F4;
-    z-index: 3;
+.adder-content {
+    display: flex;
+    flex-direction: column;
 
-    h2 {
-        margin-top: 0;
-        color: var(--main-color);
+    span {
+        font-weight: bold;
+        margin-top: 1rem;
     }
 
-    .adder-content {
-        display: flex;
-        flex-direction: column;
-
-        span {
-            font-weight: bold;
-            margin-top: 1rem;
-        }
-
-        input{
-            width: 100%;
-            resize: none;
-            padding: .5rem;     
-            outline: none;
-            border-color: var(--main-color);
-        }
-        p {
-            font-size: .8rem;
-            color: red;
-            margin-top: .2rem;
-        }
+    input{
+        width: 100%;
+        resize: none;
+        padding: .5rem;     
+        outline: none;
+        border-color: none;
     }
-
-    .employee-adder-buttons {
-        display: flex;
-        justify-content: flex-end;
-        margin-top: 10px;
-        .green {
-            background: #77EE62;
-            border: 1px solid #71E05D;
-        }
-
-        .green:hover {
-            background: #71E05D;
-            cursor: pointer;
-        }
-
-        .red {
-            background: #F04B4B;
-            border: 3px solid #E73D3D;
-        }
-
-        .red:hover {
-            background: #E73D3D;
-            cursor: pointer;
-        }
-
-        button {
-            border: none;
-            color: white;
-            padding: .5rem 1rem;
-            margin-left: 1rem;
-            font-weight: bold;
-            font-size: 1rem;
-            outline: none;
-        }
+    p {
+        font-size: .8rem;
+        color: red;
+        margin-top: .2rem;
     }
 }
 
@@ -216,6 +163,7 @@
             width: 20%;
             display: flex;
             justify-content: flex-end;
+            border-right: none;
 
             div {
                 padding: 0;
@@ -264,9 +212,6 @@
             font-weight: bold;
             border-right:  3px solid #b8babc;   
         }
-        .columnID {
-            border-left:  4px solid #b8babc;
-        }
 
     }
 
@@ -276,9 +221,11 @@
         div {
             border-right: 3px solid #efefef;
         }
-        .columnID {
-            border-left:  4px solid #dbdbdb;
-        }
+        
+    }
+
+    .columnID {
+        border-left:  4px solid #dbdbdb;
     }
 
     .Employee:hover {
@@ -309,6 +256,8 @@
     .Shifts-List {
         background: white;
         min-height: 40rem;
+        border-bottom: 1rem solid var(--main-color);
+        margin-bottom: 5rem;
             p {
                 margin: 0;
             }

@@ -57,7 +57,6 @@ const EmployeeProfile = observer((props:any) => {
     }
 
     const handleAddShift = async () => {
-        console.log(state.currShifts);
         const result = await state.addShift(state.currEmployee.UserID, startDate.toISOString(), timeEditHelper(startTime), timeEditHelper(endTime));
         if(result) {
             state.setCurrShifts([...state.currShifts, {
@@ -89,21 +88,7 @@ const EmployeeProfile = observer((props:any) => {
                 <DeleteEmployee Employee={{'Name': state.currEmployee.Name, 'UserID': state.currEmployee.UserID}} setDeletingUser={setDeletingUser} type='profile'/>
                 : ''
             }
-            {
-                deletingShift ?
-                        <div className='delete-confirmation-wrapper'>
-                            <div className='confirmation-info'>
-                                <h2>Are you sure you want to delete this shift?</h2>
-                            </div>
-                            <div className='confirmation-buttons'>
-                                <button onClick={() => { 
-                                    handleShiftDelete()
-                                    }} className='green'>Confirm</button>
-                                <button onClick={() => { setDeletingShift(false)}} className='red'>Cancel</button>
-                            </div>
-                        </div>
-                : null
-            }
+            
             <Nav/>
             {!loading ?
             <div className="employeeContentWrapper">
@@ -192,6 +177,7 @@ const EmployeeProfile = observer((props:any) => {
                             let start;
                             let end;
                             let shiftIcons;
+                            
                             if(editActive.active === true && i === editActive.target) {
                                date = <DatePicker
                                             selected={startEditDate}
@@ -265,6 +251,24 @@ const EmployeeProfile = observer((props:any) => {
                            
                             return (
                                 <div>
+                                    {
+                                        deletingShift  && currDelete === shift.ShiftID ?
+                                                <div className='popupWrapper'>
+                                                    <div className='delete-container'>
+                                                        <div className='confirmation-info'>
+                                                            <h2>Are you sure you want to delete this shift?</h2>
+                                                            <p>{`${moment(shift.startTime, 'HH:mm:ss').format('h:mm A')} - ${moment(shift.endTime, 'HH:mm:ss').format('h:mm A')}`}</p>
+                                                        </div>
+                                                        <div className='confirmation-buttons'>
+                                                            <button onClick={() => { 
+                                                                handleShiftDelete()
+                                                                }} className='green'>Confirm</button>
+                                                            <button onClick={() => { setDeletingShift(false)}} className='red'>Cancel</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        : null
+                                    }
                                     <div className="shiftRow">
                                         <p className="num">{i + 1}</p>
                                         <span>Date: </span>
@@ -287,6 +291,6 @@ const EmployeeProfile = observer((props:any) => {
 });
 
 export default EmployeeProfile;
-import "react-datepicker/dist/react-datepicker.css";import { start } from 'repl';
-import { stat } from 'fs';
+import "react-datepicker/dist/react-datepicker.css";
+
 

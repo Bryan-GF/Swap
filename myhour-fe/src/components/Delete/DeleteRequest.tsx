@@ -16,15 +16,17 @@ const DeleteRequest= observer((props:any) => {
     }
 
     return (
-        <div className='delete-confirmation-wrapper'>
-            <div className='confirmation-info'>
-                <h2>Are you sure you want to delete this request?</h2>
-            </div>
-            <div className='confirmation-buttons'>
-                <button onClick={() => { 
-                    handleDelete();           
-                    }} className='green'>Confirm</button>
-                <button onClick={() => { props.setDeletingRequest(false)}} className='red'>Cancel</button>
+        <div className='popupWrapper'>
+            <div className='delete-container'>
+                <div className='confirmation-info'>
+                    <h2>Are you sure you want to delete this request?</h2>
+                </div>
+                <div className='confirmation-buttons'>
+                    <button onClick={() => { 
+                        handleDelete();           
+                        }} className='green'>Confirm</button>
+                    <button onClick={() => { props.setDeletingRequest(false)}} className='red'>Cancel</button>
+                </div>
             </div>
         </div>
     )

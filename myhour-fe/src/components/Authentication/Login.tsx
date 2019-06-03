@@ -35,7 +35,7 @@ const Login= observer((props:any) => {
                     <img src={logo} alt='logo'/>
                     <span>Swap</span>
                 </div>
-                <div className='inputWrapper'>     
+                <div className='personalInputWrapper'>     
                         <input className="employeeInput" placeholder='Email' onChange={(ev) => { setLoginInfo({...loginInfo, email: ev.target.value})}}/>
                     <div className="passwordInput">
                         <input type={ viewPass ? 'text' : 'password'} placeholder='Password' onChange={(ev) => { setLoginInfo({...loginInfo, Password: ev.target.value})}}/>

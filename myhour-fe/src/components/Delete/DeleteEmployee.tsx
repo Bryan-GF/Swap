@@ -23,15 +23,17 @@ const DeleteEmployee = observer((props:any) => {
     }
     
     return (
-        <div className='delete-confirmation-wrapper'>
-            <div className='confirmation-info'>
-                <h2>Are you sure you want to delete {props.Employee.Name}?</h2>
-            </div>
-            <div className='confirmation-buttons'>
-                <button onClick={() => { 
-                        handleDelete();
-                    }} className='green'>Confirm</button>
-                <button onClick={() => { props.setDeletingUser(false)}} className='red'>Cancel</button>
+        <div className='popupWrapper'>
+            <div className='delete-container'>
+                <div className='confirmation-info'>
+                    <h2>Are you sure you want to delete {props.Employee.Name}?</h2>
+                </div>
+                <div className='confirmation-buttons'>
+                    <button onClick={() => { 
+                            handleDelete();
+                        }} className='green'>Confirm</button>
+                    <button onClick={() => { props.setDeletingUser(false)}} className='red'>Cancel</button>
+                </div>
             </div>
         </div>
     )

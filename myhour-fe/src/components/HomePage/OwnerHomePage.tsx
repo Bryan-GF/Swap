@@ -74,22 +74,22 @@ const OwnerHomePage = observer((props:any) => {
             
             
             {addingBranch ? 
-                <div className='employee-adder-wrapper'>
-                    <h2>Add Branch</h2>
-                    <div className='adder-content'>
-                        <span>Branch Name</span>
-                        <input type="text" onChange={(ev) => {setBranchName(ev.target.value)}}/>
-                        {activeErrorsBranch ? <p>Please include a Branch Name.</p> : null}
-                    </div>
-                    <div className='employee-adder-buttons'>
-                        <button onClick={() => {
-                            handleBranchCreate();
-                        }} className="green">Create</button>
-                        <button onClick={() => {
-                            setAddingBranch(false);
-                            setActiveErrorsBranch(false);
-                            setBranchName('');
-                        }} className="red">Cancel</button>
+                <div className='popupWrapper'>
+                    <div className='inputWrapper'>
+                        <h2>Add Branch</h2>
+                            <label>Branch Name</label>
+                            <input type="text" onChange={(ev) => {setBranchName(ev.target.value)}}/>
+                            {activeErrorsBranch ? <p>Please include a Branch Name.</p> : null}
+                        <div className='confirmation-buttons'>
+                            <button onClick={() => {
+                                handleBranchCreate();
+                            }} className="green">Create</button>
+                            <button onClick={() => {
+                                setAddingBranch(false);
+                                setActiveErrorsBranch(false);
+                                setBranchName('');
+                            }} className="red">Cancel</button>
+                        </div>
                     </div>
                 </div>
                 :
@@ -111,60 +111,65 @@ const OwnerHomePage = observer((props:any) => {
                                 <div>
                                     <div className="ManageListColumn">
                                         {deletingBranch && targetBranch === branch.branchID ? 
-                                            <div className='delete-confirmation-wrapper'>
-                                                <div className='confirmation-info'>
-                                                    <h2>Are you sure you want to delete {branch.Name}?</h2>
-                                                </div>
-                                                <div className='confirmation-buttons'>
-                                                    <button onClick={() => { 
-                                                            handleDelete(branch.branchID);
-                                                        }} className='green'>Confirm</button>
-                                                    <button onClick={() => { setDeletingBranch(false)}} className='red'>Cancel</button>
+                                            <div className='popupWrapper'>
+                                                <div className='delete-container'>
+                                                    <div className='confirmation-info'>
+                                                        <h2>Are you sure you want to delete {branch.Name}?</h2>
+                                                    </div>
+                                                    <div className='confirmation-buttons'>
+                                                        <button onClick={() => { 
+                                                                handleDelete(branch.branchID);
+                                                            }} className='green'>Confirm</button>
+                                                        <button onClick={() => { setDeletingBranch(false)}} className='red'>Cancel</button>
+                                                    </div>
                                                 </div>
                                             </div>
                                             :
                                             ''                
                                         }
-                                        {addingManager && branch.branchID === targetBranch ? 
-                                            <div className='employee-adder-wrapper'>
-                                                <label>FIRST NAME *</label>    
-                                                <input className="nameInput" placeholder='ex. Jennifer' onChange={(ev) => { setManagerInfo({...managerInfo, Firstname: ev.target.value})}}/>
-                                                {activeErrorsManager.Firstname ? <p>Please include a first name.</p> : null}
-                                                <label>LAST NAME *</label>    
-                                                <input className="nameInput" placeholder='ex. Smith' onChange={(ev) => { setManagerInfo({...managerInfo, Lastname: ev.target.value})}}/>
-                                                {activeErrorsManager.Lastname ? <p>Please include a last name.</p> : null}
-                                                <label>EMAIL *</label>    
-                                                <input className="emailInput" placeholder='ex. jenniferSmith@gmail.com' onChange={(ev) => { setManagerInfo({...managerInfo, email: ev.target.value})}}/>
-                                                {!activeErrorsManager.email ? <p>Please include a valid email address.</p> : null}
-                                                <div className="passwordInput">
-                                                    <label>PASSWORD *</label> 
-                                                    <div className="passwordInputInner">
-                                                        <input type={ viewPass ? 'text' : 'password'} placeholder='Enter your Password' onChange={(ev) => { setManagerInfo({...managerInfo, Password: ev.target.value})}}/>
-                                                        <div onClick={() => {setViewPass(!viewPass)}} className='toggleEye'>
-                                                            <FontAwesomeIcon style={{color: (viewPass ? '#60B0F4' : '')}} icon={faEye} />
+                                        {addingManager && branch.branchID === managerInfo.branchID ? 
+                                            <div className='popupWrapper'>
+                                                <div className='inputWrapper'>
+                                                    <h2>Branch Creator</h2>
+                                                    <label>FIRST NAME *</label>    
+                                                    <input className="nameInput" placeholder='ex. Jennifer' onChange={(ev) => { setManagerInfo({...managerInfo, Firstname: ev.target.value})}}/>
+                                                    {activeErrorsManager.Firstname ? <p>Please include a first name.</p> : null}
+                                                    <label>LAST NAME *</label>    
+                                                    <input className="nameInput" placeholder='ex. Smith' onChange={(ev) => { setManagerInfo({...managerInfo, Lastname: ev.target.value})}}/>
+                                                    {activeErrorsManager.Lastname ? <p>Please include a last name.</p> : null}
+                                                    <label>EMAIL *</label>    
+                                                    <input className="emailInput" placeholder='ex. jenniferSmith@gmail.com' onChange={(ev) => { setManagerInfo({...managerInfo, email: ev.target.value})}}/>
+                                                    {!activeErrorsManager.email ? <p>Please include a valid email address.</p> : null}
+                                                    <div className="passwordInput">
+                                                        <label>PASSWORD *</label> 
+                                                        <div className="passwordInputInner">
+                                                            <input type={ viewPass ? 'text' : 'password'} placeholder='Enter your Password' onChange={(ev) => { setManagerInfo({...managerInfo, Password: ev.target.value})}}/>
+                                                            <div onClick={() => {setViewPass(!viewPass)}} className='toggleEye'>
+                                                                <FontAwesomeIcon style={{color: (viewPass ? '#60B0F4' : '')}} icon={faEye} />
+                                                            </div>
                                                         </div>
+                                                        {activeErrorsManager.Password ? <p>Password too short. Must be minimum 7 characters.</p> : null}
                                                     </div>
-                                                    {activeErrorsManager.Password ? <p>Password too short. Must be minimum 7 characters.</p> : null}
-                                                </div>
-                                                <div className="passwordInput">
-                                                    <label>CONFIRM PASSWORD *</label> 
-                                                    <div className="passwordInputInner">
-                                                        <input type={ viewPass2 ? 'text' : 'password'} placeholder='Confirm your Password' onChange={(ev) => { setManagerInfo({...managerInfo, ConfirmPassword: ev.target.value})}}/>
-                                                        <div onClick={() => {setViewPass2(!viewPass2)}} className='toggleEye'>
-                                                            <FontAwesomeIcon style={{color: (viewPass2 ? '#60B0F4' : '')}} icon={faEye} />
+                                                    <div className="passwordInput">
+                                                        <label>CONFIRM PASSWORD *</label> 
+                                                        <div className="passwordInputInner">
+                                                            <input type={ viewPass2 ? 'text' : 'password'} placeholder='Confirm your Password' onChange={(ev) => { setManagerInfo({...managerInfo, ConfirmPassword: ev.target.value})}}/>
+                                                            <div onClick={() => {setViewPass2(!viewPass2)}} className='toggleEye'>
+                                                                <FontAwesomeIcon style={{color: (viewPass2 ? '#60B0F4' : '')}} icon={faEye} />
+                                                            </div>
                                                         </div>
+                                                        {activeErrorsManager.ConfirmPassword ? <p>Passwords do not match.</p> : null}
                                                     </div>
-                                                    {activeErrorsManager.ConfirmPassword ? <p>Passwords do not match.</p> : null}
-                                                </div>
-                                                <div className='employee-adder-buttons'>
-                                                    <button onClick={() => {
-                                                        attemptManagerAdd();
-                                                    }} className="green">Create</button>
-                                                    <button onClick={() => {
-                                                        setAddingManager(false);
-                                                        setActiveErrorsManager({email: true, Firstname: false, Lastname: false, Password: false, ConfirmPassword: false});
-                                                        setManagerInfo({Firstname: '', Lastname: '', email: '', Password: '', ConfirmPassword: '', branchID: ''});
-                                                    }} className="red">Cancel</button>
+                                                    <div className='confirmation-buttons'>
+                                                        <button onClick={() => {
+                                                            attemptManagerAdd();
+                                                        }} className="green">Create</button>
+                                                        <button onClick={() => {
+                                                            setAddingManager(false);
+                                                            setActiveErrorsManager({email: true, Firstname: false, Lastname: false, Password: false, ConfirmPassword: false});
+                                                            setManagerInfo({Firstname: '', Lastname: '', email: '', Password: '', ConfirmPassword: '', branchID: ''});
+                                                        }} className="red">Cancel</button>
+                                                    </div>
                                                 </div>
                                             </div>
                                             :
@@ -211,16 +216,18 @@ const OwnerHomePage = observer((props:any) => {
                                                                 <FontAwesomeIcon className="times" icon={faTimes}/>
                                                             </div>
                                                             {deletingManager && targetManager === manager.UserID ? 
-                                                                <div className='delete-confirmation-wrapper'>
-                                                                    <div className='confirmation-info'>
-                                                                        <h2>Are you sure you want to delete {manager.Firstname}?</h2>
-                                                                    </div>
-                                                                    <div className='confirmation-buttons'>
-                                                                        <button onClick={() => { 
-                                                                                state.deleteManager(manager.UserID, branch.branchID);
-                                                                                setDeletingManager(false);
-                                                                            }} className='green'>Confirm</button>
-                                                                        <button onClick={() => { setDeletingManager(false)}} className='red'>Cancel</button>
+                                                                <div className='popupWrapper'>
+                                                                    <div className='delete-container'>
+                                                                        <div className='confirmation-info'>
+                                                                            <h2>Are you sure you want to delete {manager.Firstname}?</h2>
+                                                                        </div>
+                                                                        <div className='confirmation-buttons'>
+                                                                            <button onClick={() => { 
+                                                                                    state.deleteManager(manager.UserID, branch.branchID);
+                                                                                    setDeletingManager(false);
+                                                                                }} className='green'>Confirm</button>
+                                                                            <button onClick={() => { setDeletingManager(false)}} className='red'>Cancel</button>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                                 :
