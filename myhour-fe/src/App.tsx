@@ -12,6 +12,8 @@ import { VerifyToken } from './components/Authentication/VerifyToken';
 import EmployeeProfile from './components/EmployeeProfile/EmployeeProfile';
 import Signup from './components/Authentication/Signup';
 import axios from 'axios';
+import Settings from './components/Settings/Settings';
+import Conversations from './components/Conversations/Conversations';
 
 const App = observer((props:any) => {
   const state = useContext(GlobalStateContext);
@@ -47,7 +49,9 @@ const App = observer((props:any) => {
       {!loading ?
         <div>
           <NoAuthRoute exact path="/Login" component={Login} />
-          <BasicAuthRoute exact path="/Home" component={HomePage} />       
+          <BasicAuthRoute exact path="/Home" component={HomePage} /> 
+          <BasicAuthRoute exact path="/Settings" component={Settings} />   
+          <BasicAuthRoute exact path="/Conversations" component={Conversations} />            
           <BasicAuthRoute exact path="/Requests" component={Calendar} />
           <BasicAuthRoute path="/Requests/List" component={RequestListPage} />
           <ManagerAuthRoute path="/Employee/:UserID" component={EmployeeProfile}/>
