@@ -119,6 +119,11 @@ h5 {
   font-size: .7rem;
   color: red; }
 
+.register {
+  border: none;
+  width: auto;
+  padding: 0; }
+
 .loginWrapper {
   position: fixed;
   top: 50%;
@@ -233,7 +238,7 @@ h5 {
   color: var(--text-color); }
 
 .signUpWrapper {
-  width: 50%;
+  width: 720px;
   margin: 0 auto;
   margin-top: 2rem; }
 

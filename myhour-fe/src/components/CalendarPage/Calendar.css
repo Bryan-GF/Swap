@@ -98,10 +98,11 @@ main {
 .calendar {
   display: block;
   position: relative;
-  width: 80%;
+  width: 70%;
   margin: 0 auto;
   background: var(--neutral-color);
-  border: 1px solid var(--border-color); }
+  border: 1px solid var(--border-color);
+  margin-bottom: 5rem; }
 
 .calendar .header {
   text-transform: uppercase;
@@ -137,7 +138,7 @@ main {
 
 .calendar .body .cell {
   position: relative;
-  height: 8em;
+  height: 7em;
   border-right: 1px solid var(--border-color);
   overflow: hidden;
   cursor: pointer;
@@ -202,7 +203,7 @@ main {
   line-height: 1;
   color: var(--main-color);
   opacity: 0;
-  font-size: 8em;
+  font-size: 7em;
   position: absolute;
   top: .18em;
   right: -.05em;

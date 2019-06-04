@@ -45,7 +45,7 @@ const Signup = observer((props:any) => {
                 <h1>Business Registration</h1>
             <div className='signUpContainer'>
                 <h5>Note: If you are an employee, request your account information from your manager or similar.</h5>
-                <div className='inputWrapper'> 
+                <div className='inputWrapper register'> 
                         <label>FIRST NAME *</label>    
                         <input className="nameInput" placeholder='ex. Jennifer' onChange={(ev) => { setRegisterInfo({...registerInfo, Firstname: ev.target.value})}}/>
                         {activeErrors.Firstname ? <p>Please include a first name.</p> : null}
@@ -84,7 +84,7 @@ const Signup = observer((props:any) => {
                 </div>
                 <div className='registerButtons'>
                     <button onClick={() => {attemptRegister()}}className='register'>Register</button>
-                    <button onClick={() => {}} className='cancel'>Cancel</button>
+                    <button onClick={() => { props.history.push('/')}} className='cancel'>Cancel</button>
                 </div>
             </div>
         </div>

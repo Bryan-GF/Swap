@@ -250,7 +250,10 @@
         .request-list-wrapper .list-content .request-wrapper .request-content span {
           font-weight: bold; }
       .request-list-wrapper .list-content .request-wrapper .request-buttons {
-        margin-left: auto; }
+        display: flex;
+        justify-content: flex-end;
+        margin-left: auto;
+        width: 305px; }
         .request-list-wrapper .list-content .request-wrapper .request-buttons button {
           margin-left: .8rem;
           background: #60B0F4;
@@ -258,7 +261,8 @@
           color: white;
           padding: 1rem 2rem;
           font-size: 1.2rem;
-          outline: none; }
+          outline: none;
+          height: 54px; }
         .request-list-wrapper .list-content .request-wrapper .request-buttons button:hover {
           cursor: pointer;
           background: #2b7ec7; }

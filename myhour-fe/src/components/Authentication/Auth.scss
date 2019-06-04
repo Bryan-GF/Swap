@@ -143,6 +143,12 @@ h5 {
     
 }
 
+.register {
+    border: none;
+    width: auto;
+    padding: 0;
+}
+
 
 .loginWrapper {
     position: fixed;
@@ -271,7 +277,7 @@ h5 {
 }
 
 .signUpWrapper {
-    width: 50%;
+    width: 720px;
     margin: 0 auto;
     margin-top: 2rem;
     h1 {

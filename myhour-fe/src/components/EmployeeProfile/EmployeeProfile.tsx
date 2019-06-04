@@ -57,6 +57,7 @@ const EmployeeProfile = observer((props:any) => {
     }
 
     const handleAddShift = async () => {
+        setAddingShift(false);
         const result = await state.addShift(state.currEmployee.UserID, startDate.toISOString(), timeEditHelper(startTime), timeEditHelper(endTime));
         if(result) {
             state.setCurrShifts([...state.currShifts, {
@@ -66,7 +67,7 @@ const EmployeeProfile = observer((props:any) => {
                 endTime: moment(endTime, 'HH:mm:ss').format('h:mm A')
             }]);
         }
-        setAddingShift(false);
+        
     }
 
     const timeEditHelper = (time) => {

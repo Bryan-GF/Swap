@@ -1,14 +1,11 @@
 import React, {useContext, useEffect} from 'react';
 import {observer} from 'mobx-react-lite';
-import { GlobalStateContext } from '../../Stores/GlobalStore';
 import { Link } from 'react-router-dom';
 import LandingNav from '../Navigation/LandingNav';
 import './Landing.css';
-import axios from 'axios';
+import intro from '../../assets/intro.mp4';
 
 const LandingPage = observer(() => {
-    
-    const state = useContext(GlobalStateContext);
 
     useEffect(() => {
 
@@ -27,7 +24,10 @@ const LandingPage = observer(() => {
                         </div>
                     </div>
                     <div className="imgContent">
-
+                        <video autoPlay loop muted>
+                            <source src={intro} type="video/mp4" />
+                            Your browser does not support the video tag.
+                        </video>
                     </div>
                 </div>
                 <div className="Swap-Benefits shadow">
@@ -64,7 +64,7 @@ const LandingPage = observer(() => {
                                 <p>Up to 4 employees per group</p>
                                 <p>Access to all main features.</p>
                                 <div className='signupButton'>
-                                    <Link to='/SignUp'>Sign Up Now</Link>
+                                    <Link to='/Register'>Sign Up Now</Link>
                                 </div>
                             </div>
                         </div>
@@ -78,7 +78,7 @@ const LandingPage = observer(() => {
                                 <p>Up to 20 employees per group</p>
                                 <p>Access to all main features.</p>
                                 <div className='signupButton'>
-                                    <Link to='/SignUp'>Sign Up Now</Link>
+                                    <Link to='/Register'>Sign Up Now</Link>
                                 </div>
                             </div>
                         </div>
@@ -92,7 +92,7 @@ const LandingPage = observer(() => {
                                 <p>Unlimited employees per group</p>
                                 <p>Access to all main features.</p>
                                 <div className='signupButton'>
-                                    <Link to='/SignUp'>Sign Up Now</Link>
+                                    <Link to='/Register'>Sign Up Now</Link>
                                 </div>
                             </div>
                         </div>
