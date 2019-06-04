@@ -1,6 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {observer } from 'mobx-react-lite';
-import { toJS } from 'mobx';
 import { GlobalStateContext } from '../../Stores/GlobalStore';
 import './Home.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'

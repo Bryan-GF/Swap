@@ -18,6 +18,8 @@ class GlobalState {
 
     @observable BranchManagers = {};
 
+    @observable incorrectPassword = false;
+
     //IMPORTANT FOR REQUESTS
     
     @observable todaysShifts = [];
@@ -54,6 +56,20 @@ class GlobalState {
             return true;
         }).catch(err => {
             return false;
+        })
+    }
+
+    @action attemptReset = async(passwordInfo) => {
+        return await axios
+        .put('https://swapapi.azurewebsites.net/api/ResetPassword', {...passwordInfo, UserID: this.userData.UserID})
+        .then(res => {
+            this.incorrectPassword = false;
+            return true;  
+        }).catch(err => {
+            if(err.response.status === 406) {
+                this.incorrectPassword = true;
+            }
+            return true;
         })
     }
 

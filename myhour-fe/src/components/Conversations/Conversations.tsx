@@ -1,7 +1,5 @@
-import React, {useContext, useEffect} from 'react';
+import React from 'react';
 import {observer} from 'mobx-react-lite';
-
-import { Link } from 'react-router-dom';
 import './Conversations.css';
 import Nav from '../Navigation/Nav';
 
