@@ -4,90 +4,75 @@
 .Settings-Container {
   width: 1000px;
   margin: 0 auto; }
-
-.Settings-Container h2 {
-  background: var(--main-color);
-  color: white;
-  padding: 2rem 2rem;
-  font-size: 2rem; }
-
-.Settings-Container .Settings-Content {
-  background: white;
-  padding: 2rem 2rem; }
-
-.Settings-Container .Settings-Content .Reset-Password {
-  display: flex;
-  flex-direction: column;
-  width: 400px; }
-
-.Settings-Container .Settings-Content .Reset-Password h3 {
-  font-size: 1.5rem;
-  margin-bottom: 1rem; }
-
-.Settings-Container .Settings-Content .Reset-Password form {
-  display: flex;
-  flex-direction: column; }
-
-.Settings-Container .Settings-Content .Reset-Password form label {
-  font-size: .7rem;
-  margin-top: .8rem; }
-
-.Settings-Container .Settings-Content .Reset-Password form input {
-  border-radius: 4px;
-  outline: none;
-  border: 1px solid var(--text-color);
-  padding: .8rem .5rem; }
-
-.Settings-Container .Settings-Content .Reset-Password form p {
-  font-size: .8rem;
-  color: red; }
-
-.Settings-Container .Settings-Content .Reset-Password form .Reset-Button {
-  width: 30%;
-  font-size: 1rem;
-  margin-top: 1rem;
-  padding: .8rem 0;
-  color: white;
-  font-weight: bold;
-  background: #77EE62;
-  border: none;
-  border-radius: 0;
-  text-align: center; }
-
-.Settings-Container .Settings-Content .Reset-Password form .Reset-Button .lds-ring {
-  display: inline-block;
-  position: relative;
-  width: 34px;
-  height: 30px;
-  margin-left: -8px; }
-
-.Settings-Container .Settings-Content .Reset-Password form .Reset-Button .lds-ring div {
-  box-sizing: border-box;
-  display: block;
-  position: absolute;
-  width: 30px;
-  height: 30px;
-  margin: 6px;
-  border: 6px solid #fff;
-  border-radius: 50%;
-  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-  border-color: #fff transparent transparent transparent; }
-
-.Settings-Container .Settings-Content .Reset-Password form .Reset-Button .lds-ring div:nth-child(1) {
-  animation-delay: -0.45s; }
-
-.Settings-Container .Settings-Content .Reset-Password form .Reset-Button .lds-ring div:nth-child(2) {
-  animation-delay: -0.3s; }
-
-.Settings-Container .Settings-Content .Reset-Password form .Reset-Button .lds-ring div:nth-child(3) {
-  animation-delay: -0.15s; }
+  .Settings-Container h2 {
+    background: var(--main-color);
+    color: white;
+    padding: 2rem 2rem;
+    font-size: 2rem; }
+  .Settings-Container .Settings-Content {
+    background: white;
+    padding: 2rem 2rem; }
+    .Settings-Container .Settings-Content .Reset-Password {
+      display: flex;
+      flex-direction: column;
+      width: 400px; }
+      .Settings-Container .Settings-Content .Reset-Password h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem; }
+      .Settings-Container .Settings-Content .Reset-Password form {
+        display: flex;
+        flex-direction: column; }
+        .Settings-Container .Settings-Content .Reset-Password form label {
+          font-size: .7rem;
+          margin-top: .8rem; }
+        .Settings-Container .Settings-Content .Reset-Password form input {
+          border-radius: 4px;
+          outline: none;
+          border: 1px solid var(--text-color);
+          padding: .8rem .5rem; }
+        .Settings-Container .Settings-Content .Reset-Password form p {
+          font-size: .8rem;
+          color: red; }
+        .Settings-Container .Settings-Content .Reset-Password form .Reset-Button {
+          width: 30%;
+          font-size: 1rem;
+          margin-top: 1rem;
+          padding: .8rem 0;
+          color: white;
+          font-weight: bold;
+          background: #77EE62;
+          border: none;
+          border-radius: 0;
+          text-align: center; }
+          .Settings-Container .Settings-Content .Reset-Password form .Reset-Button .lds-ring {
+            display: inline-block;
+            position: relative;
+            width: 34px;
+            height: 30px;
+            margin-left: -8px; }
+          .Settings-Container .Settings-Content .Reset-Password form .Reset-Button .lds-ring div {
+            box-sizing: border-box;
+            display: block;
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            margin: 6px;
+            border: 6px solid #fff;
+            border-radius: 50%;
+            animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+            border-color: #fff transparent transparent transparent; }
+          .Settings-Container .Settings-Content .Reset-Password form .Reset-Button .lds-ring div:nth-child(1) {
+            animation-delay: -0.45s; }
+          .Settings-Container .Settings-Content .Reset-Password form .Reset-Button .lds-ring div:nth-child(2) {
+            animation-delay: -0.3s; }
+          .Settings-Container .Settings-Content .Reset-Password form .Reset-Button .lds-ring div:nth-child(3) {
+            animation-delay: -0.15s; }
 
 @keyframes lds-ring {
   0% {
     transform: rotate(0deg); }
   100% {
     transform: rotate(360deg); } }
-
-.Settings-Container .Settings-Content .Reset-Password form .Reset-Button:hover {
-  background: #71E05D;
-  cursor: pointer; }
+        .Settings-Container .Settings-Content .Reset-Password form .Reset-Button:hover {
+          background: #71E05D;
+          cursor: pointer; }

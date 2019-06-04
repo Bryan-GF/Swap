@@ -14,18 +14,15 @@ const Login= observer((props:any) => {
     const state = useContext(GlobalStateContext);
     const [loginInfo, setLoginInfo] = useState({email: '', Password: ''});
     const [viewPass, setViewPass] = useState(false);
+    const [loading, setLoading] = useState(false);
 
-    const attemptLogin = () => {
-        axios
-        .post('https://swapapi.azurewebsites.net/api/Authenticate', loginInfo)
-        .then(res => {
-            console.log(res.data);
-            localStorage.setItem('Token', res.data.Token);
-            let User = {"email": res.data.employeeID, "Firstname": res.data.Firstname, "Lastname": res.data.Lastname, "Position": res.data.Position, "branchID": res.data.branchID, "UserID": res.data.UserID, CompanyID: res.data.CompanyID, roles: res.data.roles}
-            state.setUserData(User);
-            state.setLoginStatus(true);
-            props.history.push('/Home');           
-        }).catch(err => console.log(err))
+    const attemptLogin = async() => {
+        setLoading(true);
+        let status = await state.attemptLogin(loginInfo);
+        if(status) {
+            props.history.push('/Home');
+        }
+        setLoading(false);
     }
 
     return (
@@ -44,7 +41,14 @@ const Login= observer((props:any) => {
                         </div>
                     </div>
                 </div>
-                <button onClick={() => {attemptLogin()}}className='loginButton'>Login</button>
+                {state.incorrectPassword ? <p>Incorrect email or password.</p> : null}
+                <div className="loginButton" onClick={() => { attemptLogin()}}>
+                    {loading ?
+                        <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
+                        :
+                        'Login'
+                    }
+                </div>
             </div>
         </div>
     )

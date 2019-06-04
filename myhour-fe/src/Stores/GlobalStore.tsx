@@ -64,12 +64,12 @@ class GlobalState {
         .put('https://swapapi.azurewebsites.net/api/ResetPassword', {...passwordInfo, UserID: this.userData.UserID})
         .then(res => {
             this.incorrectPassword = false;
-            return true;  
+            return false;  
         }).catch(err => {
             if(err.response.status === 406) {
                 this.incorrectPassword = true;
             }
-            return true;
+            return false;
         })
     }
 
@@ -307,8 +307,22 @@ class GlobalState {
     }
 
     //LOGIN ACTIONS
-    @action attemptLogin = () => {
-        console.log('attempted')
+    @action attemptLogin = async(loginInfo) => {
+        return await axios
+        .post('https://swapapi.azurewebsites.net/api/Authenticate', loginInfo)
+        .then(res => {
+            localStorage.setItem('Token', res.data.Token);
+            this.userData = res.data;
+            this.loginStatus = true;
+            this.incorrectPassword = false;
+            return true;        
+        }).catch(err => {
+            console.log(err)
+            if(err.response.status === 406) {
+                this.incorrectPassword = true;
+            }
+            return false;
+        })
     }
 
     @action setLoginStatus = (status: boolean) => {

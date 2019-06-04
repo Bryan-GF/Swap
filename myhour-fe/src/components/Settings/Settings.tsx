@@ -26,9 +26,7 @@ const Settings = observer((props:any) => {
             setLoading(true);
             console.log("Attempt");
             let status = await state.attemptReset(passwordInfo);
-            if(status) {
-                setLoading(false);
-            } 
+            setLoading(status);
             
         }
     }
