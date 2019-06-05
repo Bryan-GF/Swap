@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashAlt, faPlusSquare, faPlusCircle } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom';
 import DeleteEmployee from '../Delete/DeleteEmployee';
+import isEmail from 'validator/lib/isEmail';
 
 const ManagerHomePage = observer((props:any) => {
 
@@ -20,13 +21,13 @@ const ManagerHomePage = observer((props:any) => {
         "Position": '',
         "Password": ''
     })
-    const [activeErrors, setActiveErrors] = useState({"email": false, "Firstname": false, "Lastname": false, "Position": false, "Password": false})
+    const [activeErrors, setActiveErrors] = useState({"email": true, "Firstname": false, "Lastname": false, "Position": false, "Password": false})
     const [targetEmployee, setTargetEmployee] = useState({Name: '', UserID: ''});
 
     const handleAddEmployee = async() => {
         const {email, Firstname, Lastname, Password, Position} = newEmployeeInfo;
-        let safeActive = {"email": false, "Firstname": false, "Lastname": false, "Position": false, "Password": false}
-        let newActive = {"email": email.length === 0, "Firstname": Firstname.length === 0, "Lastname": Lastname.length === 0, "Position": Position.length === 0, "Password": Password.length < 7}
+        let safeActive = {"email": true, "Firstname": false, "Lastname": false, "Position": false, "Password": false}
+        let newActive = {"email": isEmail(email), "Firstname": Firstname.length === 0, "Lastname": Lastname.length === 0, "Position": Position.length === 0, "Password": Password.length < 7}
         setActiveErrors(newActive)
         if(JSON.stringify(safeActive) === JSON.stringify(newActive)) {
             setActiveErrors({"email": false, "Firstname": false, "Lastname": false, "Position": false, "Password": false});
@@ -45,26 +46,25 @@ const ManagerHomePage = observer((props:any) => {
     return (
         <div>
             {addingUser ? 
-                    <div className='employee-adder-wrapper'>
-                        <h2>Add Employee</h2>
-                        <div className='adder-content'>
-                            <span>Email</span>
+                    <div className='popupWrapper'>                      
+                        <div className='inputWrapper'>
+                            <h2>Add Employee</h2>
+                            <label>Email</label>
                             <input type="text" onChange={(ev) => {setNewEmployeeInfo({...newEmployeeInfo, "email": ev.target.value})}}/>
-                            {activeErrors.email ? <p>Please include a valid email.</p> : null}
-                            <span>First Name</span>
+                            {!activeErrors.email ? <p>Please include a valid email.</p> : null}
+                            <label>First Name</label>
                             <input type="text" onChange={(ev) => {setNewEmployeeInfo({...newEmployeeInfo, "Firstname": ev.target.value})}}/>
                             {activeErrors.Firstname ? <p>Please include a first name.</p> : null}
-                            <span>Last Name</span>
+                            <label>Last Name</label>
                             <input type="text" onChange={(ev) => {setNewEmployeeInfo({...newEmployeeInfo, "Lastname": ev.target.value})}}/>
                             {activeErrors.Lastname ? <p>Please include a last name.</p> : null}
-                            <span>Position</span>
+                            <label>Position</label>
                             <input type="text" onChange={(ev) => {setNewEmployeeInfo({...newEmployeeInfo, "Position": ev.target.value})}}/>
                             {activeErrors.Position ? <p>Please include a position.</p> : null}
-                            <span>Temporary Password</span>
+                            <label>Temporary Password</label>
                             <input type="text" onChange={(ev) => {setNewEmployeeInfo({...newEmployeeInfo, "Password": ev.target.value})}}/>
                             {activeErrors.Password ? <p>Password must be a minimum of 7 characters.</p> : null}
-                        </div>
-                        <div className='employee-adder-buttons'>
+                            <div className='confirmation-buttons'>
                             <button onClick={() => {
                                 handleAddEmployee();
                                 
@@ -75,6 +75,8 @@ const ManagerHomePage = observer((props:any) => {
                                 setNewEmployeeInfo({"email": '', "Firstname": '', "Lastname": '', "Position": '', "Password": ''});
                             }} className="red">Cancel</button>
                         </div>
+                        </div>
+                        
                     </div>
                 : ''}
             {deletingUser ?
