@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {Component, useContext, useEffect, useState} from 'react';
 import {observer} from 'mobx-react-lite';
 import { GlobalStateContext } from '../../Stores/GlobalStore';
 import Nav from '../Navigation/Nav';
@@ -10,9 +10,6 @@ import DeleteEmployee from '../Delete/DeleteEmployee';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 
-
-//GOAL FOR TOMORROW: Get Editing and Deleting Shifts, that should take 2 hours. Next I will move onto getting shifts shwoing up
-// on request creation.
 
 const EmployeeProfile = observer((props:any) => {
     
@@ -52,6 +49,7 @@ const EmployeeProfile = observer((props:any) => {
         if(status) {
             state.setCurrShifts(state.currShifts.filter((shift) =>
             shift.ShiftID != currDelete));
+            
         }
         setDeletingShift(false);
     }
@@ -292,6 +290,6 @@ const EmployeeProfile = observer((props:any) => {
 });
 
 export default EmployeeProfile;
-import "react-datepicker/dist/react-datepicker.css";
+import "./react-datepicker.css";
 
 
