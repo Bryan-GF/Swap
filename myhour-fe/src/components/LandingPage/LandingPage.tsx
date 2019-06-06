@@ -3,7 +3,7 @@ import {observer} from 'mobx-react-lite';
 import { Link } from 'react-router-dom';
 import LandingNav from '../Navigation/LandingNav';
 import './Landing.css';
-
+import intro from '../../assets/intro.mp4';
 
 const LandingPage = observer(() => {
 
@@ -16,11 +16,14 @@ const LandingPage = observer(() => {
                         <h2>Finding a replacement can be hard.</h2>
                         <p>Swap is an easy to use shift trading tool built for the convenience of both Employees and Management.</p>
                         <div className='signupButton'>
-                            <Link to='/SignUp'>Sign Up Now</Link>
+                            <Link to='/Register'>Sign Up Now</Link>
                         </div>
                     </div>
                     <div className="imgContent">
-                        
+                        <video autoPlay loop muted>
+                            <source src={intro} type="video/mp4" />
+                            Your browser does not support the video tag.
+                        </video>
                     </div>
                 </div>
                 <div className="Swap-Benefits shadow">
