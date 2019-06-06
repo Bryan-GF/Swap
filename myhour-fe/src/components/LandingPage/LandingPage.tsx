@@ -7,10 +7,6 @@ import intro from '../../assets/intro.mp4';
 
 const LandingPage = observer(() => {
 
-    useEffect(() => {
-
-    }, [])
-
     return (
         <div>
             <LandingNav/>
