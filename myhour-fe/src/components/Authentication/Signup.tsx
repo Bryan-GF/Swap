@@ -8,6 +8,7 @@ import './Auth.css';
 import { withRouter } from 'react-router';
 import isEmail from 'validator/lib/isEmail';
 import isMobilePhone from 'validator/lib/isMobilePhone';
+import axios from 'axios';
 
 //EXTRA
 const Signup = observer((props:any) => {
@@ -32,10 +33,19 @@ const Signup = observer((props:any) => {
         if(JSON.stringify(safeActive) === JSON.stringify(newActive)) {
             let status = await state.addCompany(registerInfo);
             if(status) {
-                state.setUserData({UserID: status.UserID , email : email,  Firstname: Firstname, Lastname: Lastname, Position: "Company Ownder", branchID: "", CompanyID: status.CompanyID, roles: "Owner"});
+                axios.interceptors.request.use(
+                    config => {
+                      if (!config.headers.Authorization) {                
+                        config.headers.Authorization = status.Token;
+                      }
+                  
+                      return config;
+                    },
+                    error => Promise.reject(error)
+                );
+                state.setUserData({UserID: status.UserID , email : email,  Firstname: Firstname, Lastname: Lastname, Position: "Company Owner", branchID: "", CompanyID: status.CompanyID, roles: "Owner"});
                 state.setLoginStatus(true);
                 props.history.push('/Home');
-
             }
         } 
     }

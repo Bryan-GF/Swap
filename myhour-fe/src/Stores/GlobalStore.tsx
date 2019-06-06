@@ -154,11 +154,13 @@ class GlobalState {
     }
 
     @action addManager = async(managerInfo) => {
+        console.log(managerInfo);
         return await axios
         .post('https://swapapi.azurewebsites.net/api/AddManager', {...managerInfo, CompanyID: this.userData.CompanyID})
         .then(res => {
             if(res.data) {
-                this.BranchManagers[managerInfo.branchID] = [...this.BranchManagers[managerInfo.branchID], {email: managerInfo.email, UserID: managerInfo.UserID, Firstname: managerInfo.Firstname, Lastname: managerInfo.Lastname}];
+                this.BranchManagers[managerInfo.branchID] = [...this.BranchManagers[managerInfo.branchID], {email: managerInfo.email, UserID: res.data, Firstname: managerInfo.Firstname, Lastname: managerInfo.Lastname}];
+                console.log(this.BranchManagers);
                 return res.data;
             }
                  

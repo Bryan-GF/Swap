@@ -26,6 +26,8 @@ const OwnerHomePage = observer((props:any) => {
         let status = (branchName.length === 0);
         setActiveErrorsBranch(status);
         if(!status) {
+            console.log(state.userData.CompanyID);
+            console.log(branchName)
             state.addBranch(branchName);
             setAddingBranch(false);
             setBranchName('');
@@ -45,8 +47,8 @@ const OwnerHomePage = observer((props:any) => {
             ConfirmPassword: Password != ConfirmPassword
         }
         setActiveErrorsManager(newActive)
-        console.log(newActive);
         if(JSON.stringify(safeActive) === JSON.stringify(newActive)) {
+            
             let status = await state.addManager(managerInfo);
             if(status) {
                 setAddingManager(false);
