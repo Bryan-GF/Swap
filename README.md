@@ -15,6 +15,7 @@ My goal with this application was just as the description says, to make trading 
 - At the moment the site is only available in Desktop view.
 
 ### Login Information (For testing purposes)
+
 #### Company Owner
 email: testowner@gmail.com
 password: testpassword
