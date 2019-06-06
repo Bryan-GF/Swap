@@ -3,7 +3,7 @@ import {observer} from 'mobx-react-lite';
 import { Link } from 'react-router-dom';
 import LandingNav from '../Navigation/LandingNav';
 import './Landing.css';
-import intro from '../../assets/intro.mp4';
+import main from '../../assets/team_meeting_2.png';
 
 const LandingPage = observer(() => {
 
@@ -20,10 +20,7 @@ const LandingPage = observer(() => {
                         </div>
                     </div>
                     <div className="imgContent">
-                        <video autoPlay loop muted>
-                            <source src={intro} type="video/mp4" />
-                            Your browser does not support the video tag.
-                        </video>
+                            <img src={main} />
                     </div>
                 </div>
                 <div className="Swap-Benefits shadow">

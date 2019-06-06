@@ -43,7 +43,7 @@ h3 {
 }
 
 .Swap-Intro {
-    padding: 1rem 3rem;
+    padding: 1rem 9vw;
     height: 35rem;
 
     display: flex;
@@ -52,8 +52,17 @@ h3 {
         width: 200px;
     }
 
+    .imgContent {
+        margin-left: auto;
+        img {
+            width: 586px;
+            height: 430px;
+        }
+    }
+
     .textContent {
         width: 50%;
+        margin-right: 2rem;
         h2 {
             font-size: 2.3rem;
             font-weight: 600;
