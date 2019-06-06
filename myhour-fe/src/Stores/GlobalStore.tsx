@@ -1,7 +1,7 @@
 import {observable, action, computed} from 'mobx';
 import {createContext} from 'react';
 import axios from 'axios';
-import {toast } from 'react-toastify';
+
 
 class GlobalState {
     @observable userData = {UserID: "" , email : "",  Firstname: "", Lastname: "", Position: "", branchID: "", CompanyID: "", roles: ""};
@@ -245,9 +245,7 @@ class GlobalState {
         return await axios
         .post('https://swapapi.azurewebsites.net/api/AddShift', {"UserID": ID, "shiftDate": shiftDate, "startTime": startTime, "endTime": endTime})
         .then(res => {
-            toast.success("Successfuly posted review!", {
-                position: toast.POSITION.BOTTOM_RIGHT
-            });
+            
             return res.data;   
         }).catch(err => {
             return null;
