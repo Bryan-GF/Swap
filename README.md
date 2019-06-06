@@ -18,15 +18,18 @@ My goal with this application was just as the description says, to make trading 
 
 #### Company Owner
 email: testowner@gmail.com
+
 password: testpassword
 
 #### Branch/Team Manager
 email: testmanager@gmail.com
+
 password: testpassword
 
 #### Employee
 email: testemployeer@gmail.com
+
 password: testpassword
 
-LIVE SITE: https://swap.azurewebsites.net/
+### LIVE SITE: https://swap.azurewebsites.net/
 
