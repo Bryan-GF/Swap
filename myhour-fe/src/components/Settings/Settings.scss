@@ -17,57 +17,58 @@
         background: white;
         padding: 2rem 2rem;
 
-        .Reset-Password {           
-            display: flex;
-            flex-direction: column;
-            width: 400px;
+    }
+}
 
-            h3 {
-                font-size: 1.5rem;
-                margin-bottom: 1rem;
-            }
+.Reset-Password {           
+    display: flex;
+    flex-direction: column;
+    width: 400px;
 
-            form {
-                display: flex;
-                flex-direction: column;
+    h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
 
-                label {
-                    font-size: .7rem;
-                    margin-top: .8rem;
-                    
-                }
-                
-                input {
-                    border-radius: 4px;
-                    outline: none;
-                    border: 1px solid var(--text-color);
-                    padding: .8rem .5rem;
-                }
+    form {
+        display: flex;
+        flex-direction: column;
 
-                p {
-                    font-size: .8rem;
-                    color: red;
-                }
+        label {
+            font-size: .7rem;
+            margin-top: .8rem;
+            
+        }
+        
+        input {
+            border-radius: 4px;
+            outline: none;
+            border: 1px solid var(--text-color);
+            padding: .8rem .5rem;
+        }
 
-                .Reset-Button {
-                    width: 30%;
-                    font-size: 1rem;
-                    margin-top: 1rem;
-                    padding: .8rem 0;
-                    color: white;
-                    font-weight: bold;
-                    background: #77EE62;
-                    border: none;
-                    border-radius: 0;
-                    text-align: center;
-                      
-                }
+        p {
+            font-size: .8rem;
+            color: red;
+        }
 
-                .Reset-Button:hover {
-                    background: #71E05D;
-                    cursor: pointer;                   
-                }
-            }
+        .Reset-Button {
+            width: 30%;
+            font-size: 1rem;
+            margin-top: 1rem;
+            padding: .8rem 0;
+            color: white;
+            font-weight: bold;
+            background: #77EE62;
+            border: none;
+            border-radius: 0;
+            text-align: center;
+              
+        }
+
+        .Reset-Button:hover {
+            background: #71E05D;
+            cursor: pointer;                   
         }
     }
 }

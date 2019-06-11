@@ -14,6 +14,7 @@ import Signup from './components/Authentication/Signup';
 import axios from 'axios';
 import Settings from './components/Settings/Settings';
 import Conversations from './components/Conversations/Conversations';
+import ResetPassword from './components/ResetPassword/ResetPasswordPage';
 
 const App = observer((props:any) => {
   const state = useContext(GlobalStateContext);
@@ -49,6 +50,7 @@ const App = observer((props:any) => {
       {!loading ?
         <div>
           <NoAuthRoute exact path="/Login" component={Login} />
+          <NoAuthRoute exact path="/ResetPassword" component={ResetPassword} />
           <BasicAuthRoute exact path="/Home" component={HomePage} /> 
           <BasicAuthRoute exact path="/Settings" component={Settings} />   
           <BasicAuthRoute exact path="/Conversations" component={Conversations} />            

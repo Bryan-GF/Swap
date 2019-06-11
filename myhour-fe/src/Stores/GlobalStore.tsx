@@ -61,7 +61,7 @@ class GlobalState {
 
     @action attemptReset = async(passwordInfo) => {
         return await axios
-        .put('https://swapapi.azurewebsites.net/api/ResetPassword', {...passwordInfo, UserID: this.userData.UserID})
+        .put('https://swapapi.azurewebsites.net/api/ResetPassword', {...passwordInfo, email: this.userData.email})
         .then(res => {
             this.incorrectPassword = false;
             return false;  

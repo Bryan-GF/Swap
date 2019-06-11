@@ -2,7 +2,7 @@ import React, {useContext, useState} from 'react';
 import {observer} from 'mobx-react-lite';
 import { GlobalStateContext } from '../../Stores/GlobalStore';
 import Nav from '../Navigation/Nav';
-import './Settings.css'
+import './Settings.css';
 import { loadingIndicatorCSS } from 'react-select/lib/components/indicators';
 
 

@@ -4,9 +4,9 @@ import { GlobalStateContext } from '../../Stores/GlobalStore';
 import logo from '../../assets/logo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye } from '@fortawesome/free-solid-svg-icons'
-import './Auth.css';
-import axios from 'axios';
+import './Auth.css';;
 import { withRouter } from 'react-router';
+import { Link } from 'react-router-dom';
 
 
 const Login= observer((props:any) => {
@@ -42,6 +42,7 @@ const Login= observer((props:any) => {
                     </div>
                 </div>
                 {state.incorrectPassword ? <p>Incorrect email or password.</p> : null}
+                <Link to='/ResetPassword'>Reset Password</Link>
                 <div className="loginButton" onClick={() => { attemptLogin()}}>
                     {loading ?
                         <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
@@ -49,6 +50,7 @@ const Login= observer((props:any) => {
                         'Login'
                     }
                 </div>
+
             </div>
         </div>
     )
