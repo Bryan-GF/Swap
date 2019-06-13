@@ -1,25 +1,22 @@
+// Global State
+import { GlobalStateContext } from '../../Stores/GlobalStore';
+
+// Functional package imports
 import React, {useState, useEffect, useContext} from 'react';
 import {observer} from 'mobx-react-lite';
-import './Requests.css';
-import Nav from '../Navigation/Nav';
-import queryString from 'query-string';
-import { GlobalStateContext } from '../../Stores/GlobalStore';
 import format from 'date-fns/format';
 import {fixTime} from './RequestHelper';
-import DeleteRequest from '../Delete/DeleteRequest';
+import queryString from 'query-string';
+
+// Desgin
+import './Requests.css';
 import avatar from '../../assets/avatar.png';
 
-/*NOTES:
-Important:
-    - Need to make it so someone can't add a shift to their schedule if they already have a shift at that time.
-    - Possibly need a way to limit how many hours someone can work a day.
-    - Need a clickaway for the create request.
-    - Need a popup for the accept button, to double confirm they want to take the shift. Also needs clickaway.
-    - Need to make it so urgent requests always show up first.
-For Later: 
-    - Messages should open up the conversation tab with the ability to message the person of interest.
-*/
+// Components
+import DeleteRequest from '../Delete/DeleteRequest';
+import Nav from '../Navigation/Nav';
 
+// Requests list page component, displays every available request.
 const RequestListPage = observer((props:any) => {
 
     const state = useContext(GlobalStateContext);
@@ -31,20 +28,24 @@ const RequestListPage = observer((props:any) => {
         Version: string;
     }
 
-    const [creatingRequest, setCreatingRequest] = useState(false);
-    const [requestContent, setRequestContent] = useState<RequestContent>({Comment: '', ShiftID: '', Urgent: false, Version: ''});
-    const [requestTime, setRequestTime] = useState('');
+    // Popup Handlers
     const [acceptingRequest, setAcceptingRequest] = useState(false);
     const [deletingRequest, setDeletingRequest] = useState(false);
-    const [targetRequest, setTargetRequest] = useState('');
-    
-    //const [date, setDate] = useState('');
+    const [creatingRequest, setCreatingRequest] = useState(false);
 
+    // Content Handlers
+    const [requestContent, setRequestContent] = useState<RequestContent>({Comment: '', ShiftID: '', Urgent: false, Version: ''});
+    const [requestTime, setRequestTime] = useState('');
+
+    //Target Handlers
+    const [targetRequest, setTargetRequest] = useState('');
+
+    // Attempts to post request. On success add neq request to global state todaysRequest array.
+    // Then filters global state todaysShifts array to remove shift. Switches creatingRequest locale
+    // state value to false, getting rid of popup.
     const handlePost = async() => {
-        console.log(requestContent);
         if(requestContent.ShiftID.length > 1) {           
             let status = await state.addRequest(requestContent);
-
             if(status) {
                 state.setTodaysRequests([...state.todaysRequests, {
                     Comment: requestContent.Comment,
@@ -69,6 +70,8 @@ const RequestListPage = observer((props:any) => {
         setCreatingRequest(false);
     }
 
+    // Attempts to accept request through global state function acceptRequest. On success
+    // sets local state acceptingRequest value to false, getting rid of popup.
     const handleAcceptRequest = async (UserID, ShiftID, Version) => {
         let status = await state.acceptRequest(UserID, ShiftID, Version);
         if(status) {
@@ -77,13 +80,17 @@ const RequestListPage = observer((props:any) => {
         
     }
 
-    useEffect(() => {
-        
+
+    // On component did mount, attempts to get requests for the day through global state function
+    // getRequestsByDay.
+    useEffect(() => {   
         const values = queryString.parse(props.location.search)
         const val = format(
             values.date.toString(), 
             'YYYY-MM-DD'
         );
+
+        // Have to use a function for useEffect to allow async.
         async function getData () {
             state.getRequestsByDay(val);
             const shiftInfo = await state.getShiftsByDay(val);
@@ -97,7 +104,6 @@ const RequestListPage = observer((props:any) => {
         
     }, [])
 
-    console.log(requestContent);
     return (
         <div>
             <Nav/>

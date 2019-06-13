@@ -1,16 +1,24 @@
+// Global State
+import { GlobalStateContext } from '../../Stores/GlobalStore';
+
+// Functional package imports
 import React, {useContext} from 'react';
 import {observer} from 'mobx-react-lite';
 import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router';
+
+// Design
 import './Nav.css';
-import { GlobalStateContext } from '../../Stores/GlobalStore';
 import logo from '../../assets/logo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
-import { withRouter } from 'react-router';
 
+// Navigation for non landing nav pages when user is logged in.
 const Nav = observer((props:any) => {
 
     const state = useContext(GlobalStateContext);
+
+    // Deletes the access token from local storage and sets global state loginStatus value to false.
     const handleLogout = () => {
         localStorage.removeItem("Token");
         state.setLoginStatus(false);

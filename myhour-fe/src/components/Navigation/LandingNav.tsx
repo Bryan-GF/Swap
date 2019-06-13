@@ -1,8 +1,13 @@
+// Functional package imports
 import React from 'react';
 import { Link } from 'react-router-dom';
+
+// Design
 import './Nav.css';
 import logo from '../../assets/logo.png'
 
+
+// Navigation for landing page component.
 const LandingNav = () => {
     return (
         <div className='navigation'>    

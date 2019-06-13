@@ -1,10 +1,16 @@
+// Functional package imports
 import React, {useContext, useEffect} from 'react';
 import {observer} from 'mobx-react-lite';
 import { Link } from 'react-router-dom';
-import LandingNav from '../Navigation/LandingNav';
+
+// Desgin
 import './Landing.css';
 import main from '../../assets/team_meeting_2.png';
 
+// Components
+import LandingNav from '../Navigation/LandingNav';
+
+// Landing page component
 const LandingPage = observer(() => {
 
     return (

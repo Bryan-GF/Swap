@@ -1,11 +1,17 @@
+// Global State
+import { GlobalStateContext } from '../../Stores/GlobalStore';
+
+// Functional package imports
 import React, {useContext, useEffect} from 'react';
 import {observer} from 'mobx-react-lite';
-import { GlobalStateContext } from '../../Stores/GlobalStore';
+
+// Components
 import Nav from '../Navigation/Nav';
 import ManagerHomePage from './ManagerHomePage';
 import UserHomePage from './UserHomePage';
 import OwnerHomePage from './OwnerHomePage';
 
+// Component decides which component to show depending on role
 const HomePage = observer((props:any) => {
     
     const state = useContext(GlobalStateContext);
