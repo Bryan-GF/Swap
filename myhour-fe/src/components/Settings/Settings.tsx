@@ -1,21 +1,34 @@
+// GLobal State
+import { GlobalStateContext } from '../../Stores/GlobalStore';
+
+// Functional package imports
 import React, {useContext, useState} from 'react';
 import {observer} from 'mobx-react-lite';
-import { GlobalStateContext } from '../../Stores/GlobalStore';
-import Nav from '../Navigation/Nav';
+
+// Design
 import './Settings.css';
+
+// Components
+import Nav from '../Navigation/Nav';
 import { loadingIndicatorCSS } from 'react-select/lib/components/indicators';
 
-
+// Settings page, only used for resetting password at the moment.
 const Settings = observer((props:any) => {
 
     const state = useContext(GlobalStateContext);
-    const [passwordInfo, setPasswordInfo] = useState({oldPassword: '', newPassword: '', confirmNewPassword: ''});
+
+    // Content Handler
+    const [passwordInfo, setPasswordInfo] = useState({oldPassword: '', newPassword: '', confirmNewPassword: ''});'
+    
+    // Error Handler
     const [errorHandler, setErrorHandler] = useState({oldPassword: true, newPassword: true, confirmNewPassword: true});
+
     const [loading, setLoading] = useState(false);
     
+    // Attempts to edit shift values through global state editShift function. Takes in the target
+    // shift ID and Version. Success edits global state currShifts array to have updated values.
     const handleReset = async(ev) => {
         ev.preventDefault();
-        console.log("HEY");
         let safeInfo = await {oldPassword: true, newPassword: true, confirmNewPassword: true};
         let checkInfo = await {oldPassword: passwordInfo.oldPassword.length > 0, 
                                 newPassword: passwordInfo.newPassword.length > 7, 
@@ -24,7 +37,6 @@ const Settings = observer((props:any) => {
         setErrorHandler(checkInfo);
         if(JSON.stringify(safeInfo) === JSON.stringify(checkInfo)) {
             setLoading(true);
-            console.log("Attempt");
             let status = await state.attemptReset(passwordInfo);
             setLoading(status);
             

@@ -1,18 +1,33 @@
+// Global State
+import { GlobalStateContext } from '../../Stores/GlobalStore';
+
+// Functional package imports
 import React, {useContext, useState} from 'react';
 import {observer} from 'mobx-react-lite';
-import { GlobalStateContext } from '../../Stores/GlobalStore';
 import { withRouter } from 'react-router-dom';
-import './ResetPass.css';
-import LandingNav from '../Navigation/LandingNav';
 import isEmail from 'validator/lib/isEmail';
 
+// Design
+import './ResetPass.css';
+
+// Components
+import LandingNav from '../Navigation/LandingNav';
+
+// Page for users to reset their passwords
 const ResetPassword = observer((props:any) => {
     
     const state = useContext(GlobalStateContext);
+
+    // Content Handler 
     const [passwordInfo, setPasswordInfo] = useState({email: '', oldPassword: '', newPassword: '', confirmNewPassword: ''});
+
+    // Error Handlers
     const [errorHandler, setErrorHandler] = useState({email: true, oldPassword: true, newPassword: true, confirmNewPassword: true});
+
     const [loading, setLoading] = useState(false);
     
+
+    // Accepts ev parameter. Attempts to use gobabl state function attemptReset to reset the users password.
     const handleReset = async(ev) => {
         ev.preventDefault();
         state.setUserData({...state.userData, email: passwordInfo.email});
