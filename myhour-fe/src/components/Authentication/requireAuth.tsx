@@ -3,6 +3,7 @@ import {Route, Redirect} from 'react-router-dom';
 import { GlobalStateContext } from '../../Stores/GlobalStore';
 import Unauthorized from './Unauthorized';
 
+// Authentication route for when user is not logged in. Checks login status. Passed component.
 export const NoAuthRoute = ({component: Component, ...rest}) => {
   const state = useContext(GlobalStateContext);
   return (
@@ -24,6 +25,7 @@ export const NoAuthRoute = ({component: Component, ...rest}) => {
   )
 }
 
+// Authentication route for when user is logged in as an employee. Checks login status. Passed component.
 export const BasicAuthRoute = ({component: Component, ...rest}) => {
     const state = useContext(GlobalStateContext);
     console.log(state);
@@ -46,6 +48,7 @@ export const BasicAuthRoute = ({component: Component, ...rest}) => {
     )
 }
 
+// Authentication route for when user is logged in as a manager. Checks role and login status. Passed component.
 export const ManagerAuthRoute = ({component: Component, ...rest}) => {
   const state = useContext(GlobalStateContext);
   return (
@@ -69,6 +72,7 @@ export const ManagerAuthRoute = ({component: Component, ...rest}) => {
   )
 }
 
+// Authentication route for when user is logged in as an owner. Checks role and login status. Passed component.
 export const OwnerAuthRoute = ({component: Component, ...rest}) => {
   const state = useContext(GlobalStateContext);
   return (

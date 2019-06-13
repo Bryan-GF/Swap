@@ -1,24 +1,33 @@
 import React, {useContext, useState} from 'react';
 import {observer} from 'mobx-react-lite';
 import { GlobalStateContext } from '../../Stores/GlobalStore';
-import logo from '../../assets/logo.png';
+
+// Design
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye } from '@fortawesome/free-solid-svg-icons'
 import './Auth.css';
+
+// Functional package imports
 import { withRouter } from 'react-router';
 import isEmail from 'validator/lib/isEmail';
 import isMobilePhone from 'validator/lib/isMobilePhone';
 import axios from 'axios';
 
-//EXTRA
 const Signup = observer((props:any) => {
     
     const state = useContext(GlobalStateContext);
     const [registerInfo, setRegisterInfo] = useState({Firstname: '', Lastname: '', email: '', Password: '', ConfirmPassword: '', CompanyName: '', CompanyNumber: ''});
+
+    // Boolean for conditional display of password in text or hidden.
     const [viewPass, setViewPass] = useState(false);
     const [viewPass2, setViewPass2] = useState(false);
+
+    // Object made up of boolean values for conditional errors.
     const [activeErrors, setActiveErrors] = useState({email: true, Firstname: false, Lastname: false, Password: false, ConfirmPassword: false, CompanyNumber: true, CompanyName: false})
 
+    // Attempt to register through addCompany global state function. Sets default global axios header.
+    // Responsible for changing global state login status and user data on successful api call. Also sets
+    // active conditional erros in state object active errors.
     const attemptRegister = async() => {
         const {email, Firstname, Lastname, Password, ConfirmPassword, CompanyName, CompanyNumber} = registerInfo;
         let safeActive = {email: true, Firstname: false, Lastname: false, Password: false, ConfirmPassword: false, CompanyName: false, CompanyNumber: true}

@@ -13,9 +13,14 @@ const Login= observer((props:any) => {
     
     const state = useContext(GlobalStateContext);
     const [loginInfo, setLoginInfo] = useState({email: '', Password: ''});
+
+    // Boolean for conditional display of password in text or hidden.
     const [viewPass, setViewPass] = useState(false);
+
+    //Boolean for conditional display of loading circle.
     const [loading, setLoading] = useState(false);
 
+    // Calls state login attempt function, takes in login information. Switches between loading states (true to false).
     const attemptLogin = async() => {
         setLoading(true);
         let status = await state.attemptLogin(loginInfo);
@@ -41,6 +46,7 @@ const Login= observer((props:any) => {
                         </div>
                     </div>
                 </div>
+                {/* Checks global state value of incorretValue for conditional display*/}
                 {state.incorrectPassword ? <p>Incorrect email or password.</p> : null}
                 <Link to='/ResetPassword'>Reset Password</Link>
                 <div className="loginButton" onClick={() => { attemptLogin()}}>

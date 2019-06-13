@@ -1,8 +1,10 @@
+//Functional package imports
 import React, {useContext, useEffect} from 'react';
 import {observer} from 'mobx-react-lite';
-import { GlobalStateContext } from '../../Stores/GlobalStore';
 import { Link } from 'react-router-dom';
 
+
+// Component presented when access to page is unauthroized.
 const Unauthorized = observer((props:any) => {
     
     return (

@@ -1,5 +1,9 @@
+//Functional package imports
 import axios from 'axios';
 
+
+// Function attempts to verify json web token with api call. Accepts global state, setLoading function for local state,
+// and the available token. Sets global state login status and user data.
 export const VerifyToken = async(state, setLoading, token) => {   
     return axios
     .post('https://swapapi.azurewebsites.net/api/VerifyToken', {"token": token})
