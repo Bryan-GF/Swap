@@ -1,13 +1,19 @@
+// Global State
+import { GlobalStateContext } from '../../Stores/GlobalStore';
+
+// Functional package imports
 import React, {useContext} from 'react';
 import {observer} from 'mobx-react-lite';
-import { GlobalStateContext } from '../../Stores/GlobalStore';
 import { withRouter } from 'react-router';
 
+// Popup component for deleting employees.
 const DeleteEmployee = observer((props:any) => {
     
     
     const state = useContext(GlobalStateContext);
     
+    // Attempts to delete using deleteUser global state function. Successful response filters 
+    // out the deleted employee.
     const handleDelete = async() => {
         const status  = await state.deleteUser(props.Employee.UserID);
         if(status) {

@@ -1,35 +1,50 @@
-import React, {Component, useContext, useEffect, useState} from 'react';
-import {observer} from 'mobx-react-lite';
+// Global State
 import { GlobalStateContext } from '../../Stores/GlobalStore';
-import Nav from '../Navigation/Nav';
-import avatar from '../../assets/avatar.png';
-import './Profile.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrashAlt, faPen, faCheck, faTimes } from '@fortawesome/free-solid-svg-icons'
-import DeleteEmployee from '../Delete/DeleteEmployee';
+
+// Functional package imports
+import React, {useContext, useEffect, useState} from 'react';
+import {observer} from 'mobx-react-lite';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 
+// Design
+import avatar from '../../assets/avatar.png';
+import './Profile.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrashAlt, faPen, faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 
+// Components
+import Nav from '../Navigation/Nav';
+import DeleteEmployee from '../Delete/DeleteEmployee';
+
+// Components displays employee information along with a list of their shifts. Managers can
+// delete employees and add/modify/delete shifts here.
 const EmployeeProfile = observer((props:any) => {
     
     const state = useContext(GlobalStateContext);
 
-    const [deletingUser, setDeletingUser] = useState(false);
-    const [addingShift, setAddingShift] = useState(false);
-
+    // Time Handlers
     const [startDate, setStartDate] = useState(new Date());
     const [startTime, setStartTime] = useState(new Date());
     const [endTime, setEndTime] = useState(new Date());
     const [startEditDate, setEditStartDate] = useState(new Date());
     const [startEditTime, setEditStartTime] = useState(new Date());
     const [endEditTime, setEditEndTime] = useState(new Date());
-    const [deletingShift, setDeletingShift] = useState(false);
-    const [currDelete, setCurrDelete] = useState(null);
 
-    const [loading, setLoading] = useState(true);
+    // Popup Hanlders
+    const [deletingShift, setDeletingShift] = useState(false);
+    const [deletingUser, setDeletingUser] = useState(false);
+    const [addingShift, setAddingShift] = useState(false);
+
+    // Target Handlers
+    const [currDelete, setCurrDelete] = useState(null);
     const [editActive, setEditActive] = useState({active: false, target: null});
 
+    const [loading, setLoading] = useState(true);
+    
+
+    // Attempts to edit shift values through global state editShift function. Takes in the target
+    // shift ID and Version. Success edits global state currShifts array to have updated values.
     const handleEditShift = async(ShiftID, Version) => {
         let status = await state.editShift(ShiftID, startEditDate.toISOString(), timeEditHelper(startEditTime), timeEditHelper(endEditTime), Version);
         if(status) {
@@ -44,6 +59,9 @@ const EmployeeProfile = observer((props:any) => {
         }
     }
 
+    // Attempt to delete employee shift through global state function deleteShift. Success filters out
+    // old shift out of global state currShifts array. Switches deletingShift state value to 
+    // false, getting rid of popup.
     const handleShiftDelete = async() => {
         const status = await state.deleteShift(currDelete);
         if(status) {
@@ -54,6 +72,9 @@ const EmployeeProfile = observer((props:any) => {
         setDeletingShift(false);
     }
 
+    // Attempts to add employee shift through global state function addShift. Success adds
+    // shift to the global state currShifts array. Switches addingShift state value to false,
+    // getting rid of popup.
     const handleAddShift = async () => {
         setAddingShift(false);
         const result = await state.addShift(state.currEmployee.UserID, startDate.toISOString(), timeEditHelper(startTime), timeEditHelper(endTime));
@@ -68,11 +89,14 @@ const EmployeeProfile = observer((props:any) => {
         
     }
 
+    // Takes in time value when editing shift and converts it into the correct timezone.
     const timeEditHelper = (time) => {
         let tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
         return (new Date(time - tzoffset)).toISOString().slice(0, -1);
     }
 
+
+    // On component did mount, gets employees profile and shift information.
     useEffect(() => {
         const ID = props.match.params.UserID;
         state.getEmployee(ID);

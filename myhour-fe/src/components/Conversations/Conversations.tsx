@@ -1,8 +1,14 @@
+// Functional package imports
 import React from 'react';
 import {observer} from 'mobx-react-lite';
+
+// Desgin
 import './Conversations.css';
+
+// Components
 import Nav from '../Navigation/Nav';
 
+// Conversations component, still unavailable.
 const Conversations = observer((props:any) => {
     
     return (
