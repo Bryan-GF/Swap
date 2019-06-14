@@ -1,33 +1,47 @@
+// Global State
+import { GlobalStateContext } from '../../Stores/GlobalStore';
+
+// Functional package imports
 import React, {useContext, useEffect, useState} from 'react';
 import {observer} from 'mobx-react-lite';
-import { GlobalStateContext } from '../../Stores/GlobalStore';
+import isEmail from 'validator/lib/isEmail';
+
+// Design
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt, faPlusSquare, faPlusCircle, faEye, faTimes} from '@fortawesome/free-solid-svg-icons';
 import './Home.css';
-import isEmail from 'validator/lib/isEmail';
+
 
 const OwnerHomePage = observer((props:any) => {
     
     const state = useContext(GlobalStateContext);
+
+    // Popup Handlers
     const [addingBranch, setAddingBranch] = useState(false);
     const [deletingBranch, setDeletingBranch] = useState(false);
     const [addingManager, setAddingManager] = useState(false);
     const [deletingManager, setDeletingManager] = useState(false);
-    const [branchName, setBranchName] = useState('');
+
+    // Error Handlers
+    const [activeErrorsBranch, setActiveErrorsBranch] = useState(false);
+    const [activeErrorsManager, setActiveErrorsManager] = useState({email: true, Firstname: false, Lastname: false, Password: false, ConfirmPassword: false});
+
+    // Target Handlers
     const [targetBranch, setTargetBranch] = useState('');
     const [targetManager, setTargetManager] = useState('');
-    const [activeErrorsBranch, setActiveErrorsBranch] = useState(false);
+
+    // Content Handlers
+    const [branchName, setBranchName] = useState('');
     const [managerInfo, setManagerInfo] = useState({Firstname: '', Lastname: '', email: '', Password: '', ConfirmPassword: '', branchID: ''});
-    const [activeErrorsManager, setActiveErrorsManager] = useState({email: true, Firstname: false, Lastname: false, Password: false, ConfirmPassword: false});
+    
     const [viewPass, setViewPass] = useState(false);
     const [viewPass2, setViewPass2] = useState(false);
 
+    // Attempt to add a branch through addBranch global state function. Also sets active conditional errors in state object activeErrorsBranch based on local state branchName.
     const handleBranchCreate = () => {
         let status = (branchName.length === 0);
         setActiveErrorsBranch(status);
         if(!status) {
-            console.log(state.userData.CompanyID);
-            console.log(branchName)
             state.addBranch(branchName);
             setAddingBranch(false);
             setBranchName('');
@@ -35,8 +49,9 @@ const OwnerHomePage = observer((props:any) => {
         }
     }
 
+    // Attempt to add a manager through addManager global state function. Also sets active conditional errors in state object activeErrorsManager based on local state 
+    // managerInfo object data. Switches local state addingManager to false, getting rid of popup.
     const attemptManagerAdd = async() => {
-
         const {email, Firstname, Lastname, Password, ConfirmPassword} = managerInfo;
         let safeActive = {email: true, Firstname: false, Lastname: false, Password: false, ConfirmPassword: false}
         let newActive = {
@@ -47,24 +62,24 @@ const OwnerHomePage = observer((props:any) => {
             ConfirmPassword: Password != ConfirmPassword
         }
         setActiveErrorsManager(newActive)
-        if(JSON.stringify(safeActive) === JSON.stringify(newActive)) {
-            
+        if(JSON.stringify(safeActive) === JSON.stringify(newActive)) {           
             let status = await state.addManager(managerInfo);
             if(status) {
                 setAddingManager(false);
                 setActiveErrorsManager({email: true, Firstname: false, Lastname: false, Password: false, ConfirmPassword: false});
                 setManagerInfo({Firstname: '', Lastname: '', email: '', Password: '', ConfirmPassword: '', branchID: ''});
-            }
-            
+            }        
         } 
         
     }
 
+    // Call global state function deleteBranch and switch local state deletingBranch to false, getting rid of popup.
     const handleDelete = (ID) => {
         state.deleteBranch(ID);
         setDeletingBranch(false);
     }
 
+    // On component did mount call global state functions getManagers and getAllBranches.
     useEffect(() => {
         state.getManagers();
         state.getAllBranches();

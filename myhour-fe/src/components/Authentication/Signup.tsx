@@ -1,5 +1,5 @@
-import React, {useContext, useState} from 'react';
-import {observer} from 'mobx-react-lite';
+
+//Global State
 import { GlobalStateContext } from '../../Stores/GlobalStore';
 
 // Design
@@ -8,6 +8,8 @@ import { faEye } from '@fortawesome/free-solid-svg-icons'
 import './Auth.css';
 
 // Functional package imports
+import React, {useContext, useState} from 'react';
+import {observer} from 'mobx-react-lite';
 import { withRouter } from 'react-router';
 import isEmail from 'validator/lib/isEmail';
 import isMobilePhone from 'validator/lib/isMobilePhone';
@@ -27,7 +29,7 @@ const Signup = observer((props:any) => {
 
     // Attempt to register through addCompany global state function. Sets default global axios header.
     // Responsible for changing global state login status and user data on successful api call. Also sets
-    // active conditional erros in state object active errors.
+    // active conditional erross in state object activeErrors.
     const attemptRegister = async() => {
         const {email, Firstname, Lastname, Password, ConfirmPassword, CompanyName, CompanyNumber} = registerInfo;
         let safeActive = {email: true, Firstname: false, Lastname: false, Password: false, ConfirmPassword: false, CompanyName: false, CompanyNumber: true}

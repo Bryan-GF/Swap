@@ -1,19 +1,28 @@
+// Global State
+import { GlobalStateContext } from '../../Stores/GlobalStore';
+
+// Functional package imports 
 import React, {useContext, useEffect, useState} from 'react';
 import {observer } from 'mobx-react-lite';
-import { GlobalStateContext } from '../../Stores/GlobalStore';
-import './Home.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrashAlt, faPlusSquare, faPlusCircle } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom';
 import DeleteEmployee from '../Delete/DeleteEmployee';
 import isEmail from 'validator/lib/isEmail';
 
+//Design
+import './Home.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrashAlt, faPlusSquare, faPlusCircle } from '@fortawesome/free-solid-svg-icons'
+
+// Lists all employees in a branch. Allows Manager to add and delete employees.
 const ManagerHomePage = observer((props:any) => {
 
     const state = useContext(GlobalStateContext);
 
+    // Popup Handlers
     const [addingUser, setAddingUser] = useState(false);
     const [deletingUser, setDeletingUser] = useState(false);
+
+    // Content Handlers
     const [newEmployeeInfo, setNewEmployeeInfo] = useState({
         "email": '',
         "Firstname": '',
@@ -21,9 +30,15 @@ const ManagerHomePage = observer((props:any) => {
         "Position": '',
         "Password": ''
     })
+
+    // Error Handlers
     const [activeErrors, setActiveErrors] = useState({"email": true, "Firstname": false, "Lastname": false, "Position": false, "Password": false})
+
+    // Target Handlers
     const [targetEmployee, setTargetEmployee] = useState({Name: '', UserID: ''});
 
+    // Attempt to add employee through addEmployee global state function. Responsible for changing global state branchData on successful api call. Also sets
+    // active conditional errors in state object activeErrors.
     const handleAddEmployee = async() => {
         const {email, Firstname, Lastname, Password, Position} = newEmployeeInfo;
         let safeActive = {"email": true, "Firstname": false, "Lastname": false, "Position": false, "Password": false}
@@ -39,6 +54,7 @@ const ManagerHomePage = observer((props:any) => {
         }  
     }
 
+    // On component did mount, call global state function getBranchData to employee data.
     useEffect(() => {
         state.getBranchData();
     }, [])

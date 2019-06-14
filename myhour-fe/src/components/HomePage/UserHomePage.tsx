@@ -1,14 +1,18 @@
-import React, {useContext, useEffect, useState} from 'react';
-import {observer} from 'mobx-react-lite';
+// Global State
 import { GlobalStateContext } from '../../Stores/GlobalStore';
-import moment from 'moment';
+
+// Functional package imports
+import React, {useContext, useEffect} from 'react';
+import {observer} from 'mobx-react-lite';
 import {fixTime} from '../Requests/RequestHelper';
 import { Link } from 'react-router-dom';
 
+// Lists all of users shifts and their request status.
 const UserHomePage = observer((props:any) => {
     
     const state = useContext(GlobalStateContext);
 
+    // On component did mount make call to global state functions getShifts and getUserRequests.
     useEffect(() => {
         state.getShifts(state.userData.UserID);
         state.getUserRequests();
