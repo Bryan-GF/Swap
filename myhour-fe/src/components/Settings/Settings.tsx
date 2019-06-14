@@ -18,7 +18,7 @@ const Settings = observer((props:any) => {
     const state = useContext(GlobalStateContext);
 
     // Content Handler
-    const [passwordInfo, setPasswordInfo] = useState({oldPassword: '', newPassword: '', confirmNewPassword: ''});'
+    const [passwordInfo, setPasswordInfo] = useState({oldPassword: '', newPassword: '', confirmNewPassword: ''});
     
     // Error Handler
     const [errorHandler, setErrorHandler] = useState({oldPassword: true, newPassword: true, confirmNewPassword: true});
