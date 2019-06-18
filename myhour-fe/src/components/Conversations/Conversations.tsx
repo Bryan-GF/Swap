@@ -9,11 +9,13 @@ import './Conversations.css';
 // Components
 import Nav from '../Navigation/Nav';
 import MessageList from './MessageList';
+import MessageForm from './MessageForm';
 
 // Conversations component, still unavailable.
 const Conversations = observer((props:any) => {
 
     const [messages, setMessages] = useState([]);
+   
     
     useEffect(() => {
         const chatManager = new Chatkit.ChatManager({
@@ -46,10 +48,7 @@ const Conversations = observer((props:any) => {
             <div className='buffer-convo'>
                 <div className='Conversation-Container'>
                     <MessageList messages={messages}/>
-                    {/*
-                    <h1>Feature Unavailable</h1>
-                    <p>Swap conversations feature still in dvelopment.</p>
-                    */}
+                    <MessageForm/>
                 </div>
             </div>
         </div>
