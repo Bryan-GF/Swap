@@ -7,16 +7,13 @@
   background: white;
   border-radius: 10px;
   padding: 2rem; }
-
-.Conversation-Container h1 {
-  margin: 0; }
-
-.Conversation-Container p {
-  margin: .7rem 0 2rem 0; }
-
-.Conversation-Container a {
-  font-size: 1.5rem;
-  color: var(--text-color); }
+  .Conversation-Container h1 {
+    margin: 0; }
+  .Conversation-Container p {
+    margin: .7rem 0 2rem 0; }
+  .Conversation-Container a {
+    font-size: 1.5rem;
+    color: var(--text-color); }
 
 .MessageListContainer {
   height: 400px;

@@ -14,7 +14,6 @@ const RoomList = observer((props:any) => {
             <ul>
             <h3>Your rooms:</h3>
             {props.rooms.map(room => {
-                console.log(room);
                 return (
                     <li key={room.id} className="Room">
                         <a onClick={() => { props.subscribeToRoom(room.id)}}href="#"># {room.name}</a>

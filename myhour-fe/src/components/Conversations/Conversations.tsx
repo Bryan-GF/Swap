@@ -14,7 +14,7 @@ import MessageList from './MessageList';
 import MessageForm from './MessageForm';
 import RoomList from './RoomList';
 import RoomForm from './RoomForm';
-import { join } from 'path';
+import ConversationHeader from './ConversationHeader';
 
 
 // Conversations component, still unavailable.
@@ -22,6 +22,7 @@ import { join } from 'path';
 const Conversations = observer((props:any) => {
 
     const [roomId, setRoomId] = useState(null);
+    const [roomUsers, setRoomUsers] = useState([]);
     const [joinedRooms, setJoinedRooms] = useState([]);
 
     const state = useContext(GlobalStateContext);
@@ -71,6 +72,8 @@ const Conversations = observer((props:any) => {
             }
         })
         .then(room => {
+            console.log(room.users);
+            setRoomUsers(room.users);
             setRoomId(room.id);  
         })
         .catch(err => console.log('error connecting', err))     
@@ -84,7 +87,10 @@ const Conversations = observer((props:any) => {
             <div className='buffer-convo'>
                 <div className='Conversation-Container'>
                     <RoomList rooms = {joinedRooms} subscribeToRoom={subscribeToRoom}/>
-                    <MessageList messages={state.messages} roomId={roomId}/>
+                    <div className='ConversationListContainer'>
+                        <ConversationHeader roomUsers={roomUsers}/>
+                        <MessageList messages={state.messages} roomId={roomId}/>
+                    </div>
                     <MessageForm sendMessage={sendMessage} disabled={!roomId}/>
                     <RoomForm createRoom={createRoom} />
                 </div>
