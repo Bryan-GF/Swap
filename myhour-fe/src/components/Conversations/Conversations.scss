@@ -22,3 +22,8 @@
         color: var(--text-color);
     }
 }
+
+.MessageListContainer {
+    height: 400px;
+    overflow: scroll;
+}

@@ -6,15 +6,14 @@ import './Conversations.css';
 
 // Components
 
+const RoomForm = observer((props:any) => {
 
-const MessageForm = observer((props:any) => {
-
-    const [newMessage, setNewMessage] = useState('');
+    const [newRoom, setNewRoom] = useState('');
 
     const handleSubmit = (ev) => {
         ev.preventDefault();
-        props.sendMessage(newMessage);
-        setNewMessage('');
+        props.createRoom(newRoom);
+        setNewRoom('');
     }
 
     return (
@@ -22,14 +21,13 @@ const MessageForm = observer((props:any) => {
             onSubmit={(ev) => {handleSubmit(ev)}}
             className="MessageForm">
             <input 
-                disabled={props.disabled}
-                placeholder="Type your message here..." 
-                value = {newMessage}
+                placeholder="Create Room" 
+                value = {newRoom}
                 type="text" 
-                onChange={(ev) => {setNewMessage(ev.target.value)}}
+                onChange={(ev) => {setNewRoom(ev.target.value)}}
             />
         </form> 
     )
 });
 
-export default MessageForm;
+export default RoomForm;

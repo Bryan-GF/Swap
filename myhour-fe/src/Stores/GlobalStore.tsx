@@ -24,6 +24,16 @@ class GlobalState {
 
     @observable todaysRequests = [];
 
+    //Chat Observables
+
+    @observable messages = [];
+
+    @observable currChatter = null;
+
+    @observable currRoom = null;
+
+    ///////////////////////////////////////////////////////
+
     @observable currEmployee = {UserID: '', email: '', Name: '', Position: ''};
 
     // GENERAL FUNCTIONS
@@ -395,6 +405,18 @@ class GlobalState {
     
     @action setBranchData = (data) => {
         this.branchData = data;
+    }
+
+    @action setMessages = (data:Array<Object>) => {
+        this.messages = data;
+    }
+
+    @action setCurrChatter = (data:Array<Object>) => {
+        this.currChatter = data;
+    }
+
+    @action setCurrRoom = (data:string) => {
+        this.currRoom = data;
     }
 
     @computed get UserName() {
