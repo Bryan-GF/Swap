@@ -48,6 +48,7 @@ const ManagerHomePage = observer((props:any) => {
             setActiveErrors({"email": false, "Firstname": false, "Lastname": false, "Position": false, "Password": false});
             const result = await state.addEmployee(newEmployeeInfo);
             if(result) {
+                state.createChatter(name, email);
                 state.setBranchData([...state.branchData, {UserID: result, email: email, Firstname: Firstname, Lastname: Lastname, Position: Position}])
             }
             setAddingUser(false);

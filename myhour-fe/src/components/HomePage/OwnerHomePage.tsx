@@ -66,6 +66,7 @@ const OwnerHomePage = observer((props:any) => {
             let status = await state.addManager(managerInfo);
             if(status) {
                 setAddingManager(false);
+                state.createChatter(name, email);
                 setActiveErrorsManager({email: true, Firstname: false, Lastname: false, Password: false, ConfirmPassword: false});
                 setManagerInfo({Firstname: '', Lastname: '', email: '', Password: '', ConfirmPassword: '', branchID: ''});
             }        

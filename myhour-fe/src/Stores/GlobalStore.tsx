@@ -41,23 +41,21 @@ class GlobalState {
     // GENERAL FUNCTIONS
 
     @action createChatter = (name, email) => {
-        const expiration = new Date();
-        expiration.setHours( expiration.getHours() + 3);
         let token = JWT.sign({
             instance: process.env.REACT_APP_INSTANCE_ID,
-            iss: process.env.REACT_APP_AUTH_KEY,
-            iat: new Date().getTime() / 1000,
-            exp: expiration.getTime() / 1000,
+            iss: "api_keys/" + process.env.REACT_APP_KEY_ID,
             sub: name,
             su: true,
-          }, 'secret');
+          }, process.env.REACT_APP_SECRET,{ expiresIn: 60 * 60 });
         console.log(token);
-        /*
+        let config = {
+            headers: {'Authorization': "Bearer " + token} 
+        };
+        
         return axios
-        .post(chatterUrl + '/users', {name: this.userData.Firstname + "" + this.userData.Lastname, email: this.userData.email})
+        .post(chatterUrl + '/users', {name: name, id: email}, config)
         .then(res => console.log(res))
         .catch(err => console.log(err));
-        */
     }
 
     // Takes in companyInfo object as a parameter. Attempts to make api call using companyInfo as body. On success returns response data. On fail return null.

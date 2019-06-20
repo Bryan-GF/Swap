@@ -16,7 +16,6 @@ const UserHomePage = observer((props:any) => {
     useEffect(() => {
         state.getShifts(state.userData.UserID);
         state.getUserRequests();
-        state.createChatter('test', 'test@gmail.com');
     }, [])
     
     return (
@@ -32,7 +31,6 @@ const UserHomePage = observer((props:any) => {
                         date = date.substring(0, 8);
                     }
                     date = date.trim();
-                    console.log(date);
                     let newTime = fixTime(shift.startTime, shift.endTime);
                     return (
                         <div>
