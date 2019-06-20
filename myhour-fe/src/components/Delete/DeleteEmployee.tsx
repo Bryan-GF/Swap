@@ -17,7 +17,7 @@ const DeleteEmployee = observer((props:any) => {
     const handleDelete = async() => {
         const status  = await state.deleteUser(props.Employee.UserID);
         if(status) {
-            
+            state.deleteChatter(props.Employee.email);
             if(props.type === 'profile') {
                 props.history.push('/Home');
             } else if(props.type === 'home') {

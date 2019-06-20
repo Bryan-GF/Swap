@@ -35,7 +35,7 @@ const ManagerHomePage = observer((props:any) => {
     const [activeErrors, setActiveErrors] = useState({"email": true, "Firstname": false, "Lastname": false, "Position": false, "Password": false})
 
     // Target Handlers
-    const [targetEmployee, setTargetEmployee] = useState({Name: '', UserID: ''});
+    const [targetEmployee, setTargetEmployee] = useState({Name: '', UserID: '', email: ''});
 
     // Attempt to add employee through addEmployee global state function. Responsible for changing global state branchData on successful api call. Also sets
     // active conditional errors in state object activeErrors.
@@ -48,7 +48,7 @@ const ManagerHomePage = observer((props:any) => {
             setActiveErrors({"email": false, "Firstname": false, "Lastname": false, "Position": false, "Password": false});
             const result = await state.addEmployee(newEmployeeInfo);
             if(result) {
-                state.createChatter(name, email);
+                state.createChatter(name, email, null);
                 state.setBranchData([...state.branchData, {UserID: result, email: email, Firstname: Firstname, Lastname: Lastname, Position: Position}])
             }
             setAddingUser(false);
@@ -130,7 +130,7 @@ const ManagerHomePage = observer((props:any) => {
                                         </div>
                                         <div onClick={(ev) => { 
                                             ev.preventDefault();
-                                            setTargetEmployee({UserID: employee.UserID, Name: employee.Firstname + ' ' + employee.Lastname});
+                                            setTargetEmployee({UserID: employee.UserID, Name: employee.Firstname + ' ' + employee.Lastname, email: employee.email});
                                             setDeletingUser(true);     
                                         }} className="trash-wrapper">
                                             <FontAwesomeIcon className="trash" icon={faTrashAlt}/>

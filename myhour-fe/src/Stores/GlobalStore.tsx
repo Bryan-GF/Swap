@@ -5,6 +5,22 @@ import JWT from 'jsonwebtoken';
 
 const chatterUrl = `https://us1.pusherplatform.io/services/chatkit/v4/${process.env.REACT_APP_INSTANCE_ID}`;
 
+const tokenBuilder = (email = 'test') => {
+    const token = JWT.sign({
+    instance: process.env.REACT_APP_INSTANCE_ID,
+    iss: "api_keys/" + process.env.REACT_APP_KEY_ID,
+    sub: email,
+    su: true,
+  }, process.env.REACT_APP_SECRET,{ expiresIn: 60 * 60 })
+
+
+    let config = {
+        headers: {'Authorization': "Bearer " + token} 
+    };
+
+    return config;
+}
+
 class GlobalState {
     @observable userData = {UserID: "" , email : "",  Firstname: "", Lastname: "", Position: "", branchID: "", CompanyID: "", roles: ""};
 
@@ -40,22 +56,35 @@ class GlobalState {
 
     // GENERAL FUNCTIONS
 
-    @action createChatter = (name, email) => {
-        let token = JWT.sign({
-            instance: process.env.REACT_APP_INSTANCE_ID,
-            iss: "api_keys/" + process.env.REACT_APP_KEY_ID,
-            sub: name,
-            su: true,
-          }, process.env.REACT_APP_SECRET,{ expiresIn: 60 * 60 });
-        console.log(token);
-        let config = {
-            headers: {'Authorization': "Bearer " + token} 
-        };
-        
-        return axios
+    @action createChatter = async (name, email, roomName) => {       
+        const config = await tokenBuilder();
+       
+        return await axios
         .post(chatterUrl + '/users', {name: name, id: email}, config)
-        .then(res => console.log(res))
+        .then(res => {
+            if(roomName) {
+                this.createRoom(email, roomName);
+            }           
+        })
         .catch(err => console.log(err));
+    }
+
+    @action deleteChatter = async(email) => {
+        const config = await tokenBuilder(email);
+
+        return axios
+        .delete(chatterUrl + `/users/${email}`, config)
+        .then(res => console.log(res))
+        .catch(err => console.log(err))
+    }
+
+    @action createRoom = async (email, roomName) => {
+        const config = await tokenBuilder(email);
+
+        return await axios
+        .post(chatterUrl + `/rooms`, {name: roomName, user_ids: [email]}, config)
+        .then(res => console.log(res))
+        .catch(err => console.log(err))
     }
 
     // Takes in companyInfo object as a parameter. Attempts to make api call using companyInfo as body. On success returns response data. On fail return null.

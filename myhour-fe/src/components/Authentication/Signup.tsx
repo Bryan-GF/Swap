@@ -14,6 +14,7 @@ import { withRouter } from 'react-router';
 import isEmail from 'validator/lib/isEmail';
 import isMobilePhone from 'validator/lib/isMobilePhone';
 import axios from 'axios';
+import { stat } from 'fs';
 
 const Signup = observer((props:any) => {
     
@@ -54,7 +55,7 @@ const Signup = observer((props:any) => {
                     },
                     error => Promise.reject(error)
                 );
-                state.createChatter(Firstname + " " +Lastname, email);
+                state.createChatter(Firstname + " " +Lastname, email, CompanyName);
                 state.setUserData({UserID: status.UserID , email : email,  Firstname: Firstname, Lastname: Lastname, Position: "Company Owner", branchID: "", CompanyID: status.CompanyID, roles: "Owner"});
                 state.setLoginStatus(true);
                 props.history.push('/Home');
