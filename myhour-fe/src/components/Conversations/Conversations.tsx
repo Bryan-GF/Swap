@@ -26,14 +26,21 @@ const Conversations = observer((props:any) => {
     const [joinedRooms, setJoinedRooms] = useState([]);
 
     const state = useContext(GlobalStateContext);
+
+    
     
     useEffect(() => {
+        //Weird work around to tokenprovider, to get API working with SDK
+        let tokenprovider =  {
+            fetchToken() {
+                return state.getToken();
+            }
+        }
+
         const chatManager = new Chatkit.ChatManager({
             instanceLocator: process.env.REACT_APP_INSTANCE_LOCATOR,
             userId: state.userData.email,
-            tokenProvider: new Chatkit.TokenProvider({
-                url: process.env.REACT_APP_TOKEN_PROVIDER
-            })
+            tokenProvider: tokenprovider
         })
 
         chatManager.connect()

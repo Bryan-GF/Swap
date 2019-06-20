@@ -54,8 +54,7 @@ const EmployeeProfile = observer((props:any) => {
                 } else {
                     return shift;
                 }
-            }));
-           
+            }));      
         }
     }
 

@@ -87,6 +87,16 @@ class GlobalState {
         .catch(err => console.log(err))
     }
 
+    @action getToken = async() => {
+
+        return await JWT.sign({
+            instance: process.env.REACT_APP_INSTANCE_ID,
+            iss: "api_keys/" + process.env.REACT_APP_KEY_ID,
+            sub: this.userData.email,
+            su: true,
+        }, process.env.REACT_APP_SECRET,{ expiresIn: 60 * 60 })
+    }
+
     // Takes in companyInfo object as a parameter. Attempts to make api call using companyInfo as body. On success returns response data. On fail return null.
     @action addCompany = (companyInfo) => {
         return axios
