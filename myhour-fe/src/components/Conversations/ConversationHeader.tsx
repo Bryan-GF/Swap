@@ -17,8 +17,7 @@ const ConversationHeader = observer((props:any) => {
                     userlist += user.name;                   
                 } else {
                     userlist += user.name + ", ";
-                }
-                
+                }             
             })}
             <p>{userlist}</p>
         </div>
