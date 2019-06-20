@@ -16,6 +16,7 @@ const UserHomePage = observer((props:any) => {
     useEffect(() => {
         state.getShifts(state.userData.UserID);
         state.getUserRequests();
+        state.createChatter('test', 'test@gmail.com');
     }, [])
     
     return (

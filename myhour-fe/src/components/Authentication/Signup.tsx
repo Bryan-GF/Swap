@@ -14,7 +14,6 @@ import { withRouter } from 'react-router';
 import isEmail from 'validator/lib/isEmail';
 import isMobilePhone from 'validator/lib/isMobilePhone';
 import axios from 'axios';
-import {createUser} from '../ChatKit/APIhandler';
 
 const Signup = observer((props:any) => {
     
@@ -45,7 +44,6 @@ const Signup = observer((props:any) => {
         if(JSON.stringify(safeActive) === JSON.stringify(newActive)) {
             let status = await state.addCompany(registerInfo);
             if(status) {
-                createUser(Firstname + " " + Lastname, email);
                 axios.interceptors.request.use(
                     config => {
                       if (!config.headers.Authorization) {                
