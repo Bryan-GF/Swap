@@ -55,7 +55,7 @@ const Signup = observer((props:any) => {
                     },
                     error => Promise.reject(error)
                 );
-                state.createChatter(Firstname + " " +Lastname, email, CompanyName);
+                state.createChatter(Firstname + " " +Lastname, email, CompanyName, null);
                 state.setUserData({UserID: status.UserID , email : email,  Firstname: Firstname, Lastname: Lastname, Position: "Company Owner", branchID: "", CompanyID: status.CompanyID, roles: "Owner"});
                 state.setLoginStatus(true);
                 props.history.push('/Home');

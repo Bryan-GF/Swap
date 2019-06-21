@@ -56,7 +56,7 @@ class GlobalState {
 
     // GENERAL FUNCTIONS
 
-    @action createChatter = async (name, email, roomName) => {       
+    @action createChatter = async (name, email, roomName, roomId) => {       
         const config = await tokenBuilder();
        
         return await axios
@@ -64,7 +64,9 @@ class GlobalState {
         .then(res => {
             if(roomName) {
                 this.createRoom(email, roomName);
-            }           
+            } else if (roomId) {
+                this.addToChatRoom(roomId, email);
+            }      
         })
         .catch(err => console.log(err));
     }
@@ -83,8 +85,8 @@ class GlobalState {
 
         return await axios
         .post(chatterUrl + `/rooms`, {name: roomName, user_ids: [email]}, config)
-        .then(res => console.log(res))
-        .catch(err => console.log(err))
+        .then(res => res)
+        .catch(err => null)
     }
 
     @action getToken = async() => {
@@ -95,6 +97,15 @@ class GlobalState {
             sub: this.userData.email,
             su: true,
         }, process.env.REACT_APP_SECRET,{ expiresIn: 60 * 60 })
+    }
+
+    @action addToChatRoom = async (roomId, email) => {
+        const config = await tokenBuilder(email);
+        console.log(config);
+        return await axios
+        .put(chatterUrl + `/rooms/${roomId}/users/add`, {user_ids: [email]}, config)
+        .then(res => console.log(res))
+        .catch(err => console.log(err))
     }
 
     // Takes in companyInfo object as a parameter. Attempts to make api call using companyInfo as body. On success returns response data. On fail return null.
@@ -155,10 +166,10 @@ class GlobalState {
         .post('https://swapapi.azurewebsites.net/api/AddManager', {...managerInfo, CompanyID: this.userData.CompanyID})
         .then(res => {
             if(res.data) {
+                this.createChatter(managerInfo.Firstname + " " + managerInfo.Lastname, managerInfo.email, null, managerInfo.roomId)
                 this.BranchManagers[managerInfo.branchID] = [...this.BranchManagers[managerInfo.branchID], {email: managerInfo.email, UserID: res.data, Firstname: managerInfo.Firstname, Lastname: managerInfo.Lastname}];
                 return res.data;
-            }
-                 
+            }             
         }).catch(err => {
             console.log(err);
             return null;
@@ -166,14 +177,19 @@ class GlobalState {
     }
 
     // Takes in branchName string as a parameter. Attempts to make api call using branchname and companyID in body object. On success adds value to BranchList array.
-    @action addBranch = async(branchName) => {
-        return await axios
-        .post('https://swapapi.azurewebsites.net/api/AddBranch', {Name: branchName, CompanyID: this.userData.CompanyID})
-        .then(res => {
-            this.BranchList = [...this.BranchList, {Name: branchName, branchID: res.data}]; 
-        }).catch(err => {
-            console.log(err);
-        })
+    @action addBranch = async(branchName) => { 
+        // I don't want to do this, but it is the only way to be able to add managers and employees to the branch on creation.
+        // Capabilities limited by Chatkit. Addding branches now dependent on the functionality of chatkit.
+        const room = await this.createRoom(this.userData.email, branchName);
+        if(room) {
+            return await axios
+            .post('https://swapapi.azurewebsites.net/api/AddBranch', {Name: branchName, CompanyID: this.userData.CompanyID, roomId: room.data.id})
+            .then(res => {        
+                this.BranchList = [...this.BranchList, {Name: branchName, branchID: res.data, roomId: room.data.id}]; 
+            }).catch(err => {
+                console.log(err);
+            })
+        }
     }
 
     // Takes branchID string as a parameter. Attempts to make api call using branchID in body object. On success filter branch out of BranchList array.

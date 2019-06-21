@@ -32,7 +32,7 @@ const OwnerHomePage = observer((props:any) => {
 
     // Content Handlers
     const [branchName, setBranchName] = useState('');
-    const [managerInfo, setManagerInfo] = useState({Firstname: '', Lastname: '', email: '', Password: '', ConfirmPassword: '', branchID: ''});
+    const [managerInfo, setManagerInfo] = useState({Firstname: '', Lastname: '', email: '', Password: '', ConfirmPassword: '', branchID: '', roomId: ''});
     
     const [viewPass, setViewPass] = useState(false);
     const [viewPass2, setViewPass2] = useState(false);
@@ -66,9 +66,8 @@ const OwnerHomePage = observer((props:any) => {
             let status = await state.addManager(managerInfo);
             if(status) {
                 setAddingManager(false);
-                state.createChatter(name, email, null);
                 setActiveErrorsManager({email: true, Firstname: false, Lastname: false, Password: false, ConfirmPassword: false});
-                setManagerInfo({Firstname: '', Lastname: '', email: '', Password: '', ConfirmPassword: '', branchID: ''});
+                setManagerInfo({Firstname: '', Lastname: '', email: '', Password: '', ConfirmPassword: '', branchID: '', roomId: ''});
             }        
         } 
         
@@ -180,12 +179,13 @@ const OwnerHomePage = observer((props:any) => {
                                                     </div>
                                                     <div className='confirmation-buttons'>
                                                         <button onClick={() => {
+                                                            
                                                             attemptManagerAdd();
                                                         }} className="green">Create</button>
                                                         <button onClick={() => {
                                                             setAddingManager(false);
                                                             setActiveErrorsManager({email: true, Firstname: false, Lastname: false, Password: false, ConfirmPassword: false});
-                                                            setManagerInfo({Firstname: '', Lastname: '', email: '', Password: '', ConfirmPassword: '', branchID: ''});
+                                                            setManagerInfo({Firstname: '', Lastname: '', email: '', Password: '', ConfirmPassword: '', branchID: '', roomId: ''});
                                                         }} className="red">Cancel</button>
                                                     </div>
                                                 </div>
@@ -198,7 +198,7 @@ const OwnerHomePage = observer((props:any) => {
                                             <div className="columnIcons">
                                                 <div onClick={(ev) => { 
                                                     ev.preventDefault(); 
-                                                    setManagerInfo({...managerInfo, branchID: branch.branchID});
+                                                    setManagerInfo({...managerInfo, branchID: branch.branchID, roomId: branch.roomId});
                                                     setAddingManager(true);
                                                 }}className="plus-wrapper">
                                                     <FontAwesomeIcon className="plus" icon={faPlusSquare}/>
