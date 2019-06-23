@@ -10,7 +10,7 @@ export const VerifyToken = async(state, setLoading, token) => {
     .then(async(res) => {
         if(res.data) {
             let json = JSON.parse(res.data);
-            let User = {"UserID": json.UserID, "email": json.email, "Firstname": json.Firstname, "Lastname": json.Lastname, "Position": json.Position, "CompanyID": json.CompanyID, "branchID": json.branchID, "roles": json.roles}
+            let User = {"UserID": json.UserID, "email": json.email, "Firstname": json.Firstname, "Lastname": json.Lastname, "Position": json.Position, "CompanyID": json.CompanyID, "branchID": json.branchID, "roles": json.roles, "roomId": json.roomId}
             state.setUserData(User);
             state.setLoginStatus(true);
         }

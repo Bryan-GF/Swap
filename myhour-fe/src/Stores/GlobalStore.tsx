@@ -22,7 +22,7 @@ const tokenBuilder = (email = 'test') => {
 }
 
 class GlobalState {
-    @observable userData = {UserID: "" , email : "",  Firstname: "", Lastname: "", Position: "", branchID: "", CompanyID: "", roles: ""};
+    @observable userData = {UserID: "" , email : "",  Firstname: "", Lastname: "", Position: "", branchID: "", CompanyID: "", roles: "", roomId: ""};
 
     @observable loginStatus = false;
 
@@ -142,6 +142,7 @@ class GlobalState {
         .then(res => {
             localStorage.setItem('Token', res.data.Token);
             this.userData = res.data;
+            console.log(res.data);
             this.loginStatus = true;
             this.incorrectPassword = false;
             return true;        
@@ -266,6 +267,7 @@ class GlobalState {
         return await axios
         .post('https://swapapi.azurewebsites.net/api/AddUser', {...employee, "branchID": this.userData.branchID, "CompanyID": this.userData.CompanyID})
         .then(res => {
+            this.createChatter(employee.Firstname + " " + employee.Lastname, employee.email, null, this.userData.roomId)
             return res.data;
         }).catch(err => {
             return null;
@@ -371,7 +373,7 @@ class GlobalState {
     // Attempts to make an api call to get number of request per day of the week. On success returns data. (BUGGED FORGOT TO ADD BRANCH ID TO ONLY GET REQUESTS FOR THEIR BRANCH).
     @action getRequestCounts = () => {
         return axios
-        .get('https://swapapi.azurewebsites.net/api/GetRequestCounts')
+        .post('https://swapapi.azurewebsites.net/api/GetRequestCounts', {branchID: this.userData.branchID})
         .then(res => {
             return res.data; 
         }).catch(err => {
@@ -406,7 +408,7 @@ class GlobalState {
     // Takes in date as parameter. Attempts to make an api call to get all requests for the day using date in body object. On success sets todaysRequest to response data. On fail return null.
     @action getRequestsByDay = async(date) => {
         return await axios
-        .post('https://swapapi.azurewebsites.net/api/GetRequestsByDay', {"shiftDate": date})
+        .post('https://swapapi.azurewebsites.net/api/GetRequestsByDay', {shiftDate: date, branchID: this.userData.branchID})
         .then(res => {
             if(res.data != null) {
                 this.todaysRequests = res.data;  
