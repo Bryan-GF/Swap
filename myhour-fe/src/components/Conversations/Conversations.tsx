@@ -27,8 +27,6 @@ const Conversations = observer((props:any) => {
 
     const state = useContext(GlobalStateContext);
 
-    
-    
     useEffect(() => {
         //Weird work around to tokenprovider, to get API working with SDK
         let tokenprovider =  {
@@ -36,18 +34,21 @@ const Conversations = observer((props:any) => {
                 return state.getToken();
             }
         }
+        if(!state.currChatter) {
+            const chatManager = new Chatkit.ChatManager({
+                instanceLocator: process.env.REACT_APP_INSTANCE_LOCATOR,
+                userId: state.userData.email,
+                tokenProvider: tokenprovider
+            })
 
-        const chatManager = new Chatkit.ChatManager({
-            instanceLocator: process.env.REACT_APP_INSTANCE_LOCATOR,
-            userId: state.userData.email,
-            tokenProvider: tokenprovider
-        })
-
-        chatManager.connect()
-        .then(currentUser => {
-            state.setCurrChatter(currentUser);
-            setJoinedRooms(state.currChatter.rooms);
-        })
+            chatManager.connect()
+            .then(currentUser => {
+                state.setCurrChatter(currentUser);
+                setJoinedRooms(state.currChatter.rooms);
+            })
+        } else {
+            setJoinedRooms(state.currChatter.rooms)
+        }     
     }, [])
 
     const sendMessage = (text) => {
@@ -79,7 +80,6 @@ const Conversations = observer((props:any) => {
             }
         })
         .then(room => {
-            console.log(room.users);
             setRoomUsers(room.users);
             setRoomId(room.id);  
         })
