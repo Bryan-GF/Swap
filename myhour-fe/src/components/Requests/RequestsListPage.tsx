@@ -8,6 +8,7 @@ import format from 'date-fns/format';
 import {fixTime} from './RequestHelper';
 import queryString from 'query-string';
 import Chatkit from '@pusher/chatkit-client';
+import { withRouter } from 'react-router';
 
 // Desgin
 import './Requests.css';
@@ -88,6 +89,7 @@ const RequestListPage = observer((props:any) => {
             private: true,
             addUserIds: [email, state.userData.email]
         }).then(room => {
+            props.history.push('/Conversations');
             console.log(`Created room called ${room.name}`);
         }).catch(err => {
             console.log(`Error creating room ${err}`);
@@ -267,4 +269,4 @@ const RequestListPage = observer((props:any) => {
     )
 });
 
-export default RequestListPage;
+export default withRouter(RequestListPage);

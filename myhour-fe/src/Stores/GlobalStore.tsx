@@ -65,7 +65,7 @@ class GlobalState {
             if(roomName) {
                 this.createRoom(email, roomName);
             } else if (roomId) {
-                this.addToChatRoom(roomId, email);
+                this.addToChatRoom(roomId, [email]);
             }      
         })
         .catch(err => console.log(err));
@@ -101,9 +101,8 @@ class GlobalState {
 
     @action addToChatRoom = async (roomId, email) => {
         const config = await tokenBuilder(email);
-        console.log(config);
         return await axios
-        .put(chatterUrl + `/rooms/${roomId}/users/add`, {user_ids: [email]}, config)
+        .put(chatterUrl + `/rooms/${roomId}/users/add`, {user_ids: email}, config)
         .then(res => console.log(res))
         .catch(err => console.log(err))
     }

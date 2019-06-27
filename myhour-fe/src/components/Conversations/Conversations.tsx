@@ -3,6 +3,7 @@ import React, {useContext, useState, useEffect} from 'react';
 import {observer} from 'mobx-react-lite';
 import Chatkit from '@pusher/chatkit-client';
 import { GlobalStateContext } from '../../Stores/GlobalStore';
+import axios from 'axios';
 
 
 // Desgin
@@ -15,6 +16,7 @@ import MessageForm from './MessageForm';
 import RoomList from './RoomList';
 import RoomForm from './RoomForm';
 import ConversationHeader from './ConversationHeader';
+import UserAddForm from './UserAddForm';
 
 
 // Conversations component, still unavailable.
@@ -24,6 +26,9 @@ const Conversations = observer((props:any) => {
     const [roomId, setRoomId] = useState(null);
     const [roomUsers, setRoomUsers] = useState([]);
     const [joinedRooms, setJoinedRooms] = useState([]);
+
+    const [creatingRoom, setCreatingRoom] = useState(false);
+    const [addingUsers, setAddingUsers] = useState(false);
 
     const state = useContext(GlobalStateContext);
 
@@ -86,20 +91,31 @@ const Conversations = observer((props:any) => {
         .catch(err => console.log('error connecting', err))     
     }
 
-  
+    const addUsers = async(users) => {
+        state.addToChatRoom(roomId, users);
+    }
 
     return (
         <div>
             <Nav/>
             <div className='buffer-convo'>
                 <div className='Conversation-Container'>
-                    <RoomList rooms = {joinedRooms} subscribeToRoom={subscribeToRoom}/>
+                    {creatingRoom ?
+                        <RoomForm createRoom={createRoom}/>
+                        :
+                        null
+                    }
+                    {addingUsers ?
+                        <UserAddForm addUsers={addUsers}/>
+                        :
+                        null
+                    }
+                    <RoomList rooms = {joinedRooms} subscribeToRoom={subscribeToRoom} setCreatingRoom={setCreatingRoom}/>
                     <div className='ConversationListContainer'>
-                        <ConversationHeader roomUsers={roomUsers}/>
+                        <ConversationHeader roomUsers={roomUsers} setAddingUsers={setAddingUsers}/>
                         <MessageList messages={state.messages} roomId={roomId}/>
                     </div>
                     <MessageForm sendMessage={sendMessage} disabled={!roomId}/>
-                    <RoomForm createRoom={createRoom} />
                 </div>
             </div>
         </div>

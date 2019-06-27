@@ -20,7 +20,8 @@ const RoomList = observer((props:any) => {
                     </li>
                 )
             })}
-            </ul>
+                <button onClick={() => {props.setCreatingRoom(true)}}>Create Room</button>
+            </ul>      
         </div>
     )
 });

@@ -17,16 +17,19 @@ const RoomForm = observer((props:any) => {
     }
 
     return (
-        <form 
-            onSubmit={(ev) => {handleSubmit(ev)}}
-            className="MessageForm">
-            <input 
-                placeholder="Create Room" 
-                value = {newRoom}
-                type="text" 
-                onChange={(ev) => {setNewRoom(ev.target.value)}}
-            />
-        </form> 
+        <div>
+            <h2>Name Your Room:</h2>
+            <form 
+                onSubmit={(ev) => {handleSubmit(ev)}}
+                className="MessageForm">
+                <input 
+                    placeholder="Create Room" 
+                    value = {newRoom}
+                    type="text" 
+                    onChange={(ev) => {setNewRoom(ev.target.value)}}
+                />
+            </form> 
+        </div>
     )
 });
 
