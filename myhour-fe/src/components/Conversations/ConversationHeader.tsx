@@ -21,7 +21,7 @@ const ConversationHeader = observer((props:any) => {
             })}
             <p>{userlist}</p>
             <button onClick={() => { props.setAddingUsers(true)}}> + </button>
-            <button> Leave Room </button>
+            <button onClick={(ev) => { props.leaveRoom(ev)}}> Leave Room </button>
         </div>
     )
 });

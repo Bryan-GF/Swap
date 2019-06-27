@@ -94,6 +94,19 @@ const Conversations = observer((props:any) => {
     const addUsers = async(users) => {
         state.addToChatRoom(roomId, users);
     }
+    
+    const leaveRoom = (ev) => {
+        ev.preventDefault();
+        state.currChatter.leaveRoom({ roomId: roomId })
+        .then(room => {
+            setJoinedRooms(joinedRooms.filter((rooms) =>
+            rooms.id != room.id));
+          console.log(`Left room with ID: ${room.id}`)
+        })
+        .catch(err => {
+          console.log(`Error leaving room ${roomId}: ${err}`)
+        })
+    }
 
     return (
         <div>
@@ -112,7 +125,7 @@ const Conversations = observer((props:any) => {
                     }
                     <RoomList rooms = {joinedRooms} subscribeToRoom={subscribeToRoom} setCreatingRoom={setCreatingRoom}/>
                     <div className='ConversationListContainer'>
-                        <ConversationHeader roomUsers={roomUsers} setAddingUsers={setAddingUsers}/>
+                        <ConversationHeader roomUsers={roomUsers} setAddingUsers={setAddingUsers} leaveRoom={leaveRoom}/>
                         <MessageList messages={state.messages} roomId={roomId}/>
                     </div>
                     <MessageForm sendMessage={sendMessage} disabled={!roomId}/>
