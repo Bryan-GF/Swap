@@ -1,4 +1,4 @@
-# THE REAL BACKEND CAN BE FOUND HERE:
+# THE BACKEND CAN BE FOUND HERE:
 ### https://github.com/Bryan-GF/Swap-API
 
 # General Info
