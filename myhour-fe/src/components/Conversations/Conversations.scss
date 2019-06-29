@@ -3,7 +3,7 @@ ul {
 }
 
 .buffer-convo {
-    padding-top: 10rem;
+    padding-top: 7rem;
 }
 
 .Conversation-Container {
@@ -13,6 +13,7 @@ ul {
     border-radius: 10px;
     display: flex;
     white-space: pre-line;
+    border: 1px solid var(--main-color);
     h3 {
         margin: 0 0 0 1rem;
         font-size: 1.6rem;
@@ -27,6 +28,7 @@ ul {
         background: var(--main-color);
         color: white;      
         padding-top: 1rem;
+        border-radius: 10px 0 0 10px;
 
         a {
             color: white;
@@ -123,10 +125,22 @@ ul {
         
 
         .MessageForm {
+            display: flex;
+            justify-content: center;
+            border-top: 1px solid #eee;
+            padding: 1rem 0;
             textarea {
-                width: 100%;
+                width: 90%;
+                background: #eee;
                 resize:none;
-            }       
+                outline-color: var(--main-color);
+                padding: .4rem .4rem;
+            }      
+            
+            textarea:focus {
+                background: #f5f5f5;
+                box-shadow: 0 0 10px #719ECE;
+            }
         }
     }
 

@@ -30,6 +30,7 @@ const MessageForm = observer((props:any) => {
             disabled={props.disabled}
             placeholder="Type your message here..." 
             value = {newMessage}
+            rows={3}
             onChange={(ev) => {setNewMessage(ev.target.value)}}
             onKeyDown={(ev) => {
                 if(ev.keyCode === 13) {
