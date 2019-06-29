@@ -3,6 +3,7 @@ import {observer} from 'mobx-react-lite';
 
 // Desgin
 import './Conversations.css';
+import { withRouter } from 'react-router';
 
 // Components
 
@@ -16,9 +17,9 @@ const RoomList = observer((props:any) => {
             <button onClick={() => {props.setCreatingRoom(true)}}>Create Room</button>
             {props.rooms.map(room => {
                 return (
-                    <li key={room.id} className="Room">
-                        <a onClick={() => { props.subscribeToRoom(room.id)}}href="#"># {room.name}</a>
-                    </li>
+                    <div key={room.id} className="Room" style={props.roomId === room.id ? {background: 'white'} : {}}>
+                        <a onClick={() => { props.subscribeToRoom(room.id)}}href="#" style={props.roomId === room.id ? {color: '#60B0F4'} : {}}># {room.name}</a>
+                    </div>
                 )
             })}
                 

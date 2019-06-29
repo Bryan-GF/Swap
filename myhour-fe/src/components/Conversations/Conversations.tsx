@@ -114,7 +114,6 @@ const Conversations = observer((props:any) => {
         <div>
             <Nav/>
             <div className='buffer-convo'>
-                <div className='Conversation-Container'>
                     {creatingRoom ?
                         <RoomForm createRoom={createRoom} setCreatingRoom={setCreatingRoom}/>
                         :
@@ -125,12 +124,15 @@ const Conversations = observer((props:any) => {
                         :
                         null
                     }
-                    <RoomList rooms = {joinedRooms} subscribeToRoom={subscribeToRoom} setCreatingRoom={setCreatingRoom}/>
+                <div className='Conversation-Container'>
+                    
+                    <RoomList rooms = {joinedRooms} subscribeToRoom={subscribeToRoom} setCreatingRoom={setCreatingRoom} roomId={roomId}/>
                     <div className='ConversationListContainer'>
                         <ConversationHeader roomUsers={roomUsers} setAddingUsers={setAddingUsers} leaveRoom={leaveRoom} roomId={roomId}/>
                         <MessageList messages={state.messages} roomId={roomId}/>
+                        <MessageForm sendMessage={sendMessage} disabled={!roomId}/>
                     </div>
-                    <MessageForm sendMessage={sendMessage} disabled={!roomId}/>
+                    
                 </div>
             </div>
         </div>
