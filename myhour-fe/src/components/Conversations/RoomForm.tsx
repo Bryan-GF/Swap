@@ -29,6 +29,8 @@ const RoomForm = observer((props:any) => {
                     onChange={(ev) => {setNewRoom(ev.target.value)}}
                 />
             </form> 
+            <button onClick={(ev) => { handleSubmit(ev)}}>Submit</button>
+            <button onClick={(ev) => { props.setCreatingRoom(false)}}>Cancel</button>
         </div>
     )
 });

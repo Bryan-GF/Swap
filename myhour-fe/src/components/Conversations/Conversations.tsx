@@ -70,6 +70,7 @@ const Conversations = observer((props:any) => {
         .then(room => {
             setJoinedRooms([...joinedRooms, room]);
             subscribeToRoom(room.id);
+            setCreatingRoom(false);
         })
         .catch(err => console.log('error creating room', err));
     }
@@ -95,13 +96,14 @@ const Conversations = observer((props:any) => {
         state.addToChatRoom(roomId, users);
     }
     
-    const leaveRoom = (ev) => {
+    const leaveRoom = async(ev) => {
         ev.preventDefault();
         state.currChatter.leaveRoom({ roomId: roomId })
         .then(room => {
             setJoinedRooms(joinedRooms.filter((rooms) =>
             rooms.id != room.id));
-          console.log(`Left room with ID: ${room.id}`)
+            setRoomId(null)
+            setRoomUsers([]);
         })
         .catch(err => {
           console.log(`Error leaving room ${roomId}: ${err}`)
@@ -114,18 +116,18 @@ const Conversations = observer((props:any) => {
             <div className='buffer-convo'>
                 <div className='Conversation-Container'>
                     {creatingRoom ?
-                        <RoomForm createRoom={createRoom}/>
+                        <RoomForm createRoom={createRoom} setCreatingRoom={setCreatingRoom}/>
                         :
                         null
                     }
                     {addingUsers ?
-                        <UserAddForm addUsers={addUsers}/>
+                        <UserAddForm addUsers={addUsers} setAddingUsers={setAddingUsers}/>
                         :
                         null
                     }
                     <RoomList rooms = {joinedRooms} subscribeToRoom={subscribeToRoom} setCreatingRoom={setCreatingRoom}/>
                     <div className='ConversationListContainer'>
-                        <ConversationHeader roomUsers={roomUsers} setAddingUsers={setAddingUsers} leaveRoom={leaveRoom}/>
+                        <ConversationHeader roomUsers={roomUsers} setAddingUsers={setAddingUsers} leaveRoom={leaveRoom} roomId={roomId}/>
                         <MessageList messages={state.messages} roomId={roomId}/>
                     </div>
                     <MessageForm sendMessage={sendMessage} disabled={!roomId}/>

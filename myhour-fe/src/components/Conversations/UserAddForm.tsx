@@ -55,10 +55,12 @@ const UserAddForm = observer((props:any) => {
                     <div>
                         <p>{username}</p>
                         <button onClick={(ev) => {handleRemove(ev, user)}}> X </button>
+                        
                     </div>
                 )
             })}
             <button onClick={(ev) => {handleSubmit(ev)}}>Submit</button>
+            <button onClick={() => { props.setAddingUsers(false)}}>Cancel</button>
         </div>
     )
 });

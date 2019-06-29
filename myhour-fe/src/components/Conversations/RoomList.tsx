@@ -13,6 +13,7 @@ const RoomList = observer((props:any) => {
         <div className='RoomList'>
             <ul>
             <h3>Your rooms:</h3>
+            <button onClick={() => {props.setCreatingRoom(true)}}>Create Room</button>
             {props.rooms.map(room => {
                 return (
                     <li key={room.id} className="Room">
@@ -20,7 +21,7 @@ const RoomList = observer((props:any) => {
                     </li>
                 )
             })}
-                <button onClick={() => {props.setCreatingRoom(true)}}>Create Room</button>
+                
             </ul>      
         </div>
     )
