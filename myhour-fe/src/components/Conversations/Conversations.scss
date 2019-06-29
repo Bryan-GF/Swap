@@ -4,6 +4,47 @@ ul {
 
 .buffer-convo {
     padding-top: 7rem;
+
+    .Form {
+        display: flex;
+        background: white;
+        border: 2px solid var(--main-color);
+        flex-direction: column;
+        padding: 2rem;
+        margin-top: -10rem;
+
+        input {
+            font-size: 1rem;
+            width: 100%;
+            padding: .5rem .5rem;
+            border: none;
+            border-bottom: 1px solid var(--main-color);
+            outline: none;
+        }
+
+        input:focus {
+            border-bottom: 3px solid var(--main-color);
+        }
+
+        h2 {
+            padding-bottom: 1rem;
+        }
+
+        .confirmation-buttons {
+            margin-top: 2rem;
+            .green{
+                margin-left: 0;
+            }
+        }
+    }
+
+    .RoomForm {
+        align-items: center;
+    }
+
+    .UserForm {
+        width: 500px;
+    }
 }
 
 .Conversation-Container {
@@ -43,8 +84,14 @@ ul {
             color: var(--main-color);
             border: none;
             border-radius: 10px;
-            padding: .5rem .5rem;
+            padding: 1rem 1rem;
             margin: 1rem 0 1rem 1rem;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            cursor: pointer;
+            box-shadow: 0 0 10px rgb(165, 194, 224);
         }
 
         ul {
@@ -140,6 +187,7 @@ ul {
                 resize:none;
                 outline-color: var(--main-color);
                 padding: .4rem .4rem;
+                border-radius: 5px;
             }      
             
             textarea:focus {

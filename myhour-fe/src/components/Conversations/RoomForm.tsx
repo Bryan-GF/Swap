@@ -17,20 +17,24 @@ const RoomForm = observer((props:any) => {
     }
 
     return (
-        <div>
-            <h2>Name Your Room:</h2>
-            <form 
-                onSubmit={(ev) => {handleSubmit(ev)}}
-                className="MessageForm">
-                <input 
-                    placeholder="Create Room" 
-                    value = {newRoom}
-                    type="text" 
-                    onChange={(ev) => {setNewRoom(ev.target.value)}}
-                />
-            </form> 
-            <button onClick={(ev) => { handleSubmit(ev)}}>Submit</button>
-            <button onClick={(ev) => { props.setCreatingRoom(false)}}>Cancel</button>
+        <div className='popupWrapper'>
+            <div className='Form RoomForm'>
+                <h2>Name Your Room:</h2>
+                <form 
+                    onSubmit={(ev) => {handleSubmit(ev)}}
+                    className="MessageForm">
+                    <input 
+                        placeholder="Create Room" 
+                        value = {newRoom}
+                        type="text" 
+                        onChange={(ev) => {setNewRoom(ev.target.value)}}
+                    />
+                </form> 
+                <div className='confirmation-buttons'>
+                    <button className='green' onClick={(ev) => { handleSubmit(ev)}}>Submit</button>
+                    <button className='red' onClick={(ev) => { props.setCreatingRoom(false)}}>Cancel</button>
+                </div>
+            </div>
         </div>
     )
 });

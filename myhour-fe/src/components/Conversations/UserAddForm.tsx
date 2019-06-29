@@ -36,30 +36,34 @@ const UserAddForm = observer((props:any) => {
     }
 
     return (
-        <div>
-            <h2>Add To Room:</h2>
-            <form 
-                onSubmit={(ev) => {handleAddUser(ev)}}
-                className="MessageForm">
-                <input 
-                    placeholder="Co-worker's email" 
-                    value = {user}
-                    type="text" 
-                    onChange={(ev) => {setUser(ev.target.value)}}
-                />
-            </form> 
-            {  
-                Object.keys(users).forEach((username) => {               
-                return(
-                    <div>
-                        <p>{username}</p>
-                        <button onClick={(ev) => {handleRemove(ev, user)}}> X </button>
-                        
-                    </div>
-                )
-            })}
-            <button onClick={(ev) => {handleSubmit(ev)}}>Submit</button>
-            <button onClick={() => { props.setAddingUsers(false)}}>Cancel</button>
+        <div className='popupWrapper'>
+            <div className='Form UserForm'>
+                <h2>Add To Room:</h2>
+                <form 
+                    onSubmit={(ev) => {handleAddUser(ev)}}
+                    className="MessageForm">
+                    <input 
+                        placeholder="Co-worker's email" 
+                        value = {user}
+                        type="text" 
+                        onChange={(ev) => {setUser(ev.target.value)}}
+                    />
+                </form> 
+                {  
+                    Object.keys(users).forEach((username) => {               
+                    return(
+                        <div>
+                            <p>{username}</p>
+                            <button onClick={(ev) => {handleRemove(ev, user)}}> X </button>
+                            
+                        </div>
+                    )
+                })}
+                <div className='confirmation-buttons'>
+                    <button className='green' onClick={(ev) => {handleSubmit(ev)}}>Submit</button>
+                    <button className='red' onClick={() => { props.setAddingUsers(false)}}>Cancel</button>
+                </div>
+            </div>
         </div>
     )
 });
