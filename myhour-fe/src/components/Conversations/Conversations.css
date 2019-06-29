@@ -58,11 +58,43 @@ ul {
   width: 80%; }
 
 .Conversation-Container .ConversationListContainer .Header {
-  width: 100%; }
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1rem;
+  border-bottom: 1px solid #eee; }
+
+.Conversation-Container .ConversationListContainer .Header p {
+  font-weight: bold; }
+
+.Conversation-Container .ConversationListContainer .Header .HeaderButtons {
+  display: flex; }
+
+.Conversation-Container .ConversationListContainer .Header .HeaderButtons svg {
+  height: 2rem;
+  width: 2rem;
+  color: var(--main-color); }
+
+.Conversation-Container .ConversationListContainer .Header .HeaderButtons svg:hover {
+  cursor: pointer;
+  transform: scale(1.1); }
+
+.Conversation-Container .ConversationListContainer .Header .HeaderButtons .signOut-wrapper {
+  margin-left: 1.5rem; }
 
 .Conversation-Container .ConversationListContainer .MessageListContainer {
   height: 40rem;
-  overflow-y: scroll; }
+  overflow: auto;
+  padding-left: 1rem; }
+
+.Conversation-Container .ConversationListContainer .MessageListContainer .MessageList::-webkit-scrollbar {
+  width: 0.5em;
+  height: 0.5em; }
+
+.Conversation-Container .ConversationListContainer .MessageListContainer .MessageList::-webkit-scrollbar-thumb {
+  background: var(--main-color);
+  border-radius: 5px; }
 
 .Conversation-Container .ConversationListContainer .MessageForm input {
   width: 100%; }

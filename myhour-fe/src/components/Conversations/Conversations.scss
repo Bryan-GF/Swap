@@ -69,12 +69,58 @@ ul {
     
         .Header {
             width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1rem;
+            border-bottom: 1px solid #eee;
+            p {
+                font-weight: bold;
+            }
+            .HeaderButtons {
+                display: flex;
+
+                svg {
+                    height: 2rem;
+                    width: 2rem;
+                    color: var(--main-color);
+                    
+                }
+
+                svg:hover {
+                    cursor: pointer;
+                    transform: scale(1.1);
+                }
+
+                .signOut-wrapper {
+                    margin-left: 1.5rem;
+                    
+                }
+                
+            }
         }
 
         .MessageListContainer {
             height: 40rem;
-            overflow-y: scroll;
+            overflow: auto;
+            padding-left: 1rem;
+
+            .MessageList {
+                &::-webkit-scrollbar {
+                    width: 0.5em;
+                    height: 0.5em;
+                   }
+            }
+    
+            .MessageList::-webkit-scrollbar-thumb {
+                background: var(--main-color); 
+                border-radius: 5px;
+            }
+            
+            
         }
+
+        
 
         .MessageForm {
             input {

@@ -3,6 +3,8 @@ import {observer} from 'mobx-react-lite';
 
 // Desgin
 import './Conversations.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlusSquare, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 
 // Components
 
@@ -22,8 +24,14 @@ const ConversationHeader = observer((props:any) => {
                         }             
                     })}
                     <p>{userlist}</p>
-                    <button onClick={() => { props.setAddingUsers(true)}}> + </button>
-                    <button onClick={(ev) => { props.leaveRoom(ev)}}> Leave Room </button>
+                    <div className="HeaderButtons">
+                        <div onClick={() => { props.setAddingUsers(true)}}className="plus-wrapper">
+                            <FontAwesomeIcon className="plus" icon={faPlusSquare}/>
+                        </div>
+                        <div onClick={(ev) => { props.leaveRoom(ev)}}className="signOut-wrapper">
+                            <FontAwesomeIcon className="signOut" icon={faSignOutAlt}/>
+                        </div>
+                    </div>
             </div>
         : null
         }     
