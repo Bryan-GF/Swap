@@ -13,22 +13,35 @@ const MessageForm = observer((props:any) => {
 
     const handleSubmit = (ev) => {
         ev.preventDefault();
+        console.log(newMessage)
         props.sendMessage(newMessage);
         setNewMessage('');
     }
 
     return (
-        <form 
-            onSubmit={(ev) => {handleSubmit(ev)}}
-            className="MessageForm">
-            <input 
-                disabled={props.disabled}
-                placeholder="Type your message here..." 
-                value = {newMessage}
-                type="text" 
-                onChange={(ev) => {setNewMessage(ev.target.value)}}
-            />
+        <div className="MessageForm">
+        <form
+            id='#MForm'
+            onSubmit={(ev) => {}}         
+        >  
         </form> 
+        <textarea 
+            id='#MForm'
+            disabled={props.disabled}
+            placeholder="Type your message here..." 
+            value = {newMessage}
+            onChange={(ev) => {setNewMessage(ev.target.value)}}
+            onKeyDown={(ev) => {
+                if(ev.keyCode === 13) {
+                    if(ev.shiftKey) {
+                        setNewMessage(newMessage + '\n');                       
+                    } else {
+                        handleSubmit(ev)
+                    }
+                }
+            }}
+        />`
+        </div>
     )
 });
 

@@ -9,7 +9,8 @@ ul {
   margin: 0 auto;
   background: white;
   border-radius: 10px;
-  display: flex; }
+  display: flex;
+  white-space: pre-line; }
 
 .Conversation-Container h3 {
   margin: 0 0 0 1rem;
@@ -96,5 +97,6 @@ ul {
   background: var(--main-color);
   border-radius: 5px; }
 
-.Conversation-Container .ConversationListContainer .MessageForm input {
-  width: 100%; }
+.Conversation-Container .ConversationListContainer .MessageForm textarea {
+  width: 100%;
+  resize: none; }

@@ -12,7 +12,7 @@ ul {
     background: white;
     border-radius: 10px;
     display: flex;
-
+    white-space: pre-line;
     h3 {
         margin: 0 0 0 1rem;
         font-size: 1.6rem;
@@ -123,8 +123,9 @@ ul {
         
 
         .MessageForm {
-            input {
+            textarea {
                 width: 100%;
+                resize:none;
             }       
         }
     }

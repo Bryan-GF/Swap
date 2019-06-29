@@ -35,7 +35,6 @@ const UserAddForm = observer((props:any) => {
         setUsers(newUsers);
     }
 
-    console.log(users);
     return (
         <div>
             <h2>Add To Room:</h2>
