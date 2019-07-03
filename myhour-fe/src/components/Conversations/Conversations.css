@@ -38,6 +38,43 @@ ul {
 .buffer-convo .UserForm {
   width: 500px; }
 
+.buffer-convo .UserForm .email {
+  display: flex;
+  margin-top: 1rem;
+  background: var(--border-color);
+  box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0);
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem; }
+
+.buffer-convo .UserForm .email .emailContent {
+  font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; }
+
+.buffer-convo .UserForm .email .emailRemove {
+  padding: 0 .5rem;
+  margin-top: 5px; }
+
+.buffer-convo .UserForm .email .emailRemove svg {
+  height: 1.5rem;
+  width: 1.5rem; }
+
+.buffer-convo .UserForm .email .emailRemove .remove {
+  color: #F04B4B; }
+
+.buffer-convo .UserForm .email .emailRemove .remove:hover {
+  color: #E73D3D;
+  cursor: pointer; }
+
+.buffer-convo .UserForm .email:hover {
+  transform: scale(1.05); }
+
+.emailIssue p {
+  color: #F04B4B;
+  font-size: .9rem; }
+
 .Conversation-Container {
   width: 1000px;
   margin: 0 auto;
@@ -138,12 +175,26 @@ ul {
 .Conversation-Container .ConversationListContainer .MessageListContainer {
   height: 40rem;
   overflow: auto;
-  padding-left: 1rem; }
+  padding: 0 1rem; }
 
 .Conversation-Container .ConversationListContainer .MessageListContainer .MessageList .JoinRoom {
   font-size: 2rem;
   padding-top: 2rem;
   font-weight: bold; }
+
+.Conversation-Container .ConversationListContainer .MessageListContainer .MessageList .Message {
+  padding-top: 1rem; }
+
+.Conversation-Container .ConversationListContainer .MessageListContainer .MessageList .Message .messageHeader {
+  font-weight: bold; }
+
+.Conversation-Container .ConversationListContainer .MessageListContainer .MessageList .Message .messageContent {
+  margin: .5rem 0 0 1rem;
+  background: var(--main-color);
+  color: white;
+  padding: .5rem 1rem;
+  display: inline-block;
+  border-radius: 12px; }
 
 .Conversation-Container .ConversationListContainer .MessageForm {
   display: flex;

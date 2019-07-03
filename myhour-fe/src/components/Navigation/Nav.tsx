@@ -23,6 +23,7 @@ const Nav = observer((props:any) => {
         localStorage.removeItem("Token");
         state.setLoginStatus(false);
         props.history.push('/Login');
+        document.location.reload() 
     }
 
     return (

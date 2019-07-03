@@ -44,7 +44,59 @@ ul {
 
     .UserForm {
         width: 500px;
+
+        
+
+        .email {
+            display: flex;
+            margin-top: 1rem;
+            background: var(--border-color);
+            box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, -5.9);
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 1rem;
+
+            .emailContent {
+                font-weight: bold;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            .emailRemove {
+                padding: 0 .5rem;
+                margin-top: 5px;
+
+                svg {
+                    height: 1.5rem;
+                    width: 1.5rem;
+                }
+
+                .remove {
+                    color: #F04B4B;
+                    
+                }
+
+                .remove:hover {
+                    color: #E73D3D;
+                    cursor: pointer;
+                }
+            }
+        }
+
+        .email:hover {
+            transform: scale(1.05);
+        }
+        
     }
+}
+
+.emailIssue {
+    p{
+        color: #F04B4B;
+        font-size: .9rem;
+    }
+    
 }
 
 .Conversation-Container {
@@ -63,6 +115,8 @@ ul {
     p {
         margin: 0;
     }
+
+    
 
     .RoomList {
         width: 20%;
@@ -165,13 +219,29 @@ ul {
         .MessageListContainer {
             height: 40rem;
             overflow: auto;
-            padding-left: 1rem;
+            padding: 0 1rem;
 
             .MessageList {
                 .JoinRoom {
                     font-size: 2rem;
                     padding-top: 2rem;
                     font-weight: bold;
+                }
+
+                .Message {
+                    padding-top: 1rem;
+                    .messageHeader {
+                        font-weight: bold;
+                    }   
+
+                    .messageContent {
+                        margin: .5rem 0 0 1rem;
+                        background: var(--main-color);
+                        color: white;
+                        padding: .5rem 1rem;
+                        display: inline-block;
+                        border-radius: 12px;
+                    }
                 }
             }         
         }
@@ -195,6 +265,9 @@ ul {
                 box-shadow: 0 0 10px #719ECE;
             }
 
+           
+
+            
         }
     }
 

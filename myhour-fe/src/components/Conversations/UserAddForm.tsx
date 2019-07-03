@@ -3,13 +3,17 @@ import {observer} from 'mobx-react-lite';
 
 // Desgin
 import './Conversations.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTimes } from '@fortawesome/free-solid-svg-icons'
+import isEmail from 'validator/lib/isEmail';
 
 // Components
 
 const UserAddForm = observer((props:any) => {
 
-    const [users, setUsers] = useState({});
+    const [users, setUsers] = useState([]);
     const [user, setUser] = useState('');
+    const [invalidEmail, setInvalidEmail] = useState(false);
 
     const handleSubmit = (ev) => {
         ev.preventDefault();
@@ -19,21 +23,22 @@ const UserAddForm = observer((props:any) => {
 
     const handleAddUser = (ev) => {
         ev.preventDefault();
-        
-        if(!users[user]) {
-            let newUsers = users;
-            newUsers[user] = 0;
-            setUsers(newUsers);
-        }     
+        if(isEmail(user)) {
+            setUsers([...users, user]);  
+            setInvalidEmail(false);
+        } else {
+            setInvalidEmail(true);
+        }
         setUser('');
     }
 
-    const handleRemove = async(ev, user) => {
+    const handleRemove = async(ev, email) => {
         ev.preventDefault();
-        let newUsers = users;
-        delete newUsers[user];
+        let newUsers = users.filter(userEmail => userEmail != email);
         setUsers(newUsers);
     }
+
+    
 
     return (
         <div className='popupWrapper'>
@@ -49,16 +54,19 @@ const UserAddForm = observer((props:any) => {
                         onChange={(ev) => {setUser(ev.target.value)}}
                     />
                 </form> 
-                {  
-                    Object.keys(users).forEach((username) => {               
-                    return(
-                        <div>
-                            <p>{username}</p>
-                            <button onClick={(ev) => {handleRemove(ev, user)}}> X </button>
-                            
-                        </div>
-                    )
-                })}
+                {invalidEmail ? <div className='emailIssue'><p>Please enter a valid email address.</p></div> : null}
+                {
+                    users.map((email) => {               
+                        return (
+                            <div className='email'>
+                                <p className='emailContent'>{email}</p>
+                                <div className='emailRemove' onClick={(ev) => {handleRemove(ev, email)}}>
+                                    <FontAwesomeIcon className="remove" icon={faTimes}/>
+                                </div>                            
+                            </div>
+                        );
+                    })
+                }
                 <div className='confirmation-buttons'>
                     <button className='green' onClick={(ev) => {handleSubmit(ev)}}>Submit</button>
                     <button className='red' onClick={() => { props.setAddingUsers(false)}}>Cancel</button>

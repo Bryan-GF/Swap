@@ -10,8 +10,8 @@ import './Conversations.css';
 const Message = observer((props:any) => {
     return (
         <div className="Message">
-            <div>{props.username}</div>
-            <div>{props.text}</div>
+            <div className='messageHeader'>{props.username}</div>
+            <div className='messageContent'>{props.text}</div>
         </div>
     )
 });

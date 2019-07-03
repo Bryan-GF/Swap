@@ -24,7 +24,6 @@ const MessageList = observer((props:any) => {
             {props.roomId ? 
                 <div className="MessageList" ref={list}>
                     {props.messages.map((message, index)  => {
-                        console.log(message);
                         return  (
                             <Message key={index} username={message.sender.name} text={message.text}/>
                         )
