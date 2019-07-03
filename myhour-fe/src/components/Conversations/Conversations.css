@@ -3,73 +3,58 @@ ul {
 
 .buffer-convo {
   padding-top: 7rem; }
-
-.buffer-convo .Form {
-  display: flex;
-  background: white;
-  border: 2px solid var(--main-color);
-  flex-direction: column;
-  padding: 2rem;
-  margin-top: -10rem; }
-
-.buffer-convo .Form input {
-  font-size: 1rem;
-  width: 100%;
-  padding: .5rem .5rem;
-  border: none;
-  border-bottom: 1px solid var(--main-color);
-  outline: none; }
-
-.buffer-convo .Form input:focus {
-  border-bottom: 3px solid var(--main-color); }
-
-.buffer-convo .Form h2 {
-  padding-bottom: 1rem; }
-
-.buffer-convo .Form .confirmation-buttons {
-  margin-top: 2rem; }
-
-.buffer-convo .Form .confirmation-buttons .green {
-  margin-left: 0; }
-
-.buffer-convo .RoomForm {
-  align-items: center; }
-
-.buffer-convo .UserForm {
-  width: 500px; }
-
-.buffer-convo .UserForm .email {
-  display: flex;
-  margin-top: 1rem;
-  background: var(--border-color);
-  box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0);
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 1rem; }
-
-.buffer-convo .UserForm .email .emailContent {
-  font-weight: bold;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap; }
-
-.buffer-convo .UserForm .email .emailRemove {
-  padding: 0 .5rem;
-  margin-top: 5px; }
-
-.buffer-convo .UserForm .email .emailRemove svg {
-  height: 1.5rem;
-  width: 1.5rem; }
-
-.buffer-convo .UserForm .email .emailRemove .remove {
-  color: #F04B4B; }
-
-.buffer-convo .UserForm .email .emailRemove .remove:hover {
-  color: #E73D3D;
-  cursor: pointer; }
-
-.buffer-convo .UserForm .email:hover {
-  transform: scale(1.05); }
+  .buffer-convo .Form {
+    display: flex;
+    background: white;
+    border: 2px solid var(--main-color);
+    flex-direction: column;
+    padding: 2rem;
+    margin-top: -10rem; }
+    .buffer-convo .Form input {
+      font-size: 1rem;
+      width: 100%;
+      padding: .5rem .5rem;
+      border: none;
+      border-bottom: 1px solid var(--main-color);
+      outline: none; }
+    .buffer-convo .Form input:focus {
+      border-bottom: 3px solid var(--main-color); }
+    .buffer-convo .Form h2 {
+      padding-bottom: 1rem; }
+    .buffer-convo .Form .confirmation-buttons {
+      margin-top: 2rem; }
+      .buffer-convo .Form .confirmation-buttons .green {
+        margin-left: 0; }
+  .buffer-convo .RoomForm {
+    align-items: center; }
+  .buffer-convo .UserForm {
+    width: 500px; }
+    .buffer-convo .UserForm .email {
+      display: flex;
+      margin-top: 1rem;
+      background: var(--border-color);
+      box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0);
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 1rem; }
+      .buffer-convo .UserForm .email .emailContent {
+        font-weight: bold;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap; }
+      .buffer-convo .UserForm .email .emailRemove {
+        padding: 0 .5rem;
+        margin-top: 5px; }
+        .buffer-convo .UserForm .email .emailRemove svg {
+          height: 1.5rem;
+          width: 1.5rem; }
+        .buffer-convo .UserForm .email .emailRemove .remove {
+          color: #F04B4B; }
+        .buffer-convo .UserForm .email .emailRemove .remove:hover {
+          color: #E73D3D;
+          cursor: pointer; }
+    .buffer-convo .UserForm .email:hover {
+      transform: scale(1.05); }
 
 .emailIssue p {
   color: #F04B4B;
@@ -83,133 +68,105 @@ ul {
   display: flex;
   white-space: pre-line;
   border: 1px solid var(--main-color); }
-
-.Conversation-Container h3 {
-  margin: 0 0 0 1rem;
-  font-size: 1.6rem; }
-
-.Conversation-Container p {
-  margin: 0; }
-
-.Conversation-Container .RoomList {
-  width: 20%;
-  background: var(--main-color);
-  color: white;
-  padding-top: 1rem;
-  border-radius: 10px 0 0 10px; }
-
-.Conversation-Container .RoomList a {
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 1.3rem; }
-
-.Conversation-Container .RoomList button {
-  background: white;
-  font-size: 1.3rem;
-  color: var(--main-color);
-  border: none;
-  border-radius: 10px;
-  padding: 1rem 1rem;
-  margin: 1rem 0 1rem 1rem; }
-
-.Conversation-Container .RoomList button:hover {
-  transform: scale(1.05);
-  cursor: pointer;
-  box-shadow: 0 0 10px #a5c2e0; }
-
-.Conversation-Container .RoomList ul {
-  padding: 0; }
-
-.Conversation-Container .RoomList .Room {
-  padding: .2rem 0 .2rem 1rem; }
-
-.Conversation-Container .RoomList .Room:hover {
-  background: white;
-  cursor: pointer; }
-
-.Conversation-Container .RoomList .Room:hover a {
-  color: var(--main-color); }
-
-.Conversation-Container .ConversationListContainer {
-  display: flex;
-  flex-direction: column;
-  width: 80%; }
-
-.Conversation-Container .ConversationListContainer .Header {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 1rem;
-  border-bottom: 1px solid #eee; }
-
-.Conversation-Container .ConversationListContainer .Header p {
-  font-weight: bold; }
-
-.Conversation-Container .ConversationListContainer .Header .HeaderButtons {
-  display: flex; }
-
-.Conversation-Container .ConversationListContainer .Header .HeaderButtons svg {
-  height: 2rem;
-  width: 2rem;
-  color: var(--main-color); }
-
-.Conversation-Container .ConversationListContainer .Header .HeaderButtons svg:hover {
-  cursor: pointer;
-  transform: scale(1.1); }
-
-.Conversation-Container .ConversationListContainer .Header .HeaderButtons .signOut-wrapper {
-  margin-left: 1.5rem; }
-
-.Conversation-Container .ConversationListContainer div::-webkit-scrollbar {
-  width: .5em; }
-
-.Conversation-Container .ConversationListContainer div::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3); }
-
-.Conversation-Container .ConversationListContainer div::-webkit-scrollbar-thumb {
-  background-color: darkgrey;
-  outline: 1px solid slategrey; }
-
-.Conversation-Container .ConversationListContainer .MessageListContainer {
-  height: 40rem;
-  overflow: auto;
-  padding: 0 1rem; }
-
-.Conversation-Container .ConversationListContainer .MessageListContainer .MessageList .JoinRoom {
-  font-size: 2rem;
-  padding-top: 2rem;
-  font-weight: bold; }
-
-.Conversation-Container .ConversationListContainer .MessageListContainer .MessageList .Message {
-  padding-top: 1rem; }
-
-.Conversation-Container .ConversationListContainer .MessageListContainer .MessageList .Message .messageHeader {
-  font-weight: bold; }
-
-.Conversation-Container .ConversationListContainer .MessageListContainer .MessageList .Message .messageContent {
-  margin: .5rem 0 0 1rem;
-  background: var(--main-color);
-  color: white;
-  padding: .5rem 1rem;
-  display: inline-block;
-  border-radius: 12px; }
-
-.Conversation-Container .ConversationListContainer .MessageForm {
-  display: flex;
-  justify-content: center;
-  border-top: 1px solid #eee;
-  padding: 1rem 0; }
-
-.Conversation-Container .ConversationListContainer .MessageForm textarea {
-  width: 90%;
-  background: #eee;
-  resize: none;
-  outline-color: var(--main-color);
-  padding: .4rem .4rem;
-  border-radius: 5px; }
-
-.Conversation-Container .ConversationListContainer .MessageForm textarea:focus {
-  background: #f5f5f5;
-  box-shadow: 0 0 10px #719ECE; }
+  .Conversation-Container h3 {
+    margin: 0 0 0 1rem;
+    font-size: 1.6rem; }
+  .Conversation-Container p {
+    margin: 0; }
+  .Conversation-Container .RoomList {
+    width: 20%;
+    background: var(--main-color);
+    color: white;
+    padding-top: 1rem;
+    border-radius: 10px 0 0 10px; }
+    .Conversation-Container .RoomList a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.3rem; }
+    .Conversation-Container .RoomList button {
+      background: white;
+      font-size: 1.3rem;
+      color: var(--main-color);
+      border: none;
+      border-radius: 10px;
+      padding: 1rem 1rem;
+      margin: 1rem 0 1rem 1rem; }
+    .Conversation-Container .RoomList button:hover {
+      transform: scale(1.05);
+      cursor: pointer;
+      box-shadow: 0 0 10px #a5c2e0; }
+    .Conversation-Container .RoomList ul {
+      padding: 0; }
+    .Conversation-Container .RoomList .Room {
+      padding: .2rem 0 .2rem 1rem; }
+    .Conversation-Container .RoomList .Room:hover {
+      background: white;
+      cursor: pointer; }
+      .Conversation-Container .RoomList .Room:hover a {
+        color: var(--main-color); }
+  .Conversation-Container .ConversationListContainer {
+    display: flex;
+    flex-direction: column;
+    width: 80%; }
+    .Conversation-Container .ConversationListContainer .Header {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1rem;
+      border-bottom: 1px solid #eee; }
+      .Conversation-Container .ConversationListContainer .Header p {
+        font-weight: bold; }
+      .Conversation-Container .ConversationListContainer .Header .HeaderButtons {
+        display: flex; }
+        .Conversation-Container .ConversationListContainer .Header .HeaderButtons svg {
+          height: 2rem;
+          width: 2rem;
+          color: var(--main-color); }
+        .Conversation-Container .ConversationListContainer .Header .HeaderButtons svg:hover {
+          cursor: pointer;
+          transform: scale(1.1); }
+        .Conversation-Container .ConversationListContainer .Header .HeaderButtons .signOut-wrapper {
+          margin-left: 1.5rem; }
+    .Conversation-Container .ConversationListContainer div::-webkit-scrollbar {
+      width: .5em; }
+    .Conversation-Container .ConversationListContainer div::-webkit-scrollbar-track {
+      -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3); }
+    .Conversation-Container .ConversationListContainer div::-webkit-scrollbar-thumb {
+      background-color: darkgrey;
+      outline: 1px solid slategrey; }
+    .Conversation-Container .ConversationListContainer .MessageListContainer {
+      height: 40rem;
+      overflow: auto;
+      padding: 0 1rem; }
+      .Conversation-Container .ConversationListContainer .MessageListContainer .MessageList .JoinRoom {
+        font-size: 2rem;
+        padding-top: 2rem;
+        font-weight: bold; }
+      .Conversation-Container .ConversationListContainer .MessageListContainer .MessageList .Message {
+        padding-top: 1rem; }
+        .Conversation-Container .ConversationListContainer .MessageListContainer .MessageList .Message .messageHeader {
+          font-weight: bold; }
+        .Conversation-Container .ConversationListContainer .MessageListContainer .MessageList .Message .messageContent {
+          margin: .5rem 0 0 1rem;
+          background: var(--main-color);
+          color: white;
+          padding: .5rem 1rem;
+          display: inline-block;
+          border-radius: 12px; }
+    .Conversation-Container .ConversationListContainer .MessageForm {
+      display: flex;
+      justify-content: center;
+      border-top: 1px solid #eee;
+      padding: 1rem 0; }
+      .Conversation-Container .ConversationListContainer .MessageForm textarea {
+        width: 90%;
+        background: #eee;
+        resize: none;
+        outline-color: var(--main-color);
+        padding: .4rem .4rem;
+        border-radius: 5px; }
+      .Conversation-Container .ConversationListContainer .MessageForm textarea:focus {
+        background: #f5f5f5;
+        box-shadow: 0 0 10px #719ECE; }

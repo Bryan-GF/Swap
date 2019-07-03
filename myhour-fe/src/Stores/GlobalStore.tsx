@@ -100,7 +100,7 @@ class GlobalState {
     }
 
     @action addToChatRoom = async (roomId, email) => {
-        const config = await tokenBuilder(email);
+        const config = await tokenBuilder(this.userData.email);
         return await axios
         .put(chatterUrl + `/rooms/${roomId}/users/add`, {user_ids: email}, config)
         .then(res => console.log(res))
