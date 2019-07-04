@@ -124,9 +124,6 @@ const ManagerHomePage = observer((props:any) => {
                                     <div className="columnName">{employee.Firstname + " " + employee.Lastname}</div>
                                     <div className="columnPosition">{employee.Position}</div>
                                     <div className="columnIcons">
-                                        <div onClick={(ev) => { ev.preventDefault(); }}className="plus-wrapper">
-                                            <FontAwesomeIcon className="plus" icon={faPlusSquare}/>
-                                        </div>
                                         <div onClick={(ev) => { 
                                             ev.preventDefault();
                                             setTargetEmployee({UserID: employee.UserID, Name: employee.Firstname + ' ' + employee.Lastname, email: employee.email});

@@ -17,8 +17,8 @@ const RoomList = observer((props:any) => {
             <button onClick={() => {props.setCreatingRoom(true)}}>Create Room</button>
             {props.rooms.map(room => {
                 return (
-                    <div key={room.id} className="Room" style={props.roomId === room.id ? {background: 'white'} : {}}>
-                        <a onClick={() => { props.subscribeToRoom(room.id)}}href="#" style={props.roomId === room.id ? {color: '#60B0F4'} : {}}># {room.name}</a>
+                    <div key={room.id} onClick={() => { props.subscribeToRoom(room.id)}} className="Room" style={props.roomId === room.id ? {background: 'white'} : {}}>
+                        <a href="#" style={props.roomId === room.id ? {color: '#60B0F4'} : {}}># {room.name}</a>
                     </div>
                 )
             })}

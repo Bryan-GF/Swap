@@ -73,8 +73,10 @@ const Calendar = observer(() => {
                 formattedDate = dateFns.format(day, dateFormat);
                 compareDate = dateFns.format(day, 'M/D/YYYY');
                 const cloneDay = day;
+                let currDate = new Date();
+                currDate.setDate(currDate.getDate() -1)
                 days.push(
-                    (dateFns.isSameMonth(day, monthStart) ?
+                    (dateFns.isSameMonth(day, monthStart) && dateFns.isAfter(day, currDate) ?
                     <Link className='col cell' to={{ pathname: "/Requests/List", search: `date=${compareDate}`}}>
                         <div
                             className={`cell ${

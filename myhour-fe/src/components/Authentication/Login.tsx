@@ -48,7 +48,7 @@ const Login= observer((props:any) => {
                 </div>
                 {/* Checks global state value of incorretValue for conditional display*/}
                 {state.incorrectPassword ? <p>Incorrect email or password.</p> : null}
-                <Link to='/ResetPassword'>Reset Password</Link>
+                <Link to='/'>Back to Landing Page</Link>
                 <div className="loginButton" onClick={() => { attemptLogin()}}>
                     {loading ?
                         <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
