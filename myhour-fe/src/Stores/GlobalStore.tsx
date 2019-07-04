@@ -165,11 +165,9 @@ class GlobalState {
         return await axios
         .post('https://swapapi.azurewebsites.net/api/AddManager', {...managerInfo, CompanyID: this.userData.CompanyID})
         .then(res => {
-            if(res.data) {
                 this.createChatter(managerInfo.Firstname + " " + managerInfo.Lastname, managerInfo.email, null, managerInfo.roomId)
                 this.BranchManagers[managerInfo.branchID] = [...this.BranchManagers[managerInfo.branchID], {email: managerInfo.email, UserID: res.data, Firstname: managerInfo.Firstname, Lastname: managerInfo.Lastname}];
-                return res.data;
-            }             
+                return res.data;            
         }).catch(err => {
             console.log(err);
             return null;
@@ -186,6 +184,7 @@ class GlobalState {
             .post('https://swapapi.azurewebsites.net/api/AddBranch', {Name: branchName, CompanyID: this.userData.CompanyID, roomId: room.data.id})
             .then(res => {        
                 this.BranchList = [...this.BranchList, {Name: branchName, branchID: res.data, roomId: room.data.id}]; 
+                this.BranchManagers[res.data] = [];
             }).catch(err => {
                 console.log(err);
             })
