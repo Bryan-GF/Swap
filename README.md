@@ -30,7 +30,7 @@ email: testmanager@gmail.com
 password: testpassword
 
 #### Employee
-email: testemployeer@gmail.com
+email: testemployee@gmail.com
 
 password: testpassword
 
