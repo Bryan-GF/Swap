@@ -14,7 +14,6 @@ My goal with this application was just as the description says, to make trading 
 ### Tech Stack: ReactJS | Typescript | MobX | MySQL | C# | Azure Cloud | SASS
 
 ### Some information before you go the live site:
-- The site is still a work in progress, although most of the base functionality is there in terms of trading shifts and management, there may still be some bugs and missing features. 
 - At the moment the site is only available in Desktop view.
 
 ### Login Information (For testing purposes)
@@ -30,7 +29,7 @@ email: testmanager@gmail.com
 password: testpassword
 
 #### Employee
-email: testemployeer@gmail.com
+email: testemployee@gmail.com
 
 password: testpassword
 
