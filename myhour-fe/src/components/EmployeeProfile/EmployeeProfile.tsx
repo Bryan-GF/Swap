@@ -46,7 +46,10 @@ const EmployeeProfile = observer((props:any) => {
     // Attempts to edit shift values through global state editShift function. Takes in the target
     // shift ID and Version. Success edits global state currShifts array to have updated values.
     const handleEditShift = async(ShiftID, Version) => {
-        let status = await state.editShift(ShiftID, startEditDate.toISOString(), timeEditHelper(startEditTime), timeEditHelper(endEditTime), Version);
+  
+        let finalDate = new Date(startEditDate.getFullYear(), startEditDate.getMonth(), startEditDate.getDate(), startEditTime.getHours(), startEditTime.getMinutes(), startEditTime.getSeconds());
+        
+        let status = await state.editShift(ShiftID, startEditDate.toISOString(), timeEditHelper(startEditTime), timeEditHelper(endEditTime), Version, moment.utc(finalDate).format('YYYY-MM-DD hh:mm:ss'));
         if(status) {
             state.setCurrShifts(state.currShifts.map((shift, i) => {
                 if(shift.ShiftID === ShiftID) {
@@ -56,6 +59,7 @@ const EmployeeProfile = observer((props:any) => {
                 }
             }));      
         }
+        
     }
 
     // Attempt to delete employee shift through global state function deleteShift. Success filters out
@@ -76,7 +80,10 @@ const EmployeeProfile = observer((props:any) => {
     // getting rid of popup.
     const handleAddShift = async () => {
         setAddingShift(false);
-        const result = await state.addShift(state.currEmployee.UserID, startDate.toISOString(), timeEditHelper(startTime), timeEditHelper(endTime));
+
+        let finalDate = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate(), startTime.getHours(), startTime.getMinutes(), startTime.getSeconds());
+
+        const result = await state.addShift(state.currEmployee.UserID, timeEditHelper(startDate), timeEditHelper(startTime), timeEditHelper(endTime), moment.utc(finalDate).format('YYYY-MM-DD hh:mm:ss'));
         if(result) {
             state.setCurrShifts([...state.currShifts, {
                 ShiftID: `${result}`,
@@ -84,7 +91,7 @@ const EmployeeProfile = observer((props:any) => {
                 startTime: moment(startTime, 'HH:mm:ss').format('h:mm A'),
                 endTime: moment(endTime, 'HH:mm:ss').format('h:mm A')
             }]);
-        }
+        }  
         
     }
 
@@ -314,5 +321,6 @@ const EmployeeProfile = observer((props:any) => {
 
 export default EmployeeProfile;
 import "./react-datepicker.css";
+import { start } from 'repl';
 
 

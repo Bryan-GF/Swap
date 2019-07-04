@@ -93,8 +93,6 @@ const Conversations = observer((props:any) => {
     }
 
     const addUsers = async(users) => {
-        console.log(roomId);
-        console.log(users);
         state.addToChatRoom(roomId, users);
     }
     

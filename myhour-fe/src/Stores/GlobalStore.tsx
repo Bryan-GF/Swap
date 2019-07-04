@@ -300,28 +300,29 @@ class GlobalState {
 
     // Takes in employee ID string, shift date string, shift start time string, and end time string as parameters. Attempts to make api call using all parameters in body object.
     // On success return response data. On fail return null.
-    @action addShift = async(ID, shiftDate, startTime, endTime) => {
+    @action addShift = async(ID, shiftDate, startTime, endTime, datetime) => {
         shiftDate = shiftDate.slice(0, 10);
         startTime =startTime.slice(11, 19);
         endTime = endTime.slice(11, 19);
         return await axios
-        .post('https://swapapi.azurewebsites.net/api/AddShift', {"UserID": ID, "shiftDate": shiftDate, "startTime": startTime, "endTime": endTime})
+        .post('https://swapapi.azurewebsites.net/api/AddShift', {"UserID": ID, "shiftDate": shiftDate, "startTime": startTime, "endTime": endTime, datetime: datetime})
         .then(res => {
             
             return res.data;   
         }).catch(err => {
             return null;
         })
+        
     }
 
     // Takes in ShiftID string, shiftDate string, shift start time string, shift end time string, and database version string as parameters.. Attempts to make an api call using all parameters in body object.
     // On success return true. On fail return false.
-    @action editShift = async(ShiftID, shiftDate, startTime, endTime, Version) => {
+    @action editShift = async(ShiftID, shiftDate, startTime, endTime, Version, datetime) => {
         shiftDate = shiftDate.slice(0, 10);
         startTime =startTime.slice(11, 19);
         endTime = endTime.slice(11, 19);
         return await axios
-        .put('https://swapapi.azurewebsites.net/api/EditShift', {"ShiftID": ShiftID, "shiftDate": shiftDate, "startTime": startTime, "endTime": endTime, Version: Version})
+        .put('https://swapapi.azurewebsites.net/api/EditShift', {"ShiftID": ShiftID, "shiftDate": shiftDate, "startTime": startTime, "endTime": endTime, Version: Version, datetime: datetime})
         .then(res => {
             return true;  
         }).catch(err => {
@@ -443,10 +444,8 @@ class GlobalState {
     @action getShifts = (ID) => {
         return axios
         .post('https://swapapi.azurewebsites.net/api/GetEmployeeShifts', {"UserID": ID})
-        .then(res => {
-            
-            if (res.data != null) {
-                
+        .then(res => {    
+            if (res.data != null) {               
                 this.currShifts = res.data;
             } else {
                 this.currShifts = [];
