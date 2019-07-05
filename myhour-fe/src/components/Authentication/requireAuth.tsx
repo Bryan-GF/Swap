@@ -28,7 +28,6 @@ export const NoAuthRoute = ({component: Component, ...rest}) => {
 // Authentication route for when user is logged in as an employee. Checks login status. Passed component.
 export const BasicAuthRoute = ({component: Component, ...rest}) => {
     const state = useContext(GlobalStateContext);
-    console.log(state);
     return (
       <Route
         {...rest}
