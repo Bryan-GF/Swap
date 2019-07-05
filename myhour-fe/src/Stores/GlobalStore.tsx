@@ -141,7 +141,6 @@ class GlobalState {
         .then(res => {
             localStorage.setItem('Token', res.data.Token);
             this.userData = res.data;
-            console.log(res.data);
             this.loginStatus = true;
             this.incorrectPassword = false;
             return true;        

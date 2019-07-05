@@ -46,7 +46,6 @@ const App = observer((props:any) => {
 
   // On component did mount, attempts to verify token if available.
   useEffect(() => {
-    console.log(process.env)
     const token = localStorage.getItem('Token');
     if(token) {
       VerifyToken(state, setLoading, token);
