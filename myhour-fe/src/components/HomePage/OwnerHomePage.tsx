@@ -147,7 +147,7 @@ const OwnerHomePage = observer((props:any) => {
                                         {addingManager && branch.branchID === managerInfo.branchID ? 
                                             <div className='popupWrapper'>
                                                 <div className='inputWrapper'>
-                                                    <h2>Branch Creator</h2>
+                                                    <h2>Manager Creator</h2>
                                                     <label>FIRST NAME *</label>    
                                                     <input className="nameInput" placeholder='ex. Jennifer' onChange={(ev) => { setManagerInfo({...managerInfo, Firstname: ev.target.value})}}/>
                                                     {activeErrorsManager.Firstname ? <p>Please include a first name.</p> : null}

@@ -7,7 +7,6 @@ import {observer} from 'mobx-react-lite';
 import format from 'date-fns/format';
 import {fixTime} from './RequestHelper';
 import queryString from 'query-string';
-import Chatkit from '@pusher/chatkit-client';
 import { withRouter } from 'react-router';
 
 // Desgin
@@ -17,7 +16,6 @@ import avatar from '../../assets/avatar.png';
 // Components
 import DeleteRequest from '../Delete/DeleteRequest';
 import Nav from '../Navigation/Nav';
-import { request } from 'https';
 
 // Requests list page component, displays every available request.
 const RequestListPage = observer((props:any) => {
@@ -90,7 +88,6 @@ const RequestListPage = observer((props:any) => {
             addUserIds: [email, state.userData.email]
         }).then(room => {
             props.history.push('/Conversations');
-            console.log(`Created room called ${room.name}`);
         }).catch(err => {
             console.log(`Error creating room ${err}`);
         })
@@ -117,23 +114,6 @@ const RequestListPage = observer((props:any) => {
             }
         }
         getData();
-        let tokenprovider =  {
-            fetchToken() {
-                return state.getToken();
-            }
-        }
-
-        const chatManager = new Chatkit.ChatManager({
-            instanceLocator: process.env.REACT_APP_INSTANCE_LOCATOR,
-            userId: state.userData.email,
-            tokenProvider: tokenprovider
-        })
-
-        chatManager.connect()
-        .then(currentUser => {
-            state.setCurrChatter(currentUser);
-        })
-        
     }, [])
 
     return (

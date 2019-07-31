@@ -64,7 +64,8 @@ h5 {
   .inputWrapper h2 {
     margin-top: 0;
     color: var(--main-color);
-    background: none; }
+    background: none;
+    padding: 0; }
   .inputWrapper label {
     margin-top: 1.8rem;
     font-size: .7rem;

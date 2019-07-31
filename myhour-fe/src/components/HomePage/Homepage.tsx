@@ -4,6 +4,7 @@ import { GlobalStateContext } from '../../Stores/GlobalStore';
 // Functional package imports
 import React, {useContext, useEffect} from 'react';
 import {observer} from 'mobx-react-lite';
+import Chatkit from '@pusher/chatkit-client';
 
 // Components
 import Nav from '../Navigation/Nav';
@@ -15,6 +16,25 @@ import OwnerHomePage from './OwnerHomePage';
 const HomePage = observer((props:any) => {
     
     const state = useContext(GlobalStateContext);
+
+    useEffect(() => {
+        let tokenprovider =  {
+            fetchToken() {
+                return state.getToken();
+            }
+        }
+
+        const chatManager = new Chatkit.ChatManager({
+            instanceLocator: process.env.REACT_APP_INSTANCE_LOCATOR,
+            userId: state.userData.email,
+            tokenProvider: tokenprovider
+        })
+
+        chatManager.connect()
+        .then(currentUser => {
+            state.setCurrChatter(currentUser);
+        })
+    }, []);
 
     return (
         <div>

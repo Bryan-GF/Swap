@@ -6,6 +6,7 @@ import React, {useContext, useEffect, useState} from 'react';
 import {observer} from 'mobx-react-lite';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
+import Chatkit from '@pusher/chatkit-client';
 
 // Design
 import avatar from '../../assets/avatar.png';
@@ -92,7 +93,18 @@ const EmployeeProfile = observer((props:any) => {
                 endTime: moment(endTime, 'HH:mm:ss').format('h:mm A')
             }]);
         }  
-        
+    }
+
+    const createConversation = () => {
+        state.currChatter.createRoom({
+            name: state.userData.Firstname + ", " + state.currEmployee.Name,
+            private: true,
+            addUserIds: [state.currEmployee.email, state.userData.email]
+        }).then(room => {
+            props.history.push('/Conversations');
+        }).catch(err => {
+            console.log(`Error creating room ${err}`);
+        })
     }
 
     // Takes in time value when editing shift and converts it into the correct timezone.
@@ -138,7 +150,9 @@ const EmployeeProfile = observer((props:any) => {
                                 <div onClick={() => { setDeletingUser(true)}} className="trash">
                                     <FontAwesomeIcon className="trash" icon={faTrashAlt}/>
                                 </div>
-                                <button>Message</button>
+                                <button onClick={(ev) => {
+                                                createConversation()
+                                }}>Message</button>
                             </div>
                         </div>
                     </div>
