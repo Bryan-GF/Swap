@@ -27,7 +27,7 @@
     "react-scripts-ts": "3.1.0",
     "react-select": "^2.4.3",
     "sass": "^1.20.1",
-    "validator": "^11.0.0"
+    "validator": "^13.7.0"
   },
   "scripts": {
     "build:css": "node-sass src/ -o src/ ",
